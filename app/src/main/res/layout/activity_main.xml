@@ -31,35 +31,50 @@
                 android:layout_marginBottom="10dp"
                 />
 
-            <EditText
-                android:id="@+id/JobNameField"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Job Name"
-                />
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/JobNameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Job Name"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-
-            <EditText
-                android:id="@+id/ApplicationDeadlineField"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:hint="Application Deadline" />
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ApplicationDeadlineField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:hint="Application Deadline" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/JobDescriptionField"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:hint="Job description"
-                android:inputType="textMultiLine"
-                />
+                android:layout_height="wrap_content"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/JobDescriptionField"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:hint="Job description"
+                    android:inputType="textMultiLine"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/PostJobButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Post"/>
+                android:text="Post"
+                style="@style/Widget.Material3.FloatingActionButton.Primary"/>
 
             <TextView
                 android:id="@+id/result"

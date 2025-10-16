@@ -1,26 +1,15 @@
 package com.example.quick_cash;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText jobName;
     EditText applicationDeadline;
     EditText jobDescription;
-    Button postButton;
+    MaterialButton postButton;
     TextView result;
 
     @Override
@@ -57,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         jobDescription = findViewById(R.id.JobDescriptionField);
         result = findViewById(R.id.result);
     }
+
 
     private void initListeners() {
         postButton = findViewById(R.id.PostJobButton);
