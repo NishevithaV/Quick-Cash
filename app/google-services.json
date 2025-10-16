@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "463267296851",
+    "firebase_url": "https://quickcash-72ee9-default-rtdb.firebaseio.com",
+    "project_id": "quickcash-72ee9",
+    "storage_bucket": "quickcash-72ee9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463267296851:android:21e359bdb4d6d9067c78a6",
+        "android_client_info": {
+          "package_name": "com.example.quick_cash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkbifdsYPiD_FBpyNIP5I25wm8vzPizzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
