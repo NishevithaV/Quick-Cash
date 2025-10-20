@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quick_Cash">
         <activity
-            android:name=".MainActivity"
+            android:name=".job_search.JobSearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
