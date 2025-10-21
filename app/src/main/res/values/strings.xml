@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Quick_Cash</string>
+    <string-array name="job_categories">
+        <item>Engineering</item>
+        <item>Healthcare</item>
+        <item>Education</item>
+        <item>Finance</item>
+        <item>Marketing</item>
+        <item>Sales</item>
+        <item>Construction</item>
+        <item>Information Technology</item>
+        <item>Hospitality</item>
+        <item>Administration</item>
+    </string-array>
 </resources>
