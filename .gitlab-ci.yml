@@ -93,4 +93,5 @@ unit_tests:
     when: always
     expire_in: 30 days
     paths:
-      - app/build/reports/tests/
+      - app/src/test/java/
+      - app/src/androidTest/java/
