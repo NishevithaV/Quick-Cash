@@ -15,13 +15,12 @@ import java.util.Map;
 
 public class JobPostingActivity extends AppCompatActivity {
 
-    FirebaseDatabase database;
-    DatabaseReference dbRef;
     EditText jobName;
     EditText applicationDeadline;
     EditText jobDescription;
     MaterialButton postButton;
     TextView result;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +28,11 @@ public class JobPostingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         this.setContentView(R.layout.activity_main);
-        initUIElements();
-        initListeners();
-        initDatabase();
+//        initUIElements();
+//        initListeners();
     }
 
-    private void initDatabase(){
-        database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference("job_listings");
-    }
-
-    private void initUIElements() {
+    protected void initUIElements() {
         jobName = findViewById(R.id.JobNameField);
         applicationDeadline = findViewById(R.id.ApplicationDeadlineField);
         jobDescription = findViewById(R.id.JobDescriptionField);
@@ -47,7 +40,7 @@ public class JobPostingActivity extends AppCompatActivity {
     }
 
 
-    private void initListeners() {
+    protected void initListeners() {
         postButton = findViewById(R.id.PostJobButton);
 
         postButton.setOnClickListener( v-> {
@@ -60,19 +53,19 @@ public class JobPostingActivity extends AppCompatActivity {
             jobObject.put("deadline", enteredApplicationDeadline);
             jobObject.put("desc", enteredJobDescription);
 
-            String jobId = dbRef.push().getKey();
-
-            boolean postSuccessful = false;
-
-            assert jobId != null;
-            dbRef.child(jobId).setValue(jobObject);
-            postSuccessful = true;
-
-            if (postSuccessful){
-                showSuccessMessage();
-                return;
-            }
-            result.setText("Job posting failed");
+//            String jobId = dbRef.push().getKey();
+//
+//            boolean postSuccessful = false;
+//
+//            assert jobId != null;
+//            dbRef.child(jobId).setValue(jobObject);
+//            postSuccessful = true;
+//
+//            if (postSuccessful){
+//                showSuccessMessage();
+//                return;
+//            }
+//            result.setText("Job posting failed");
         });
 
 
