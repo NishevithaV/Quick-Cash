@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class JUnitTest {
@@ -23,21 +24,13 @@ public class JUnitTest {
     }
 
     @Test
-    public void testPostOneJobs() {
-        Boolean isTest = true;
-        ArrayList<Map<String, String>> results = crud.postJob("", "", "", isTest);
+    public void testPostJob() {
+        Map<String, String> jobObject = new HashMap<>();
+        jobObject.put("name", "testName");
+        jobObject.put("deadline", "testDeadline");
+        jobObject.put("category", "testCategory");
+        jobObject.put("desc", "testDesc");
 
-        Map<String, String> testJob1Obj = results.get(0);
-        Map<String, String> testJob2Obj = results.get(1);
-
-        assertEquals("Real Engineer", testJob1Obj.get("name"));
-        assertEquals("Some Company", testJob1Obj.get("company"));
-        assertEquals("12/34/56", testJob1Obj.get("deadline"));
-        assertEquals("Full-Time", testJob1Obj.get("type"));
-
-        assertEquals("Real Accountant", testJob2Obj.get("name"));
-        assertEquals("Another Company", testJob2Obj.get("company"));
-        assertEquals("12/34/56", testJob2Obj.get("deadline"));
-        assertEquals("Part-Time", testJob2Obj.get("type"));
+        assertTrue(crud.postJob(jobObject));
     }
 }

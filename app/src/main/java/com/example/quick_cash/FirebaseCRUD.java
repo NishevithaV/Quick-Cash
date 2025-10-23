@@ -40,10 +40,12 @@ public class FirebaseCRUD {
     public boolean postJob(Map<String, String> job){
 
         String jobId = jobListRef.push().getKey();
-        assert jobId != null;
+        if (jobId == null){
+            System.err.println("Could not generate Job ID");
+            return false;
+        };
         jobListRef.child(jobId).setValue(job);
-
-        return jobId != null;
+        return true;
     }
 
     public boolean postUsers(){
