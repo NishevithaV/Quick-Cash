@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Quick_Cash"
         >
         <activity
-            android:name=".MainActivity"
+            android:name=".job_posting.JobPostingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

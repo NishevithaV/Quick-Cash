@@ -21,6 +21,7 @@ public class FirebaseCRUD {
         this.jobListRef = this.database.getReference("job_listings");
         this.usersRef = this.database.getReference("users");
 
+
     }
 
     private void initializeRefListeners() {
