@@ -37,8 +37,13 @@ public class FirebaseCRUD {
 
     }
 
-    public boolean postJob(){
-        return false;
+    public boolean postJob(Map<String, String> job){
+
+        String jobId = jobListRef.push().getKey();
+        assert jobId != null;
+        jobListRef.child(jobId).setValue(job);
+
+        return jobId != null;
     }
 
     public boolean postUsers(){

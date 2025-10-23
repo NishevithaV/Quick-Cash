@@ -14,3 +14,4 @@
 .cxx
 local.properties
 app/src/main/AndroidManifest.xml
+app/src/main/java/com/example/quick_cash/FirebaseCRUD.java
