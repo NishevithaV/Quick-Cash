@@ -13,81 +13,106 @@
         android:layout_height="match_parent"
         android:gravity="center"
 
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="116dp">
 
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:orientation="vertical"
             >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Post a Job"
-                android:textSize="20sp"
-                android:gravity="center"
                 android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Post a Job"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/JobNameField"
+                    android:id="@+id/JobTitleField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Job Name"
-                    />
+                    android:hint="Job Title"
+                    android:layout_marginBottom="5sp"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:hint="Select job category"
+
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/JobCategorySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:layout_marginBottom="5sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ApplicationDeadlineField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Application Deadline"
                     android:inputType="date"
-                    android:hint="Application Deadline" />
+                    android:layout_marginBottom="5sp"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/JobDescriptionField"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:hint="Job description"
                     android:inputType="textMultiLine"
-                    />
+                    android:layout_marginBottom="5sp"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/PostJobButton"
+                style="@style/Widget.Material3.FloatingActionButton.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Post"
-                style="@style/Widget.Material3.FloatingActionButton.Primary"/>
+                android:text="Post Job"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                android:layout_marginBottom="10sp" />
 
             <TextView
-                android:id="@+id/result"
+                android:id="@+id/Result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:gravity="center"
-                />
-
+                android:textSize="20sp" />
 
         </LinearLayout>
-
-
 
     </LinearLayout>
 
