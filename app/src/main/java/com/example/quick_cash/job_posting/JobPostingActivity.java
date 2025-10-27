@@ -3,6 +3,7 @@ package com.example.quick_cash.job_posting;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class JobPostingActivity extends AppCompatActivity {
 
     EditText jobName;
 
-    AutoCompleteTextView jobCategorySpinner;
+    Spinner jobCategorySpinner;
     EditText applicationDeadline;
     EditText jobDescription;
     MaterialButton postButton;
@@ -52,8 +53,11 @@ public class JobPostingActivity extends AppCompatActivity {
         types.add("AI");
         types.add("engineering");
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, types);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeAdapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         jobCategorySpinner.setAdapter(typeAdapter);
+    }
+
+    protected void setupPostJobButton() {
     }
 
     protected void initUIElements() {

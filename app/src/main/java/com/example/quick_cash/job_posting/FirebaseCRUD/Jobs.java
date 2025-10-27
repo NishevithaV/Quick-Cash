@@ -1,17 +1,15 @@
-package com.example.quick_cash;
+package com.example.quick_cash.job_posting.FirebaseCRUD;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
-public class FirebaseCRUD {
+public class Jobs {
     private final FirebaseDatabase database;
     private DatabaseReference jobListRef;
-    private DatabaseReference usersRef;
 
-
-    public FirebaseCRUD(FirebaseDatabase database) {
+    public Jobs(FirebaseDatabase database) {
         this.database = database;
         this.initializeDatabaseRefs();
         this.initializeRefListeners();
@@ -19,22 +17,13 @@ public class FirebaseCRUD {
 
     private void initializeDatabaseRefs() {
         this.jobListRef = this.database.getReference("job_listings");
-        this.usersRef = this.database.getReference("users");
-
-
     }
 
     private void initializeRefListeners() {
         this.setJobListListener();
-        this.setUsersListener();
     }
 
     private void setJobListListener(){
-
-    }
-
-    private void setUsersListener(){
-
     }
 
     public boolean postJob(Map<String, String> job){
@@ -48,13 +37,7 @@ public class FirebaseCRUD {
         return true;
     }
 
-    public boolean postUsers(){
-        return false;
-    }
-
     public void getJob(){
     }
 
-    public void getUser(){
-    }
 }

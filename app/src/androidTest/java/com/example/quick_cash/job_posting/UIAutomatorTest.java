@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_search;
+package com.example.quick_cash.job_posting;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
