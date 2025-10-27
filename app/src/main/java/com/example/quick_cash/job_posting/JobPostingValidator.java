@@ -23,7 +23,6 @@ public class JobPostingValidator {
     }
 
     public boolean checkValidApplicationDeadline(String applicationDeadline) {
-        boolean isValid = false;
         try {
             LocalDate applicationDeadlineDate = LocalDate.parse(applicationDeadline);
             LocalDate today = LocalDate.now();
@@ -31,13 +30,13 @@ public class JobPostingValidator {
             int year = applicationDeadlineDate.getYear();
             if (year >= 2025 && year < 2030) {
                 if (applicationDeadlineDate.isAfter(today)) {
-                    isValid = true;
+                    return true;
                 }
             }
         } catch (DateTimeParseException e) {
             return false;
         }
-        return isValid;
+        return false;
     }
 
     public boolean checkEmptyJobDescription(String description) {

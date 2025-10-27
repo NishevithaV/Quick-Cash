@@ -46,7 +46,7 @@ public class JUnitTest {
 
     @Test
     public void checkIfApplicationDeadlineIsInvalid() {
-        assertFalse(validator.checkValidApplicationDeadline("2025-10-21"));
+        assertFalse(validator.checkValidApplicationDeadline("2024-10-21"));
     }
 
     @Test
