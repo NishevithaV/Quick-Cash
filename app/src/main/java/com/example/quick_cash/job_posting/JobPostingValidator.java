@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class JobPostingValidator {
-    public JobPostingValidator() {
-        //default constructor
-    }
+    public JobPostingValidator() {}
 
     public boolean checkEmptyJobTitle(String title) {
         return title.isEmpty();
@@ -46,25 +44,4 @@ public class JobPostingValidator {
         return description.isEmpty();
     }
 }
-
-//
-//    public boolean checkDALEmail(String email) {
-//        if (email == null || email.trim().isEmpty()) {
-//            return false;
-//        }
-//
-//        int indexOfAtSymbol = email.indexOf('@');
-//        if (indexOfAtSymbol <= 0 || indexOfAtSymbol != email.lastIndexOf('@')) {
-//            return false;
-//        }
-//
-//        String beforeAt = email.substring(0, indexOfAtSymbol);
-//        String afterAt = email.substring(indexOfAtSymbol + 1);
-//
-//        if (beforeAt.isEmpty() || afterAt.isEmpty()) {
-//            return false;
-//        }
-//
-//        return afterAt.equalsIgnoreCase("dal.ca");
-//    }
 

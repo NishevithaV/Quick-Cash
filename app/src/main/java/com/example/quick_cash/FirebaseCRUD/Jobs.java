@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_posting.FirebaseCRUD;
+package com.example.quick_cash.FirebaseCRUD;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
