@@ -133,5 +133,14 @@
             android:background="@android:color/transparent"
             android:strokeColor="#1E64FF" />
 
+        <TextView
+            android:id="@+id/statusMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp" />
+
     </LinearLayout>
 </ScrollView>
