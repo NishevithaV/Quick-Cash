@@ -34,7 +34,7 @@ public class UIAutomator {
     }
 
     @Test
-    public void testPageIsVisible() {
+    public void testPageItemsVisible() {
         UiObject2 employeeBtn = device.wait(Until.findObject(By.res("com.example.quick_cash", "employee_button")), 3000);
         UiObject2 employerBtn = device.wait(Until.findObject(By.res("com.example.quick_cash", "employer_button")), 3000);
         UiObject2 registerBtn = device.wait(Until.findObject(By.res("com.example.quick_cash", "register_button")), 3000);

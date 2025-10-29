@@ -1,6 +1,7 @@
 package com.example.quick_cash.Registration;
 
 import org.junit.Test;
+import org.junit.Before;
 
 import static org.junit.Assert.*;
 
@@ -13,63 +14,71 @@ import static org.junit.Assert.*;
 
 public class JUnitTest {
 
-    private RegistrationActivity registrationActivity;
+    private RegistrationValidator registrationValidator;
 
+
+    @Before
     public void setUp() {
-        registrationActivity = new RegistrationActivity();
+        
+        registrationValidator = new RegistrationValidator();
     }
 
     @Test
     public void testValidUser() {
-        assertTrue(registrationActivity.ValidUser("Employee"));
-        assertTrue(registrationActivity.ValidUser("Employer"));
-        assertFalse(registrationActivity.ValidUser(""));
-        assertFalse(registrationActivity.ValidUser(null));
+        assertTrue(registrationValidator.ValidUser("Employee"));
+        assertTrue(registrationValidator.ValidUser("Employer"));
+        assertFalse(registrationValidator.ValidUser(""));
+        assertFalse(registrationValidator.ValidUser(null));
     }
+
+    @Test
     public void testInValidUser() {
-        assertFalse(registrationActivity.ValidUser(""));
-        assertFalse(registrationActivity.ValidUser(null));
-        assertFalse(registrationActivity.ValidUser("User"));
+        assertFalse(registrationValidator.ValidUser(""));
+        assertFalse(registrationValidator.ValidUser(null));
+        assertFalse(registrationValidator.ValidUser("User"));
     }
 
     @Test
     public void testValidName() {
-        assertTrue(registrationActivity.ValidName("Johnny Liver"));
+        assertTrue(registrationValidator.ValidName("Johnny Liver"));
     }
 
     @Test
     public void testInValidName() {
-        assertFalse(registrationActivity.ValidName(""));
-        assertFalse(registrationActivity.ValidName(null));
+        assertFalse(registrationValidator.ValidName(""));
+        assertFalse(registrationValidator.ValidName(null));
     }
 
     @Test
     public void testValidEmail() {
-        assertTrue(registrationActivity.ValidEmail("user@gmail.com"));
+
+        assertTrue(registrationValidator.ValidEmail("user@gmail.com"));
     }
 
     @Test
     public void testInValidEmail() {
-        assertFalse(registrationActivity.ValidEmail(""));
-        assertFalse(registrationActivity.ValidEmail("usergmail.com"));
-        assertFalse(registrationActivity.ValidEmail("user@dal.ca"));
-        assertFalse(registrationActivity.ValidEmail(null));
+        assertFalse(registrationValidator.ValidEmail(""));
+        assertFalse(registrationValidator.ValidEmail("usergmail.com"));
+        assertFalse(registrationValidator.ValidEmail("user@dal.ca"));
+        assertFalse(registrationValidator.ValidEmail(null));
     }
 
     @Test
     public void testValidPassword() {
-        assertTrue(registrationActivity.ValidPassword("Password123!"));
+
+        assertTrue(registrationValidator.ValidPassword("Password123!"));
     }
      @Test
     public void testInValidPassword() {
-         assertFalse(registrationActivity.ValidPassword("password"));
-         assertFalse(registrationActivity.ValidPassword(""));
-         assertFalse(registrationActivity.ValidPassword("pass"));
-         assertFalse(registrationActivity.ValidPassword(null));
-         assertFalse(registrationActivity.ValidPassword("Password"));
-         assertFalse(registrationActivity.ValidPassword("12345678"));
-         assertFalse(registrationActivity.ValidPassword("PASSWORD123"));
-         assertFalse(registrationActivity.ValidPassword("Password123"));
+         setUp();
+         assertFalse(registrationValidator.ValidPassword("password"));
+         assertFalse(registrationValidator.ValidPassword(""));
+         assertFalse(registrationValidator.ValidPassword("pass"));
+         assertFalse(registrationValidator.ValidPassword(null));
+         assertFalse(registrationValidator.ValidPassword("Password"));
+         assertFalse(registrationValidator.ValidPassword("12345678"));
+         assertFalse(registrationValidator.ValidPassword("PASSWORD123"));
+         assertFalse(registrationValidator.ValidPassword("Password123"));
      }
 
 }

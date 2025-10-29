@@ -11,10 +11,16 @@
       <SelectionState runConfigName="EspressoTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="UIAutomator">
+      <SelectionState runConfigName="checkIfValidUser()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testPageIsVisible()">
+      <SelectionState runConfigName="checkIfPasswordIsValid()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="checkIfPasswordIsInvalid()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="checkIfEmailIsValid()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
