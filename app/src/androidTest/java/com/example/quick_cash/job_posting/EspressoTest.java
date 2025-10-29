@@ -23,11 +23,11 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class EspressoTest {
 
-    public ActivityScenario<JobPostingActivity> activityScenario;
+    public ActivityScenario<PostFormActivity> activityScenario;
 
     @Before
     public void setup() {
-        activityScenario = ActivityScenario.launch(JobPostingActivity.class);
+        activityScenario = ActivityScenario.launch(PostFormActivity.class);
         activityScenario.onActivity(activity -> {
             activity.loadJobCategorySpinner();
             activity.setupPostJobButton();

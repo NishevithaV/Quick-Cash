@@ -1,22 +1,16 @@
 package com.example.quick_cash.FirebaseCRUD;
 
+import android.util.Log;
+
+import com.example.quick_cash.Models.Job;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Map;
-
 public class Jobs {
-    private final FirebaseDatabase database;
-    private DatabaseReference jobListRef;
+    private final DatabaseReference jobListRef;
 
     public Jobs(FirebaseDatabase database) {
-        this.database = database;
-        this.initializeDatabaseRefs();
-        this.initializeRefListeners();
-    }
-
-    private void initializeDatabaseRefs() {
-        this.jobListRef = this.database.getReference("job_listings");
+        this.jobListRef = database.getReference("job_listings");
     }
 
     private void initializeRefListeners() {
@@ -26,14 +20,18 @@ public class Jobs {
     private void setJobListListener(){
     }
 
-    public boolean postJob(Map<String, String> job){
+    public boolean postJob(Job job){
 
         String jobId = jobListRef.push().getKey();
-        if (jobId == null){
-            System.err.println("Could not generate Job ID");
+        if (jobId == null) {
+            Log.e("Firebase", "Failed to generate jobId");
             return false;
-        };
-        jobListRef.child(jobId).setValue(job);
+        }
+
+        jobListRef.child(jobId).setValue(job)
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Job posted successfully!"))
+                .addOnFailureListener(e -> Log.e("Firebase", "Failed to post job", e));
+
         return true;
     }
 

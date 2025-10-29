@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".job_posting.JobPostingActivity">
+    tools:context=".job_posting.PostFormActivity">
 
     <LinearLayout
         android:id="@+id/mainLayout"
@@ -34,77 +34,57 @@
                 android:textStyle="bold"
                 />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- Job Title -->
+            <EditText
+                android:id="@+id/JobTitleField"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="Job Title"
+                android:layout_marginBottom="10dp"
+                android:inputType="textCapWords" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/JobTitleField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Job Title"
-                    android:layout_marginBottom="5sp"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-                <Spinner
-                    android:id="@+id/JobCategorySpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:padding="0sp"
-                    android:layout_marginBottom="5sp" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- Job Category Spinner -->
+            <Spinner
+                android:id="@+id/JobCategorySpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ApplicationDeadlineField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Application Deadline"
-                    android:inputType="date"
-                    android:layout_marginBottom="5sp"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- Application Deadline -->
+            <EditText
+                android:id="@+id/ApplicationDeadlineField"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="Application Deadline"
+                android:inputType="date"
+                android:layout_marginBottom="10dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/JobDescriptionField"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:hint="Job description"
-                    android:inputType="textMultiLine"
-                    android:layout_marginBottom="5sp"/>
+            <!-- Job Description -->
+            <EditText
+                android:id="@+id/JobDescriptionField"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Job Description"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="10dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
+            <!-- Post Job Button -->
+            <Button
                 android:id="@+id/PostJobButton"
-                style="@style/Widget.Material3.FloatingActionButton.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Post Job"
-                app:boxCornerRadiusTopStart="30dp"
-                app:boxCornerRadiusTopEnd="30dp"
-                app:boxCornerRadiusBottomStart="30dp"
-                app:boxCornerRadiusBottomEnd="30dp"
-                android:layout_marginBottom="10sp" />
+                android:layout_marginBottom="10dp" />
 
+            <!-- Result / Status -->
             <TextView
                 android:id="@+id/Result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 

@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quick_Cash"
         >
+        <activity android:name=".job_posting.EmployerDashboardActivity" />
         <activity
-            android:name=".job_posting.JobPostingActivity"
+            android:name=".job_posting.PostFormActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
