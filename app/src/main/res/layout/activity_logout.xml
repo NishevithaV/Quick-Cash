@@ -21,7 +21,7 @@
         tools:ignore="RtlCompat" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/logoutButton"
         android:layout_width="308dp"
         android:layout_height="59dp"
         android:backgroundTint="#FA0202"
