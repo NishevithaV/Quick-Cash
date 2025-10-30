@@ -25,12 +25,33 @@ public class ConfirmActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_confirm);
 
+        // Get data from intent
+        String currentRole = getIntent().getStringExtra("current_role");
+        String newRole = getIntent().getStringExtra("new_role");
+        currentUserEmail = getIntent().getStringExtra("current_email");
+
+        // Initialize views
         roleSwitchText = findViewById(R.id.roleSwitchText);
         emailInput = findViewById(R.id.roleInputEmail);
         confirmButton = findViewById(R.id.roleConfirmButton);
         cancelButton = findViewById(R.id.roleCancelButton);
 
-        
+        // Set the role switch text
+        roleSwitchText.setText(currentRole + " to " + newRole);
+
+        // Set up click listeners
+        confirmButton.setOnClickListener(v -> {
+            String enteredEmail = emailInput.getText().toString().trim();
+            if (enteredEmail.equals(currentUserEmail)) {
+                // Email matches, proceed with role switch
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                // Email doesn't match
+                Toast.makeText(this, "Email does not match your current logged-in account",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         cancelButton.setOnClickListener(v -> finish());
     }

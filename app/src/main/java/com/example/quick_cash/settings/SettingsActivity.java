@@ -21,6 +21,16 @@ public class SettingsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_settings);
         
+        switchRoleButton = findViewById(R.id.switchRoleButton);
         
+        // Set up click listener for switch role button
+        switchRoleButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ConfirmActivity.class);
+            // Pass current role info to confirm activity
+            intent.putExtra("current_role", currentUser.getType());
+            intent.putExtra("new_role", currentUser.getType().equals("employer") ? "employee" : "employer");
+            intent.putExtra("current_email", currentUser.getEmail());
+            startActivity(intent);
+        });
     }
 }
