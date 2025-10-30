@@ -6,18 +6,17 @@
     android:layout_height="match_parent"
     android:background="#070707">
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="426dp"
         android:layout_height="149dp"
-        android:background="#6189F5"
+        android:background="#1E64FF"
         android:gravity="center_vertical"
         android:text="Settings"
         android:textAlignment="center"
         android:textColor="#FDFCFC"
         android:textSize="36sp"
-        tools:layout_editor_absoluteX="-5dp"
-        tools:layout_editor_absoluteY="-4dp"
         tools:ignore="RtlCompat" />
 
     <Button
@@ -28,6 +27,6 @@
         android:text="Logout"
         android:textSize="20sp"
         app:rippleColor="#F40A0A"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="605dp" />
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="587dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
