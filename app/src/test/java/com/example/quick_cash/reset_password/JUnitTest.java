@@ -24,6 +24,7 @@ public class JUnitTest {
 
     @Before
     public void setUp() {
+        
         service = new ResetPasswordLogic();
     }
 
