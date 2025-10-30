@@ -13,12 +13,12 @@ public class ResetPasswordLogic {
     public void sendResetLink(final String email, final StatusCallback callback) {
         if (!isValidEmail(email)) {
             if (callback != null) {
-                callback.onComplete(false, "Invalid Email!");
+                callback.onComplete(false, "invalid Email!");
             }
             return;
         }
         if (callback != null) {
-            callback.onComplete(true, "Reset Email sent!");
+            callback.onComplete(true, "reset email sent!");
         }
     }
 
