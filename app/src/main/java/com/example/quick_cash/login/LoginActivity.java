@@ -23,6 +23,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * LoginActivity
+ * Implements:
+ *  - AT-1: Role-based dashboard redirection
+ *  - AT-2: Error message box for invalid inputs or login errors
+ *  - AT-3: Toast confirmation for success/failure of login attempt
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailInput, passwordInput;
@@ -50,15 +57,18 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseLoginRepository repo = new FirebaseLoginRepository();
 
+        // Redirect to registration page
         signupRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, TempRegistrationActivity.class);
             startActivity(intent);
         });
 
+        // Login button logic
         loginButton.setOnClickListener(view -> {
             String email = safeText(emailInput);
             String pass = safeText(passwordInput);
 
+            // Validation checks (AT-2)
             if (!validator.isEmailValid(email)) {
                 showError("Invalid Email", "Please enter a valid email address.");
                 return;
@@ -71,23 +81,29 @@ public class LoginActivity extends AppCompatActivity {
 
             repo.signIn(email, pass).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    FirebaseUser user = task.getResult();
+                    FirebaseUser user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
                     if (user != null) {
                         // AT-3 success toast
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
+
+                        // AT-1 role-based redirection
                         fetchUserRoleAndRedirect(user);
                     }
                 } else {
                     // AT-3 failure toast
-                    Toast.makeText(this, "Login failed: Incorrect email or password.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,
+                            "Login failed: Incorrect email or password.",
+                            Toast.LENGTH_SHORT).show();
+
+                    // AT-2 visual error box
                     showError("Incorrect Login Details",
                             "The username or password you entered is incorrect. Please try again.");
                 }
             });
         });
-
     }
 
+    // Fetch user role and redirect to corresponding dashboard (AT-1)
     private void fetchUserRoleAndRedirect(FirebaseUser user) {
         DatabaseReference userRef = FirebaseDatabase.getInstance()
                 .getReference("users")
@@ -119,10 +135,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // Safe text fetch utility
     private String safeText(EditText et) {
         return et.getText() == null ? "" : et.getText().toString().trim();
     }
 
+    // Error box display (AT-2)
     private void showError(String title, String message) {
         errorTitle.setText(title);
         errorMessage.setText(message);
