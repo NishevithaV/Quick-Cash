@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".job_posting.PostFormActivity">
+    tools:context=".job_posting.PostFormActivity"
+    >
 
     <LinearLayout
         android:id="@+id/mainLayout"
@@ -15,7 +16,8 @@
 
         android:orientation="vertical"
         tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="116dp">
+        tools:layout_editor_absoluteY="116dp"
+        android:background="@color/black">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,6 +34,7 @@
                 android:text="Post a Job"
                 android:textSize="40sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 />
 
             <!-- Job Title -->
@@ -41,14 +44,20 @@
                 android:layout_height="wrap_content"
                 android:hint="Job Title"
                 android:layout_marginBottom="10dp"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                />
 
             <!-- Job Category Spinner -->
             <Spinner
                 android:id="@+id/JobCategorySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+android:background="@color/white"
+                />
 
             <!-- Application Deadline -->
             <EditText
@@ -57,7 +66,10 @@
                 android:layout_height="wrap_content"
                 android:hint="Application Deadline"
                 android:inputType="date"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                />
 
             <!-- Job Description -->
             <EditText
@@ -67,7 +79,10 @@
                 android:hint="Job Description"
                 android:gravity="top"
                 android:inputType="textMultiLine"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                />
 
             <!-- Post Job Button -->
             <Button
@@ -85,7 +100,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"/>
 
         </LinearLayout>
 
