@@ -5,10 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Unit tests for Login feature.
- * Written as part of TDD for User Story 2 (Login Functionality)
- * Quick Cash Project - Fall 2025
+ * Unit test class for the Login feature.
+ * Verifies email and password validation along with authentication outcomes
+ * to maintain consistent login behavior across the app.
  */
+
 public class LoginUnitTest {
 
     private LoginValidator validator;
