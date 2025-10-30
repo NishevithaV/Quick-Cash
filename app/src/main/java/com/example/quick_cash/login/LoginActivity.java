@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
             if (ok) {
                 errorBox.setVisibility(View.GONE);
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-
                 // TODO: navigate to the correct screen based on role
             } else {
                 showError("Incorrect Login Details",
