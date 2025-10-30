@@ -57,4 +57,15 @@ public class UIAutomatorTestLogout {
         assertTrue(textView.exists());
         assertTrue(LogoutButton.exists());
     }
+
+    @Test
+    public void checkIfMoved2LoginPage() throws UiObjectNotFoundException{
+        UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));
+        LogoutButton.click();
+        UiObject ConfirmButton = device.findObject(new UiSelector().text("Confirm"));
+        ConfirmButton.click();
+
+        UiObject LoginLabel = device.findObject(new UiSelector().textContains("Login"));
+        assertTrue(LoginLabel.exists());
+    }
 }
