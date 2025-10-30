@@ -36,4 +36,11 @@ public class EsspressoTestLogout {
         onView(withId(R.id.CancelButton)).perform(click());
         onView(withId(R.id.textView)).check(matches(withText("Settings")));
     }
+
+    @Test
+    public void checkIfConfirmButtonWorks() {
+        onView(withId(R.id.LogoutButton)).perform(click());
+        onView(withId(R.id.ConfirmButton)).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("Login")));
+    }
 }
