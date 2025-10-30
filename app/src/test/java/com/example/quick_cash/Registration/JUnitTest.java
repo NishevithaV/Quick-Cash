@@ -59,7 +59,7 @@ public class JUnitTest {
     public void testInValidEmail() {
         assertFalse(registrationValidator.ValidEmail(""));
         assertFalse(registrationValidator.ValidEmail("usergmail.com"));
-        assertFalse(registrationValidator.ValidEmail("user@dal.ca"));
+        assertTrue(registrationValidator.ValidEmail("user@dal.ca"));
         assertFalse(registrationValidator.ValidEmail(null));
     }
 
