@@ -31,6 +31,12 @@ public class EsspressoTestLogout {
     }
 
     @Test
+    public void checkIfLogoutButtonWorks() {
+        onView(withId(R.id.LogoutButton)).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("Are you sure you would like to logout?")));
+    }
+
+    @Test
     public void checkIfCancelButtonWorks() {
         onView(withId(R.id.LogoutButton)).perform(click());
         onView(withId(R.id.CancelButton)).perform(click());
