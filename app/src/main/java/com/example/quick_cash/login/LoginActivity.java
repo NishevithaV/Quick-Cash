@@ -73,15 +73,19 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult();
                     if (user != null) {
-                        Toast.makeText(this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                        // AT-3 success toast
+                        Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
                         fetchUserRoleAndRedirect(user);
                     }
                 } else {
+                    // AT-3 failure toast
+                    Toast.makeText(this, "Login failed: Incorrect email or password.", Toast.LENGTH_SHORT).show();
                     showError("Incorrect Login Details",
                             "The username or password you entered is incorrect. Please try again.");
                 }
             });
         });
+
     }
 
     private void fetchUserRoleAndRedirect(FirebaseUser user) {
@@ -90,21 +94,16 @@ public class LoginActivity extends AppCompatActivity {
                 .child(user.getUid())
                 .child("userType");
 
-        Toast.makeText(this, "Fetching userType for UID: " + user.getUid(), Toast.LENGTH_SHORT).show();
-
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getValue() != null) {
                     String role = snapshot.getValue(String.class);
-                    Toast.makeText(LoginActivity.this, "Fetched role: " + role, Toast.LENGTH_SHORT).show();
 
                     if ("Employer".equalsIgnoreCase(role)) {
-                        Intent intent = new Intent(LoginActivity.this, TempEmployerDashboardActivity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(LoginActivity.this, TempEmployerDashboardActivity.class));
                     } else if ("Employee".equalsIgnoreCase(role)) {
-                        Intent intent = new Intent(LoginActivity.this, TempEmployeeDashboardActivity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(LoginActivity.this, TempEmployeeDashboardActivity.class));
                     } else {
                         showError("Error", "Unknown userType: " + role);
                     }
