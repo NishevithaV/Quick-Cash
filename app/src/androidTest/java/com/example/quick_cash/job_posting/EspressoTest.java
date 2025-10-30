@@ -5,6 +5,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -27,6 +28,7 @@ public class EspressoTest {
 
     @Before
     public void setup() {
+
         activityScenario = ActivityScenario.launch(PostFormActivity.class);
         activityScenario.onActivity(activity -> {
             activity.loadJobCategorySpinner();
@@ -72,6 +74,7 @@ public class EspressoTest {
     @Test
     public void checkIfJobCategoryIsInvalid() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
+        onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Select job category"))).perform(click());
         onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));

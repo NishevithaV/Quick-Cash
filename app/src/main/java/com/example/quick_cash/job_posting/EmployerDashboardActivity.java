@@ -38,8 +38,7 @@ public class EmployerDashboardActivity extends AppCompatActivity {
 
     public void loadJobsForUser(String userID) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance()
-                .getReference("jobs")
-                .child(userID);
+                .getReference("jobs");
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override

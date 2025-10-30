@@ -1,5 +1,6 @@
 package com.example.quick_cash.job_posting;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
@@ -27,7 +28,8 @@ import java.util.List;
 public class UIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
-    final String launcherPackageName = "com.example.quick_cash.job_posting";
+    private static final int REDIRECT_TIMEOUT = 5000;
+    final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
     @Before
@@ -49,15 +51,14 @@ public class UIAutomatorTest {
         jobCategorySpinner.exists();
         UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline"));
         assertTrue(applicationDeadlineField.exists());
-        UiObject descriptionField = device.findObject(new UiSelector().text("Job description"));
+        UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         assertTrue(descriptionField.exists());
         UiObject postJobButton = device.findObject(new UiSelector().text("Post Job"));
         assertTrue(postJobButton.exists());
     }
 
-
     @Test
-    public void checkIfJobSuccessfullyPosted() throws UiObjectNotFoundException {
+    public void checkIfJobPostedSuccessfully() throws UiObjectNotFoundException {
         UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));
         jobTitleField.setText("Backend Developer");
         UiObject jobCategorySpinner = device.findObject(new UiSelector().textContains("Select job category"));
@@ -66,13 +67,33 @@ public class UIAutomatorTest {
         types.get(4).click();
         UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline"));
         applicationDeadlineField.setText("2025-11-21");
-        UiObject descriptionField = device.findObject(new UiSelector().text("Job description"));
+        UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         descriptionField.setText("Sample description");
         UiObject postJobButton = device.findObject(new UiSelector().text("Post Job"));
         postJobButton.click();
-        device.wait(Until.hasObject(By.text("Job posted successfully!")), 5000);
-        UiObject2 toast = device.findObject(By.text("Job posted successfully!"));
-        assertTrue(toast != null);
+        device.wait(Until.hasObject(By.text("Job posted successfully")), REDIRECT_TIMEOUT);
+        UiObject result = device.findObject(new UiSelector().text("Job posted successfully"));
+        assertNotNull("Failed to post job!", result);
+    }
+
+
+    @Test
+    public void checkIfRedirectedAfterPost() throws UiObjectNotFoundException {
+        UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));
+        jobTitleField.setText("Backend Developer");
+        UiObject jobCategorySpinner = device.findObject(new UiSelector().textContains("Select job category"));
+        jobCategorySpinner.click();
+        List<UiObject2> types = device.findObjects(By.res("android:id/text1"));
+        types.get(4).click();
+        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline"));
+        applicationDeadlineField.setText("2025-11-21");
+        UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
+        descriptionField.setText("Sample description");
+        UiObject postJobButton = device.findObject(new UiSelector().text("Post Job"));
+        postJobButton.click();
+        device.wait(Until.hasObject(By.text("Your Posted Jobs")), REDIRECT_TIMEOUT);
+        UiObject2 dashboardTitle = device.findObject(By.text("Your Posted Jobs"));
+        assertNotNull("Failed to redirect to Employer Dashboard!", dashboardTitle);
     }
 
 }

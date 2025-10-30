@@ -29,8 +29,12 @@ public class Jobs {
         }
 
         jobListRef.child(jobId).setValue(job)
-                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Job posted successfully!"))
-                .addOnFailureListener(e -> Log.e("Firebase", "Failed to post job", e));
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Firebase", "Job posted successfully!");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase", "Failed to post job", e);
+                });
 
         return true;
     }

@@ -57,8 +57,5 @@ public class Job {
     public void setUserID(String userID) {
         this.userID = userID;
     }
-//  Map<String, String> jobObject = new HashMap<>();
-//            jobObject.put("title", enteredJobName);
-//            jobObject.put("deadline", enteredApplicationDeadline);
-//            jobObject.put("desc", enteredJobDescription);
+
 }

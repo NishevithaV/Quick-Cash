@@ -2,6 +2,8 @@ package com.example.quick_cash.job_posting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,14 +12,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.FirebaseCRUD.Jobs;
 import com.example.quick_cash.Models.Job;
 import com.example.quick_cash.R;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,6 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
     Spinner jobCategorySpinner;
     EditText applicationDeadline;
     EditText jobDescription;
-    MaterialButton postButton;
     TextView result;
 
 
@@ -39,13 +40,13 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         this.setContentView(R.layout.activity_post_form);
+//        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
         this.validator = new JobPostingValidator();
         this.jobsCRUD = new Jobs(getFirebaseDatabase());
         initUIElements();
-        loadJobCategorySpinner();
-        setupPostJobButton();
+        this.loadJobCategorySpinner();
+        this.setupPostJobButton();
     }
 
     protected FirebaseDatabase getFirebaseDatabase() {
@@ -94,30 +95,35 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         String errorMessage = "";
         if (validator.checkEmptyJobTitle(enteredJobTitle)) {
             errorMessage = getResources().getString(R.string.EMPTY_JOB_TITLE);
+            result.setText(errorMessage);
             showToast(errorMessage);
             return;
         }
 
         if (!validator.checkValidJobCategory(enteredJobCategory)) {
             errorMessage = getResources().getString(R.string.INVALID_JOB_CATEGORY);
+            result.setText(errorMessage);
             showToast(errorMessage);
             return;
         }
 
         if (validator.checkEmptyApplicationDeadline(enteredJobDeadline)) {
             errorMessage = getResources().getString(R.string.EMPTY_DEADLINE);
+            result.setText(errorMessage);
             showToast(errorMessage);
             return;
         }
 
         if (!validator.checkValidApplicationDeadline(enteredJobDeadline)) {
             errorMessage = getResources().getString(R.string.INVALID_APPLICATION_DEADLINE);
+            result.setText(errorMessage);
             showToast(errorMessage);
             return;
         }
 
         if (validator.checkEmptyJobDescription(enteredJobDescription)) {
             errorMessage = getResources().getString(R.string.EMPTY_DESCRIPTION);
+            result.setText(errorMessage);
             showToast(errorMessage);
             return;
         }
@@ -133,10 +139,12 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
 
         if (!postedSuccessfully) {
             showToast("Job posting failed");
+            result.setText(getResources().getString(R.string.EMPTY_STRING));
             return;
         };
 
         showToast("Job posted successfully");
+        result.setText(getResources().getString(R.string.EMPTY_STRING));
         move2EmployerDashboard(job);
     }
 
@@ -145,9 +153,11 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void move2EmployerDashboard(Job job) {
-        Intent intent = new Intent(this, EmployerDashboardActivity.class);
-        intent.putExtra("userID", job.getUserID());
-        startActivity(intent);
-        finish();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent intent = new Intent(this, EmployerDashboardActivity.class);
+            intent.putExtra("userID", job.getUserID());
+            startActivity(intent);
+            finish();
+        }, 1000);
     }
 }
