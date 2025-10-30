@@ -10,16 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Quick_Cash">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/Theme.Quick_Cash"
+        tools:targetApi="31">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".login.LoginActivity"
             android:exported="true">
@@ -28,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".job_posting.TempEmployerDashboardActivity" />
+        <activity android:name=".employee.TempEmployeeDashboardActivity" />
+        <activity android:name=".registration.TempRegistrationActivity" />
+
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
