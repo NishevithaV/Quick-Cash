@@ -1,5 +1,6 @@
 package com.example.quick_cash.Registration;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Button;
@@ -42,14 +43,45 @@ public class RegistrationActivity extends AppCompatActivity {
         // Initialize function to show toast
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
-        // User type selection
+
+        userType = "Employee"; // initial selection
+
         Employee_btn.setOnClickListener(view -> {
-            userType = "Employee";
+            // Employee clicked → only change if not already selected
+           if(Employee_btn.getBackgroundTintList() == ColorStateList.valueOf(0xFFFFFFFF)){
+               Employee_btn.setBackgroundTintList(ColorStateList.valueOf(0xFF1E64FF)); // blue
+               Employee_btn.setTextColor(0xFFFFFFFF);
+               Employer_btn.setBackgroundTintList(ColorStateList.valueOf(0xFFFFFFFF));
+               Employer_btn.setTextColor(0xFF1E64FF);
+
+           }
+           else{
+               Employee_btn.setBackgroundTintList(ColorStateList.valueOf(0xFFFFFFFF));
+               Employee_btn.setTextColor(0xFF1E64FF);
+               Employer_btn.setBackgroundTintList(ColorStateList.valueOf(0xFF1E64FF));
+               Employer_btn.setTextColor(0xFFFFFFFF);
+
+           }
         });
 
         Employer_btn.setOnClickListener(view -> {
-            userType = "Employer";
+            // Employer clicked → only change if not already selected
+            if(Employer_btn.getBackgroundTintList() == ColorStateList.valueOf(0xFF1E64FF)){
+                Employer_btn.setBackgroundTintList(ColorStateList.valueOf(0xFFFFFFFF));
+                Employer_btn.setTextColor(0xFF1E64FF);
+                Employee_btn.setBackgroundTintList(ColorStateList.valueOf(0xFF1E64FF)); // blue
+                Employee_btn.setTextColor(0xFFFFFFFF);
+            }
+            else{
+                Employer_btn.setBackgroundTintList(ColorStateList.valueOf(0xFF1E64FF));
+                Employer_btn.setTextColor(0xFFFFFFFF);
+                Employee_btn.setBackgroundTintList(ColorStateList.valueOf(0xFFFFFFFF));
+                Employee_btn.setTextColor(0xFF1E64FF);
+            }
         });
+
+
+
 
         // After clicking registration button
         Register_btn.setOnClickListener(view -> {
@@ -94,7 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         userData.put("name", name);
                         userData.put("email", email);
                         userData.put("userType", userType);
-                        userData.put("userId", userId);
+                        userData.put("password", password);
 
                         firebaseCRUD.saveUserData(userId, userData);
                     },

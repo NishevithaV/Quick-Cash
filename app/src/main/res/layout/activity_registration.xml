@@ -6,7 +6,7 @@
     android:background="#000"
     tools:context=".Registration.RegistrationActivity">
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -134,5 +134,5 @@
             android:strokeColor="#1E64FF" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 </ScrollView>

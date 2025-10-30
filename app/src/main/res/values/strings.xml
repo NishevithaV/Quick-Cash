@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Quick_Cash</string>
-    <string name="INVALID_EMAIL">Pls enter a Valid Email</string>
-    <string name="INVALID_PASSWORD">"Password must include an uppercase letter, number, and special character, and be at least 8 characters long"</string>
-    <string name="EMPTY_PASSWORD">Pls enter a Valid Password</string>
-    <string name="INVALID_NAME">Pls enter a Valid Name</string>
-    <string name="INVALID_USER_TYPE">Pls select a User Type</string>
+    <string name="INVALID_EMAIL">Enter enter a Valid Email</string>
+    <string name="INVALID_PASSWORD">"Password must include an uppercase letter, number, and special character, atleast 8 characters long"</string>
+    <string name="EMPTY_PASSWORD">Enter a Valid Password</string>
+    <string name="INVALID_NAME">Enter enter a Valid Name</string>
+    <string name="INVALID_USER_TYPE">Enter select a User Type</string>
     <string name="REGISTRATION_SUCCESSFUL">Registration Successful</string>
     <string name="REGISTRATION_FAILED">Registration Failed</string>
 

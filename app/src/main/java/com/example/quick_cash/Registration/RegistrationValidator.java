@@ -27,7 +27,8 @@ public class RegistrationValidator {
 
     public boolean ValidEmail(String email) {
         if (email == null || email.isEmpty()) return false;
-        if (!email.endsWith("@gmail.com")) return false;
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        if (!email.matches(emailRegex)) return false;
         return true;
     }
 
