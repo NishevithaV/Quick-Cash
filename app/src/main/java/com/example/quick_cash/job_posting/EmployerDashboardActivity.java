@@ -38,26 +38,32 @@ public class EmployerDashboardActivity extends AppCompatActivity {
 
     public void loadJobsForUser(String userID) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance()
-                .getReference("jobs");
+                .getReference("job_listings");
 
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                jobTitles.clear();
-                for (DataSnapshot jobSnap : snapshot.getChildren()) {
-                    String title = jobSnap.child("title").getValue(String.class);
-                    if (title != null) {
-                        jobTitles.add(title);
+        dbRef.orderByChild("userID").equalTo(userID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        jobTitles.clear();
+
+                        for (DataSnapshot jobSnap : snapshot.getChildren()) {
+                            String title = jobSnap.child("title").getValue(String.class);
+                            if (title != null && !title.isEmpty()) jobTitles.add(title);
+                        }
+
+                        adapter.notifyDataSetChanged();
+
+                        if (jobTitles.isEmpty()) {
+                            Toast.makeText(EmployerDashboardActivity.this,
+                                    "No jobs posted yet.", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(EmployerDashboardActivity.this,
-                        "Failed to load jobs.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(EmployerDashboardActivity.this,
+                                "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
