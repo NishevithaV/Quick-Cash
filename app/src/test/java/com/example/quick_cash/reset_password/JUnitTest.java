@@ -7,9 +7,9 @@ import static org.junit.Assert.*;
 
 public class JUnitTest {
 
-    private ResetPasswordService service;
+    private ResetPasswordLogic service;
 
-    private static class TestCallback implements ResetPasswordService.StatusCallback {
+    private static class TestCallback implements ResetPasswordLogic.StatusCallback {
         boolean callbackTriggered = false;
         boolean operationSucceeded;
         String resultMessage;
@@ -24,33 +24,26 @@ public class JUnitTest {
 
     @Before
     public void setUp() {
-        service = new ResetPasswordService();
+        service = new ResetPasswordLogic();
     }
 
     @Test
-    public void isValidEmail_empty_false() {
+    public void isInValidEmail() {
+        assertFalse(service.isValidEmail("alex.gmail.com"));
         assertFalse(service.isValidEmail(""));
+        assertFalse(service.isValidEmail("alex@gmailcom"));
+        assertFalse(service.isValidEmail("  "));
     }
 
     @Test
-    public void isValidEmail_whitespace_false() {
-        assertFalse(service.isValidEmail("   "));
+    public void isValidEmail() {
+        assertTrue(service.isValidEmail("alex@gmail.com"));
     }
 
     @Test
-    public void isValidEmail_noAt_false() {
-        assertFalse(service.isValidEmail("user.example.com"));
-    }
-
-    @Test
-    public void isValidEmail_good_true() {
-        assertTrue(service.isValidEmail("user@example.com"));
-    }
-
-    @Test
-    public void sendResetLink_invalidEmail_callsErrorImmediately() {
+    public void sendResetLink_invalidEmail_returnsError() {
         TestCallback callback = new TestCallback();
-        service.sendResetLink("bad", callback);
+        service.sendResetLink("invalidEmail@gmail", callback);
         assertTrue(callback.callbackTriggered);
         assertFalse(callback.operationSucceeded);
         assertNotNull(callback.resultMessage);
