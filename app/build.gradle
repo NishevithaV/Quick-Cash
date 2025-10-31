@@ -36,10 +36,8 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     implementation libs.firebase.database
-    implementation libs.firebase.auth
     implementation libs.uiautomator
-
-    // Unit Testing
+    implementation libs.firebase.auth
     testImplementation libs.junit
     testImplementation libs.mockito.core
     testImplementation libs.mockito.inline

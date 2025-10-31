@@ -10,11 +10,8 @@ activity = "1.11.0"
 constraintlayout = "2.2.1"
 googleGmsGoogleServices = "4.4.4"
 firebaseDatabase = "22.0.1"
-mockitoCore = "5.20.0"
-mockitoInline = "5.2.0"
-robolectric = "4.16"
-rules = "1.7.0"
 uiautomator = "2.3.0"
+firebaseAuth = "24.0.1"
 
 [libraries]
 espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoCore" }
@@ -27,12 +24,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
-mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoCore" }
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
-robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
-rules = { module = "androidx.test:rules", version.ref = "rules" }
 uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
