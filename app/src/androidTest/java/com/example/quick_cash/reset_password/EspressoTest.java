@@ -28,13 +28,13 @@ public class EspressoTest {
     public void testSuccesfulToast() {
         onView(withId(R.id.emailInputID)).perform(typeText("alex@gmail.com"), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
-        onView(withText("reset email sent!")).check(matches(withText("reset email sent!")));
+        onView(withId(R.id.statusTextID)).check(matches(withText("reset email sent!")));
     }
 
     @Test
     public void testErrorToast() {
         onView(withId(R.id.emailInputID)).perform(typeText("alex.gmail.com"), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
-        onView(withText("invalid email")).check(matches(withText("invalid email")));
+        onView(withId(R.id.statusTextID)).check(matches(withText("invalid email")));
     }
 }
