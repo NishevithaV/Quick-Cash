@@ -11,12 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp">
 
-
-
-
-        <!-- Company Name -->
+        <!-- Page Title -->
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -27,24 +25,29 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:background="#1E64FF"
-            android:textAlignment="center"
+            android:textAlignment="center" />
 
+        <!-- Switch Role Button -->
+        <Button
+            android:id="@+id/switchRoleButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="400dp"
+            android:backgroundTint="#1E64FF"
+            android:drawablePadding="8dp"
+            android:text="Switch Role"
+            android:textColor="#F7F8FA" />
 
-            />
-
-        <!-- Employee Button -->
+        <!-- Logout Button -->
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="500dp"
+            android:layout_marginTop="40dp"
             android:backgroundTint="#F80202"
             android:drawablePadding="8dp"
             android:text="Logout"
             android:textColor="#F7F8FA" />
-
-
-
 
     </LinearLayout>
 </ScrollView>

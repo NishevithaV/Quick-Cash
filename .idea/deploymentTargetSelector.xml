@@ -13,13 +13,19 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="checkIfCancelWorks()">
+      <SelectionState runConfigName="testMockFirebase_EmployeeToEmployerSwitch()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="EsspressoTestLogout">
+      <SelectionState runConfigName="SettingsActivityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="UIAutomatorTestLogout">
+      <SelectionState runConfigName="testSwitchRoleButtonIsDisplayed()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="testIntegration_IncorrectEmail_StaysOnConfirmPage()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="testSwitchRoleButtonNavigatesToConfirmActivity()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
