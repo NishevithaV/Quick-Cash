@@ -27,12 +27,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_reset_password);
         auth = FirebaseAuth.getInstance();
+        emailValidator = new ResetPasswordValidator();
 
+        initUI();
+        initListeners();
+    }
+
+    protected void initUI(){
         emailInput = findViewById(R.id.emailInputID);
         resetButton = findViewById(R.id.resetButtonID);
         statusText = findViewById(R.id.statusTextID);
-        emailValidator = new ResetPasswordValidator();
+    }
 
+    protected void initListeners(){
         resetButton.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
