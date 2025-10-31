@@ -14,11 +14,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logout);
         initUI();
+        logoutHandler = new LogoutHandler(this);
         initListeners();
     }
 
     protected void initUI() {
-        logoutHandler = new LogoutHandler(this);
         logoutButton = findViewById(R.id.logoutButton);
     }
     private void initListeners() {

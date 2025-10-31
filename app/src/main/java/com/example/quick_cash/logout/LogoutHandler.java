@@ -1,10 +1,13 @@
 package com.example.quick_cash.logout;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.quick_cash.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutHandler {
@@ -24,6 +27,8 @@ public class LogoutHandler {
         logoutConfirmationPage.setPositiveButton("Yes", (dialog, which) -> {
             signOut();
             Toast.makeText(context, "Logged Out", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
         });
 
         logoutConfirmationPage.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());

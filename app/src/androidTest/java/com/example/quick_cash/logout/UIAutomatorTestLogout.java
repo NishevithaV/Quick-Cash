@@ -31,10 +31,16 @@ public class UIAutomatorTestLogout {
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         Context context = ApplicationProvider.getApplicationContext();
-        Intent launcherIntent = context.getPackageManager().getLaunchIntentForPackage(launcherPackageName);
-        Assert.assertNotNull(launcherIntent);
-        launcherIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(launcherIntent);
+
+        // Explicit intent to start SettingsActivity directly
+        Intent intent = new Intent();
+        intent.setClassName(
+                launcherPackageName,
+                launcherPackageName+".logout.SettingsActivity"
+        );
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        context.startActivity(intent);
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
