@@ -9,9 +9,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutHandler {
     private final Context context;
+    private final FirebaseAuth auth;
 
     public LogoutHandler(Context context) {
         this.context = context;
+        this.auth = FirebaseAuth.getInstance();
     }
 
     public void showLogoutConfirmation() {
@@ -29,5 +31,6 @@ public class LogoutHandler {
     }
 
     private void signOut() {
+        auth.signOut();
     }
 }

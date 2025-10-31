@@ -3,6 +3,7 @@ package com.example.quick_cash.log_out;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -24,14 +25,16 @@ public class EsspressoTestLogout {
     public void setup() {
         activityScenario = ActivityScenario.launch(SettingsActivity.class);
         activityScenario.onActivity(activity -> {
-            activity.initSettingsUI();
+            activity.initUI();
         });
     }
 
     @Test
     public void checkIfLogoutButtonWorks() {
         onView(withId(R.id.logoutButton)).perform(click());
-        onView(withId(R.id.textView)).check(matches(withText("Confirm Logout")));
+        onView(withText("Confirm Logout")).check(matches(isDisplayed()));
+        onView(withText("Yes")).check(matches(isDisplayed()));
+        onView(withText("Cancel")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -45,6 +48,6 @@ public class EsspressoTestLogout {
     public void checkIfConfirmButtonWorks() {
         onView(withId(R.id.logoutButton)).perform(click());
         onView(withText("Yes")).perform(click());
-        onView(withId(R.id.textView)).check(matches(withText("Login")));
+        onView(withText("Login")).check(matches(isDisplayed()));
     }
 }
