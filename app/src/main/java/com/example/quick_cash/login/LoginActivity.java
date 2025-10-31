@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.Registration.RegistrationActivity;
+import com.example.quick_cash.employee.EmployeeDashboardActivity;
 import com.example.quick_cash.employee.TempEmployeeDashboardActivity;
+import com.example.quick_cash.employer.EmployerDashboardActivity;
 import com.example.quick_cash.job_posting.TempEmployerDashboardActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -117,9 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                     String role = snapshot.getValue(String.class);
 
                     if ("Employer".equalsIgnoreCase(role)) {
-                        startActivity(new Intent(LoginActivity.this, TempEmployerDashboardActivity.class));
+                        startActivity(new Intent(LoginActivity.this, EmployeeDashboardActivity.class));
                     } else if ("Employee".equalsIgnoreCase(role)) {
-                        startActivity(new Intent(LoginActivity.this, TempEmployeeDashboardActivity.class));
+                        startActivity(new Intent(LoginActivity.this, EmployerDashboardActivity.class));
                     } else {
                         showError("Error", "Unknown userType: " + role);
                     }

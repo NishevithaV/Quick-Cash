@@ -11,6 +11,7 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.settings.SettingsActivity;
 
 import org.junit.Before;
 import org.junit.Test;

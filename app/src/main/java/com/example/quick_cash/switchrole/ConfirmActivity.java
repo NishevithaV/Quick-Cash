@@ -1,4 +1,4 @@
-package com.example.quick_cash.settings;
+package com.example.quick_cash.switchrole;
 
 import android.content.Intent;
 import android.os.Bundle;

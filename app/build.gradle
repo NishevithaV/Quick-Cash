@@ -38,6 +38,7 @@ dependencies {
     implementation libs.firebase.database
     implementation libs.uiautomator
     implementation libs.firebase.auth
+
     testImplementation libs.junit
     testImplementation libs.mockito.core
     testImplementation libs.mockito.inline
@@ -47,5 +48,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.espresso.intents
     androidTestImplementation libs.mockito.android
-    androidTestImplementation libs.rules
+    //androidTestImplementation libs.rules
 }
