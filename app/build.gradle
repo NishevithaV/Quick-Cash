@@ -41,7 +41,6 @@ dependencies {
 
     testImplementation libs.junit
     testImplementation libs.mockito.core
-    testImplementation libs.mockito.inline
 
     // Android Instrumentation Testing
     androidTestImplementation libs.ext.junit

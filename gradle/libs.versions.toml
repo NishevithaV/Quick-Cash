@@ -11,9 +11,8 @@ constraintlayout = "2.2.1"
 googleGmsGoogleServices = "4.4.4"
 firebaseDatabase = "22.0.1"
 uiautomator = "2.3.0"
-mockito = "5.12.0"
-mockitoInline = "5.12.0"
-mockitoAndroid = "5.12.0"
+mockito = "5.11.0"
+mockitoAndroid = "5.11.0"
 
 [libraries]
 espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoCore" }
@@ -28,7 +27,6 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroid" }
 
 [plugins]
