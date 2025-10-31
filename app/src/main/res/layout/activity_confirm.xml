@@ -68,7 +68,7 @@
             android:id="@+id/roleConfirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:text="Confirm Switch"
             app:layout_constraintEnd_toStartOf="@+id/roleCancelButton"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"

@@ -8,10 +8,19 @@ public class User {
 
     public User() {}
 
-    public User(String type, String email, String name) {
+    public User(String type, String email, String name, String id) {
         this.type = type;
         this.email = email;
         this.name = name;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

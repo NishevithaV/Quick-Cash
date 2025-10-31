@@ -36,7 +36,18 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     implementation libs.firebase.database
+    implementation libs.firebase.auth
+    implementation libs.uiautomator
+
+    // Unit Testing
     testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+
+    // Android Instrumentation Testing
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    androidTestImplementation libs.espresso.intents
+    androidTestImplementation libs.mockito.android
+    androidTestImplementation libs.rules
 }
