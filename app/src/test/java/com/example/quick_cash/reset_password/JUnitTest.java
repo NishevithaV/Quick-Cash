@@ -60,15 +60,26 @@ public class JUnitTest {
 
     @Test
     public void sendResetLink_validEmail_returnsSuccess() {
-        // arrange: valid email, but we do not stub the mock yet
         TestCallback callback = new TestCallback();
+
+        doAnswer(inv -> {
+            com.example.quick_cash.FirebaseCrud.ResetPasswordCRUD.BoolCallback cb = inv.getArgument(1);
+            cb.onResult(true); // pretend email exists
+            return null;
+        }).when(crudMock).checkEmailExists(eq("alex@gmail.com"),
+                any(com.example.quick_cash.FirebaseCrud.ResetPasswordCRUD.BoolCallback.class));
+
+        doAnswer(inv -> {
+            com.example.quick_cash.FirebaseCrud.ResetPasswordCRUD.BoolCallback cb = inv.getArgument(1);
+            cb.onResult(true); // pretend reset email sent
+            return null;
+        }).when(crudMock).sendResetEmail(eq("alex@gmail.com"),
+                any(com.example.quick_cash.FirebaseCrud.ResetPasswordCRUD.BoolCallback.class));
 
         service.sendResetLink("alex@gmail.com", callback);
 
-        // this will fail right now because no stub is set, so callback never fires
         assertTrue("callback should be called", callback.callbackTriggered);
         assertTrue("operation should be successful", callback.operationSucceeded);
-        assertEquals("reset email sent!",
-                callback.resultMessage == null ? null : callback.resultMessage.toLowerCase());
+        assertEquals("reset email sent!", callback.resultMessage.toLowerCase());
     }
 }
