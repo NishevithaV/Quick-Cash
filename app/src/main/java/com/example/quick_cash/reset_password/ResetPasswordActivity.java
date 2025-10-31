@@ -6,7 +6,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.quick_cash.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -15,33 +17,43 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private Button resetButton;
     private TextView statusText;
 
-    // logic class
-    private ResetPasswordLogic logic;
+    private FirebaseAuth auth;
+
+    // Validator class
+    private ResetPasswordValidator emailValidator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_reset_password);
+        auth = FirebaseAuth.getInstance();
 
         emailInput = findViewById(R.id.emailInputID);
         resetButton = findViewById(R.id.resetButtonID);
         statusText = findViewById(R.id.statusTextID);
-        logic = new ResetPasswordLogic();
+        emailValidator = new ResetPasswordValidator();
 
         resetButton.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
                 String email = emailInput.getText().toString().trim();
+                if (emailValidator.isValidEmail(email)) {
 
-                logic.sendResetLink(email, new ResetPasswordLogic.StatusCallback() {
-                    @Override
-                    public void onComplete(boolean success, String message) {
+                    auth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    statusText.setText(R.string.RESET_SEND_SUCCESSFUL);
+                                    Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_SUCCESSFUL, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    statusText.setText(R.string.RESET_SEND_FAILED);
+                                    Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_FAILED, Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
-                        // displaying message visibly for Espresso test
-                        statusText.setText(message);
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                } else {
+                    statusText.setText(R.string.INVALID_EMAIL);
+                    Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_FAILED, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
