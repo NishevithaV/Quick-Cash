@@ -17,7 +17,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.R;
-import com.example.quick_cash.settings.ConfirmActivity;
+import com.example.quick_cash.switchrole.ConfirmActivity;
 
 import org.junit.Before;
 import org.junit.Test;
