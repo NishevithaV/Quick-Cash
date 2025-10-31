@@ -1,4 +1,4 @@
-package com.example.quick_cash.log_out;
+package com.example.quick_cash.logout;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

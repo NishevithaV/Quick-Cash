@@ -1,4 +1,4 @@
-package com.example.quick_cash.log_out;
+package com.example.quick_cash.logout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
