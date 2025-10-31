@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 public class UIAutomatorTestLogout {
 
     private static final int LAUNCH_TIMEOUT = 5000;
-    final String launcherPackageName = "com.example.quick_cash.log_out";
+    final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
     @Before
