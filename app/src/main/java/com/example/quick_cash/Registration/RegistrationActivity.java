@@ -1,5 +1,6 @@
-package com.example.quick_cash.Registration;
+package com.example.quick_cash.registration;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.login.LoginActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -134,6 +136,11 @@ public class RegistrationActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
             );
+        });
+
+        Login_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
     }
 

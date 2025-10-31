@@ -1,4 +1,4 @@
-package com.example.quick_cash.Registration;
+package com.example.quick_cash.registration;
 
 import androidx.annotation.NonNull;
 

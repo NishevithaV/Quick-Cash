@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.registration.RegistrationActivity;
 import com.example.quick_cash.employee.TempEmployeeDashboardActivity;
 import com.example.quick_cash.job_posting.TempEmployerDashboardActivity;
-import com.example.quick_cash.registration.TempRegistrationActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Redirect to registration page
         signupRedirect.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, TempRegistrationActivity.class);
+            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivity(intent);
         });
 
