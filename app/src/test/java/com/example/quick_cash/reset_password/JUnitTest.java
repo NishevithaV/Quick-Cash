@@ -8,11 +8,11 @@ import static org.junit.Assert.*;
 
 public class JUnitTest {
 
-    private ResetPasswordLogic validator;
+    private ResetPasswordValidator validator;
 
     @Before
     public void setUp() {
-        validator = new ResetPasswordLogic();
+        validator = new ResetPasswordValidator();
     }
 
     @Test
