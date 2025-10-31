@@ -15,6 +15,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private Button logoutButton;
     private Button switchRoleButton;
+    private Button resetPsswdButton;
     private LogoutHandler logoutHandler;
     private SwitchRoleHandler switchRoleHandler;
 
@@ -34,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void initUI() {
         logoutButton = findViewById(R.id.logoutButton);
         switchRoleButton = findViewById(R.id.switchRoleButton);
+        resetPsswdButton = findViewById(R.id.resetPasswordButton);
     }
 
     /**
