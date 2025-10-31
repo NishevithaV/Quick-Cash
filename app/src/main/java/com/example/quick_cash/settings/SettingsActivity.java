@@ -1,0 +1,59 @@
+package com.example.quick_cash.settings;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+
+import com.example.quick_cash.R;
+import com.example.quick_cash.logout.LogoutHandler;
+import com.example.quick_cash.switchrole.SwitchRoleHandler;
+
+/**
+ * Settings screen that allows users to log out or switch roles.
+ */
+public class SettingsActivity extends AppCompatActivity {
+
+    private Button logoutButton;
+    private Button switchRoleButton;
+    private LogoutHandler logoutHandler;
+    private SwitchRoleHandler switchRoleHandler;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+
+        initUI();
+        initHandlers();
+        initListeners();
+    }
+
+    /**
+     * Initialize UI elements from the layout.
+     */
+    public void initUI() {
+        logoutButton = findViewById(R.id.logoutButton);
+        switchRoleButton = findViewById(R.id.switchRoleButton);
+    }
+
+    /**
+     * Initialize helper handler classes.
+     */
+    private void initHandlers() {
+        logoutHandler = new LogoutHandler(this);
+        switchRoleHandler = new SwitchRoleHandler(this);
+    }
+
+    /**
+     * Set up event listeners for buttons.
+     */
+    private void initListeners() {
+        logoutButton.setOnClickListener(v -> logoutHandler.showLogoutConfirmation());
+        switchRoleButton.setOnClickListener(v -> switchRoleHandler.handleSwitchRole());
+    }
+
+    public SwitchRoleHandler getSwitchRoleHandler() {
+        return switchRoleHandler;
+    }
+}
+
