@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registration.RegistrationActivity" />
+        <activity android:name=".Registration.RegistrationActivity" />
         <activity android:name=".job_posting.TempEmployerDashboardActivity" />
         <activity android:name=".employee.TempEmployeeDashboardActivity" />
 

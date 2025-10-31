@@ -1,4 +1,4 @@
-package com.example.quick_cash.registration;
+package com.example.quick_cash.Registration;
 
 public class RegistrationValidator {
     private String userType = "";

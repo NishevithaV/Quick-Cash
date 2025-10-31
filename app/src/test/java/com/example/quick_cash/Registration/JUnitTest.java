@@ -1,4 +1,4 @@
-package com.example.quick_cash.registration;
+package com.example.quick_cash.Registration;
 
 import org.junit.Test;
 import org.junit.Before;

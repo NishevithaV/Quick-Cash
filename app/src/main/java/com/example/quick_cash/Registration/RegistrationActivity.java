@@ -1,4 +1,4 @@
-package com.example.quick_cash.registration;
+package com.example.quick_cash.Registration;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -136,6 +136,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
             );
+            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
         Login_btn.setOnClickListener(view -> {

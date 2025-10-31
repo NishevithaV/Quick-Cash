@@ -1,4 +1,4 @@
-package com.example.quick_cash.registration;
+package com.example.quick_cash.Registration;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
