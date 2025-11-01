@@ -53,4 +53,27 @@ public class UIAutomatorTest {
         assertNotNull(resultsView);
     }
 
+    @Test
+    public void testSearchShowsMatchingResults() {
+        UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
+        UiObject2 button = device.findObject(By.res(launcherPackageName, "searchBtn"));
+
+        input.setText("Dev", "");
+        button.click();
+
+        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "resultsView")), 2000);
+        assertNotNull("Filtered results should be shown", list);
+    }
+
+    @Test
+    public void testCategoryShowsMatchingResults() {
+        UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
+        UiObject2 button = device.findObject(By.res(launcherPackageName, "searchBtn"));
+
+        input.setText("", "AI");
+        button.click();
+
+        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "resultsView")), 2000);
+        assertNotNull("Filtered results should be shown", list);
+    }
 }
