@@ -1,5 +1,7 @@
 *.iml
 .gradle
+.idea
+/.idea
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -13,5 +15,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-app/src/main/AndroidManifest.xml
-app/src/main/java/com/example/quick_cash/FirebaseCRUD
+/app/src/main/AndroidManifest.xml

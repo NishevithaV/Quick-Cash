@@ -12,4 +12,13 @@
     <string name="email">Email</string>
     <string name="account_registration">Account Registration</string>
     <string name="retrieve_credentials">Retrieve Credentials</string>
+    <string name="INVALID_EMAIL">Enter enter a Valid Email</string>
+    <string name="INVALID_PASSWORD">"Password must include an uppercase letter, number, and special character, atleast 8 characters long"</string>
+    <string name="EMPTY_PASSWORD">Enter a Valid Password</string>
+    <string name="INVALID_NAME">Enter enter a Valid Name</string>
+    <string name="INVALID_USER_TYPE">Enter select a User Type</string>
+    <string name="REGISTRATION_SUCCESSFUL">Registration Successful</string>
+    <string name="REGISTRATION_FAILED">Registration Failed</string>
+    <string name="RESET_SEND_SUCCESSFUL">Password reset email sent</string>
+    <string name="RESET_SEND_FAILED">Failed to send reset email</string>
 </resources>

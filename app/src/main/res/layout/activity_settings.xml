@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".settings.SettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp">
+
+        <!-- Page Title -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="180dp"
+            android:layout_height="62dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:text="Settings"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- Switch Role Button -->
+        <Button
+            android:id="@+id/switchRoleButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="350dp"
+            android:backgroundTint="#1E64FF"
+            android:drawablePadding="8dp"
+            android:text="Switch Role"
+            android:textColor="#F7F8FA" />
+
+        <!-- Switch Role Button -->
+        <Button
+            android:id="@+id/resetPasswordButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#1E64FF"
+            android:drawablePadding="8dp"
+            android:text="Reset Password"
+            android:textColor="#F7F8FA" />
+
+        <!-- Logout Button -->
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#F80202"
+            android:drawablePadding="8dp"
+            android:text="Logout"
+            android:textColor="#F7F8FA" />
+    </LinearLayout>
+</ScrollView>

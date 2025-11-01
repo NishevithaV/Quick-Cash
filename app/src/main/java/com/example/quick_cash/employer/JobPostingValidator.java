@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_posting;
+package com.example.quick_cash.employer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

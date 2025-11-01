@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_posting;
+package com.example.quick_cash.employer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quick_cash.FirebaseCRUD.Jobs;
 import com.example.quick_cash.Models.Job;
 import com.example.quick_cash.R;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,13 +35,15 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
     EditText jobDescription;
     TextView result;
 
+    private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_post_form);
-//        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+        auth = FirebaseAuth.getInstance();
         this.validator = new JobPostingValidator();
         this.jobsCRUD = new Jobs(getFirebaseDatabase());
         initUIElements();
@@ -148,8 +150,12 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         move2EmployerDashboard(job);
     }
 
-    private String getCurrentUserID() {
-        return "sample-user-id";
+    public String getCurrentUserID() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return "TEST_UID";
+        }
+        return user.getUid();
     }
 
     protected void move2EmployerDashboard(Job job) {

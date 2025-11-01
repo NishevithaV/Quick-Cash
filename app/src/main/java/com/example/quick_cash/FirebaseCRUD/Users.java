@@ -33,4 +33,17 @@ public class Users {
     public Map<String, String> getUser(){
         return null;
     }
+
+    // Interface for role update callback
+    public interface RoleUpdateCallback {
+        void onSuccess();
+        void onFailure(String error);
+    }
+
+    // Method to update user role in Firebase
+    public void updateUserRole(String userId, String newRole, RoleUpdateCallback callback) {
+        usersRef.child(userId).child("type").setValue(newRole)
+                .addOnSuccessListener(aVoid -> callback.onSuccess())
+                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
 }
