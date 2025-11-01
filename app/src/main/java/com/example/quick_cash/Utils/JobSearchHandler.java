@@ -16,12 +16,54 @@ public class JobSearchHandler {
         allJobs = new ArrayList<>(sampleJobs);
     }
 
-    public ArrayList<Job> getAllJobs(String search) {
-        if (search.isEmpty()) return allJobs;
-        else {
-            ArrayList<Job> results = new ArrayList<>();
+    private boolean matchSearch(Job j, String search) {
+        return j.getTitle().toLowerCase().contains(search.toLowerCase()) ||
+                j.getCategory().toLowerCase().contains(search.toLowerCase()) ||
+                j.getDesc().toLowerCase().contains(search.toLowerCase());
+    }
 
-            return results;
+    private boolean matchCategory(Job j, String category) {
+        return j.getCategory().toLowerCase().contains(category.toLowerCase());
+    }
+
+    private boolean matchCategoryAndSearch(Job j, String search, String category) {
+        return matchSearch(j, search) && matchCategory(j, category);
+    }
+
+    private ArrayList<Job> filterJobs(String search, String category) {
+        ArrayList<Job> results = new ArrayList<>();
+        boolean categoryIsEmpty = (category.isEmpty() || category.equals("Category"));
+
+        if (!search.isEmpty() && categoryIsEmpty) {
+            for (Job j : allJobs) {
+                if (matchSearch(j, search)) {
+                    results.add(j);
+                }
+            }
+        } else if (!categoryIsEmpty && search.isEmpty()) {
+            for (Job j : allJobs) {
+                if (matchCategory(j, category)) {
+                    results.add(j);
+                }
+            }
+        } else {
+            for (Job j : allJobs) {
+                if (matchCategoryAndSearch(j, search, category)) {
+                    results.add(j);
+                };
+            }
+        }
+
+        return results;
+    }
+
+    public ArrayList<Job> getAllJobs(String search, String category) {
+        boolean categoryIsEmpty = (category.isEmpty() || category.equals("Category"));
+        if (search.isEmpty() && categoryIsEmpty) {
+            return allJobs;
+        }
+        else {
+            return filterJobs(search, category);
         }
     }
 }

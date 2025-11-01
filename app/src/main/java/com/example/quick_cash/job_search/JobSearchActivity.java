@@ -20,6 +20,7 @@ import com.example.quick_cash.Utils.JobsCRUD;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class JobSearchActivity extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class JobSearchActivity extends AppCompatActivity {
         jobsCRUD.getJobs(callbackJobs -> {
             Log.d("JobSearchOut", "Jobs found: " + callbackJobs.toArray().length);
             jobSearcher = new JobSearchHandler(callbackJobs);
-            loadJobs("");
+            loadJobs("", "");
             initListeners();
         });
 
@@ -58,25 +59,45 @@ public class JobSearchActivity extends AppCompatActivity {
         this.resultsHeader = findViewById(R.id.textViewResHead);
         this.resultsView = findViewById(R.id.resultsView);
         this.categorySelector = findViewById(R.id.catSelect);
+        ArrayList<String> categories = new ArrayList<String>(
+                Arrays.asList("Category", "Finance", "Tech", "Education", "Health", "Construction", "AI")
+        );
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.category_item, // use your custom layout
+                categories
+        );
+        adapter.setDropDownViewResource(R.layout.category_item);
+        categorySelector.setAdapter(adapter);
     }
 
     protected void initListeners() {
-
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadJobs(userSearch.getText().toString().trim(),
+                        categorySelector.getSelectedItem().toString());
+            }
+        });
     }
 
-    protected void loadJobs(String search) {
-        ArrayList<Job> jobsToLoad = jobSearcher.getAllJobs("");
+    protected void loadJobs(String search, String category) {
+        ArrayList<Job> jobsToLoad = jobSearcher.getAllJobs(search, category);
         displayJobs(jobsToLoad);
     }
 
     protected void displayJobs(List<Job> jobs) {
-        resultsHeader.setText(R.string.RESULT);
-        resultsView.setVisibility(View.VISIBLE);
+        if (jobs.isEmpty()) {
+            resultsView.setVisibility(View.GONE);
+        } else {
+            resultsHeader.setText(R.string.RESULT);
+            resultsView.setVisibility(View.VISIBLE);
 
-        adapter = new JobAdapter(this, R.layout.search_results_item, new ArrayList<>(jobs));
-        resultsView.setAdapter(adapter);
+            adapter = new JobAdapter(this, R.layout.search_results_item, new ArrayList<>(jobs));
+            resultsView.setAdapter(adapter);
 
 
-        adapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
+        }
     }
 }
