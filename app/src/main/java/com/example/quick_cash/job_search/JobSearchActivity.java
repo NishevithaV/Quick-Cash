@@ -1,5 +1,6 @@
 package com.example.quick_cash.job_search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +35,8 @@ public class JobSearchActivity extends AppCompatActivity {
     JobsCRUD jobsCRUD;
 
     JobSearchHandler jobSearcher;
-    private JobAdapter adapter;
+
+    private ArrayList<Job> displayedJobs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,7 @@ public class JobSearchActivity extends AppCompatActivity {
             loadJobs("", "");
             initListeners();
         });
-
-
-
+        displayedJobs = new ArrayList<>();
     }
 
     protected void initUI() {
@@ -79,6 +79,17 @@ public class JobSearchActivity extends AppCompatActivity {
                         categorySelector.getSelectedItem().toString());
             }
         });
+
+        resultsView.setOnItemClickListener((parent, view, position, id) -> {
+            Job selectedJob = displayedJobs.get(position);
+
+            Intent intent = new Intent(JobSearchActivity.this, JobDetailActivity.class);
+            intent.putExtra("title", selectedJob.getTitle());
+            intent.putExtra("employer", selectedJob.getUserID());
+            intent.putExtra("category", selectedJob.getCategory());
+            intent.putExtra("description", selectedJob.getDesc());
+            startActivity(intent);
+        });
     }
 
     protected void loadJobs(String search, String category) {
@@ -86,15 +97,18 @@ public class JobSearchActivity extends AppCompatActivity {
         displayJobs(jobsToLoad);
     }
 
-    protected void displayJobs(List<Job> jobs) {
-        if (jobs.isEmpty()) {
+    protected void displayJobs(ArrayList<Job> jobs) {
+        displayedJobs.clear();
+        displayedJobs.addAll(jobs);
+
+        if (displayedJobs.isEmpty()) {
             resultsView.setVisibility(View.GONE);
             resultsHeader.setText(R.string.NO_RESULT);
         } else {
             resultsHeader.setText(R.string.RESULT);
             resultsView.setVisibility(View.VISIBLE);
 
-            adapter = new JobAdapter(this, R.layout.search_results_item, new ArrayList<>(jobs));
+            JobAdapter adapter = new JobAdapter(this, R.layout.search_results_item, new ArrayList<>(jobs));
             resultsView.setAdapter(adapter);
 
 
