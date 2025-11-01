@@ -71,8 +71,8 @@
             android:id="@+id/textViewResHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Results"
             android:gravity="start"
+            android:text="@string/RESULT"
             android:textColor="#FFF"
             app:layout_constraintBottom_toTopOf="@+id/resultsView"
             tools:layout_editor_absoluteX="15dp" />
@@ -81,7 +81,7 @@
         <ListView
             android:id="@+id/resultsView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="470dp"
             android:textColor="#FFF" />
     </LinearLayout>
 </ScrollView>

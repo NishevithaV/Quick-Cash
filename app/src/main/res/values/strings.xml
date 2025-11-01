@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quick_Cash</string>
+    <string name="NO_RESULT">No Results. Try a different search</string>
+    <string name="RESULT">Results</string>
 </resources>
