@@ -1,6 +1,8 @@
 package com.example.quick_cash.job_search;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -8,6 +10,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 
 import androidx.test.core.app.ActivityScenario;
@@ -43,30 +46,41 @@ public class EspressoTest {
 
     @Test
     public void testSearchUpdatesResults() {
-        onView(withId(R.id.userSearch)).perform(typeText(gibberish, ""), closeSoftKeyboard());
+        onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(not(isDisplayed())));
-        onView(withId(R.id.userSearch)).perform(typeText("Dev", ""), closeSoftKeyboard());
+
+        onView(withId(R.id.userSearch)).perform(clearText(), typeText("Dev"), closeSoftKeyboard());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testCategoryUpdatesResults() {
-        onView(withId(R.id.userSearch)).perform(typeText("", gibberish), closeSoftKeyboard());
+        onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
+        onView(withId(R.id.catSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Category"))).perform(click());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(not(isDisplayed())));
-        onView(withId(R.id.userSearch)).perform(typeText("", "AI"), closeSoftKeyboard());
+
+        onView(withId(R.id.userSearch)).perform(clearText(), closeSoftKeyboard());
+        onView(withId(R.id.catSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testCategoryAndSearchUpdateResults() {
-        onView(withId(R.id.userSearch)).perform(typeText(gibberish, gibberish), closeSoftKeyboard());
+        onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
+        onView(withId(R.id.catSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Category"))).perform(click());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(not(isDisplayed())));
-        onView(withId(R.id.userSearch)).perform(typeText("Dev", "AI"), closeSoftKeyboard());
+
+        onView(withId(R.id.userSearch)).perform(clearText(), typeText("Dev"), closeSoftKeyboard());
+        onView(withId(R.id.catSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }

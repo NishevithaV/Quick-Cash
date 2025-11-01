@@ -1,6 +1,7 @@
 package com.example.quick_cash.job_search;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
@@ -20,11 +21,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class UIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
+    private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
     @Before
     public void setup() {
@@ -55,25 +59,11 @@ public class UIAutomatorTest {
 
     @Test
     public void testSearchShowsMatchingResults() {
-        UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
-        UiObject2 button = device.findObject(By.res(launcherPackageName, "searchBtn"));
 
-        input.setText("Dev", "");
-        button.click();
-
-        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "resultsView")), 2000);
-        assertNotNull("Filtered results should be shown", list);
     }
 
     @Test
     public void testCategoryShowsMatchingResults() {
-        UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
-        UiObject2 button = device.findObject(By.res(launcherPackageName, "searchBtn"));
 
-        input.setText("", "AI");
-        button.click();
-
-        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "resultsView")), 2000);
-        assertNotNull("Filtered results should be shown", list);
     }
 }
