@@ -117,9 +117,9 @@ public class LoginActivity extends AppCompatActivity {
                     String role = snapshot.getValue(String.class);
 
                     if ("Employer".equalsIgnoreCase(role)) {
-                        startActivity(new Intent(LoginActivity.this, EmployeeDashboardActivity.class));
-                    } else if ("Employee".equalsIgnoreCase(role)) {
                         startActivity(new Intent(LoginActivity.this, EmployerDashboardActivity.class));
+                    } else if ("Employee".equalsIgnoreCase(role)) {
+                        startActivity(new Intent(LoginActivity.this, EmployeeDashboardActivity.class));
                     } else {
                         showError("Error", "Unknown userType: " + role);
                     }

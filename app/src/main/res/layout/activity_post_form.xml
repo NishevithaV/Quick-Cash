@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".employer.PostFormActivity"
+    >
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="116dp"
+        android:background="@color/black">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Post a Job"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                />
+
+            <!-- Job Title -->
+            <EditText
+                android:id="@+id/JobTitleField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Job Title"
+                android:layout_marginBottom="10dp"
+                android:inputType="textCapWords"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                />
+
+            <!-- Job Category Spinner -->
+            <Spinner
+                android:id="@+id/JobCategorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+android:background="@color/white"
+                />
+
+            <!-- Application Deadline -->
+            <EditText
+                android:id="@+id/ApplicationDeadlineField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Application Deadline"
+                android:inputType="date"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                />
+
+            <!-- Job Description -->
+            <EditText
+                android:id="@+id/JobDescriptionField"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Job Description"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                />
+
+            <!-- Post Job Button -->
+            <Button
+                android:id="@+id/PostJobButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Job"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#0D47A1"/>
+
+            <!-- Result / Status -->
+            <TextView
+                android:id="@+id/Result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
