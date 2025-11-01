@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 public class EspressoTest {
 
     public ActivityScenario<ResetPasswordActivity> activityScenario;
+    String testEmail = "emiyusuffe@gmail.com";
 
     @Before
     public void setup() {
@@ -49,8 +50,7 @@ public class EspressoTest {
 
     @Test
     public void testSuccessfulResetSend() {
-
-        onView(withId(R.id.resetEmailInputID)).perform(typeText("test-user@bigmoney.com"), closeSoftKeyboard());
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testEmail), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
         try {
             Thread.sleep(2000);

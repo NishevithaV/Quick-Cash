@@ -29,6 +29,8 @@ public class UIAutomatorTest {
     private final String emailInpID = "resetEmailInputID";
     private final String statusTxtID = "resetPsswdStatusTextID";
 
+    String testEmail = "emiyusuffe@gmail.com";
+
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -63,7 +65,6 @@ public class UIAutomatorTest {
 
     @Test
     public void testResetButtonWithValidEmail() throws InterruptedException {
-        String testEmail = "test-user@bigmoney.com";
         device.findObject(By.res(launcherPackageName, emailInpID)).setText(testEmail);
         device.findObject(By.res(launcherPackageName, resetBtnID)).click();
         device.waitForIdle();
@@ -76,7 +77,6 @@ public class UIAutomatorTest {
 
     @Test
     public void testGoToLoginAfterReset() {
-        String testEmail = "test-user@bigmoney.com";
         device.findObject(By.res(launcherPackageName, emailInpID)).setText(testEmail);
         device.findObject(By.res(launcherPackageName, resetBtnID)).click();
         device.waitForIdle();
