@@ -87,4 +87,17 @@ public class UIAutomatorTest {
         UiObject noResultsHeader = device.findObject(new UiSelector().text("No Results. Try a different search"));
         assertTrue(noResultsHeader.exists());
     }
+
+    @Test
+    public void testJobClickOpensDetail() {
+        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "resultsView")), 2000);
+        assertNotNull(list);
+
+        UiObject2 firstItem = list.getChildren().get(0);
+        firstItem.click();
+
+        device.wait(Until.findObject(By.textContains("Apply")), 3000);
+        UiObject applyButton = device.findObject(new UiSelector().text("Apply"));
+        assertTrue(applyButton.exists());
+    }
 }

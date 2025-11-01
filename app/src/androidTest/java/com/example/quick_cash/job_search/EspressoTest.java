@@ -94,6 +94,7 @@ public class EspressoTest {
 
     @Test
     public void testClickOpensDetail() {
-
+        onView(withId(R.id.resultsView)).perform(click());
+        onView(withText("Apply")).check(matches(isDisplayed()));
     }
 }
