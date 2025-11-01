@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.example.quick_cash.Models.Job;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class JUnitTest {
@@ -22,7 +23,12 @@ public class JUnitTest {
         sampleJobs.add(new Job("Android Developer", "Tech", "2025-12-31", "Develop Android apps", "user1"));
         sampleJobs.add(new Job("Nurse", "Health", "2025-11-30", "Work in hospital", "user2"));
         sampleJobs.add(new Job("Math Teacher", "Education", "2025-10-15", "Teach math", "user3"));
+    }
+
+    @Test
+    public void testUpdateAllJobs() {
         searcher.updateAllJobs(sampleJobs);
+        assertEquals(searcher.getAllJobs(), sampleJobs);
     }
 
     @Test

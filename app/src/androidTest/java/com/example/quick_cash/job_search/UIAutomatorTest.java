@@ -39,7 +39,18 @@ public class UIAutomatorTest {
 
     @Test
     public void testElementsVisible() {
-
+        UiObject searchBar = device.findObject(new UiSelector().textContains("Find Jobs"));
+        searchBar.exists();
+        UiObject2 userSearch = device.findObject(By.res(launcherPackageName+":id/"+"userSearch"));
+        assertNotNull(userSearch);
+        UiObject2 catSelect = device.findObject(By.res(launcherPackageName+":id/"+"catSelect"));
+        assertNotNull(catSelect);
+        UiObject searchBtn = device.findObject(new UiSelector().text("Go"));
+        assertTrue(searchBtn.exists());
+        UiObject resultsHeader = device.findObject(new UiSelector().text("Results"));
+        assertTrue(resultsHeader.exists());
+        UiObject2 resultsView = device.findObject(By.res(launcherPackageName+":id/"+"resultsView"));
+        assertNotNull(resultsView);
     }
 
 }

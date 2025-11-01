@@ -38,10 +38,6 @@ public class EspressoTest {
         activityScenario.onActivity(JobSearchActivity::initUI);
     }
 
-    public void testAllJobsDisplayed() {
-
-    }
-
     @Test
     public void testSearchUpdatesResults() {
 
