@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/body"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000">
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:gravity="center"
 
         android:orientation="vertical">
@@ -19,6 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="24sp"
+            android:textColor="#FFF"
             android:text="Find Jobs" />
 
         <LinearLayout
@@ -35,6 +38,7 @@
                 android:ems="10"
                 android:hint="Search for Jobs"
                 android:inputType="text"
+                android:textColor="#FFF"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="16dp" />
 
@@ -45,8 +49,10 @@
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:padding="2dp"
+                android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/userSearch"
-                tools:layout_editor_absoluteX="16dp" />
+                tools:layout_editor_absoluteX="16dp"
+                android:popupBackground="@color/black"/>
 
             <Button
                 android:id="@+id/searchBtn"
@@ -54,6 +60,8 @@
                 android:layout_height="40dp"
                 android:padding="2dp"
                 android:text="Go"
+                android:textColor="#FFF"
+                android:backgroundTint="#0066FF"
                 app:layout_constraintTop_toBottomOf="@+id/catSelect"
                 tools:layout_editor_absoluteX="15dp" />
 
@@ -65,6 +73,7 @@
             android:layout_height="wrap_content"
             android:text="Results"
             android:gravity="start"
+            android:textColor="#FFF"
             app:layout_constraintBottom_toTopOf="@+id/resultsView"
             tools:layout_editor_absoluteX="15dp" />
 
@@ -72,6 +81,7 @@
         <ListView
             android:id="@+id/resultsView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:textColor="#FFF" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
