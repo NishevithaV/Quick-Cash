@@ -1,5 +1,26 @@
 <resources>
     <string name="app_name">Quick_Cash</string>
+    <string name="EMPTY_JOB_TITLE">Empty Job Title</string>
+    <string name="EMPTY_DEADLINE">Empty Application Deadline</string>
+    <string name="EMPTY_STRING"></string>
+    <string name="INVALID_JOB_CATEGORY">Invalid job category</string>
+    <string name="INVALID_APPLICATION_DEADLINE">Invalid application deadline</string>
+    <string name="EMPTY_DESCRIPTION">Empty description</string>
+    <string name="FIREBASE_DB_URL">https://csci3130-fall2025-a2-default-rtdb.firebaseio.com</string>
+    <string name="register">Register</string>
+    <string name="banner_id">Banner ID</string>
+    <string name="email">Email</string>
+    <string name="account_registration">Account Registration</string>
+    <string name="retrieve_credentials">Retrieve Credentials</string>
+    <string name="INVALID_EMAIL">Enter enter a Valid Email</string>
+    <string name="INVALID_PASSWORD">"Password must include an uppercase letter, number, and special character, atleast 8 characters long"</string>
+    <string name="EMPTY_PASSWORD">Enter a Valid Password</string>
+    <string name="INVALID_NAME">Enter enter a Valid Name</string>
+    <string name="INVALID_USER_TYPE">Enter select a User Type</string>
+    <string name="REGISTRATION_SUCCESSFUL">Registration Successful</string>
+    <string name="REGISTRATION_FAILED">Registration Failed</string>
+    <string name="RESET_SEND_SUCCESSFUL">Password reset email sent</string>
+    <string name="RESET_SEND_FAILED">Failed to send reset email</string>
     <string name="NO_RESULT">No Results. Try a different search</string>
     <string name="RESULT">Results</string>
 </resources>
