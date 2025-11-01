@@ -25,7 +25,7 @@ public class EmployerDashboardEspressoTest {
 
         activityScenario = ActivityScenario.launch(EmployerDashboardActivity.class);
         activityScenario.onActivity(activity -> {
-            activity.loadJobsForUser("TEST_UID");
+            activity.loadJobsForUser("NO_JOB_UID");
         });
     }
 

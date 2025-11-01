@@ -18,6 +18,7 @@ import com.example.quick_cash.R;
 import com.example.quick_cash.Utils.JobAdapter;
 import com.example.quick_cash.Utils.JobSearchHandler;
 import com.example.quick_cash.Utils.JobsCRUD;
+import com.example.quick_cash.Utils.UserIdMapper;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -44,7 +45,6 @@ public class JobSearchActivity extends AppCompatActivity {
         initUI();
         jobsCRUD = new JobsCRUD(FirebaseDatabase.getInstance());
         jobsCRUD.getJobs(callbackJobs -> {
-            Log.d("JobSearchOut", "Jobs found: " + callbackJobs.toArray().length);
             jobSearcher = new JobSearchHandler(callbackJobs);
             loadJobs("", "");
             initListeners();
@@ -84,10 +84,12 @@ public class JobSearchActivity extends AppCompatActivity {
 
             Intent intent = new Intent(JobSearchActivity.this, JobDetailActivity.class);
             intent.putExtra("title", selectedJob.getTitle());
-            intent.putExtra("employer", selectedJob.getUserID());
             intent.putExtra("category", selectedJob.getCategory());
             intent.putExtra("description", selectedJob.getDesc());
-            startActivity(intent);
+            UserIdMapper.getName(selectedJob.getUserID(), name -> {
+                intent.putExtra("employer", name);
+                startActivity(intent);
+            });
         });
     }
 

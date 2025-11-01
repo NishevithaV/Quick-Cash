@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.quick_cash.Models.Job;
 import com.example.quick_cash.R;
 
@@ -14,15 +16,16 @@ import java.util.List;
 
 public class JobAdapter extends ArrayAdapter<Job> {
 
-    private int resource;
+    private final int resource;
 
     public JobAdapter(Context context, int resource, List<Job> jobs) {
         super(context, resource, jobs);
         this.resource = resource;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
 
         if (view == null) {
@@ -38,7 +41,7 @@ public class JobAdapter extends ArrayAdapter<Job> {
 
         if (job != null) {
             titleText.setText(job.getTitle());
-            employerText.setText(job.getUserID());
+            UserIdMapper.getName(job.getUserID(), employerText::setText);
             categoryText.setText(job.getCategory());
         }
 
