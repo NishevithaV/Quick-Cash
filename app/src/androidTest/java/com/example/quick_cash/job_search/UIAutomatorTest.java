@@ -1,5 +1,6 @@
 package com.example.quick_cash.job_search;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -59,11 +60,31 @@ public class UIAutomatorTest {
 
     @Test
     public void testSearchShowsMatchingResults() {
+        UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
+        UiObject2 catSelect = device.findObject(By.res(launcherPackageName, "catSelect"));
+        UiObject2 button = device.findObject(By.res(launcherPackageName, "searchBtn"));
 
+        input.setText("Dev");
+        catSelect.click();
+        device.wait(Until.hasObject(By.text("Category")), 2000);
+        UiObject2 category = device.findObject(By.text("Category"));
+        category.click();
+        button.click();
+        device.wait(Until.findObject(By.text("Results")), 2000);
+        UiObject resultsHeader = device.findObject(new UiSelector().text("Results"));
+        assertTrue(resultsHeader.exists());
     }
 
     @Test
-    public void testCategoryShowsMatchingResults() {
+    public void testNoResultsMessageShown() {
+        UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
+        UiObject2 button = device.findObject(By.res(launcherPackageName, "searchBtn"));
 
+        input.setText(gibberish);
+        button.click();
+
+        device.wait(Until.findObject(By.text("No Results. Try a different search")), 2000);
+        UiObject noResultsHeader = device.findObject(new UiSelector().text("No Results. Try a different search"));
+        assertTrue(noResultsHeader.exists());
     }
 }

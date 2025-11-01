@@ -87,7 +87,9 @@ public class EspressoTest {
 
     @Test
     public void testNoResultsMessage() {
-
+        onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
+        onView(withId(R.id.searchBtn)).perform(click());
+        onView(withId(R.id.textViewResHead)).check(matches(withText(R.string.NO_RESULT)));
     }
 
     @Test

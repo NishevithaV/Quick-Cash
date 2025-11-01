@@ -23,6 +23,8 @@ public class JUnitTest {
     private List<Job> mathTeachArr;
     private List<Job> englishTeachArr;
     private List<Job> educationArr;
+    private List<Job> emptyArr;
+    private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
     @Before
     public void setup() {
@@ -37,7 +39,10 @@ public class JUnitTest {
         nurseArr = new ArrayList<Job>(Collections.singletonList(sampleJobs.get(1)));
         mathTeachArr = new ArrayList<Job>(Collections.singletonList(sampleJobs.get(2)));
         englishTeachArr = new ArrayList<Job>(Collections.singletonList(sampleJobs.get(3)));
-        educationArr = new ArrayList<Job>(Arrays.asList(sampleJobs.get(2), sampleJobs.get(3)));
+        educationArr = new ArrayList<Job>();
+        educationArr.addAll(mathTeachArr);
+        educationArr.addAll(englishTeachArr);
+        emptyArr = new ArrayList<Job>();
     }
 
     @Test
@@ -68,6 +73,7 @@ public class JUnitTest {
 
     @Test
     public void testFilterNoResults() {
-
+        assertEquals(searcher.getAllJobs(gibberish, "Tech"), emptyArr);
+        assertEquals(searcher.getAllJobs("Dev", gibberish), emptyArr);
     }
 }
