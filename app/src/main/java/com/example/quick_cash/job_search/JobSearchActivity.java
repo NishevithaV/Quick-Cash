@@ -89,6 +89,7 @@ public class JobSearchActivity extends AppCompatActivity {
     protected void displayJobs(List<Job> jobs) {
         if (jobs.isEmpty()) {
             resultsView.setVisibility(View.GONE);
+            resultsHeader.setText(R.string.NO_RESULT);
         } else {
             resultsHeader.setText(R.string.RESULT);
             resultsView.setVisibility(View.VISIBLE);
