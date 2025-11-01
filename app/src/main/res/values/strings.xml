@@ -7,9 +7,6 @@
     <string name="INVALID_USER_TYPE">Enter select a User Type</string>
     <string name="REGISTRATION_SUCCESSFUL">Registration Successful</string>
     <string name="REGISTRATION_FAILED">Registration Failed</string>
-
-
-
-
-
+    <string name="RESET_SEND_SUCCESSFUL">Password reset email sent</string>
+    <string name="RESET_SEND_FAILED">Failed to send reset email</string>
 </resources>

@@ -38,14 +38,12 @@ dependencies {
     implementation libs.firebase.database
     implementation libs.uiautomator
     implementation libs.firebase.auth
-
+    implementation libs.espresso.idling.resource
     testImplementation libs.junit
     testImplementation libs.mockito.core
 
-    // Android Instrumentation Testing
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.espresso.intents
     androidTestImplementation libs.mockito.android
-    //androidTestImplementation libs.rules
 }

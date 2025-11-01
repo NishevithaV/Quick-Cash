@@ -11,6 +11,7 @@ constraintlayout = "2.2.1"
 googleGmsGoogleServices = "4.4.4"
 firebaseDatabase = "22.0.1"
 uiautomator = "2.3.0"
+espressoIdlingResource = "3.7.0"
 mockito = "5.11.0"
 mockitoAndroid = "5.11.0"
 
@@ -25,6 +26,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espressoIdlingResource" }
 uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroid" }
