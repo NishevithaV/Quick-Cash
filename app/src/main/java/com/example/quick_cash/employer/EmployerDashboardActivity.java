@@ -51,7 +51,7 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         }
 
         jobsListView = findViewById(R.id.jobListView);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, jobTitles);
+        adapter = new ArrayAdapter<>(this, R.layout.job_postings_item, jobTitles);
         jobsListView.setAdapter(adapter);
 
         loadJobsForUser(userID);
