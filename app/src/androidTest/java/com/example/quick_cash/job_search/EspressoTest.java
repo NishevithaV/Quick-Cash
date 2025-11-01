@@ -18,14 +18,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
-import static org.junit.Assert.assertEquals;
 
 import com.example.quick_cash.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.List;
 
 /**
  * Instrumented test, which will execute on an Android device.

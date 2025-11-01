@@ -35,9 +35,13 @@ public class UIAutomatorTest {
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         Context context = ApplicationProvider.getApplicationContext();
-        Intent launcherIntent = context.getPackageManager().getLaunchIntentForPackage(launcherPackageName);
+        Intent launcherIntent = new Intent();
+        launcherIntent.setClassName(
+                launcherPackageName,
+                launcherPackageName+".job_search.JobSearchActivity"
+        );
+        launcherIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Assert.assertNotNull(launcherIntent);
-        launcherIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(launcherIntent);
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }

@@ -1,7 +1,5 @@
 package com.example.quick_cash.Utils;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.quick_cash.Models.Job;
@@ -18,13 +16,6 @@ public class JobsCRUD {
 
     public JobsCRUD(FirebaseDatabase database) {
         this.jobListRef = database.getReference("job_listings");
-    }
-
-    private void initializeRefListeners() {
-        this.setJobListListener();
-    }
-
-    private void setJobListListener(){
     }
 
     public interface JobsCallback {

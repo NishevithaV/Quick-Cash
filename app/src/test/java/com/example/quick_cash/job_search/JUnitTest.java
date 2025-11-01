@@ -9,9 +9,7 @@ import com.example.quick_cash.Models.Job;
 import com.example.quick_cash.Utils.JobSearchHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 public class JUnitTest {
@@ -24,7 +22,6 @@ public class JUnitTest {
     private List<Job> englishTeachArr;
     private List<Job> educationArr;
     private List<Job> emptyArr;
-    private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
     @Before
     public void setup() {
@@ -73,6 +70,7 @@ public class JUnitTest {
 
     @Test
     public void testFilterNoResults() {
+        String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
         assertEquals(searcher.getAllJobs(gibberish, "Tech"), emptyArr);
         assertEquals(searcher.getAllJobs("Dev", gibberish), emptyArr);
     }

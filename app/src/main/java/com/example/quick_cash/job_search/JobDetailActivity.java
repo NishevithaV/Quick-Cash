@@ -14,7 +14,7 @@ public class JobDetailActivity extends AppCompatActivity {
     TextView employer;
     TextView category;
     TextView description;
-    Button applyButton, backButton;
+    Button applyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,6 @@ public class JobDetailActivity extends AppCompatActivity {
         category = findViewById(R.id.jobCategory);
         description = findViewById(R.id.jobDesc);
         applyButton = findViewById(R.id.applyButton);
-        backButton = findViewById(R.id.backToJobSearchButton);
 
         title.setText(getIntent().getStringExtra("title"));
         employer.setText(getIntent().getStringExtra("employer"));
