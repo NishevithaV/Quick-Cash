@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.Registration.RegistrationActivity;
-import com.example.quick_cash.employee.EmployeeDashboardActivity;
+import com.example.quick_cash.views.EmployeeDashboardActivity;
 import com.example.quick_cash.employer.EmployerDashboardActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

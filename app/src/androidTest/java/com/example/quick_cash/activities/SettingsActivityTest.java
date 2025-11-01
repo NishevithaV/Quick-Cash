@@ -30,7 +30,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.FirebaseCRUD.Users;
 import com.example.quick_cash.R;
-import com.example.quick_cash.employee.EmployeeDashboardActivity;
+import com.example.quick_cash.views.EmployeeDashboardActivity;
 import com.example.quick_cash.employer.EmployerDashboardActivity;
 import com.example.quick_cash.settings.SettingsActivity;
 import com.example.quick_cash.switchrole.ConfirmActivity;

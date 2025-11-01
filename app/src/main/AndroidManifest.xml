@@ -28,7 +28,6 @@
         <activity android:name=".Registration.RegistrationActivity" />
         <activity android:name=".employer.PostFormActivity" />
         <activity android:name=".employer.EmployerDashboardActivity" />
-        <activity android:name=".employee.EmployeeDashboardActivity" />
         <activity android:name=".switchrole.ConfirmActivity" />
         <activity android:name=".job_search.JobDetailActivity" />
         <activity android:name=".job_search.JobSearchActivity" />
