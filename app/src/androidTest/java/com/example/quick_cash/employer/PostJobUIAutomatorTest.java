@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_posting;
+package com.example.quick_cash.employer;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
-public class UIAutomatorTest {
+public class PostJobUIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
     private static final int REDIRECT_TIMEOUT = 5000;
@@ -36,9 +36,13 @@ public class UIAutomatorTest {
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         Context context = ApplicationProvider.getApplicationContext();
-        Intent launcherIntent = context.getPackageManager().getLaunchIntentForPackage(launcherPackageName);
+        Intent launcherIntent = new Intent();
+        launcherIntent.setClassName(
+                launcherPackageName,
+                launcherPackageName+".employer.PostFormActivity"
+        );
+        launcherIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Assert.assertNotNull(launcherIntent);
-        launcherIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(launcherIntent);
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }

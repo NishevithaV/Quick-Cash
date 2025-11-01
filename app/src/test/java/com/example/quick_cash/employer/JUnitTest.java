@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_posting;
+package com.example.quick_cash.employer;
 
 import org.junit.Before;
 import org.junit.Test;
