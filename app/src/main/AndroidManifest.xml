@@ -14,7 +14,6 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".reset_password.ResetPasswordActivity"
             android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -24,12 +23,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".settings.SettingsActivity"/>
+        <activity android:name=".reset_password.ResetPasswordActivity"/>
         <activity android:name=".Registration.RegistrationActivity" />
         <activity android:name=".employer.EmployerDashboardActivity" />
         <activity android:name=".employee.EmployeeDashboardActivity" />
         <activity android:name=".switchrole.ConfirmActivity" />
-
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
