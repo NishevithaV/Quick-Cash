@@ -16,7 +16,7 @@
         <!--company logo-->
         <ImageView
             android:id="@+id/company_logo"
-            android:src="@drawable/bigMoneylogo"
+            android:src="@drawable/big_money_logo"
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_marginTop="24dp"
