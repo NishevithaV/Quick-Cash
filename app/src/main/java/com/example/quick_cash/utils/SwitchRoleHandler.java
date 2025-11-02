@@ -24,6 +24,11 @@ public class SwitchRoleHandler {
     private FirebaseDatabase mDatabase;
     private DatabaseReference usersRef;
 
+    /**
+     * Instantiates a new Switch role handler.
+     *
+     * @param context the context
+     */
     public SwitchRoleHandler(Context context) {
         this.context = context;
         this.mAuth = FirebaseAuth.getInstance();
@@ -31,16 +36,31 @@ public class SwitchRoleHandler {
         this.usersRef = mDatabase.getReference("users");
     }
 
-    // ===== Dependency Injection =====
+    /**
+     * Sets firebase auth.
+     *
+     * @param auth the auth
+     */
+// ===== Dependency Injection =====
     public void setFirebaseAuth(FirebaseAuth auth) {
         this.mAuth = auth;
     }
 
+    /**
+     * Sets firebase database.
+     *
+     * @param database the database
+     */
     public void setFirebaseDatabase(FirebaseDatabase database) {
         this.mDatabase = database;
         this.usersRef = database.getReference("users");
     }
 
+    /**
+     * Gets firebase auth.
+     *
+     * @return the firebase auth
+     */
     protected FirebaseAuth getFirebaseAuth() {
         if (mAuth == null) {
             mAuth = FirebaseAuth.getInstance();
@@ -48,6 +68,11 @@ public class SwitchRoleHandler {
         return mAuth;
     }
 
+    /**
+     * Gets firebase database.
+     *
+     * @return the firebase database
+     */
     protected FirebaseDatabase getFirebaseDatabase() {
         if (mDatabase == null) {
             mDatabase = FirebaseDatabase.getInstance();
@@ -56,7 +81,9 @@ public class SwitchRoleHandler {
         return mDatabase;
     }
 
-    // ===== Core Logic =====
+    /**
+     * Handle switch role core logic.
+     */
     public void handleSwitchRole() {
         FirebaseUser currentUser = getFirebaseAuth().getCurrentUser();
         String tag = "SwitchRoleHandler";

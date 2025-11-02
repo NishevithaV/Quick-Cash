@@ -34,12 +34,17 @@ public class LoginActivityTest {
     public ActivityScenarioRule<LoginActivity> activityRule =
             new ActivityScenarioRule<>(LoginActivity.class);
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         activityRule.getScenario();  // Automatically launches LoginActivity
     }
 
-    /** AT-2: Invalid email should show error box */
+    /**
+     * AT-2: Invalid email should show error box
+     */
     @Test
     public void testInvalidEmailShowsErrorBox() {
         onView(withId(R.id.email_input))
@@ -52,7 +57,9 @@ public class LoginActivityTest {
         onView(withId(R.id.error_title)).check(matches(withText("Invalid Email")));
     }
 
-    /** AT-2: Invalid password should show error box */
+    /**
+     * AT-2: Invalid password should show error box
+     */
     @Test
     public void testInvalidPasswordShowsErrorBox() {
         onView(withId(R.id.email_input))
@@ -65,7 +72,9 @@ public class LoginActivityTest {
         onView(withId(R.id.error_title)).check(matches(withText("Invalid Password")));
     }
 
-    /** AT-1: Sign-up redirect should open registration screen */
+    /**
+     * AT-1: Sign-up redirect should open registration screen
+     */
     @Test
     public void testSignupRedirectOpensRegistrationPage() {
         onView(withId(R.id.signup_redirect)).perform(click());

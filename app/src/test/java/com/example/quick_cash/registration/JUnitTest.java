@@ -7,24 +7,23 @@ import static org.junit.Assert.*;
 
 import com.example.quick_cash.controllers.RegistrationValidator;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-
-
 public class JUnitTest {
 
     private RegistrationValidator registrationValidator;
 
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         
         registrationValidator = new RegistrationValidator();
     }
 
+    /**
+     * Test valid user.
+     */
     @Test
     public void testValidUser() {
         assertTrue(registrationValidator.validUser("Employee"));
@@ -33,6 +32,9 @@ public class JUnitTest {
         assertFalse(registrationValidator.validUser(null));
     }
 
+    /**
+     * Test in valid user.
+     */
     @Test
     public void testInValidUser() {
         assertFalse(registrationValidator.validUser(""));
@@ -40,23 +42,35 @@ public class JUnitTest {
         assertFalse(registrationValidator.validUser("User"));
     }
 
+    /**
+     * Test valid name.
+     */
     @Test
     public void testValidName() {
         assertTrue(registrationValidator.validName("Johnny Liver"));
     }
 
+    /**
+     * Test in valid name.
+     */
     @Test
     public void testInValidName() {
         assertFalse(registrationValidator.validName(""));
         assertFalse(registrationValidator.validName(null));
     }
 
+    /**
+     * Test valid email.
+     */
     @Test
     public void testValidEmail() {
 
         assertTrue(registrationValidator.validEmail("user@gmail.com"));
     }
 
+    /**
+     * Test in valid email.
+     */
     @Test
     public void testInValidEmail() {
         assertFalse(registrationValidator.validEmail(""));
@@ -65,12 +79,19 @@ public class JUnitTest {
         assertFalse(registrationValidator.validEmail(null));
     }
 
+    /**
+     * Test valid password.
+     */
     @Test
     public void testValidPassword() {
 
         assertTrue(registrationValidator.validPassword("Password123!"));
     }
-     @Test
+
+    /**
+     * Test in valid password.
+     */
+    @Test
     public void testInValidPassword() {
          setUp();
          assertFalse(registrationValidator.validPassword("password"));

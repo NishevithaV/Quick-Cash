@@ -8,6 +8,12 @@ import java.util.List;
 
 public class JobSearchHandler {
     private ArrayList<Job> allJobs;
+
+    /**
+     * Instantiates a new Job search handler.
+     *
+     * @param jobs the jobs
+     */
     public JobSearchHandler(List<Job> jobs) {
         updateAllJobs(jobs);
     }
@@ -57,6 +63,13 @@ public class JobSearchHandler {
         return results;
     }
 
+    /**
+     * Gets all jobs.
+     *
+     * @param search   the search
+     * @param category the category
+     * @return the all jobs
+     */
     public ArrayList<Job> getAllJobs(String search, String category) {
         boolean categoryIsEmpty = (category.isEmpty() || category.equals("Category"));
         if (search.isEmpty() && categoryIsEmpty) {

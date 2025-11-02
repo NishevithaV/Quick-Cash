@@ -16,10 +16,21 @@ import java.util.ArrayList;
 public class Jobs {
     private final DatabaseReference jobListRef;
 
+    /**
+     * Instantiates a new Jobs.
+     *
+     * @param database the database
+     */
     public Jobs(FirebaseDatabase database) {
         this.jobListRef = database.getReference("job_listings");
     }
 
+    /**
+     * Post job boolean.
+     *
+     * @param job the job
+     * @return the boolean
+     */
     public boolean postJob(Job job){
 
         String jobId = jobListRef.push().getKey();
@@ -39,10 +50,23 @@ public class Jobs {
         return true;
     }
 
+    /**
+     * The interface Jobs callback.
+     */
     public interface JobsCallback {
+        /**
+         * On callback.
+         *
+         * @param jobs the jobs
+         */
         void onCallback(ArrayList<Job> jobs);
     }
 
+    /**
+     * Gets jobs.
+     *
+     * @param callback the callback
+     */
     public void getJobs(JobsCallback callback) {
         ArrayList<Job> jobs = new ArrayList<>();
 

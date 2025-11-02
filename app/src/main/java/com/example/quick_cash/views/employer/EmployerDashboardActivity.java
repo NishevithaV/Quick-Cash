@@ -29,6 +29,13 @@ public class EmployerDashboardActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private List<String> jobTitles = new ArrayList<>();
 
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +73,11 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         jobsListView = findViewById(R.id.jobListView);
     }
 
+    /**
+     * Load jobs for user.
+     *
+     * @param userID the user id
+     */
     public void loadJobsForUser(String userID) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance()
                 .getReference("job_listings");

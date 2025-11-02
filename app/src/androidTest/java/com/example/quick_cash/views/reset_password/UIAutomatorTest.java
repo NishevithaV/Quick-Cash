@@ -31,6 +31,9 @@ public class UIAutomatorTest {
 
     String testEmail = "emiyusuffe@gmail.com";
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -47,6 +50,9 @@ public class UIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Check if reset password page is visible.
+     */
     @Test
     public void checkIfResetPasswordPageIsVisible() {
         UiObject2 resetBtn = device.findObject(By.res(launcherPackageName, resetBtnID));
@@ -55,6 +61,9 @@ public class UIAutomatorTest {
         assertNotNull(emailBox);
     }
 
+    /**
+     * Test reset button with invalid email.
+     */
     @Test
     public void testResetButtonWithInvalidEmail() {
         device.findObject(By.res(launcherPackageName, emailInpID)).setText("bademail.com");
@@ -63,6 +72,11 @@ public class UIAutomatorTest {
         assertTrue(device.findObject(By.res(launcherPackageName, statusTxtID)).getText().contains("Enter enter a Valid Email"));
     }
 
+    /**
+     * Test reset button with valid email.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void testResetButtonWithValidEmail() throws InterruptedException {
         device.findObject(By.res(launcherPackageName, emailInpID)).setText(testEmail);
@@ -75,6 +89,9 @@ public class UIAutomatorTest {
         assertTrue(login.contains("Go To Login"));
     }
 
+    /**
+     * Test go to login after reset.
+     */
     @Test
     public void testGoToLoginAfterReset() {
         device.findObject(By.res(launcherPackageName, emailInpID)).setText(testEmail);

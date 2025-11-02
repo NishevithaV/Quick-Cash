@@ -40,6 +40,9 @@ public class UsersTest {
 
     private Users users;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -53,6 +56,9 @@ public class UsersTest {
         users = new Users(mockDatabase);
     }
 
+    /**
+     * Test update user role from employer to employee.
+     */
     @Test
     public void testUpdateUserRoleFromEmployerToEmployee() {
         // Arrange
@@ -81,6 +87,9 @@ public class UsersTest {
         verify(callback).onSuccess();
     }
 
+    /**
+     * Test update user role from employee to employer.
+     */
     @Test
     public void testUpdateUserRoleFromEmployeeToEmployer() {
         // Arrange
@@ -109,6 +118,9 @@ public class UsersTest {
         verify(callback).onSuccess();
     }
 
+    /**
+     * Test update user role updates firebase.
+     */
     @Test
     public void testUpdateUserRoleUpdatesFirebase() {
         // Arrange

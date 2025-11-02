@@ -20,13 +20,22 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class LogoutEsspressoTest {
 
+    /**
+     * The Activity scenario.
+     */
     public ActivityScenario<SettingsActivity> activityScenario;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         activityScenario = ActivityScenario.launch(SettingsActivity.class);
     }
 
+    /**
+     * Check if logout button works.
+     */
     @Test
     public void checkIfLogoutButtonWorks() {
         onView(withId(R.id.logoutButton)).perform(click());
@@ -35,6 +44,9 @@ public class LogoutEsspressoTest {
         onView(withText("Cancel")).check(matches(isDisplayed()));
     }
 
+    /**
+     * Check if cancel button works.
+     */
     @Test
     public void checkIfCancelButtonWorks() {
         onView(withId(R.id.logoutButton)).perform(click());
@@ -42,6 +54,9 @@ public class LogoutEsspressoTest {
         onView(withId(R.id.textView)).check(matches(withText("Settings")));
     }
 
+    /**
+     * Check if confirm button works.
+     */
     @Test
     public void checkIfConfirmButtonWorks() {
         onView(withId(R.id.logoutButton)).perform(click());

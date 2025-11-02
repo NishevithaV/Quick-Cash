@@ -79,11 +79,17 @@ public class SettingsActivityEspressoTest {
     private static final String NEW_ROLE_EMPLOYEE = "Employee";
     private static final String NEW_ROLE_EMPLOYER = "Employer";
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Test switch role button is displayed.
+     */
     @Test
     public void testSwitchRoleButtonIsDisplayed() {
         // Launch activity
@@ -103,6 +109,9 @@ public class SettingsActivityEspressoTest {
         scenario.close();
     }
 
+    /**
+     * Test integration correct email updates role and redirects to dashboard.
+     */
     @Test
     public void testIntegration_CorrectEmail_UpdatesRoleAndRedirectsToDashboard() {
         // Initialize Espresso Intents
@@ -148,7 +157,9 @@ public class SettingsActivityEspressoTest {
     }
 
 
-
+    /**
+     * Test firebase mock employer to employee redirects to employee dashboard.
+     */
     @Test
     public void testFirebaseMock_EmployerToEmployee_RedirectsToEmployeeDashboard() {
         // Initialize Espresso Intents
@@ -188,6 +199,9 @@ public class SettingsActivityEspressoTest {
         release();
     }
 
+    /**
+     * Test firebase mock employee to employer redirects to employer dashboard.
+     */
     @Test
     public void testFirebaseMock_EmployeeToEmployer_RedirectsToEmployerDashboard() {
         // Initialize Espresso Intents

@@ -19,6 +19,11 @@ public class Users {
     private final FirebaseDatabase database;
     private DatabaseReference usersRef;
 
+    /**
+     * Instantiates a new Users.
+     *
+     * @param database the database
+     */
     public Users(FirebaseDatabase database) {
         auth = FirebaseAuth.getInstance();
         this.database = database;
@@ -29,21 +34,51 @@ public class Users {
         this.usersRef = this.database.getReference("users");
     }
 
-    // Create user in Firebase Authentication
+    /**
+     * Create user.
+     *
+     * @param name      the name
+     * @param email     the email
+     * @param password  the password
+     * @param onSuccess the on success
+     * @param onFailure the on failure
+     */
+// Create user in Firebase Authentication
     public void createUser(String name, String email, String password, Consumer<AuthResult> onSuccess, Consumer<Exception> onFailure) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(onSuccess::accept)
                 .addOnFailureListener(onFailure::accept);
     }
 
-    //Save in Realtime DB
+    /**
+     * Save user data.
+     *
+     * @param userId   the user id
+     * @param userData the user data
+     */
+//Save in Realtime DB
     public void saveUserData(String userId, Map<String, Object> userData) {
         usersRef.child(userId).setValue(userData);
     }
+
+    /**
+     * The interface Users callback.
+     */
     public interface UsersCallback {
+        /**
+         * On callback.
+         *
+         * @param user the user
+         */
         void onCallback(User user);
     }
 
+    /**
+     * Get user.
+     *
+     * @param userID   the user id
+     * @param callback the callback
+     */
     public void getUser(String userID, UsersCallback callback){
         final User[] userArr = new User[1];
         usersRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -65,13 +100,32 @@ public class Users {
         });
     }
 
-    // Interface for role update callback
+    /**
+     * The interface Role update callback.
+     */
+// Interface for role update callback
     public interface RoleUpdateCallback {
+        /**
+         * On success.
+         */
         void onSuccess();
+
+        /**
+         * On failure.
+         *
+         * @param error the error
+         */
         void onFailure(String error);
     }
 
-    // Method to update user role in Firebase
+    /**
+     * Update user role.
+     *
+     * @param userId   the user id
+     * @param newRole  the new role
+     * @param callback the callback
+     */
+// Method to update user role in Firebase
     public void updateUserRole(String userId, String newRole, RoleUpdateCallback callback) {
         usersRef.child(userId).child("type").setValue(newRole)
                 .addOnSuccessListener(aVoid -> callback.onSuccess())

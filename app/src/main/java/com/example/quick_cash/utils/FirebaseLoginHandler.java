@@ -12,6 +12,13 @@ public class FirebaseLoginHandler {
     private final DatabaseReference dbRef =
             FirebaseDatabase.getInstance().getReference("users");
 
+    /**
+     * Sign in task.
+     *
+     * @param email    the email
+     * @param password the password
+     * @return the task
+     */
     public Task<FirebaseUser> signIn(String email, String password) {
         return auth.signInWithEmailAndPassword(email, password)
                 .continueWith(task -> {

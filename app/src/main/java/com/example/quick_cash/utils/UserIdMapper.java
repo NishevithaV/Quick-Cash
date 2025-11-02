@@ -12,7 +12,8 @@ public final class UserIdMapper {
 
     /**
      * Get user name given user id
-     * @param userId id to get name for
+     *
+     * @param userId   id to get name for
      * @param callback interface with method to handle user name
      */
     public static void getName(String userId, UserNameCallback callback) {
@@ -26,6 +27,11 @@ public final class UserIdMapper {
      * Interface to be used as callback with getName()
      */
     public interface UserNameCallback {
+        /**
+         * Run On name loaded. To be implemented
+         *
+         * @param name the name
+         */
         void onNameLoaded(String name);
     }
 }

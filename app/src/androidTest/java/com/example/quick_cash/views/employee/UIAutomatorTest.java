@@ -31,6 +31,9 @@ public class UIAutomatorTest {
     private UiDevice device;
     private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -46,6 +49,9 @@ public class UIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Test elements visible.
+     */
     @Test
     public void testElementsVisible() {
         UiObject header = device.findObject(new UiSelector().textContains("Find Jobs"));
@@ -62,6 +68,9 @@ public class UIAutomatorTest {
         assertNotNull(resultsView);
     }
 
+    /**
+     * Test search shows matching results.
+     */
     @Test
     public void testSearchShowsMatchingResults() {
         UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
@@ -79,6 +88,9 @@ public class UIAutomatorTest {
         assertTrue(resultsHeader.exists());
     }
 
+    /**
+     * Test no results message shown.
+     */
     @Test
     public void testNoResultsMessageShown() {
         UiObject2 input = device.findObject(By.res(launcherPackageName, "userSearch"));
@@ -92,6 +104,9 @@ public class UIAutomatorTest {
         assertTrue(noResultsHeader.exists());
     }
 
+    /**
+     * Test job click opens detail.
+     */
     @Test
     public void testJobClickOpensDetail() {
         UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "resultsView")), 2000);

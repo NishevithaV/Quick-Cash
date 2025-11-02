@@ -11,6 +11,9 @@ import org.junit.Test;
  */
 public class ConfirmActivityTest {
 
+    /**
+     * Test emails match returns true for matching emails.
+     */
     @Test
     public void testEmailsMatchReturnsTrueForMatchingEmails() {
         // Arrange
@@ -24,6 +27,9 @@ public class ConfirmActivityTest {
         assertTrue("Emails should match", result);
     }
 
+    /**
+     * Test emails match returns false for non matching emails.
+     */
     @Test
     public void testEmailsMatchReturnsFalseForNonMatchingEmails() {
         // Arrange

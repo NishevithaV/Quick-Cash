@@ -35,14 +35,23 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class EspressoTest {
 
+    /**
+     * The Activity scenario.
+     */
     public ActivityScenario<JobSearchActivity> activityScenario;
     private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         activityScenario = ActivityScenario.launch(JobSearchActivity.class);
     }
 
+    /**
+     * Test search updates results.
+     */
     @Test
     public void testSearchUpdatesResults() {
         onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
@@ -54,6 +63,9 @@ public class EspressoTest {
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Test category updates results.
+     */
     @Test
     public void testCategoryUpdatesResults() {
         onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
@@ -69,6 +81,9 @@ public class EspressoTest {
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Test category and search update results.
+     */
     @Test
     public void testCategoryAndSearchUpdateResults() {
         onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
@@ -84,6 +99,9 @@ public class EspressoTest {
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Test no results message.
+     */
     @Test
     public void testNoResultsMessage() {
         onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());

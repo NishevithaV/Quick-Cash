@@ -27,7 +27,12 @@ public class ConfirmActivity extends AppCompatActivity {
     private String newRole;
     private Users usersDb;
 
-    // Allow dependency injection for testing
+    /**
+     * Gets users db.
+     *
+     * @return the users db
+     */
+// Allow dependency injection for testing
     protected Users getUsersDb() {
         if (usersDb == null) {
             usersDb = new Users(FirebaseDatabase.getInstance());
@@ -35,15 +40,34 @@ public class ConfirmActivity extends AppCompatActivity {
         return usersDb;
     }
 
-    // For testing purposes
+    /**
+     * Sets users db.
+     *
+     * @param usersDb the users db
+     */
+// For testing purposes
     public void setUsersDb(Users usersDb) {
         this.usersDb = usersDb;
     }
 
+    /**
+     * Emails match boolean.
+     *
+     * @param email1 the email 1
+     * @param email2 the email 2
+     * @return the boolean
+     */
     public static boolean emailsMatch(String email1, String email2){
         return email1.equals(email2);
     }
 
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,7 +38,13 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
 
     private FirebaseAuth auth;
 
-
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,10 +58,18 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         this.setupPostJobButton();
     }
 
+    /**
+     * Gets firebase database.
+     *
+     * @return the firebase database
+     */
     protected FirebaseDatabase getFirebaseDatabase() {
         return FirebaseDatabase.getInstance("https://quickcash-72ee9-default-rtdb.firebaseio.com/");
     }
 
+    /**
+     * Load job category spinner.
+     */
     protected void loadJobCategorySpinner() {
         jobCategorySpinner = findViewById(R.id.JobCategorySpinner);
         List<String> types = new ArrayList<>();
@@ -70,11 +84,17 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         jobCategorySpinner.setAdapter(typeAdapter);
     }
 
+    /**
+     * Sets post job button.
+     */
     protected void setupPostJobButton() {
         Button postJobButton = findViewById(R.id.PostJobButton);
         postJobButton.setOnClickListener(this);
     }
 
+    /**
+     * Init ui elements.
+     */
     protected void initUIElements() {
         jobName = findViewById(R.id.JobTitleField);
         jobCategorySpinner = findViewById(R.id.JobCategorySpinner);
@@ -87,6 +107,10 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         Toast.makeText(PostFormActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Validate and move to Employer dashboard when view is clicked
+     * @param view The view that was clicked.
+     */
     @Override
     public void onClick(View view) {
         String userId = getCurrentUserID();
@@ -151,6 +175,11 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         move2EmployerDashboard(job);
     }
 
+    /**
+     * Gets current user id.
+     *
+     * @return the current user id
+     */
     public String getCurrentUserID() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -159,6 +188,11 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         return user.getUid();
     }
 
+    /**
+     * Move 2 employer dashboard.
+     *
+     * @param job the job
+     */
     protected void move2EmployerDashboard(Job job) {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent = new Intent(this, EmployerDashboardActivity.class);

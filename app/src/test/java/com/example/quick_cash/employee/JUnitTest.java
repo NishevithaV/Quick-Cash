@@ -23,6 +23,9 @@ public class JUnitTest {
     private List<Job> educationArr;
     private List<Job> emptyArr;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         sampleJobs = new ArrayList<>();
@@ -42,11 +45,17 @@ public class JUnitTest {
         emptyArr = new ArrayList<Job>();
     }
 
+    /**
+     * Test all jobs on init.
+     */
     @Test
     public void testAllJobsOnInit() {
         assertEquals(searcher.getAllJobs("", ""), sampleJobs);
     }
 
+    /**
+     * Test filter by keyword and category.
+     */
     @Test
     public void testFilterByKeywordAndCategory() {
         assertEquals(searcher.getAllJobs("Android", "Tech"), androidArr);
@@ -54,6 +63,9 @@ public class JUnitTest {
         assertEquals(searcher.getAllJobs("English", "Education"), englishTeachArr);
     }
 
+    /**
+     * Test filter by keyword.
+     */
     @Test
     public void testFilterByKeyword() {
         assertEquals(searcher.getAllJobs("Apps", ""), androidArr);
@@ -61,6 +73,9 @@ public class JUnitTest {
         assertEquals(searcher.getAllJobs("teach", ""), educationArr);
     }
 
+    /**
+     * Test filter by category.
+     */
     @Test
     public void testFilterByCategory() {
         assertEquals(searcher.getAllJobs("", "Tech"), androidArr);
@@ -68,6 +83,9 @@ public class JUnitTest {
         assertEquals(searcher.getAllJobs("", "Education"), educationArr);
     }
 
+    /**
+     * Test filter no results.
+     */
     @Test
     public void testFilterNoResults() {
         String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";

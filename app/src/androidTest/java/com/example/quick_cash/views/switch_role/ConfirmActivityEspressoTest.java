@@ -23,14 +23,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/**
- * Espresso tests for ConfirmActivity
- */
 @RunWith(AndroidJUnit4.class)
 public class ConfirmActivityEspressoTest {
 
     private Intent intent;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         // Create intent with required extras
@@ -41,6 +41,9 @@ public class ConfirmActivityEspressoTest {
         intent.putExtra("user_id", "testUserId123");
     }
 
+    /**
+     * Test confirmation message displays correct roles.
+     */
     @Test
     public void testConfirmationMessageDisplaysCorrectRoles() {
         // Act - Launch activity with intent
@@ -56,6 +59,9 @@ public class ConfirmActivityEspressoTest {
         scenario.close();
     }
 
+    /**
+     * Test email input field is displayed.
+     */
     @Test
     public void testEmailInputFieldIsDisplayed() {
         // Act - Launch activity
@@ -68,6 +74,9 @@ public class ConfirmActivityEspressoTest {
         scenario.close();
     }
 
+    /**
+     * Test confirm switch button is displayed.
+     */
     @Test
     public void testConfirmSwitchButtonIsDisplayed() {
         // Act - Launch activity
@@ -81,6 +90,9 @@ public class ConfirmActivityEspressoTest {
         scenario.close();
     }
 
+    /**
+     * Test correct email navigates to correct dashboard.
+     */
     @Test
     public void testCorrectEmailNavigatesToCorrectDashboard() {
         // Note: This test verifies the UI flow but cannot fully test Firebase interaction
@@ -104,6 +116,9 @@ public class ConfirmActivityEspressoTest {
         scenario.close();
     }
 
+    /**
+     * Test incorrect email stays on page.
+     */
     @Test
     public void testIncorrectEmailStaysOnPage() {
         // Act - Launch activity

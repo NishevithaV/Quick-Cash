@@ -28,9 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 /**
  * LoginActivity
  * Implements:
- *  - AT-1: Role-based dashboard redirection
- *  - AT-2: Error message box for invalid inputs or login errors
- *  - AT-3: Toast confirmation for success/failure of login attempt
+ * - AT-1: Role-based dashboard redirection
+ * - AT-2: Error message box for invalid inputs or login errors
+ * - AT-3: Toast confirmation for success/failure of login attempt
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,6 +46,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private final LoginValidator validator = new LoginValidator();
 
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

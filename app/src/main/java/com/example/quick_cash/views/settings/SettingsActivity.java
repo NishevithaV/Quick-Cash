@@ -11,9 +11,6 @@ import com.example.quick_cash.utils.LogoutHandler;
 import com.example.quick_cash.views.reset_password.ResetPasswordActivity;
 import com.example.quick_cash.utils.SwitchRoleHandler;
 
-/**
- * Settings screen that allows users to log out or switch roles.
- */
 public class SettingsActivity extends AppCompatActivity {
 
     private Button logoutButton;
@@ -22,6 +19,13 @@ public class SettingsActivity extends AppCompatActivity {
     private LogoutHandler logoutHandler;
     private SwitchRoleHandler switchRoleHandler;
 
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Initialize UI elements from the layout.
+     * Init ui.
      */
     public void initUI() {
         logoutButton = findViewById(R.id.logoutButton);
@@ -41,23 +45,22 @@ public class SettingsActivity extends AppCompatActivity {
         resetPsswdButton = findViewById(R.id.resetPasswordButton);
     }
 
-    /**
-     * Initialize helper handler classes.
-     */
     private void initHandlers() {
         logoutHandler = new LogoutHandler(this);
         switchRoleHandler = new SwitchRoleHandler(this);
     }
 
-    /**
-     * Set up event listeners for buttons.
-     */
     private void initListeners() {
         logoutButton.setOnClickListener(v -> logoutHandler.showLogoutConfirmation());
         switchRoleButton.setOnClickListener(v -> switchRoleHandler.handleSwitchRole());
         resetPsswdButton.setOnClickListener(v -> startActivity(new Intent(SettingsActivity.this, ResetPasswordActivity.class)));
     }
 
+    /**
+     * Gets switch role handler.
+     *
+     * @return the switch role handler
+     */
     public SwitchRoleHandler getSwitchRoleHandler() {
         return switchRoleHandler;
     }

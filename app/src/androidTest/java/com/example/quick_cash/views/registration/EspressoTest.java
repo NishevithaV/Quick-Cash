@@ -25,11 +25,17 @@ public class EspressoTest {
 
     private ActivityScenario<RegistrationActivity> scenario;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         scenario = ActivityScenario.launch(RegistrationActivity.class);
     }
 
+    /**
+     * Check if valid user.
+     */
     @Test
     public void checkIfValidUser() {
         onView(withId(R.id.employee_button)).perform(click());
@@ -53,6 +59,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Check if name is valid.
+     */
     @Test
     public void checkIfNameIsValid() {
         onView(withId(R.id.employer_button)).perform(click());
@@ -75,6 +84,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Check if name is empty.
+     */
     @Test
     public void checkIfNameIsEmpty() {
         onView(withId(R.id.employer_button)).perform(click());
@@ -96,6 +108,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Check if email is invalid.
+     */
     @Test
     public void checkIfEmailIsInvalid() {
         onView(withId(R.id.employee_button)).perform(click());
@@ -118,6 +133,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Check if email is empty.
+     */
     @Test
     public void checkIfEmailIsEmpty() {
         onView(withId(R.id.employee_button)).perform(click());
@@ -139,6 +157,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Check if email is valid.
+     */
     @Test
     public void checkIfEmailIsValid() {
         onView(withId(R.id.employee_button)).perform(click());
@@ -161,6 +182,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Check if password empty.
+     */
     @Test
     public void checkIfPasswordEmpty() {
         onView(withId(R.id.employee_button)).perform(click());
@@ -181,6 +205,9 @@ public class EspressoTest {
             });
     }
 
+    /**
+     * Check if password is invalid.
+     */
     @Test
     public void checkIfPasswordIsInvalid() {
         onView(withId(R.id.employee_button)).perform(click());
@@ -203,6 +230,9 @@ public class EspressoTest {
             });
     }
 
+    /**
+     * Check if password is valid.
+     */
     @Test
     public void checkIfPasswordIsValid() {
         onView(withId(R.id.employee_button)).perform(click());

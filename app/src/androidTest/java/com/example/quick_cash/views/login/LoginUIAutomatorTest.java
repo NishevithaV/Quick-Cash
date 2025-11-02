@@ -31,6 +31,9 @@ public class LoginUIAutomatorTest {
     private static final int LAUNCH_TIMEOUT = 5000;
     private UiDevice device;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -52,6 +55,9 @@ public class LoginUIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(PACKAGE).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Test successful login redirects to dashboard.
+     */
     @Test
     public void testSuccessfulLoginRedirectsToDashboard() {
         // Wait for email field
@@ -80,6 +86,9 @@ public class LoginUIAutomatorTest {
                 employerDashboardLoaded || employeeDashboardLoaded);
     }
 
+    /**
+     * Test sign up redirect opens registration page.
+     */
     @Test
     public void testSignUpRedirectOpensRegistrationPage() {
         // Tap "Sign up" link

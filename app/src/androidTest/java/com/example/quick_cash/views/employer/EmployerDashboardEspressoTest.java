@@ -21,6 +21,9 @@ public class EmployerDashboardEspressoTest {
 
     public ActivityScenario<EmployerDashboardActivity> activityScenario;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
 
@@ -30,7 +33,10 @@ public class EmployerDashboardEspressoTest {
         });
     }
 
-    // test just for checking job list features
+    /**
+     * Check if no jobs posted.
+     */
+// test just for checking job list features
     @Test
     public void checkIfNoJobsPosted() {
 

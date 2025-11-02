@@ -23,9 +23,15 @@ import org.junit.runner.RunWith;
 public class LogoutUIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
+    /**
+     * The Launcher package name.
+     */
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -43,6 +49,9 @@ public class LogoutUIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Check if settings page is visible.
+     */
     @Test
     public void checkIfSettingsPageIsVisible() {
         UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));
@@ -51,6 +60,11 @@ public class LogoutUIAutomatorTest {
         assertTrue(textView.exists());
     }
 
+    /**
+     * Check if cancel works.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
+     */
     @Test
     public void checkIfCancelWorks() throws UiObjectNotFoundException {
         UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));
@@ -63,6 +77,11 @@ public class LogoutUIAutomatorTest {
         assertTrue(LogoutButton.exists());
     }
 
+    /**
+     * Check if moved 2 login page.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
+     */
     @Test
     public void checkIfMoved2LoginPage() throws UiObjectNotFoundException{
         UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));

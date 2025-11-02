@@ -14,11 +14,19 @@ public class LogoutHandler {
     private final Context context;
     private final FirebaseAuth auth;
 
+    /**
+     * Instantiates a new Logout handler.
+     *
+     * @param context the context
+     */
     public LogoutHandler(Context context) {
         this.context = context;
         this.auth = FirebaseAuth.getInstance();
     }
 
+    /**
+     * Show logout confirmation.
+     */
     public void showLogoutConfirmation() {
         AlertDialog.Builder logoutConfirmationPage = new AlertDialog.Builder(context);
         logoutConfirmationPage.setTitle("Confirm Logout");

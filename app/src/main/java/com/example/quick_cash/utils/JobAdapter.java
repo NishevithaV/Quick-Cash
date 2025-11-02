@@ -18,6 +18,13 @@ public class JobAdapter extends ArrayAdapter<Job> {
 
     private final int resource;
 
+    /**
+     * Instantiates a new Job adapter.
+     *
+     * @param context  the context
+     * @param resource the resource
+     * @param jobs     the jobs
+     */
     public JobAdapter(Context context, int resource, List<Job> jobs) {
         super(context, resource, jobs);
         this.resource = resource;

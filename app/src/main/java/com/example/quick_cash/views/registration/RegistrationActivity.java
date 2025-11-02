@@ -33,8 +33,18 @@ public class RegistrationActivity extends AppCompatActivity {
     private Users firebaseCRUD;
 
     private Toast toast;
+    /**
+     * The constant lastToastMessage.
+     */
     public static String lastToastMessage = "";
 
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -27,6 +27,9 @@ public class EspressoTest {
     public ActivityScenario<ResetPasswordActivity> activityScenario;
     String testEmail = "emiyusuffe@gmail.com";
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         activityScenario = ActivityScenario.launch(ResetPasswordActivity.class);
@@ -34,6 +37,9 @@ public class EspressoTest {
         });
     }
 
+    /**
+     * Test valid email.
+     */
     @Test
     public void testValidEmail() {
         onView(withId(R.id.resetEmailInputID)).perform(typeText("thisemaildoesnotexitindb@validemail.com"), closeSoftKeyboard());
@@ -41,6 +47,9 @@ public class EspressoTest {
         onView(withId(R.id.resetPsswdStatusTextID)).check(matches(not(withText(R.string.INVALID_EMAIL))));
     }
 
+    /**
+     * Test invalid email.
+     */
     @Test
     public void testInvalidEmail() {
         onView(withId(R.id.resetEmailInputID)).perform(typeText("bademail.com"), closeSoftKeyboard());
@@ -49,6 +58,11 @@ public class EspressoTest {
         onView(withId(R.id.resetTologinLinkID)).check(matches(not(isDisplayed())));
     }
 
+    /**
+     * Test successful reset send.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void testSuccessfulResetSend() throws InterruptedException {
         onView(withId(R.id.resetEmailInputID)).perform(typeText(testEmail), closeSoftKeyboard());

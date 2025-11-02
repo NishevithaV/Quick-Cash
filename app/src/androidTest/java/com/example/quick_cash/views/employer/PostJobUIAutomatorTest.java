@@ -32,6 +32,9 @@ public class PostJobUIAutomatorTest {
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -47,6 +50,9 @@ public class PostJobUIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Check if post form is visible.
+     */
     @Test
     public void checkIfPostFormIsVisible() {
         UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));
@@ -61,6 +67,11 @@ public class PostJobUIAutomatorTest {
         assertTrue(postJobButton.exists());
     }
 
+    /**
+     * Check if job posted successfully.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
+     */
     @Test
     public void checkIfJobPostedSuccessfully() throws UiObjectNotFoundException {
         UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));
@@ -81,6 +92,11 @@ public class PostJobUIAutomatorTest {
     }
 
 
+    /**
+     * Check if redirected after post.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
+     */
     @Test
     public void checkIfRedirectedAfterPost() throws UiObjectNotFoundException {
         UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));

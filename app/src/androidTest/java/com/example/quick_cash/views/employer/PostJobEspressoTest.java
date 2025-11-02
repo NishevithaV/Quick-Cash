@@ -26,6 +26,9 @@ public class PostJobEspressoTest {
 
     public ActivityScenario<PostFormActivity> activityScenario;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setup() {
 
@@ -36,6 +39,9 @@ public class PostJobEspressoTest {
         });
     }
 
+    /**
+     * Check if job title is empty.
+     */
     @Test
     public void checkIfJobTitleIsEmpty() {
         onView(withId(R.id.JobTitleField)).perform(typeText(""));
@@ -48,6 +54,9 @@ public class PostJobEspressoTest {
     }
 
 
+    /**
+     * Check if job title is not empty.
+     */
     @Test
     public void checkIfJobTitleIsNotEmpty() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Software Engineer"));
@@ -59,6 +68,9 @@ public class PostJobEspressoTest {
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
     }
 
+    /**
+     * Check if job category is valid.
+     */
     @Test
     public void checkIfJobCategoryIsValid() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
@@ -71,6 +83,9 @@ public class PostJobEspressoTest {
     }
 
 
+    /**
+     * Check if job category is invalid.
+     */
     @Test
     public void checkIfJobCategoryIsInvalid() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
@@ -82,6 +97,9 @@ public class PostJobEspressoTest {
         onView(withId(R.id.Result)).check(matches(withText(R.string.INVALID_JOB_CATEGORY)));
     }
 
+    /**
+     * Check if application deadline is empty.
+     */
     @Test
     public void checkIfApplicationDeadlineIsEmpty() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
@@ -93,6 +111,9 @@ public class PostJobEspressoTest {
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_DEADLINE)));
     }
 
+    /**
+     * Check if application deadline is valid.
+     */
     @Test
     public void checkIfApplicationDeadlineIsValid() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
@@ -104,6 +125,9 @@ public class PostJobEspressoTest {
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
     }
 
+    /**
+     * Check if application deadline is invalid.
+     */
     @Test
     public void checkIfApplicationDeadlineIsInvalid() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
@@ -115,6 +139,9 @@ public class PostJobEspressoTest {
         onView(withId(R.id.Result)).check(matches(withText(R.string.INVALID_APPLICATION_DEADLINE)));
     }
 
+    /**
+     * Check if description is empty.
+     */
     @Test
     public void checkIfDescriptionIsEmpty() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
@@ -126,6 +153,9 @@ public class PostJobEspressoTest {
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_DESCRIPTION)));
     }
 
+    /**
+     * Check if description is not empty.
+     */
     @Test
     public void checkIfDescriptionIsNotEmpty() {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));

@@ -26,6 +26,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
     // Validator class
     private ResetPasswordValidator emailValidator;
 
+    /**
+     * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         initListeners();
     }
 
+    /**
+     * Init ui.
+     */
     protected void initUI(){
         emailInput = findViewById(R.id.resetEmailInputID);
         resetButton = findViewById(R.id.resetButtonID);
@@ -44,6 +54,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         loginLink = findViewById(R.id.resetTologinLinkID);
     }
 
+    /**
+     * Init listeners.
+     */
     protected void initListeners(){
 
         resetButton.setOnClickListener(new android.view.View.OnClickListener() {

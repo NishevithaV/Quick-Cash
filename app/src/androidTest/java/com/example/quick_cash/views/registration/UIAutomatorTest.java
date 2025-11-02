@@ -25,6 +25,9 @@ public class UIAutomatorTest {
 
     private static final String PACKAGE = "com.example.quick_cash";
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         device = UiDevice.getInstance(androidx.test.platform.app.InstrumentationRegistry.getInstrumentation());
@@ -35,6 +38,9 @@ public class UIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(PACKAGE).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Test page items visible.
+     */
     @Test
     public void testPageItemsVisible() {
         UiObject2 employeeBtn = device.wait(Until.findObject(By.res(PACKAGE, "employee_button")), 3000);
@@ -48,6 +54,9 @@ public class UIAutomatorTest {
         assertNotNull("Login button not visible", loginBtn);
     }
 
+    /**
+     * Test employee button works.
+     */
     @Test
     public void testEmployeeButtonWorks() {
         UiObject2 employeeBtn = device.wait(Until.findObject(By.res(PACKAGE, "employee_button")), 3000);
@@ -55,6 +64,9 @@ public class UIAutomatorTest {
         employeeBtn.click();
     }
 
+    /**
+     * Test employer button works.
+     */
     @Test
     public void testEmployerButtonWorks() {
         UiObject2 employerBtn = device.wait(Until.findObject(By.res(PACKAGE, "employer_button")), 3000);
@@ -62,6 +74,9 @@ public class UIAutomatorTest {
         employerBtn.click();
     }
 
+    /**
+     * Test register button works.
+     */
     @Test
     public void testRegisterButtonWorks() {
         UiObject2 registerBtn = device.wait(Until.findObject(By.res(PACKAGE, "register_button")), 3000);
@@ -69,6 +84,9 @@ public class UIAutomatorTest {
         registerBtn.click();
     }
 
+    /**
+     * Test login button works.
+     */
     @Test
     public void testLoginButtonWorks() {
         UiObject2 loginBtn = device.wait(Until.findObject(By.res(PACKAGE, "login_button")), 3000);
