@@ -50,7 +50,7 @@ public class UsersTest {
         // Set up Firebase mock chain
         when(mockDatabase.getReference("users")).thenReturn(mockUsersRef);
         when(mockUsersRef.child(any(String.class))).thenReturn(mockUserIdRef);
-        when(mockUserIdRef.child("type")).thenReturn(mockTypeRef);
+        when(mockUserIdRef.child("userType")).thenReturn(mockTypeRef);
         when(mockTypeRef.setValue(any(String.class))).thenReturn(mockTask);
 
         users = new Users(mockDatabase);
@@ -82,7 +82,7 @@ public class UsersTest {
 
         // Assert
         verify(mockUsersRef).child(userId);
-        verify(mockUserIdRef).child("type");
+        verify(mockUserIdRef).child("userType");
         verify(mockTypeRef).setValue("employee");
         verify(callback).onSuccess();
     }
@@ -113,7 +113,7 @@ public class UsersTest {
 
         // Assert
         verify(mockUsersRef).child(userId);
-        verify(mockUserIdRef).child("type");
+        verify(mockUserIdRef).child("userType");
         verify(mockTypeRef).setValue("employer");
         verify(callback).onSuccess();
     }
@@ -145,7 +145,7 @@ public class UsersTest {
         // Assert - Verify Firebase database interaction
         verify(mockDatabase).getReference("users");
         verify(mockUsersRef).child(userId);
-        verify(mockUserIdRef).child("type");
+        verify(mockUserIdRef).child("userType");
         verify(mockTypeRef).setValue(newRole);
         verify(mockTask).addOnSuccessListener(any(OnSuccessListener.class));
         verify(mockTask).addOnFailureListener(any(OnFailureListener.class));
