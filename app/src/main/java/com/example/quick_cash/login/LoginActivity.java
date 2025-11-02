@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
-import com.example.quick_cash.Registration.RegistrationActivity;
-import com.example.quick_cash.views.EmployeeDashboardActivity;
+import com.example.quick_cash.registration.RegistrationActivity;
+import com.example.quick_cash.employee.EmployeeDashboardActivity;
 import com.example.quick_cash.employer.EmployerDashboardActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,10 +32,15 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailInput, passwordInput;
+    private EditText emailInput;
+    private EditText passwordInput;
     private LinearLayout errorBox;
-    private TextView errorTitle, errorMessage;
+    private TextView errorTitle;
+    private TextView errorMessage;
     private Button loginButton;
+    private TextView signupRedirect;
+
+    private FirebaseLoginHandler repo;
 
     private final LoginValidator validator = new LoginValidator();
 
@@ -44,26 +49,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize views
+        initUI();
+        initListeners();
+        repo = new FirebaseLoginHandler();
+    }
+
+    private void initUI() {
         emailInput = findViewById(R.id.email_input);
         passwordInput = findViewById(R.id.password_input);
         errorBox = findViewById(R.id.error_box);
+        errorBox.setVisibility(View.GONE);
         errorTitle = findViewById(R.id.error_title);
         errorMessage = findViewById(R.id.error_message);
         loginButton = findViewById(R.id.login_button);
-        TextView signupRedirect = findViewById(R.id.signup_redirect);
+        signupRedirect = findViewById(R.id.signup_redirect);
+    }
 
-        errorBox.setVisibility(View.GONE);
-
-        FirebaseLoginRepository repo = new FirebaseLoginRepository();
-
+    private void initListeners() {
         // Redirect to registration page
         signupRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivity(intent);
         });
 
-        // Login button logic
         loginButton.setOnClickListener(view -> {
             String email = safeText(emailInput);
             String pass = safeText(passwordInput);

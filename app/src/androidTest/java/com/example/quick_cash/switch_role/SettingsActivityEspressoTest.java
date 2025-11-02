@@ -1,4 +1,4 @@
-package com.example.quick_cash.activities;
+package com.example.quick_cash.switch_role;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -15,12 +15,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Intent;
 
@@ -30,17 +28,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.FirebaseCRUD.Users;
 import com.example.quick_cash.R;
-import com.example.quick_cash.views.EmployeeDashboardActivity;
+import com.example.quick_cash.employee.EmployeeDashboardActivity;
 import com.example.quick_cash.employer.EmployerDashboardActivity;
 import com.example.quick_cash.settings.SettingsActivity;
-import com.example.quick_cash.switchrole.ConfirmActivity;
-import com.example.quick_cash.switchrole.SwitchRoleHandler;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +47,7 @@ import org.mockito.MockitoAnnotations;
  * Comprehensive Espresso + Mockito integration tests for SettingsActivity
  */
 @RunWith(AndroidJUnit4.class)
-public class SettingsActivityTest {
+public class SettingsActivityEspressoTest {
 
     @Mock
     private FirebaseAuth mockAuth;

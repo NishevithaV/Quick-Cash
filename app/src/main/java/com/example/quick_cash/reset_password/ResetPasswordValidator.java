@@ -3,7 +3,7 @@ package com.example.quick_cash.reset_password;
 public class ResetPasswordValidator {
 
     public ResetPasswordValidator() {
-
+        // Default Constructor
     }
     public boolean isValidEmail(String email) {
         if (email == null) {

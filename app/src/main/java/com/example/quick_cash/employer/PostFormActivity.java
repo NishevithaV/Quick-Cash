@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.FirebaseCRUD.Jobs;
-import com.example.quick_cash.Models.Job;
+import com.example.quick_cash.models.Job;
 import com.example.quick_cash.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

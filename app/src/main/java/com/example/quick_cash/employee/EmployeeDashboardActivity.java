@@ -1,4 +1,4 @@
-package com.example.quick_cash.views;
+package com.example.quick_cash.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
-import com.example.quick_cash.job_search.JobSearchActivity;
 import com.example.quick_cash.settings.SettingsActivity;
 
 public class EmployeeDashboardActivity extends AppCompatActivity {

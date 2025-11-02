@@ -34,8 +34,22 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer_dashboard);
         String userID = getIntent().getStringExtra("userID");
-        postJobButton = findViewById(R.id.postJobEmployerButton);
-        settingsPageButton = findViewById(R.id.settingsPageEmployerButton);
+
+        initUI();
+        initListeners();
+
+        // Check if we should show the success message
+        if (getIntent().getBooleanExtra("show_success_message", false)) {
+            Toast.makeText(this, "Role switched successfully", Toast.LENGTH_SHORT).show();
+        }
+
+        adapter = new ArrayAdapter<>(this, R.layout.job_postings_item, jobTitles);
+        jobsListView.setAdapter(adapter);
+
+        loadJobsForUser(userID);
+    }
+
+    private void initListeners() {
         postJobButton.setOnClickListener(v -> {
             Intent intent = new Intent(com.example.quick_cash.employer.EmployerDashboardActivity.this, PostFormActivity.class);
             startActivity(intent);
@@ -44,17 +58,12 @@ public class EmployerDashboardActivity extends AppCompatActivity {
             Intent intent = new Intent(com.example.quick_cash.employer.EmployerDashboardActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
+    }
 
-        // Check if we should show the success message
-        if (getIntent().getBooleanExtra("show_success_message", false)) {
-            Toast.makeText(this, "Role switched successfully", Toast.LENGTH_SHORT).show();
-        }
-
+    private void initUI() {
+        postJobButton = findViewById(R.id.postJobEmployerButton);
+        settingsPageButton = findViewById(R.id.settingsPageEmployerButton);
         jobsListView = findViewById(R.id.jobListView);
-        adapter = new ArrayAdapter<>(this, R.layout.job_postings_item, jobTitles);
-        jobsListView.setAdapter(adapter);
-
-        loadJobsForUser(userID);
     }
 
     public void loadJobsForUser(String userID) {

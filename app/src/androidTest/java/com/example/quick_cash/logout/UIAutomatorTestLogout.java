@@ -36,7 +36,7 @@ public class UIAutomatorTestLogout {
         Intent intent = new Intent();
         intent.setClassName(
                 launcherPackageName,
-                launcherPackageName+".logout.SettingsActivity"
+                launcherPackageName+".settings.SettingsActivity"
         );
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 

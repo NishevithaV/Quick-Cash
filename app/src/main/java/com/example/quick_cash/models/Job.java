@@ -1,4 +1,4 @@
-package com.example.quick_cash.Models;
+package com.example.quick_cash.models;
 
 public class Job {
     private String title;

@@ -1,8 +1,7 @@
-package com.example.quick_cash.job_search;
+package com.example.quick_cash.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,11 +12,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quick_cash.Models.Job;
+import com.example.quick_cash.FirebaseCRUD.Jobs;
+import com.example.quick_cash.models.Job;
 import com.example.quick_cash.R;
 import com.example.quick_cash.Utils.JobAdapter;
 import com.example.quick_cash.Utils.JobSearchHandler;
-import com.example.quick_cash.Utils.JobsCRUD;
 import com.example.quick_cash.Utils.UserIdMapper;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,7 +31,7 @@ public class JobSearchActivity extends AppCompatActivity {
     Button searchBtn;
     Spinner categorySelector;
 
-    JobsCRUD jobsCRUD;
+    Jobs jobsCRUD;
 
     JobSearchHandler jobSearcher;
 
@@ -43,7 +42,7 @@ public class JobSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_job_list);
         initUI();
-        jobsCRUD = new JobsCRUD(FirebaseDatabase.getInstance());
+        jobsCRUD = new Jobs(FirebaseDatabase.getInstance());
         jobsCRUD.getJobs(callbackJobs -> {
             jobSearcher = new JobSearchHandler(callbackJobs);
             loadJobs("", "");

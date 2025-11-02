@@ -2,22 +2,22 @@ package com.example.quick_cash.FirebaseCRUD;
 
 import android.util.Log;
 
-import com.example.quick_cash.Models.Job;
+import androidx.annotation.NonNull;
+
+import com.example.quick_cash.models.Job;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Jobs {
     private final DatabaseReference jobListRef;
 
     public Jobs(FirebaseDatabase database) {
         this.jobListRef = database.getReference("job_listings");
-    }
-
-    private void initializeRefListeners() {
-        this.setJobListListener();
-    }
-
-    private void setJobListListener(){
     }
 
     public boolean postJob(Job job){
@@ -39,7 +39,36 @@ public class Jobs {
         return true;
     }
 
-    public void getJob(){
+    public interface JobsCallback {
+        void onCallback(ArrayList<Job> jobs);
     }
+
+    public void getJobs(JobsCallback callback) {
+        ArrayList<Job> jobs = new ArrayList<>();
+
+        jobListRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot jobSnap : snapshot.getChildren()) {
+                    Job job = new Job(
+                            String.valueOf(jobSnap.child("title").getValue(String.class)),
+                            String.valueOf(jobSnap.child("category").getValue(String.class)),
+                            String.valueOf(jobSnap.child("deadline").getValue(String.class)),
+                            String.valueOf(jobSnap.child("desc").getValue(String.class)),
+                            String.valueOf(jobSnap.child("userID").getValue(String.class))
+                    );
+                    jobs.add(job);
+                }
+                callback.onCallback(jobs);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Do nothing
+            }
+        });
+
+    }
+
 
 }

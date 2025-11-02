@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.quick_cash.Models.Job;
+import com.example.quick_cash.models.Job;
 import com.example.quick_cash.R;
 
 import java.util.List;

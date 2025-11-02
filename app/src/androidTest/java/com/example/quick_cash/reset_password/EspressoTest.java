@@ -49,13 +49,12 @@ public class EspressoTest {
     }
 
     @Test
-    public void testSuccessfulResetSend() {
+    public void testSuccessfulResetSend() throws InterruptedException {
         onView(withId(R.id.resetEmailInputID)).perform(typeText(testEmail), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-        }
+
+        Thread.sleep(2000);
+
         onView(withId(R.id.resetPsswdStatusTextID)).check(matches(withText(R.string.RESET_SEND_SUCCESSFUL)));
         onView(withId(R.id.resetTologinLinkID)).check(matches(isDisplayed()));
     }

@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class JobPostingValidator {
-    public JobPostingValidator() {}
+    public JobPostingValidator() {
+        // Default Constructor
+    }
 
     public boolean checkEmptyJobTitle(String title) {
         return title.isEmpty();
@@ -28,11 +30,9 @@ public class JobPostingValidator {
             LocalDate today = LocalDate.now();
 
             int year = applicationDeadlineDate.getYear();
-            if (year >= 2025 && year < 2030) {
-                if (applicationDeadlineDate.isAfter(today)) {
+            if (year >= 2025 && year < 2030 && applicationDeadlineDate.isAfter(today)) {
                     return true;
                 }
-            }
         } catch (DateTimeParseException e) {
             return false;
         }

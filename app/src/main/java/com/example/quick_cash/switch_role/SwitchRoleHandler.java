@@ -1,10 +1,9 @@
-package com.example.quick_cash.switchrole;
+package com.example.quick_cash.switch_role;
 
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.quick_cash.switchrole.ConfirmActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -59,41 +58,41 @@ public class SwitchRoleHandler {
     // ===== Core Logic =====
     public void handleSwitchRole() {
         FirebaseUser currentUser = getFirebaseAuth().getCurrentUser();
-
+        String tag = "SwitchRoleHandler";
         if (currentUser == null) {
             Toast.makeText(context, "No user logged in", Toast.LENGTH_SHORT).show();
-            android.util.Log.e("SwitchRoleHandler", "No user logged in");
+            android.util.Log.e(tag, "No user logged in");
             return;
         }
 
         String userId = currentUser.getUid();
         String userEmail = currentUser.getEmail();
-        android.util.Log.d("SwitchRoleHandler", "User ID: " + userId + ", Email: " + userEmail);
+        android.util.Log.d(tag, "User ID: " + userId + ", Email: " + userEmail);
         
         usersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                android.util.Log.d("SwitchRoleHandler", "DataSnapshot exists: " + dataSnapshot.exists());
-                android.util.Log.d("SwitchRoleHandler", "DataSnapshot: " + dataSnapshot.toString());
+                android.util.Log.d(tag, "DataSnapshot exists: " + dataSnapshot.exists());
+                android.util.Log.d(tag, "DataSnapshot: " + dataSnapshot.toString());
                 
                 if (!dataSnapshot.exists()) {
                     Toast.makeText(context, "User data not found", Toast.LENGTH_SHORT).show();
-                    android.util.Log.e("SwitchRoleHandler", "User data not found in Firebase");
+                    android.util.Log.e(tag, "User data not found in Firebase");
                     return;
                 }
 
                 String currentRole = dataSnapshot.child("userType").getValue(String.class);
-                android.util.Log.d("SwitchRoleHandler", "Current role: " + currentRole);
+                android.util.Log.d(tag, "Current role: " + currentRole);
                 
                 if (currentRole == null) {
                     Toast.makeText(context, "User role not found", Toast.LENGTH_SHORT).show();
-                    android.util.Log.e("SwitchRoleHandler", "User role is null");
+                    android.util.Log.e(tag, "User role is null");
                     return;
                 }
 
                 // Preserve the capitalization from Firebase
                 String newRole = currentRole.equalsIgnoreCase("employer") ? "Employee" : "Employer";
-                android.util.Log.d("SwitchRoleHandler", "Switching from " + currentRole + " to " + newRole);
+                android.util.Log.d(tag, "Switching from " + currentRole + " to " + newRole);
 
                 Intent intent = new Intent(context, ConfirmActivity.class);
                 intent.putExtra("current_role", currentRole);

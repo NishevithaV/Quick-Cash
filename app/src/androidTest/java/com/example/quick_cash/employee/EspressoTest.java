@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_search;
+package com.example.quick_cash.employee;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -20,6 +20,8 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.employee.JobSearchActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

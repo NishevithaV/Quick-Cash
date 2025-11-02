@@ -1,7 +1,7 @@
 package com.example.quick_cash.Utils;
 
 
-import com.example.quick_cash.Models.Job;
+import com.example.quick_cash.models.Job;
 
 import java.util.ArrayList;
 import java.util.List;

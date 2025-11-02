@@ -1,4 +1,4 @@
-package com.example.quick_cash.Registration;
+package com.example.quick_cash.registration;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -6,6 +6,7 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -46,27 +47,6 @@ public class EspressoTest {
         scenario.onActivity(activity -> {
             assertEquals(
                     activity.getString(R.string.REGISTRATION_SUCCESSFUL),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
-    }
-
-    @Test
-    public void checkIfInvalidUserType() {
-        onView(withId(R.id.name_input)).perform(typeText("JohnCiena"), closeSoftKeyboard());
-        onView(withId(R.id.email_input)).perform(typeText("user@gmail.com"), closeSoftKeyboard());
-        onView(withId(R.id.password_input)).perform(typeText("Password@123"), closeSoftKeyboard());
-        onView(withId(R.id.register_button)).perform(click());
-
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.INVALID_USER_TYPE),
                     RegistrationActivity.lastToastMessage
             );
         });

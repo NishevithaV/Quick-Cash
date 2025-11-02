@@ -1,6 +1,6 @@
-package com.example.quick_cash.activities;
+package com.example.quick_cash.switch_role;
 
-import static com.example.quick_cash.switchrole.ConfirmActivity.emailsMatch;
+import static com.example.quick_cash.switch_role.ConfirmActivity.emailsMatch;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

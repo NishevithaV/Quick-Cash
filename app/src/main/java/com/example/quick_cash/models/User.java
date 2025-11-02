@@ -1,4 +1,4 @@
-package com.example.quick_cash.Models;
+package com.example.quick_cash.models;
 
 public class User {
     private String id;

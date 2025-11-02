@@ -2,42 +2,44 @@ package com.example.quick_cash.FirebaseCRUD;
 
 import androidx.annotation.NonNull;
 
-import com.example.quick_cash.Models.Job;
-import com.example.quick_cash.Models.User;
+import com.example.quick_cash.models.User;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class Users {
+    private final FirebaseAuth auth;
     private final FirebaseDatabase database;
     private DatabaseReference usersRef;
 
     public Users(FirebaseDatabase database) {
+        auth = FirebaseAuth.getInstance();
         this.database = database;
         this.initializeDatabaseRefs();
-        this.initializeRefListeners();
     }
 
     private void initializeDatabaseRefs() {
         this.usersRef = this.database.getReference("users");
     }
 
-    private void initializeRefListeners() {
-        this.setUsersListener();
+    // Create user in Firebase Authentication
+    public void createUser(String name, String email, String password, Consumer<AuthResult> onSuccess, Consumer<Exception> onFailure) {
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(onSuccess::accept)
+                .addOnFailureListener(onFailure::accept);
     }
 
-    private void setUsersListener(){
+    //Save in Realtime DB
+    public void saveUserData(String userId, Map<String, Object> userData) {
+        usersRef.child(userId).setValue(userData);
     }
-
-    public boolean postUser(Map<String, String> job){
-        return false;
-    }
-
     public interface UsersCallback {
         void onCallback(User user);
     }

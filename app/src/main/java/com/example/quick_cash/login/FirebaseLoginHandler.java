@@ -6,13 +6,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.gms.tasks.Task;
 
-public class FirebaseLoginRepository implements LoginRepository {
+public class FirebaseLoginHandler {
 
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private final DatabaseReference dbRef =
             FirebaseDatabase.getInstance().getReference("users");
 
-    @Override
     public Task<FirebaseUser> signIn(String email, String password) {
         return auth.signInWithEmailAndPassword(email, password)
                 .continueWith(task -> {

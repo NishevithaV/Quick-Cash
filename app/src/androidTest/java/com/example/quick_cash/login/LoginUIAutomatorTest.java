@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
  */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginUiAutomatorTest {
+public class LoginUIAutomatorTest {
 
     private static final String PACKAGE = "com.example.quick_cash";
     private static final int LAUNCH_TIMEOUT = 5000;
@@ -40,9 +40,12 @@ public class LoginUiAutomatorTest {
 
         // Launch the app
         Context context = ApplicationProvider.getApplicationContext();
-        Intent intent = context.getPackageManager()
-                .getLaunchIntentForPackage(PACKAGE)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent();
+        intent.setClassName(
+                PACKAGE,
+                PACKAGE+".login.LoginActivity"
+        );
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
 
         // Wait for app to appear
@@ -50,7 +53,7 @@ public class LoginUiAutomatorTest {
     }
 
     @Test
-    public void testSuccessfulLoginRedirectsToDashboard() throws Exception {
+    public void testSuccessfulLoginRedirectsToDashboard() {
         // Wait for email field
         device.wait(Until.hasObject(By.res(PACKAGE, "email_input")), 3000);
 
@@ -69,9 +72,9 @@ public class LoginUiAutomatorTest {
 
         // Wait for dashboard to appear (mock dashboard text)
         boolean employerDashboardLoaded =
-                device.wait(Until.hasObject(By.textContains("Employer Dashboard Loaded Successfully")), 5000);
+                device.wait(Until.hasObject(By.textContains("Your Posted Jobs")), 5000);
         boolean employeeDashboardLoaded =
-                device.wait(Until.hasObject(By.textContains("Employee Dashboard Loaded Successfully")), 5000);
+                device.wait(Until.hasObject(By.textContains("Employee Dashboard")), 5000);
 
         assertTrue("Expected dashboard not displayed",
                 employerDashboardLoaded || employeeDashboardLoaded);
@@ -86,7 +89,7 @@ public class LoginUiAutomatorTest {
 
         // Wait for registration page
         boolean registrationOpened =
-                device.wait(Until.hasObject(By.textContains("Temporary Registration Page Loaded Successfully")), 5000);
-        assertTrue("Registration page did not open", registrationOpened);
+                device.wait(Until.hasObject(By.textContains("Register")), 5000);
+        assertTrue("Register", registrationOpened);
     }
 }

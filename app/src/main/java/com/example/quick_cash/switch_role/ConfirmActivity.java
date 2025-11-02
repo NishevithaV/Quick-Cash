@@ -1,4 +1,4 @@
-package com.example.quick_cash.switchrole;
+package com.example.quick_cash.switch_role;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.FirebaseCRUD.Users;
 import com.example.quick_cash.R;
-import com.example.quick_cash.views.EmployeeDashboardActivity;
+import com.example.quick_cash.employee.EmployeeDashboardActivity;
 import com.example.quick_cash.employer.EmployerDashboardActivity;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,26 +59,26 @@ public class ConfirmActivity extends AppCompatActivity {
         currentUserEmail = getIntent().getStringExtra("current_email");
         userId = getIntent().getStringExtra("user_id");
 
-        // Initialize views
-        roleSwitchText = findViewById(R.id.roleSwitchText);
-        emailInput = findViewById(R.id.roleInputEmail);
-        confirmButton = findViewById(R.id.roleConfirmButton);
-        cancelButton = findViewById(R.id.roleCancelButton);
+        initUI();
 
-        // Set the role switch text
+
         String message = "You are now switching from " + currentRole + " to " + newRole + ". Input your email to proceed.";
         roleSwitchText.setText(message);
 
-        // Set up click listeners
+        initListeners();
+
+
+    }
+
+    private void initListeners() {
         confirmButton.setOnClickListener(v -> {
             String enteredEmail = emailInput.getText().toString().trim();
             if (enteredEmail.isEmpty()) {
                 Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             if (emailsMatch(currentUserEmail, enteredEmail)) {
-                // Email matches, proceed with role switch
                 usersDb.updateUserRole(userId, newRole, new Users.RoleUpdateCallback() {
                     @Override
                     public void onSuccess() {
@@ -101,12 +101,21 @@ public class ConfirmActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                // Email doesn't match
                 Toast.makeText(this, "Email does not match your current logged-in account",
                         Toast.LENGTH_SHORT).show();
             }
         });
 
         cancelButton.setOnClickListener(v -> finish());
+    }
+
+    private void initUI() {
+        roleSwitchText = findViewById(R.id.roleSwitchText);
+        emailInput = findViewById(R.id.roleInputEmail);
+        confirmButton = findViewById(R.id.roleConfirmButton);
+        cancelButton = findViewById(R.id.roleCancelButton);roleSwitchText = findViewById(R.id.roleSwitchText);
+        emailInput = findViewById(R.id.roleInputEmail);
+        confirmButton = findViewById(R.id.roleConfirmButton);
+        cancelButton = findViewById(R.id.roleCancelButton);
     }
 }

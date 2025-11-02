@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.example.quick_cash.Models.Job;
+import com.example.quick_cash.models.Job;
 import com.example.quick_cash.Utils.JobSearchHandler;
 
 import java.util.ArrayList;

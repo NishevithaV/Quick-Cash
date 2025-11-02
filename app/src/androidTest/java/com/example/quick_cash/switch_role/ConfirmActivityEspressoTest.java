@@ -1,4 +1,4 @@
-package com.example.quick_cash.activities;
+package com.example.quick_cash.switch_role;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -17,7 +17,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.R;
-import com.example.quick_cash.switchrole.ConfirmActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +26,7 @@ import org.junit.runner.RunWith;
  * Espresso tests for ConfirmActivity
  */
 @RunWith(AndroidJUnit4.class)
-public class ConfirmActivityTest {
+public class ConfirmActivityEspressoTest {
 
     private Intent intent;
 

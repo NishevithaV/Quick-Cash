@@ -1,4 +1,4 @@
-package com.example.quick_cash.models;
+package com.example.quick_cash.switch_role;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;

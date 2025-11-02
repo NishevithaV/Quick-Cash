@@ -1,4 +1,4 @@
-package com.example.quick_cash.job_search;
+package com.example.quick_cash.employee;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -38,7 +38,7 @@ public class UIAutomatorTest {
         Intent launcherIntent = new Intent();
         launcherIntent.setClassName(
                 launcherPackageName,
-                launcherPackageName+".job_search.JobSearchActivity"
+                launcherPackageName+".employee.JobSearchActivity"
         );
         launcherIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Assert.assertNotNull(launcherIntent);

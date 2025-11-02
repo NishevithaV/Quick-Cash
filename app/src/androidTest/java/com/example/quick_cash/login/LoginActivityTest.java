@@ -70,7 +70,7 @@ public class LoginActivityTest {
     public void testSignupRedirectOpensRegistrationPage() {
         onView(withId(R.id.signup_redirect)).perform(click());
         onView(withText(CoreMatchers.containsString(
-                "Temporary Registration Page Loaded Successfully")))
+                "Register")))
                 .check(matches(isDisplayed()));
     }
 
