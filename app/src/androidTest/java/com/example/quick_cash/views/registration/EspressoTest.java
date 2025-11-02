@@ -8,6 +8,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import android.content.Context;
+
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.core.app.ActivityScenario;
@@ -23,6 +26,7 @@ import org.junit.runner.RunWith;
 @LargeTest
 public class EspressoTest {
 
+    private Context context;
     private ActivityScenario<RegistrationActivity> scenario;
 
     /**
@@ -30,6 +34,7 @@ public class EspressoTest {
      */
     @Before
     public void setup() {
+        context = ApplicationProvider.getApplicationContext();
         scenario = ActivityScenario.launch(RegistrationActivity.class);
     }
 
@@ -51,12 +56,11 @@ public class EspressoTest {
             e.printStackTrace();
         }
 
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.REGISTRATION_SUCCESSFUL),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
+        assertEquals(
+                context.getString(R.string.REGISTRATION_SUCCESSFUL),
+                RegistrationActivity.lastToastMessage
+        );
+
     }
 
     /**
@@ -76,12 +80,10 @@ public class EspressoTest {
             e.printStackTrace();
         }
 
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.REGISTRATION_SUCCESSFUL),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
+        assertEquals(
+                context.getString(R.string.REGISTRATION_SUCCESSFUL),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -100,12 +102,10 @@ public class EspressoTest {
             e.printStackTrace();
         }
 
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.INVALID_NAME),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
+        assertEquals(
+                context.getString(R.string.INVALID_NAME),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -125,12 +125,10 @@ public class EspressoTest {
             e.printStackTrace();
         }
 
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.INVALID_EMAIL),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
+        assertEquals(
+                context.getString(R.string.INVALID_EMAIL),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -149,12 +147,10 @@ public class EspressoTest {
             e.printStackTrace();
         }
 
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.INVALID_EMAIL),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
+        assertEquals(
+                context.getString(R.string.INVALID_EMAIL),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -174,12 +170,10 @@ public class EspressoTest {
             e.printStackTrace();
         }
 
-        scenario.onActivity(activity -> {
-            assertEquals(
-                    activity.getString(R.string.REGISTRATION_SUCCESSFUL),
-                    RegistrationActivity.lastToastMessage
-            );
-        });
+        assertEquals(
+                context.getString(R.string.REGISTRATION_SUCCESSFUL),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -191,18 +185,16 @@ public class EspressoTest {
         onView(withId(R.id.name_input)).perform(typeText("Mark"), closeSoftKeyboard());
         onView(withId(R.id.email_input)).perform(typeText("mark@gmail.com"), closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            scenario.onActivity(activity -> {
-                assertEquals(
-                        activity.getString(R.string.EMPTY_PASSWORD),
-                        RegistrationActivity.lastToastMessage
-                );
-            });
+        assertEquals(
+                context.getString(R.string.EMPTY_PASSWORD),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -216,18 +208,16 @@ public class EspressoTest {
         onView(withId(R.id.password_input)).perform(typeText("Password123"), closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
 
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            scenario.onActivity(activity -> {
-                assertEquals(
-                        activity.getString(R.string.INVALID_PASSWORD),
-                        RegistrationActivity.lastToastMessage
-                );
-            });
+        assertEquals(
+                context.getString(R.string.INVALID_PASSWORD),
+                RegistrationActivity.lastToastMessage
+        );
     }
 
     /**
@@ -241,17 +231,15 @@ public class EspressoTest {
         onView(withId(R.id.password_input)).perform(typeText("Password!123"), closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
 
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            scenario.onActivity(activity -> {
-                assertEquals(
-                        activity.getString(R.string.REGISTRATION_SUCCESSFUL),
-                        RegistrationActivity.lastToastMessage
-                );
-            });
+        assertEquals(
+                context.getString(R.string.REGISTRATION_SUCCESSFUL),
+                RegistrationActivity.lastToastMessage
+        );
     }
 }
