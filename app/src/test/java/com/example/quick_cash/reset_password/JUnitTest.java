@@ -6,15 +6,23 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.quick_cash.controllers.ResetPasswordValidator;
+
 public class JUnitTest {
 
     private ResetPasswordValidator validator;
 
+    /**
+     * Set up before running tests
+     */
     @Before
     public void setUp() {
         validator = new ResetPasswordValidator();
     }
 
+    /**
+     * Is in valid email.
+     */
     @Test
     public void isInValidEmail() {
         assertFalse(validator.isValidEmail("alex.gmail.com"));
@@ -23,6 +31,9 @@ public class JUnitTest {
         assertFalse(validator.isValidEmail("  "));
     }
 
+    /**
+     * Is valid email.
+     */
     @Test
     public void isValidEmail() {
         assertTrue(validator.isValidEmail("alex@gmail.com"));

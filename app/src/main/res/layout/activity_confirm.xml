@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".switchrole.ConfirmActivity">
+    tools:context=".views.switch_role.ConfirmActivity">
 
     <TextView
         android:id="@+id/confirmRoleText"
@@ -28,6 +28,7 @@
         android:layout_marginTop="8dp"
         android:textColor="#A7C8FF"
         android:textSize="16sp"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/inputEmailToProceedText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
