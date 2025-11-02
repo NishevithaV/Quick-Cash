@@ -16,10 +16,11 @@
         <!--company logo-->
         <ImageView
             android:id="@+id/company_logo"
-            android:layout_width="100dp"
+            android:src="@drawable/bigMoneylogo"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_marginTop="24dp"
-            android:background="#1E64FF" />
+            android:background="@color/black" />
 
 
 
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="ABC company"
+            android:text="BigMoney"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="28sp" />
