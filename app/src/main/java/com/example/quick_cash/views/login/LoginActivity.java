@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         // Redirect to registration page
         signupRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
 
@@ -134,9 +135,15 @@ public class LoginActivity extends AppCompatActivity {
                     String role = snapshot.getValue(String.class);
 
                     if ("Employer".equalsIgnoreCase(role)) {
-                        startActivity(new Intent(LoginActivity.this, EmployerDashboardActivity.class));
+                        Intent intent = new Intent(LoginActivity.this, EmployerDashboardActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                     } else if ("Employee".equalsIgnoreCase(role)) {
-                        startActivity(new Intent(LoginActivity.this, EmployeeDashboardActivity.class));
+                        Intent intent = new Intent(LoginActivity.this, EmployeeDashboardActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                     } else {
                         showError("Error", "Unknown userType: " + role);
                     }
