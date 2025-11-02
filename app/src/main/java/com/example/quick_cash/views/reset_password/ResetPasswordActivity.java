@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
@@ -25,6 +27,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     // Validator class
     private ResetPasswordValidator emailValidator;
+
+    private boolean emailSent = false;
 
     /**
      * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
@@ -69,7 +73,22 @@ public class ResetPasswordActivity extends AppCompatActivity {
         loginLink.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
+                Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (emailSent) {
+                    Toast.makeText(ResetPasswordActivity.this, "Back is disabled", Toast.LENGTH_SHORT).show();
+                } else {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
             }
         });
     }
@@ -81,6 +100,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            emailSent = true;
                             statusText.setText(R.string.RESET_SEND_SUCCESSFUL);
                             Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_SUCCESSFUL, Toast.LENGTH_SHORT).show();
                         } else {

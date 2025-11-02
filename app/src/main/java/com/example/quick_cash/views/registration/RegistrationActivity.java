@@ -149,12 +149,16 @@ public class RegistrationActivity extends AppCompatActivity {
                     Throwable::printStackTrace
             );
             Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         });
 
         loginBtn.setOnClickListener(view -> {
             Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         });
     }
 
