@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.quick_cash.controllers.ResetPasswordValidator;
+
 public class JUnitTest {
 
     private ResetPasswordValidator validator;

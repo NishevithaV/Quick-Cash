@@ -5,6 +5,8 @@ import org.junit.Before;
 
 import static org.junit.Assert.*;
 
+import com.example.quick_cash.controllers.RegistrationValidator;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *

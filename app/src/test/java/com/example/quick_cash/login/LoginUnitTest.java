@@ -1,6 +1,9 @@
 package com.example.quick_cash.login;
 
 import static org.junit.Assert.*;
+
+import com.example.quick_cash.controllers.LoginValidator;
+
 import org.junit.Before;
 import org.junit.Test;
 
