@@ -127,7 +127,7 @@ public class Users {
      */
 // Method to update user role in Firebase
     public void updateUserRole(String userId, String newRole, RoleUpdateCallback callback) {
-        usersRef.child(userId).child("type").setValue(newRole)
+        usersRef.child(userId).child("userType").setValue(newRole)
                 .addOnSuccessListener(aVoid -> callback.onSuccess())
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
