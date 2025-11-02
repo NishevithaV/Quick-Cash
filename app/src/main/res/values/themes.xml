@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Quick_Cash" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--        <item name="colorPrimary">@color/md_theme_light_primary</item>-->
+<!--        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>-->
+<!--        <item name="colorSurface">@color/md_theme_light_surface</item>-->
+<!--        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>-->
+<!--        <item name="android:statusBarColor">@color/md_theme_light_surface</item>-->
+    </style>
+
+    <style name="Theme.Quick_Cash" parent="Base.Theme.Quick_Cash" />
+</resources>

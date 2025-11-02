@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".views.login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp">
+
+        <!-- Error Box -->
+        <LinearLayout
+            android:id="@+id/error_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3B64FF"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/error_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incorrect Login Details"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The username or password you entered is incorrect. Please try again."
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Page Title -->
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back!"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:layout_marginBottom="40dp" />
+
+        <!-- Name Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/name_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Enter your name"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:inputType="textPersonName"
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#555555" />
+
+        <!-- Email Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Email"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Enter your email"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#555555" />
+
+        <!-- Password Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Password"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Enter your password"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:inputType="textPassword"
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#555555" />
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#3B64FF"
+            android:clipToOutline="true"
+            android:elevation="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:outlineProvider="background"
+            android:padding="12dp"
+            android:text="Login"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <!--redirect to login if user does not have account-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don’t have an account? "
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/signup_redirect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign up"
+                android:textColor="#3B64FF"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

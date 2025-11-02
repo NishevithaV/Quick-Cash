@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/body"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/findJobsHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="#FFF"
+            android:text="Find Jobs" />
+
+        <LinearLayout
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/userSearch"
+                android:layout_width="253dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Search for Jobs"
+                android:inputType="text"
+                android:textColor="#FFF"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <Spinner
+                android:id="@+id/catSelect"
+                android:layout_width="83dp"
+                android:layout_height="35dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/userSearch"
+                tools:layout_editor_absoluteX="16dp"
+                android:popupBackground="@color/black"/>
+
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:padding="2dp"
+                android:text="Go"
+                android:textColor="#FFF"
+                android:backgroundTint="#0066FF"
+                app:layout_constraintTop_toBottomOf="@+id/catSelect"
+                tools:layout_editor_absoluteX="15dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewResHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/RESULT"
+            android:textColor="#FFF"
+            app:layout_constraintBottom_toTopOf="@+id/resultsView"
+            tools:layout_editor_absoluteX="15dp" />
+
+
+        <ListView
+            android:id="@+id/resultsView"
+            android:layout_width="match_parent"
+            android:layout_height="470dp"
+            android:textColor="#FFF" />
+    </LinearLayout>
+</ScrollView>

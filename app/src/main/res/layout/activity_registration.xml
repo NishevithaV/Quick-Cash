@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".views.registration.RegistrationActivity">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <!--company logo-->
+        <ImageView
+            android:id="@+id/company_logo"
+            android:src="@drawable/big_money_logo"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/black" />
+
+
+
+        <!-- Company Name -->
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="BigMoney"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="28sp" />
+
+        <!-- Employee Button -->
+        <Button
+            android:id="@+id/employee_button"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:text="Employee"
+            android:textColor="#1E64FF"
+            android:backgroundTint="#FFFFFF"
+            android:drawablePadding="8dp" />
+
+        <!-- Employer Button -->
+        <Button
+            android:id="@+id/employer_button"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Employer"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1E64FF"
+            android:drawablePadding="8dp" />
+
+        <!-- Name Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/name_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your Full Name"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888" />
+
+        <!-- Email Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Email"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your email"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:inputType="textEmailAddress" />
+
+        <!-- Password Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Password"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your password"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:inputType="textPassword" />
+
+        <!-- Register Button -->
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:text="Register"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1E64FF" />
+
+        <!-- Login Text Button -->
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Already have an account? Login"
+            android:textColor="#1E64FF"
+            android:background="@android:color/transparent"
+            android:strokeColor="#1E64FF" />
+
+
+        </LinearLayout>
+</ScrollView>
