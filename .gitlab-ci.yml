@@ -9,7 +9,7 @@
 
 # image: openjdk:8-jdk
 # image: openjdk:11
-image: openjdk:25-ea-17-jdk-bullseye
+image: openjdk:17-jdk
 
 variables:
 
