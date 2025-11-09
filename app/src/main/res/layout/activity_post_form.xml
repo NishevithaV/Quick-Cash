@@ -46,7 +46,7 @@
                 android:layout_marginBottom="10dp"
                 android:inputType="textCapWords"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColorHint="#818181"
                 />
 
             <!-- Job Category Spinner -->
@@ -64,12 +64,11 @@ android:background="@color/white"
                 android:id="@+id/ApplicationDeadlineField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Application Deadline"
-                android:inputType="date"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                />
+                android:hint="Application Deadline (YYYY-MM-DD)"
+                android:inputType="date"
+                android:textColorHint="#818181"
+                android:textColor="@color/white" />
 
             <!-- Job Description -->
             <EditText
@@ -81,7 +80,7 @@ android:background="@color/white"
                 android:inputType="textMultiLine"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColorHint="#818181"
                 />
 
             <!-- Post Job Button -->
