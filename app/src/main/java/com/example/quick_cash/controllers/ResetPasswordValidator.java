@@ -1,12 +1,15 @@
 package com.example.quick_cash.controllers;
+import com.example.quick_cash.controllers.RegistrationValidator;
 
 public class ResetPasswordValidator {
+
+    private RegistrationValidator psswdValidator;
 
     /**
      * Instantiates a new Reset password validator.
      */
     public ResetPasswordValidator() {
-        // Default Constructor
+        psswdValidator = new RegistrationValidator();
     }
 
     /**
@@ -22,5 +25,9 @@ public class ResetPasswordValidator {
         email = email.trim();   //incase any spaces
         boolean validEmail = email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]+$");
         return validEmail;
+    }
+
+    public boolean isValidPassword(String psswd) {
+        return psswdValidator.validPassword(psswd);
     }
 }

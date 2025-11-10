@@ -25,6 +25,7 @@
         <activity android:name=".views.settings.SettingsActivity"/>
         <activity android:name=".views.employee.EmployeeDashboardActivity"/>
         <activity android:name=".views.reset_password.ResetPasswordActivity"/>
+        <activity android:name=".views.reset_password.ResetPasswordFormActivity"/>
         <activity android:name=".views.login.LoginActivity" />
         <activity android:name=".views.employer.PostFormActivity" />
         <activity android:name=".views.employer.EmployerDashboardActivity" />

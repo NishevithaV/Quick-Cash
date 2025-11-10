@@ -19,19 +19,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/resetEmailInputID"
+            android:id="@+id/currPasswd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#FFFFFF"
-            android:hint="Enter your email"
+            android:hint="Current Password"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA" />
+
+        <EditText
+            android:id="@+id/newPasswd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:hint="New Password"
             android:inputType="textEmailAddress"
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA" />
 
         <Button
-            android:id="@+id/resetButtonID"
+            android:id="@+id/formResetButtonID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#0066FF"
@@ -40,7 +52,7 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/resetPsswdStatusTextID"
+            android:id="@+id/formResetPsswdStatusTextID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -49,6 +61,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resetButtonID" />
+
+        <TextView
+            android:id="@+id/resetTologinLinkID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Go To Login"
+            android:textColor="#0A2DCE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/formResetPsswdStatusTextID"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
