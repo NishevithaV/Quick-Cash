@@ -1,6 +1,7 @@
 package com.example.quick_cash.views.reset_password;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -15,7 +16,6 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.R;
-import com.example.quick_cash.views.reset_password.ResetPasswordActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,9 @@ import org.junit.runner.RunWith;
 public class EspressoTest {
 
     public ActivityScenario<ResetPasswordActivity> activityScenario;
-    String testEmail = "emiyusuffe@gmail.com";
+    String testExistEmail = "iamjohn@johnny.com";
+    String testValidEmailNotExist = "thisemaildoesnotexitindb@validemail.com";
+
 
     /**
      * Set up before running tests
@@ -42,7 +44,7 @@ public class EspressoTest {
      */
     @Test
     public void testValidEmail() {
-        onView(withId(R.id.resetEmailInputID)).perform(typeText("thisemaildoesnotexitindb@validemail.com"), closeSoftKeyboard());
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testValidEmailNotExist), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
         onView(withId(R.id.resetPsswdStatusTextID)).check(matches(not(withText(R.string.INVALID_EMAIL))));
     }
@@ -55,22 +57,85 @@ public class EspressoTest {
         onView(withId(R.id.resetEmailInputID)).perform(typeText("bademail.com"), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
         onView(withId(R.id.resetPsswdStatusTextID)).check(matches(withText(R.string.INVALID_EMAIL)));
-        onView(withId(R.id.resetTologinLinkID)).check(matches(not(isDisplayed())));
     }
 
     /**
-     * Test successful reset send.
-     *
-     * @throws InterruptedException the interrupted exception
+     * Test same password.
      */
     @Test
-    public void testSuccessfulResetSend() throws InterruptedException {
-        onView(withId(R.id.resetEmailInputID)).perform(typeText(testEmail), closeSoftKeyboard());
+    public void testSamePassword() throws InterruptedException{
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testExistEmail), closeSoftKeyboard());
         onView(withId(R.id.resetButtonID)).perform(click());
 
         Thread.sleep(2000);
 
-        onView(withId(R.id.resetPsswdStatusTextID)).check(matches(withText(R.string.RESET_SEND_SUCCESSFUL)));
+        onView(withId(R.id.currPasswd)).perform(typeText("12345678bB%"), closeSoftKeyboard());
+        onView(withId(R.id.newPasswd)).perform(typeText("12345678bB%"), closeSoftKeyboard());
+        onView(withId(R.id.formResetButtonID)).perform(click());
+
+        Thread.sleep(2000);
+
+        onView(withId(R.id.formResetPsswdStatusTextID)).check(matches(withText("Failed to Reset Password: Same Password")));
+        onView(withId(R.id.resetTologinLinkID)).check(matches(not(isDisplayed())));
+    }
+
+    /**
+     * Test invalid password.
+     */
+    @Test
+    public void testInvalidPassword() throws InterruptedException {
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testExistEmail), closeSoftKeyboard());
+        onView(withId(R.id.resetButtonID)).perform(click());
+
+        Thread.sleep(2000);
+
+        onView(withId(R.id.currPasswd)).perform(typeText("12345678bB%"), closeSoftKeyboard());
+        onView(withId(R.id.newPasswd)).perform(typeText("badpassword"), closeSoftKeyboard());
+        onView(withId(R.id.formResetButtonID)).perform(click());
+
+        Thread.sleep(2000);
+
+        onView(withId(R.id.formResetPsswdStatusTextID)).check(matches(withText(R.string.INVALID_PASSWORD)));
+        onView(withId(R.id.resetTologinLinkID)).check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void testEmailNotExist() {
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testValidEmailNotExist), closeSoftKeyboard());
+        onView(withId(R.id.resetButtonID)).perform(click());
+        onView(withId(R.id.resetPsswdStatusTextID)).check(matches(withText(R.string.EMAIL_NOT_EXIST)));
+    }
+
+    @Test
+    public void testEmailExists() {
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testExistEmail), closeSoftKeyboard());
+        onView(withId(R.id.resetButtonID)).perform(click());
+        onView(withId(R.id.formResetButtonID)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test successful reset send/Also tests valid password.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
+    @Test
+    public void testSuccessfulReset() throws InterruptedException {
+        onView(withId(R.id.resetEmailInputID)).perform(typeText(testExistEmail), closeSoftKeyboard());
+        onView(withId(R.id.resetButtonID)).perform(click());
+
+        Thread.sleep(2000);
+
+        onView(withId(R.id.currPasswd)).perform(typeText("12345678bB%"), closeSoftKeyboard());
+        onView(withId(R.id.newPasswd)).perform(typeText("12345678aA%"), closeSoftKeyboard());
+        onView(withId(R.id.formResetButtonID)).perform(click());
+
+        Thread.sleep(2000);
+        onView(withId(R.id.formResetPsswdStatusTextID)).check(matches(withText(R.string.RESET_SEND_SUCCESSFUL)));
         onView(withId(R.id.resetTologinLinkID)).check(matches(isDisplayed()));
+
+        // clean up
+        onView(withId(R.id.currPasswd)).perform(clearText(), typeText("12345678aA%"), closeSoftKeyboard());
+        onView(withId(R.id.newPasswd)).perform(clearText(), typeText("12345678bB%"), closeSoftKeyboard());
+        onView(withId(R.id.formResetButtonID)).perform(click());
     }
 }
