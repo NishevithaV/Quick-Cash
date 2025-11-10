@@ -11,6 +11,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.utils.ResetHandler;
 import com.example.quick_cash.views.login.LoginActivity;
 import com.example.quick_cash.controllers.ResetPasswordValidator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,14 +22,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private EditText emailInput;
     private Button resetButton;
     private TextView statusText;
-    private TextView loginLink;
-
-    private FirebaseAuth auth;
+    private ResetHandler resetHandler;
 
     // Validator class
     private ResetPasswordValidator emailValidator;
-
-    private boolean emailSent = false;
 
     /**
      * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
@@ -41,9 +38,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_reset_password);
-        auth = FirebaseAuth.getInstance();
         emailValidator = new ResetPasswordValidator();
-
+        resetHandler = new ResetHandler();
         initUI();
         initListeners();
     }
@@ -55,7 +51,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.resetEmailInputID);
         resetButton = findViewById(R.id.resetButtonID);
         statusText = findViewById(R.id.resetPsswdStatusTextID);
-        loginLink = findViewById(R.id.resetTologinLinkID);
     }
 
     /**
@@ -66,52 +61,31 @@ public class ResetPasswordActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                sendResetEmail();
-            }
-        });
-
-        loginLink.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (emailSent) {
-                    Toast.makeText(ResetPasswordActivity.this, "Back is disabled", Toast.LENGTH_SHORT).show();
-                } else {
-                    setEnabled(false);
-                    getOnBackPressedDispatcher().onBackPressed();
-                }
+                goToResetForm();
             }
         });
     }
 
-    private void sendResetEmail(){
+    private void goToResetForm(){
         String email = emailInput.getText().toString().trim();
         if (emailValidator.isValidEmail(email)) {
+            resetHandler.emailExists(email, new ResetHandler.EmailExistCallback() {
+                @Override
+                public void onResult(boolean exists){
+                    if (exists) {
+                        Intent intent = new Intent(ResetPasswordActivity.this, ResetPasswordFormActivity.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    } else {
+                        statusText.setText(R.string.EMAIL_NOT_EXIST);
+                        Toast.makeText(ResetPasswordActivity.this, R.string.EMAIL_NOT_EXIST, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
-            auth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            emailSent = true;
-                            statusText.setText(R.string.RESET_SEND_SUCCESSFUL);
-                            Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_SUCCESSFUL, Toast.LENGTH_SHORT).show();
-                        } else {
-                            statusText.setText(R.string.RESET_SEND_FAILED);
-                            Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_FAILED, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-            loginLink.setVisibility(android.view.View.VISIBLE);
         } else {
             statusText.setText(R.string.INVALID_EMAIL);
-            Toast.makeText(ResetPasswordActivity.this, R.string.RESET_SEND_FAILED, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ResetPasswordActivity.this, R.string.INVALID_EMAIL, Toast.LENGTH_SHORT).show();
         }
     }
 }

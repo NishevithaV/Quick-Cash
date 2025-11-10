@@ -28,8 +28,12 @@ public class UIAutomatorTest {
     private final String loginLink = "resetTologinLinkID";
     private final String emailInpID = "resetEmailInputID";
     private final String statusTxtID = "resetPsswdStatusTextID";
+    private final String formResetBtnID = "formResetButtonID";
+    private final String currPasswordID = "currPasswd";
+    private final String newPasswordID = "newPasswd";
+    private final String formStatusTxtID = "formResetPsswdStatusTextID";
 
-    String testEmail = "emiyusuffe@gmail.com";
+    String testEmail = "iamjohn@johnny.com";
 
     /**
      * Set up before running tests
@@ -83,10 +87,8 @@ public class UIAutomatorTest {
         device.findObject(By.res(launcherPackageName, resetBtnID)).click();
         device.waitForIdle();
         device.wait(Until.hasObject(By.res(launcherPackageName, statusTxtID)), 5000);
-        String status = device.findObject(By.res(launcherPackageName, statusTxtID)).getText();
-        String login = device.findObject(By.res(launcherPackageName, loginLink)).getText();
-        assertTrue(status.contains("email sent"));
-        assertTrue(login.contains("Go To Login"));
+        String currPsswdField = device.findObject(By.res(launcherPackageName, currPasswordID)).getText();
+        assertTrue(currPsswdField.contains("Current Password"));
     }
 
     /**
@@ -98,12 +100,24 @@ public class UIAutomatorTest {
         device.findObject(By.res(launcherPackageName, resetBtnID)).click();
         device.waitForIdle();
         device.wait(Until.hasObject(By.res(launcherPackageName, statusTxtID)), 5000);
-        UiObject2 status = device.findObject(By.res(launcherPackageName, statusTxtID));
+
+        device.findObject(By.res(launcherPackageName, currPasswordID)).setText("12345678bB%");
+        device.findObject(By.res(launcherPackageName, newPasswordID)).setText("12345678aA%");
+        device.findObject(By.res(launcherPackageName, formResetBtnID)).click();
+
+        device.wait(Until.hasObject(By.res(launcherPackageName, formStatusTxtID)), 5000);
+        UiObject2 status = device.findObject(By.res(launcherPackageName, formStatusTxtID));
         UiObject2 loginBtn = device.findObject(By.res(launcherPackageName, loginLink));
-        assertTrue(status.getText().contains("email sent"));
+        assertTrue(status.getText().contains("Password Successfully Reset"));
         assertTrue(loginBtn.getText().contains("Go To Login"));
 
+        // clean up
+        device.findObject(By.res(launcherPackageName, currPasswordID)).setText("12345678aA%");
+        device.findObject(By.res(launcherPackageName, newPasswordID)).setText("12345678bB%");
+        device.findObject(By.res(launcherPackageName, formResetBtnID)).click();
         loginBtn.click();
+
+        // check if on login page
         UiObject loginHeader = device.findObject(new UiSelector().textContains("Welcome Back"));
         loginHeader.exists();
         UiObject loginPageBtn = device.findObject(new UiSelector().textContains("Login"));

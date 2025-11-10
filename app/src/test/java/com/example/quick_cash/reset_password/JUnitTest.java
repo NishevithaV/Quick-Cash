@@ -40,4 +40,16 @@ public class JUnitTest {
         assertTrue(validator.isValidEmail("alex-g@gmail.com"));
         assertTrue(validator.isValidEmail("al3098@somedomain.ca"));
     }
+
+    @Test
+    public void isInvalidPassword() {
+        assertFalse(validator.isValidPassword("badpassword"));
+        assertFalse(validator.isValidPassword("  "));
+        assertFalse(validator.isValidPassword(""));
+    }
+
+    @Test
+    public void isValidPassword() {
+        assertTrue(validator.isValidPassword("12345678bB%"));
+    }
 }
