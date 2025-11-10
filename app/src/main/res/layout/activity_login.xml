@@ -54,31 +54,6 @@
             android:textSize="28sp"
             android:layout_marginBottom="40dp" />
 
-        <!-- Name Field -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/name_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@android:color/transparent"
-            android:hint="Enter your name"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#888888"
-            android:inputType="textPersonName"
-            android:paddingBottom="8dp"
-            android:layout_marginBottom="16dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#555555" />
-
         <!-- Email Field -->
         <TextView
             android:layout_width="match_parent"
