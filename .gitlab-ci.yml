@@ -9,7 +9,7 @@
 
 # image: openjdk:8-jdk
 # image: openjdk:11
-image: openjdk:17-jdk-bullseye
+image: eclipse-temurin:17-jdk
 
 variables:
 

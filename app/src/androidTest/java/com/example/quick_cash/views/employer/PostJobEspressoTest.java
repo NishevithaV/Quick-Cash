@@ -166,19 +166,4 @@ public class PostJobEspressoTest {
         onView(withId(R.id.PostJobButton)).perform(click());
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
     }
-
-//    @Test
-//    public void checkIfJobsPosted() throws InterruptedException {
-//        onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
-//        onView(withId(R.id.JobCategorySpinner)).perform(click());
-//        onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
-//        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
-//        onView(withId(R.id.JobDescriptionField)).perform(typeText("We need an AI backend engineer"));
-//        onView(withId(R.id.PostJobButton)).perform(click());
-//        Thread.sleep(3000);
-//
-//        onView(withId(R.id.dashboardTitle)).check(matches(withText("Your Posted Jobs")));
-//
-//        onData(is("Backend Dev")).inAdapterView(withId(R.id.jobListView)).check(matches(isDisplayed()));
-//    }
 }

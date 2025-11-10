@@ -59,7 +59,7 @@ public class PostJobUIAutomatorTest {
         assertTrue(jobTitleField.exists());
         UiObject jobCategorySpinner = device.findObject(new UiSelector().textContains("Select job category"));
         jobCategorySpinner.exists();
-        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline"));
+        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
         assertTrue(applicationDeadlineField.exists());
         UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         assertTrue(descriptionField.exists());
@@ -80,7 +80,7 @@ public class PostJobUIAutomatorTest {
         jobCategorySpinner.click();
         List<UiObject2> types = device.findObjects(By.res("android:id/text1"));
         types.get(4).click();
-        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline"));
+        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
         applicationDeadlineField.setText("2025-11-21");
         UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         descriptionField.setText("Sample description");
@@ -105,7 +105,7 @@ public class PostJobUIAutomatorTest {
         jobCategorySpinner.click();
         List<UiObject2> types = device.findObjects(By.res("android:id/text1"));
         types.get(4).click();
-        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline"));
+        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
         applicationDeadlineField.setText("2025-11-21");
         UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         descriptionField.setText("Sample description");
