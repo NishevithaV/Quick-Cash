@@ -11,6 +11,10 @@
 # image: openjdk:11
 image: eclipse-temurin:17-jdk
 
+default:
+  tags:
+    - dalfcs_docker_kvm
+
 variables:
 
   # ANDROID_COMPILE_SDK is the version of Android you're compiling with.
