@@ -4,6 +4,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.utils.ToastMatcher;
 
 import org.junit.Rule;
 import org.junit.Test;
