@@ -39,6 +39,7 @@ dependencies {
     implementation libs.uiautomator
     implementation libs.firebase.auth
     implementation libs.espresso.idling.resource
+    implementation libs.espresso.contrib
     testImplementation libs.junit
     testImplementation libs.mockito.core
 
