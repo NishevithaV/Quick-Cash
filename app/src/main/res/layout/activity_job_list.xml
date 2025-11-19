@@ -1,71 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/body"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="#000"
+    android:orientation="vertical" >
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
         android:gravity="center"
-
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="35dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/findJobsHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
+            android:fontFamily="sans-serif-medium"
             android:textSize="24sp"
             android:textColor="#FFF"
             android:text="Find Jobs" />
 
-        <LinearLayout
-            android:layout_width="411dp"
+
+
+            <EditText
+                android:id="@+id/userSearch"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/searchbar"
+                android:backgroundTint="#0066FF"
+                android:ems="10"
+                android:fontFamily="sans-serif-medium"
+                android:hint="Search for Jobs"
+                android:inputType="text"
+                android:radius="12dp"
+                android:textColor="#FFF"
+                android:textAlignment="center"
+                android:textColorHint="#A8B5FF"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+        <FrameLayout
+            android:layout_width="344dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/userSearch"
-                android:layout_width="253dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Search for Jobs"
-                android:inputType="text"
-                android:textColor="#FFF"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
-
             <Spinner
                 android:id="@+id/catSelect"
-                android:layout_width="83dp"
-                android:layout_height="35dp"
-                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="#00ffffff"
+                android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:padding="2dp"
+                android:popupBackground="#802A3459"
+                android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textColorHint="#A8B5FF"
                 app:layout_constraintTop_toBottomOf="@+id/userSearch"
-                tools:layout_editor_absoluteX="16dp"
-                android:popupBackground="@color/black"/>
+                tools:layout_editor_absoluteX="16dp" />
 
-            <Button
-                android:id="@+id/searchBtn"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:padding="2dp"
-                android:text="Go"
-                android:textColor="#FFF"
-                android:backgroundTint="#0066FF"
-                app:layout_constraintTop_toBottomOf="@+id/catSelect"
-                tools:layout_editor_absoluteX="15dp" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="2dp"
+                android:layout_marginEnd="12dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/drop_arrow" />
+        </FrameLayout>
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="337dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:padding="2dp"
+            android:text="Go"
+            android:textColor="#06F"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/catSelect"
+            tools:layout_editor_absoluteX="15dp" />
 
         <TextView
             android:id="@+id/textViewResHead"
@@ -73,15 +101,19 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="@string/RESULT"
+            android:fontFamily="sans-serif-medium"
+            android:layout_margin="10dp"
             android:textColor="#FFF"
             app:layout_constraintBottom_toTopOf="@+id/resultsView"
             tools:layout_editor_absoluteX="15dp" />
 
-
         <ListView
             android:id="@+id/resultsView"
+            android:fontFamily="sans-serif-medium"
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
             android:textColor="#FFF" />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
