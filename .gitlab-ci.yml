@@ -59,6 +59,8 @@ before_script:
 
   # Not necessary, but just for surity
   - chmod +x ./gradlew
+  - echo "sdk.dir=$ANDROID_HOME" > local.properties
+
 
 # Basic android and gradle stuff
 # Check linting

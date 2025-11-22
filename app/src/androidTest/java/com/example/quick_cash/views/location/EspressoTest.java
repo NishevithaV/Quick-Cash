@@ -13,8 +13,6 @@ import androidx.test.rule.GrantPermissionRule;
 
 
 import android.Manifest;
-import android.location.Location;
-import android.location.LocationManager;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.views.maps.CurrentLocationActivity;
