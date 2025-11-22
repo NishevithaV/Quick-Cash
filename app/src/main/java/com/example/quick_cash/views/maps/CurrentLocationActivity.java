@@ -102,6 +102,5 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-
     }
 }
