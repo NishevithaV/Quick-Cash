@@ -24,4 +24,5 @@
     <string name="EMAIL_NOT_EXIST">Email does not exist for any user</string>
     <string name="NO_RESULT">No Results. Try a different search</string>
     <string name="RESULT">Results</string>
+    <string name="title_activity_current_location">CurrentLocation</string>
 </resources>

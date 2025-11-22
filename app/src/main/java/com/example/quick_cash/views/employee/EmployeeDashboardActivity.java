@@ -9,12 +9,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.views.maps.CurrentLocationActivity;
 import com.example.quick_cash.views.settings.SettingsActivity;
 
 public class EmployeeDashboardActivity extends AppCompatActivity {
 
     Button btnFindJobs;
     Button btnSettings;
+
+    Button btnNearbyJobs;
+
 
     /**
      *
@@ -47,11 +51,18 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
             Intent intent = new Intent( EmployeeDashboardActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
+
+        btnNearbyJobs.setOnClickListener(v -> {
+            Intent intent = new Intent( EmployeeDashboardActivity.this, CurrentLocationActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void initUI() {
         btnFindJobs = findViewById(R.id.btnFindJobs);
         btnSettings = findViewById(R.id.btnSettings);
+        btnNearbyJobs = findViewById(R.id.btnNearbyJobs);
+
     }
 
 }
