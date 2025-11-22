@@ -5,7 +5,10 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PostFormActivity">
+      <SelectionState runConfigName="PostJobUIAutomatorTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="CurrentLocation">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
