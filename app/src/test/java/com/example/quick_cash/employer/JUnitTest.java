@@ -65,7 +65,7 @@ public class JUnitTest {
      */
     @Test
     public void checkIfApplicationDeadlineIsValid() {
-        assertTrue(validator.checkValidApplicationDeadline("2025-11-21"));
+        assertTrue(validator.checkValidApplicationDeadline("2026-11-21"));
     }
 
     /**
