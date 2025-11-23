@@ -25,4 +25,9 @@
     <string name="NO_RESULT">No Results. Try a different search</string>
     <string name="RESULT">Results</string>
     <string name="title_activity_current_location">CurrentLocation</string>
+    <string-array name="statuses">
+        <item>Pending</item>
+        <item>Accepted</item>
+        <item>Rejected</item>
+    </string-array>
 </resources>
