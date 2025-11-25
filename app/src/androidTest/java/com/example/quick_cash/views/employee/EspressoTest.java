@@ -50,6 +50,22 @@ public class EspressoTest {
     }
 
     /**
+     * Test that the current location header updates from the default placeholder text
+     */
+    @Test
+    public void testCurrentLocationHeaderUpdates() {
+        onView(withId(R.id.currentLocationHeader)).check(matches(withText("Location: Fetching...")));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.currentLocationHeader)).check(matches(not(withText("Location: Fetching..."))));
+    }
+
+    /**
      * Test search updates results.
      */
     @Test
