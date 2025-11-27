@@ -1,4 +1,5 @@
 package com.example.quick_cash.views.employer;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -67,5 +68,54 @@ public class ApplicationsUIAutomatorTest {
         device.wait(Until.findObject(By.textContains("Accept")), 3000);
         UiObject acceptBtn = device.findObject(new UiSelector().text("Accept"));
         assertTrue(acceptBtn.exists());
+    }
+
+    @Test
+    public void testFilterApplications() throws Exception {
+        UiObject statusFilter = device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/statusFilter"));
+        statusFilter.click();
+
+        // Filter for accepted
+        UiObject acceptedItem = device.findObject(new UiSelector().text("Accepted"));
+        acceptedItem.click();
+
+        UiObject acceptedApp = device.findObject(new UiSelector().textContains("accepted"));
+        assertTrue("Accepted application should be visible", acceptedApp.exists());
+
+        UiObject pendingApp = device.findObject(new UiSelector().textContains("pending"));
+        assertFalse("Pending application should not be visible", pendingApp.exists());
+
+        UiObject declinedApp = device.findObject(new UiSelector().textContains("declined"));
+        assertFalse("Pending application should not be visible", declinedApp.exists());
+
+        // Filter for pending
+        statusFilter.click();
+
+        acceptedItem = device.findObject(new UiSelector().text("Pending"));
+        acceptedItem.click();
+
+        acceptedApp = device.findObject(new UiSelector().textContains("accepted"));
+        assertFalse("Accepted application should not be visible", acceptedApp.exists());
+
+        pendingApp = device.findObject(new UiSelector().textContains("pending"));
+        assertTrue("Pending application should be visible", pendingApp.exists());
+
+        declinedApp = device.findObject(new UiSelector().textContains("declined"));
+        assertFalse("Pending application should not be visible", declinedApp.exists());
+
+        // Filter for declined
+        statusFilter.click();
+
+        acceptedItem = device.findObject(new UiSelector().text("Declined"));
+        acceptedItem.click();
+
+        acceptedApp = device.findObject(new UiSelector().textContains("accepted"));
+        assertFalse("Accepted application should not be visible", acceptedApp.exists());
+
+        pendingApp = device.findObject(new UiSelector().textContains("pending"));
+        assertFalse("Pending application should not be visible", pendingApp.exists());
+
+        declinedApp = device.findObject(new UiSelector().textContains("declined"));
+        assertTrue("Pending application should be visible", declinedApp.exists());
     }
 }
