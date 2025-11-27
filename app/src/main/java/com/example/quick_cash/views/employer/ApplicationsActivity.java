@@ -101,6 +101,8 @@ public class ApplicationsActivity extends AppCompatActivity {
                     startActivity(intent);
                 });
             } else {
+                toastMsg = "Application already "+selectedApp.getStatus();
+                Toast.makeText(ApplicationsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -126,5 +128,11 @@ public class ApplicationsActivity extends AppCompatActivity {
 
             adapter.notifyDataSetChanged();
         }
+    }
+
+    public void setDisplayedAppsForTest(ArrayList<Application> apps) {
+        displayedApps.clear();
+        displayedApps.addAll(apps);
+        displayApps(apps);
     }
 }
