@@ -11,7 +11,7 @@
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="35dp"
         android:orientation="vertical">
@@ -20,7 +20,7 @@
             android:id="@+id/viewAppsHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:fontFamily="sans-serif-medium"
             android:textSize="24sp"
@@ -29,9 +29,9 @@
 
 
         <FrameLayout
-            android:layout_width="344dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="5dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -61,6 +61,15 @@
                 android:focusable="false"
                 android:src="@drawable/drop_arrow" />
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/appsResHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFF" />
 
         <ListView
             android:id="@+id/appsResultsView"

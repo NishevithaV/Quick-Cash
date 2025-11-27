@@ -19,7 +19,7 @@ public final class UserIdMapper {
     public static void getName(String userId, UserNameCallback callback) {
         usersCRUD.getUser(userId, user -> {
             String name = user.getName();
-            callback.onNameLoaded(name != null && !name.equals("null") ? name : "Test Employer");
+            callback.onNameLoaded(name != null && !name.equals("null") ? name : "Test User");
         });
     }
 
