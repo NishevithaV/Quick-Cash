@@ -28,6 +28,6 @@
     <string-array name="statuses">
         <item>Pending</item>
         <item>Accepted</item>
-        <item>Rejected</item>
+        <item>Declined</item>
     </string-array>
 </resources>
