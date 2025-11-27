@@ -85,6 +85,18 @@ public class ApplicationsActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
+        statusFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedStatus = parent.getItemAtPosition(position).toString();
+                loadApps(selectedStatus);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
 
         appsResultsView.setOnItemClickListener((parent, view, position, id) -> {
             Application selectedApp = displayedApps.get(position);
