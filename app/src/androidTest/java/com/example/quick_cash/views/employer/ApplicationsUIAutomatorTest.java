@@ -52,4 +52,20 @@ public class ApplicationsUIAutomatorTest {
         UiObject2 resHead = device.findObject(By.res(launcherPackageName+":id/"+"appsResHead"));
         assertNotNull(resHead);
     }
+
+    /**
+     * Test app click opens detail.
+     */
+    @Test
+    public void testAppClickOpensDetail() {
+        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "appsResultsView")), 2000);
+        assertNotNull(list);
+
+        UiObject2 firstItem = list.getChildren().get(0);
+        firstItem.click();
+
+        device.wait(Until.findObject(By.textContains("Accept")), 3000);
+        UiObject acceptBtn = device.findObject(new UiSelector().text("Accept"));
+        assertTrue(acceptBtn.exists());
+    }
 }
