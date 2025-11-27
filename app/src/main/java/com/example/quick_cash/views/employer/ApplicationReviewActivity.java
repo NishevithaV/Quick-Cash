@@ -69,7 +69,25 @@ public class ApplicationReviewActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
+        declineBtn.setOnClickListener(v -> {
+            update("declined");
+        });
 
+        acceptBtn.setOnClickListener(v -> {
+            update("accepted");
+        });
     }
 
+    private void update(String status) {
+        this.status = status;
+        statusAppRev.setText(status);
+
+        if (status.equalsIgnoreCase("declined")) statusAppRev.setTextColor(Color.RED);
+        else statusAppRev.setTextColor(Color.GREEN);
+
+        appsCRUD.updateStatus(appId, status);
+        toastMsg = "Application successfully "+status;
+        Toast.makeText(ApplicationReviewActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+
+    }
 }
