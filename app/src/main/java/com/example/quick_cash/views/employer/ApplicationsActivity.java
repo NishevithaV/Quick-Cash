@@ -59,6 +59,18 @@ public class ApplicationsActivity extends AppCompatActivity {
         displayedApps = new ArrayList<>();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        appsCRUD.getApplications(new Applications.AppsCallback() {
+            @Override
+            public void onCallback(ArrayList<Application> apps) {
+                filterHandler = new ApplicationsFilterHandler(apps);
+                loadApps(selectedStatus);
+            }
+        });
+    }
+
     private void initUI() {
         this.statusFilter = findViewById(R.id.statusFilter);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -74,6 +86,23 @@ public class ApplicationsActivity extends AppCompatActivity {
 
     private void initListeners() {
 
+        appsResultsView.setOnItemClickListener((parent, view, position, id) -> {
+            Application selectedApp = displayedApps.get(position);
+            if (selectedApp.getStatus().equalsIgnoreCase("pending")) {
+                Intent intent = new Intent(ApplicationsActivity.this, ApplicationReviewActivity.class);
+                UserIdMapper.getName(selectedApp.getApplicantId(), name -> {
+                    intent.putExtra("applicantName", name);
+                });
+                intent.putExtra("letter", selectedApp.getLetter());
+                intent.putExtra("status", selectedApp.getStatus());
+                intent.putExtra("appId", selectedApp.getId());
+                JobIdMapper.getTitle(selectedApp.getJobId(), title -> {
+                    intent.putExtra("jobTitle", title);
+                    startActivity(intent);
+                });
+            } else {
+            }
+        });
     }
 
     private void loadApps(String status) {
