@@ -11,6 +11,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.junit.Assert.assertEquals;
 
+import android.content.Intent;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.matcher.RootMatchers;
 
@@ -77,4 +79,59 @@ public class ApplicationsEspressoTest {
         });
     }
 
+    @Test
+    public void acceptButtonShowsToast() {
+        Intent intent = new Intent(
+                androidx.test.core.app.ApplicationProvider.getApplicationContext(),
+                ApplicationReviewActivity.class
+        );
+        intent.putExtra("letter", "Test Letter");
+        intent.putExtra("applicantName", "Alice");
+        intent.putExtra("status", "pending");
+        intent.putExtra("jobTitle", "Designer");
+        intent.putExtra("appId", "app001");
+
+        ActivityScenario<ApplicationReviewActivity> scenario =
+                ActivityScenario.launch(intent);
+
+        scenario.onActivity(activity -> {
+            activity.toastMsg = ""; // reset before test
+        });
+
+        onView(withId(R.id.acceptBtn)).perform(click());
+
+        // Verify Toast text
+        scenario.onActivity(activity -> {
+            String value = activity.toastMsg;
+            assertEquals("Application successfully accepted", value);
+        });
+    }
+
+    @Test
+    public void declineButtonShowsToast() {
+        Intent intent = new Intent(
+                androidx.test.core.app.ApplicationProvider.getApplicationContext(),
+                ApplicationReviewActivity.class
+        );
+        intent.putExtra("letter", "Test Letter");
+        intent.putExtra("applicantName", "Alice");
+        intent.putExtra("status", "pending");
+        intent.putExtra("jobTitle", "Designer");
+        intent.putExtra("appId", "app001");
+
+        ActivityScenario<ApplicationReviewActivity> scenario =
+                ActivityScenario.launch(intent);
+
+        scenario.onActivity(activity -> {
+            activity.toastMsg = ""; // reset before test
+        });
+
+        onView(withId(R.id.declineBtn)).perform(click());
+
+        // Verify Toast text
+        scenario.onActivity(activity -> {
+            String value = activity.toastMsg;
+            assertEquals("Application successfully declined", value);
+        });
+    }
 }
