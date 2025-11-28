@@ -45,11 +45,6 @@ public class EmployerListingsActivity extends AppCompatActivity {
         initUI();
         initListeners();
 
-        // Check if we should show the success message
-        if (getIntent().getBooleanExtra("show_success_message", false)) {
-            Toast.makeText(this, "Role switched successfully", Toast.LENGTH_SHORT).show();
-        }
-
         adapter = new ArrayAdapter<>(this, R.layout.job_postings_item, jobTitles);
         jobsListView.setAdapter(adapter);
 
