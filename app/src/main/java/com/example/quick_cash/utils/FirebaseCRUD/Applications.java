@@ -6,6 +6,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.quick_cash.models.Application;
+import com.example.quick_cash.utils.JobIdMapper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,22 +71,57 @@ public class Applications {
      * @param callback the callback
      */
     public void getApplications(AppsCallback callback) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid;
+        boolean shouldFilter;
+        if (user != null) {
+            uid = user.getUid();
+            shouldFilter = true;
+        } else {
+            uid = "";
+            shouldFilter = false;
+        }
+
         ArrayList<Application> apps = new ArrayList<>();
 
         appsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int totalApps = (int) snapshot.getChildrenCount();
+                Log.i("Total COUNT", String.valueOf(totalApps));
+                final int[] processedCount = {0};
                 for (DataSnapshot appSnap : snapshot.getChildren()) {
+                    String jobId = String.valueOf(appSnap.child("jobId").getValue(String.class));
                     Application app = new Application(
                             String.valueOf(appSnap.child("applicantId").getValue(String.class)),
                             String.valueOf(appSnap.child("coverLtr").getValue(String.class)),
                             String.valueOf(appSnap.child("status").getValue(String.class)),
-                            String.valueOf(appSnap.child("jobId").getValue(String.class)),
+                            jobId,
                             appSnap.getKey()
                     );
-                    apps.add(app);
+                    if (shouldFilter) {
+                        JobIdMapper.getEmployer(jobId, employerId -> {
+                            if (uid.equals(employerId)){
+                                apps.add(app);
+                            }
+
+                            processedCount[0]++;
+
+                            if (processedCount[0] == totalApps) {
+                                Log.i("Processed COUNT", "We in for user uid: "+uid);
+                                callback.onCallback(apps);
+                            }
+                        });
+                    } else {
+                        apps.add(app);
+                        processedCount[0]++;
+                        Log.i("Processed COUNT", String.valueOf(processedCount[0]));
+                        if (processedCount[0] == totalApps) {
+                            Log.i("Processed COUNT", "We in");
+                            callback.onCallback(apps);
+                        }
+                    }
                 }
-                callback.onCallback(apps);
             }
 
             @Override
@@ -91,7 +129,6 @@ public class Applications {
                 // Do nothing
             }
         });
-
     }
 
     /**
