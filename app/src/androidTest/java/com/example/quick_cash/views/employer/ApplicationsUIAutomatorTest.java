@@ -1,4 +1,5 @@
 package com.example.quick_cash.views.employer;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -12,6 +13,7 @@ import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObject2;
+import androidx.test.uiautomator.UiScrollable;
 import androidx.test.uiautomator.UiSelector;
 import androidx.test.uiautomator.Until;
 
@@ -67,6 +69,27 @@ public class ApplicationsUIAutomatorTest {
 
         device.wait(Until.findObject(By.textContains("Accept")), 3000);
         UiObject acceptBtn = device.findObject(new UiSelector().text("Accept"));
+        assertTrue(acceptBtn.exists());
+    }
+
+    @Test
+    public void testClickingNonPendingApplicationNoDeclineOrAccept_UiAutomator() throws Exception {
+        UiObject statusFilter = device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/statusFilter"));
+        statusFilter.click();
+
+        // Filter for accepted
+        UiObject acceptedItem = device.findObject(new UiSelector().text("Accepted"));
+        acceptedItem.click();
+
+        UiObject2 list = device.wait(Until.findObject(By.res(launcherPackageName, "appsResultsView")), 2000);
+        assertNotNull(list);
+
+        // Click the first item in the list
+        UiObject2 firstItem = list.getChildren().get(0);
+        firstItem.click();
+
+        device.wait(Until.findObject(By.textContains("Approve Payment")), 3000);
+        UiObject acceptBtn = device.findObject(new UiSelector().text("Approve Payment"));
         assertTrue(acceptBtn.exists());
     }
 

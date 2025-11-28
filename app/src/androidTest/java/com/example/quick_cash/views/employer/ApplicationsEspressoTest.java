@@ -9,6 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Intent;
@@ -47,36 +48,6 @@ public class ApplicationsEspressoTest {
     @Test
     public void testApplicationsLoad() {
         onView(withId(R.id.appsResultsView)).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void clickingNonPendingApplicationShowsToast() {
-
-        // Launch activity
-        ActivityScenario<ApplicationsActivity> scenario =
-                ActivityScenario.launch(ApplicationsActivity.class);
-
-        scenario.onActivity(activity -> {
-            // Create fake "accepted" application
-            Application app = new Application("user123", "Hello", "accepted", "job123", "A1");
-
-            ArrayList<Application> testList = new ArrayList<>();
-            testList.add(app);
-
-            activity.setDisplayedAppsForTest(testList);
-        });
-
-        // Click the first (and only) list item
-        onData(anything())
-                .inAdapterView(withId(R.id.appsResultsView))
-                .atPosition(0)
-                .perform(click());
-
-        // Verify Toast
-        scenario.onActivity(activity -> {
-            String value = activity.toastMsg;
-            assertEquals("Application already accepted", value);
-        });
     }
 
     @Test
