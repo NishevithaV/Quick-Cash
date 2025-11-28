@@ -100,22 +100,17 @@ public class ApplicationsActivity extends AppCompatActivity {
 
         appsResultsView.setOnItemClickListener((parent, view, position, id) -> {
             Application selectedApp = displayedApps.get(position);
-            if (selectedApp.getStatus().equalsIgnoreCase("pending")) {
-                Intent intent = new Intent(ApplicationsActivity.this, ApplicationReviewActivity.class);
-                UserIdMapper.getName(selectedApp.getApplicantId(), name -> {
-                    intent.putExtra("applicantName", name);
-                });
-                intent.putExtra("letter", selectedApp.getLetter());
-                intent.putExtra("status", selectedApp.getStatus());
-                intent.putExtra("appId", selectedApp.getId());
-                JobIdMapper.getTitle(selectedApp.getJobId(), title -> {
-                    intent.putExtra("jobTitle", title);
-                    startActivity(intent);
-                });
-            } else {
-                toastMsg = "Application already "+selectedApp.getStatus();
-                Toast.makeText(ApplicationsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
-            }
+            Intent intent = new Intent(ApplicationsActivity.this, ApplicationReviewActivity.class);
+            UserIdMapper.getName(selectedApp.getApplicantId(), name -> {
+                intent.putExtra("applicantName", name);
+            });
+            intent.putExtra("letter", selectedApp.getLetter());
+            intent.putExtra("status", selectedApp.getStatus());
+            intent.putExtra("appId", selectedApp.getId());
+            JobIdMapper.getTitle(selectedApp.getJobId(), title -> {
+                intent.putExtra("jobTitle", title);
+                startActivity(intent);
+            });
         });
     }
 

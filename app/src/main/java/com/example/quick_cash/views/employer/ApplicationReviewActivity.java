@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ public class ApplicationReviewActivity extends AppCompatActivity {
     TextView statusAppRev;
     TextView cvrLtrAppRev;
     public String toastMsg;
+
+    private boolean accepted;
 
     private String appId;
     private String letter;
@@ -66,6 +69,16 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         cvrLtrAppRev.setText(letter);
         declineBtn = findViewById(R.id.declineBtn);
         acceptBtn = findViewById(R.id.acceptBtn);
+        if (status.equalsIgnoreCase("accepted")) {
+            statusAppRev.setTextColor(Color.GREEN);
+            accepted = true;
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setText("Approve Payment");
+        } else if (status.equalsIgnoreCase("approved") || status.equalsIgnoreCase("declined")) {
+            statusAppRev.setTextColor(Color.RED);
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setVisibility(View.GONE);
+        }
     }
 
     private void initListeners() {
@@ -74,7 +87,12 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         });
 
         acceptBtn.setOnClickListener(v -> {
-            update("accepted");
+            if (!accepted) {
+                accepted = true;
+                update("accepted");
+            } else {
+                // this is where the intent to approve payment page goes for vaishnavi
+            }
         });
     }
 
@@ -82,8 +100,17 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         this.status = status;
         statusAppRev.setText(status);
 
-        if (status.equalsIgnoreCase("declined")) statusAppRev.setTextColor(Color.RED);
-        else statusAppRev.setTextColor(Color.GREEN);
+        if (status.equalsIgnoreCase("declined")) {
+            statusAppRev.setTextColor(Color.RED);
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setVisibility(View.GONE);
+        } else {
+            statusAppRev.setTextColor(Color.GREEN);
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setText("Approve Payment");
+        }
+
+
 
         appsCRUD.updateStatus(appId, status);
         toastMsg = "Application successfully "+status;
