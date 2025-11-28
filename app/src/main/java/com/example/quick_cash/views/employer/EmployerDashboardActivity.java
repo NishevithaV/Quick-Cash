@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,10 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_employer_dashboard);
         initUI();
+        // Check if we should show the success message
+        if (getIntent().getBooleanExtra("show_success_message", false)) {
+            Toast.makeText(this, "Role switched successfully", Toast.LENGTH_SHORT).show();
+        }
         initListeners();
     }
 
