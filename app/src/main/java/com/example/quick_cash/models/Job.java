@@ -3,6 +3,7 @@ package com.example.quick_cash.models;
 public class Job {
     private String title;
     private String category;
+    private String location;
     private String deadline;
     private String desc;
     private String userID;
@@ -18,17 +19,20 @@ public class Job {
      *
      * @param title    the title
      * @param category the category
+     * @param location the location
      * @param deadline the deadline
      * @param desc     the desc
      * @param userID   the user id
      */
-    public Job(String title, String category, String deadline, String desc, String userID) {
+    public Job(String title, String category, String location, String deadline, String desc, String userID) {
         this.title = title;
         this.category = category;
+        this.location = location;
         this.deadline = deadline;
         this.desc = desc;
         this.userID = userID;
     }
+
 
     /**
      * Gets title.
@@ -82,6 +86,24 @@ public class Job {
      */
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    /**
+     * Gets location.
+     *
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets location.
+     *
+     * @param location the location
+     */
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     /**
