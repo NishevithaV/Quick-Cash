@@ -1,0 +1,48 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+
+        <TextView android:id="@+id/cvrLtrHead"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cover Letter" />
+
+        <EditText android:id="@+id/cvrLtrInput"
+            android:textColor="@color/white"
+            android:layout_marginBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="start"
+            android:hint="Start typing..."
+            android:textColorHint="#5D5D5D"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#0066FF"
+                android:text="Submit"
+                android:textColor="@color/white" />
+        </LinearLayout>>
+    </LinearLayout>
+</ScrollView>
