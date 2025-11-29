@@ -33,7 +33,6 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
     LocationListener locationListener;
     Marker marker;
 
-
     private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     @Override
@@ -67,7 +66,6 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                     String address = addresses.get(0).getLocality()+":";
                     address += addresses.get(0).getCountryName();
-
                     LatLng userLocation = new LatLng(latitude, longitude);
                     if (marker != null){
                         marker.remove();
@@ -89,6 +87,7 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
                 0, 0, locationListener);
     }
 
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -103,4 +102,5 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
 
         mMap = googleMap;
     }
+
 }
