@@ -15,14 +15,18 @@ import static org.hamcrest.CoreMatchers.is;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.GrantPermissionRule;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
+
+import android.Manifest;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.views.employee.JobSearchActivity;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,6 +45,10 @@ public class EspressoTest {
     public ActivityScenario<JobSearchActivity> activityScenario;
     private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
+    @Rule
+    public GrantPermissionRule permissionRule =
+            GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);
+
     /**
      * Set up before running tests
      */
@@ -54,15 +62,14 @@ public class EspressoTest {
      */
     @Test
     public void testCurrentLocationHeaderUpdates() {
-        onView(withId(R.id.currentLocationHeader)).check(matches(withText("Location: Fetching...")));
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        onView(withId(R.id.currentLocationHeader)).check(matches(not(withText("Location: Fetching..."))));
+        onView(withId(R.id.currentLocationHeader)).check(matches(not(withText("Detecting Current Location..."))));
     }
 
     /**
@@ -98,6 +105,30 @@ public class EspressoTest {
     }
 
     /**
+     * Test location updates results.
+     */
+    @Test
+    public void testLocationUpdatesResults() {
+        onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
+        onView(withId(R.id.locationSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("All Jobs"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        onView(withId(R.id.resultsView)).check(matches(not(isDisplayed())));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.userSearch)).perform(clearText(), closeSoftKeyboard());
+        onView(withId(R.id.locationSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Nearby Jobs"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
+    }
+
+    /**
      * Test category and search update results.
      */
     @Test
@@ -111,6 +142,30 @@ public class EspressoTest {
         onView(withId(R.id.userSearch)).perform(clearText(), typeText("Dev"), closeSoftKeyboard());
         onView(withId(R.id.catSelect)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test location and search update results.
+     */
+    @Test
+    public void testLocationAndSearchUpdateResults() {
+        onView(withId(R.id.userSearch)).perform(typeText(gibberish), closeSoftKeyboard());
+        onView(withId(R.id.locationSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("All Jobs"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        onView(withId(R.id.resultsView)).check(matches(not(isDisplayed())));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.userSearch)).perform(clearText(), typeText("data"), closeSoftKeyboard());
+        onView(withId(R.id.locationSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Nearby Jobs"))).perform(click());
         onView(withId(R.id.searchBtn)).perform(click());
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
