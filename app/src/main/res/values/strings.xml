@@ -25,4 +25,6 @@
     <string name="NO_RESULT">No Results. Try a different search</string>
     <string name="RESULT">Results</string>
     <string name="title_activity_current_location">CurrentLocation</string>
+    <string name="ALREADY_APPLIED">Failed: Already Applied</string>
+    <string name="APPLICATION_SUCCESS">Success: Application Submitted</string>
 </resources>

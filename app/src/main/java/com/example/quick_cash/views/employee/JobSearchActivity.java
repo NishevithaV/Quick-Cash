@@ -50,10 +50,18 @@ public class JobSearchActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_job_list);
         initUI();
         jobsCRUD = new Jobs(FirebaseDatabase.getInstance());
-        jobsCRUD.getJobs(callbackJobs -> {
-            jobSearcher = new JobSearchHandler(callbackJobs);
-            loadJobs("", "");
-            initListeners();
+        jobsCRUD.getJobs(new Jobs.JobsCallback() {
+            @Override
+            public void onCallback(ArrayList<Job> callbackJobs) {
+                jobSearcher = new JobSearchHandler(callbackJobs);
+                loadJobs("", "");
+                initListeners();
+            }
+
+            @Override
+            public void onCallback(Job job) {
+                // Do nothing
+            }
         });
         displayedJobs = new ArrayList<>();
     }
