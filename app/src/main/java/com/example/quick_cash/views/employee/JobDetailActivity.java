@@ -1,12 +1,20 @@
 package com.example.quick_cash.views.employee;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.utils.SubmitApplicationHandler;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class JobDetailActivity extends AppCompatActivity {
 
@@ -15,6 +23,8 @@ public class JobDetailActivity extends AppCompatActivity {
     TextView category;
     TextView description;
     Button applyButton;
+    private SubmitApplicationHandler submitHandler;
+    private String jobID;
 
     /**
      * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
@@ -27,13 +37,22 @@ public class JobDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_detail);
+        submitHandler = new SubmitApplicationHandler();
+        jobID = getIntent().getStringExtra("jobID");
         initUI();
         initListeners();
     }
 
     private void initListeners() {
-        applyButton.setOnClickListener(v ->
-                Toast.makeText(this, "Application submitted!", Toast.LENGTH_SHORT).show()
+        applyButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(JobDetailActivity.this, SubmitApplicationActivity.class);
+                   intent.putExtra("jobID", jobID);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+               }
+           }
         );
     }
 
@@ -43,6 +62,17 @@ public class JobDetailActivity extends AppCompatActivity {
         category = findViewById(R.id.jobCategory);
         description = findViewById(R.id.jobDesc);
         applyButton = findViewById(R.id.applyButton);
+
+        // Check if user has already applied to job
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user!=null ? user.getUid() : "testUserID";
+        submitHandler.checkIfHasAlreadyApplied(uid, jobID, new SubmitApplicationHandler.HasAlreadyAppliedCallback() {
+            @Override
+            public void onCallback(boolean applied) {
+                if (!applied) applyButton.setVisibility(VISIBLE);
+                else ((TextView) findViewById(R.id.jobDetailAlreadyApplied)).setText(R.string.ALREADY_APPLIED);
+            }
+        });
 
         title.setText(getIntent().getStringExtra("title"));
         employer.setText(getIntent().getStringExtra("employer"));

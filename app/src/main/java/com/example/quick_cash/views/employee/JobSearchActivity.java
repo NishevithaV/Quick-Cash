@@ -100,6 +100,7 @@ public class JobSearchActivity extends AppCompatActivity {
             intent.putExtra("title", selectedJob.getTitle());
             intent.putExtra("category", selectedJob.getCategory());
             intent.putExtra("description", selectedJob.getDesc());
+            intent.putExtra("jobID", selectedJob.getId());
             UserIdMapper.getName(selectedJob.getUserID(), name -> {
                 intent.putExtra("employer", name);
                 startActivity(intent);

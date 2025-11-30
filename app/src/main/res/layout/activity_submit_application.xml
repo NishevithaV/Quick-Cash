@@ -11,31 +11,23 @@
         android:layout_height="match_parent"
         android:layout_marginTop="50dp">
 
-        <TextView android:id="@+id/jobTitle"
+        <TextView android:id="@+id/cvrLtrHead"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Cover Letter" />
 
-        <TextView android:id="@+id/jobEmployer"
+        <EditText android:id="@+id/cvrLtrInput"
             android:textColor="@color/white"
             android:layout_marginBottom="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/jobCategory"
-            android:layout_marginBottom="12dp"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/jobDesc"
-            android:textColor="@color/white"
-            android:layout_marginBottom="24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="start"
+            android:hint="Start typing..."
+            android:textColorHint="#5D5D5D"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,20 +36,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/applyButton"
+                android:id="@+id/submitLtrBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="#0066FF"
-                android:visibility="gone"
-                android:text="Apply Now"
+                android:text="Submit"
                 android:textColor="@color/white" />
         </LinearLayout>>
-
-        <TextView android:id="@+id/jobDetailAlreadyApplied"
-            android:textColor="@color/white"
-            android:layout_marginBottom="24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

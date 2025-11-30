@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.example.quick_cash.models.Application;
 import com.example.quick_cash.utils.JobIdMapper;
+import com.example.quick_cash.utils.UserIdMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,28 +30,34 @@ public class Applications {
         this.appsRef = database.getReference("job_applications");
     }
 
+    public interface PostAppCallback {
+        public void onSuccess();
+        public void onFailure(String reason);
+    }
+
     /**
      * Post Application boolean.
      *
      * @param app the application
-     * @return the boolean posted or not
+     * @param callback the callback
      */
-    public boolean postApplication(Application app){
+    public void postApplication(Application app, PostAppCallback callback){
 
         String appId = appsRef.push().getKey();
         if (appId == null) {
             Log.e("Firebase", "Failed to generate ApplicationId");
-            return false;
+            callback.onFailure("Failed to generate ApplicationId");
+        } else {
+            appsRef.child(appId).setValue(app)
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d("Firebase", "Application posted successfully!");
+                        callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("Firebase", "Failed to post Application", e);
+                        callback.onFailure("Failed to post Application");
+                    });
         }
-
-        appsRef.child(appId).setValue(app)
-                .addOnSuccessListener(aVoid -> {
-                    Log.d("Firebase", "Application posted successfully!");
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("Firebase", "Failed to post Application", e);
-                });
-        return true;
     }
 
     /**
@@ -100,24 +107,29 @@ public class Applications {
                             appSnap.getKey()
                     );
                     if (shouldFilter) {
-                        JobIdMapper.getEmployer(jobId, employerId -> {
-                            if (uid.equals(employerId)){
-                                apps.add(app);
+                        UserIdMapper.getRole(uid, role -> {
+                            if (role.equalsIgnoreCase("Employer")){
+                                JobIdMapper.getEmployer(jobId, employerId -> {
+                                    if (uid.equals(employerId)){
+                                        apps.add(app);
+                                    }
+                                });
+                            } else {
+                                if (app.getApplicantId().equals(uid)){
+                                    apps.add(app);
+                                }
                             }
-
                             processedCount[0]++;
 
                             if (processedCount[0] == totalApps) {
-                                Log.i("Processed COUNT", "We in for user uid: "+uid);
                                 callback.onCallback(apps);
                             }
                         });
+
                     } else {
                         apps.add(app);
                         processedCount[0]++;
-                        Log.i("Processed COUNT", String.valueOf(processedCount[0]));
                         if (processedCount[0] == totalApps) {
-                            Log.i("Processed COUNT", "We in");
                             callback.onCallback(apps);
                         }
                     }

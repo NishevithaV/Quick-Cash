@@ -42,6 +42,7 @@
         <activity android:name=".views.employer.ApplicationsActivity" />
         <activity android:name=".views.employer.EmployerListingsActivity" />
         <activity android:name=".views.switch_role.ConfirmActivity" />
+        <activity android:name=".views.employee.SubmitApplicationActivity" />
         <activity android:name=".views.employee.JobDetailActivity" />
         <activity android:name=".views.employee.JobSearchActivity" />
         <activity android:name=".views.maps.CurrentLocationActivity" />
