@@ -132,4 +132,26 @@ public class EmployeeApplicationsEspressoTest {
 
     }
 
+    /**
+     * Test update application status to completed.
+     */
+    @Test
+    public void testMarkCompleted() {
+        ArrayList<Application> testApps = new ArrayList<>();
+        testApps.clear();
+        testApps.add(new Application("testUserID", "cover letter", "accepted", "testJobID"));
+        activityScenario.onActivity(activity -> {
+            activity.displayAppsForTest(testApps);
+        });
+
+        onView(isRoot()).perform(waitFor(1000));
+        onView(withId(R.id.recycler_applications)).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.recycler_applications)).atPosition(0)
+                .onChildView(withId(R.id.btn_mark_completed)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.recycler_applications)).atPosition(0)
+                .onChildView(withId(R.id.tv_application_status)).check(matches(withText("completed")));
+        onData(anything()).inAdapterView(withId(R.id.recycler_applications)).atPosition(0)
+                .onChildView(withId(R.id.btn_mark_completed)).check(matches(not(isDisplayed())));
+    }
+
 }
