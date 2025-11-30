@@ -18,10 +18,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 
+import android.content.Intent;
 import android.os.SystemClock;
 import android.view.View;
 
 import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.IdlingPolicies;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.UiController;
@@ -60,9 +62,9 @@ public class EmployeeApplicationsEspressoTest {
     @Before
     public void setup() {
         FirebaseAuth.getInstance().signOut();
-        activityScenario = ActivityScenario.launch(EmployeeApplicationsActivity.class);
-        IdlingPolicies.setMasterPolicyTimeout(10, TimeUnit.SECONDS);
-        IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS);
+        Intent intent = new Intent(ApplicationProvider.getApplicationContext(), EmployeeApplicationsActivity.class);
+        intent.putExtra("isTest", true);
+        activityScenario = ActivityScenario.launch(intent);
     }
 
     /**
@@ -103,11 +105,30 @@ public class EmployeeApplicationsEspressoTest {
 
         onView(isRoot()).perform(waitFor(1000));
         onView(withId(R.id.recycler_applications)).check(matches(isDisplayed()));
-        onData(anything())
-                .inAdapterView(withId(R.id.recycler_applications))
-                .atPosition(0)
-                .onChildView(withId(R.id.tv_job_title))
-                .check(matches(withText("Test Job Title")));
+        onData(anything()).inAdapterView(withId(R.id.recycler_applications)).atPosition(0)
+                .onChildView(withId(R.id.tv_job_title)).check(matches(withText("Test Job Title")));
+
+    }
+
+    /**
+     * Test that applications can only be marked completed if they are accepted.
+     */
+    @Test
+    public void testMarkCompletedPossibleOnlyIfAccepted() {
+        ArrayList<Application> testApps = new ArrayList<>();
+        testApps.clear();
+        testApps.add(new Application("testUserID", "cover letter", "accepted", "testJobID"));
+        testApps.add(new Application("testUserID", "cover letter", "pending", "testJobID"));
+        activityScenario.onActivity(activity -> {
+            activity.displayAppsForTest(testApps);
+        });
+
+        onView(isRoot()).perform(waitFor(1000));
+        onView(withId(R.id.recycler_applications)).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.recycler_applications)).atPosition(0)
+                .onChildView(withId(R.id.btn_mark_completed)).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.recycler_applications)).atPosition(1)
+                .onChildView(withId(R.id.btn_mark_completed)).check(matches(not(isDisplayed())));
 
     }
 
