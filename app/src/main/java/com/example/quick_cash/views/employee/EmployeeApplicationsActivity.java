@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.models.Application;
-import com.example.quick_cash.utils.ApplicationAdapter;
-import com.example.quick_cash.utils.ApplicationsFilterHandler;
 import com.example.quick_cash.utils.EmployeeApplicationAdapter;
 import com.example.quick_cash.utils.FirebaseCRUD.Applications;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +27,7 @@ public class EmployeeApplicationsActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_employee_application_tracking);
         appsCRUD = new Applications(FirebaseDatabase.getInstance());
         initUI();
-        loadApps();
+        if (!getIntent().getBooleanExtra("isTest", false)) loadApps();
     }
 
     private void initUI() {
@@ -52,7 +50,12 @@ public class EmployeeApplicationsActivity extends AppCompatActivity {
                 new EmployeeApplicationAdapter.OnItemActionListener() {
                     @Override
                     public void onMarkCompleted(Application app, int position) {
-
+                        app.setStatus("completed");
+                        apps.set(position, app);
+                        appsCRUD.updateStatus(app.getId(), "completed");
+                        toastMsg = getString(R.string.MARKED_COMPLETED);
+                        Toast.makeText(EmployeeApplicationsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                        displayApps(apps);
                     }
 
                     @Override
@@ -73,7 +76,11 @@ public class EmployeeApplicationsActivity extends AppCompatActivity {
                 new EmployeeApplicationAdapter.OnItemActionListener() {
                     @Override
                     public void onMarkCompleted(Application app, int position) {
-
+                        app.setStatus("completed");
+                        apps.set(position, app);
+                        toastMsg = getString(R.string.MARKED_COMPLETED);
+                        Toast.makeText(EmployeeApplicationsActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                        displayAppsForTest(apps);
                     }
 
                     @Override
