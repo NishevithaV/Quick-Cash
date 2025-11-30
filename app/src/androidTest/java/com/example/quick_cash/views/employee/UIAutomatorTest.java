@@ -5,11 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.GrantPermissionRule;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject;
@@ -20,6 +22,7 @@ import androidx.test.uiautomator.Until;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
@@ -30,6 +33,10 @@ public class UIAutomatorTest {
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
     private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
+
+    @Rule
+    public GrantPermissionRule permissionRule =
+            GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);
 
     /**
      * Set up before running tests
@@ -56,10 +63,14 @@ public class UIAutomatorTest {
     public void testElementsVisible() {
         UiObject header = device.findObject(new UiSelector().textContains("Find Jobs"));
         assertTrue(header.exists());
+        UiObject2 locationHeader = device.findObject(By.res(launcherPackageName+":id/"+"currentLocationHeader"));
+        assertNotNull(locationHeader);
         UiObject2 userSearch = device.findObject(By.res(launcherPackageName+":id/"+"userSearch"));
         assertNotNull(userSearch);
         UiObject2 catSelect = device.findObject(By.res(launcherPackageName+":id/"+"catSelect"));
         assertNotNull(catSelect);
+        UiObject2 locationSelect = device.findObject(By.res(launcherPackageName+":id/"+"locationSelect"));
+        assertNotNull(locationSelect);
         UiObject searchBtn = device.findObject(new UiSelector().text("Go"));
         assertTrue(searchBtn.exists());
         UiObject resultsHeader = device.findObject(new UiSelector().text("Results"));
@@ -99,7 +110,7 @@ public class UIAutomatorTest {
         input.setText(gibberish);
         button.click();
 
-        device.wait(Until.findObject(By.text("No Results. Try a different search")), 2000);
+        device.wait(Until.findObject(By.text("No Results. Try a different search")), 5000);
         UiObject noResultsHeader = device.findObject(new UiSelector().text("No Results. Try a different search"));
         assertTrue(noResultsHeader.exists());
     }

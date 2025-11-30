@@ -158,6 +158,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         Job job = new Job(
                 enteredJobTitle,
                 enteredJobCategory,
+                "test",
                 enteredJobDeadline,
                 enteredJobDescription,
                 userId);

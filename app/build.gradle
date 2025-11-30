@@ -44,6 +44,7 @@ dependencies {
     implementation libs.firebase.auth
     implementation libs.espresso.idling.resource
     implementation libs.play.services.maps
+    implementation libs.play.services.location
     testImplementation libs.junit
     testImplementation libs.mockito.core
 

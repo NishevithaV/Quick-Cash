@@ -45,11 +45,13 @@ public class JobAdapter extends ArrayAdapter<Job> {
         TextView titleText = view.findViewById(R.id.jobTitleText);
         TextView employerText = view.findViewById(R.id.employerText);
         TextView categoryText = view.findViewById(R.id.categoryText);
+        TextView locationText = view.findViewById(R.id.locationText);
 
         if (job != null) {
             titleText.setText(job.getTitle());
             UserIdMapper.getName(job.getUserID(), employerText::setText);
             categoryText.setText(job.getCategory());
+            locationText.setText(job.getLocation());
         }
 
         return view;

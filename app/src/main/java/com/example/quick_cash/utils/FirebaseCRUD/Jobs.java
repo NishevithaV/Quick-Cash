@@ -77,6 +77,7 @@ public class Jobs {
                     Job job = new Job(
                             String.valueOf(jobSnap.child("title").getValue(String.class)),
                             String.valueOf(jobSnap.child("category").getValue(String.class)),
+                            String.valueOf(jobSnap.child("location").getValue(String.class)),
                             String.valueOf(jobSnap.child("deadline").getValue(String.class)),
                             String.valueOf(jobSnap.child("desc").getValue(String.class)),
                             String.valueOf(jobSnap.child("userID").getValue(String.class))
