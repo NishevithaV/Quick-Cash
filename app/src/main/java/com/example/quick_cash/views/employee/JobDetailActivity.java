@@ -44,8 +44,15 @@ public class JobDetailActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        applyButton.setOnClickListener(v ->
-                Toast.makeText(this, "Application submitted!", Toast.LENGTH_SHORT).show()
+        applyButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(JobDetailActivity.this, SubmitApplicationActivity.class);
+                   intent.putExtra("jobID", jobID);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+               }
+           }
         );
     }
 
