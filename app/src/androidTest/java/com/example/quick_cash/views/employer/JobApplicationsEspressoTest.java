@@ -2,7 +2,6 @@ package com.example.quick_cash.views.employer;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -21,8 +20,8 @@ import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.models.Application;
 import com.example.quick_cash.models.Job;
-import com.example.quick_cash.views.employee.EmployeeApplicationsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.hamcrest.Matcher;
@@ -31,9 +30,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class EmployerListingsEspressoTest {
+public class JobApplicationsEspressoTest {
 
-    public ActivityScenario<EmployerListingsActivity> activityScenario;
+    public ActivityScenario<JobApplicationsActivity> activityScenario;
 
     /**
      * Set up before running tests
@@ -41,14 +40,21 @@ public class EmployerListingsEspressoTest {
     @Before
     public void setup() {
         FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(ApplicationProvider.getApplicationContext(), EmployerListingsActivity.class);
-        intent.putExtra("userID", "testUserID");
+        Intent intent = new Intent(
+                ApplicationProvider.getApplicationContext(),
+                JobApplicationsActivity.class
+        );
+
+        intent.putExtra("jobID", "testJobID");
+        intent.putExtra("jobTitle", "Test Job");
         intent.putExtra("isTest", true);
+
         activityScenario = ActivityScenario.launch(intent);
     }
 
     /**
      * Helper function to pause and wait for an amount of time
+     *
      * @param millis time to wait for
      * @return ViewAction
      */
@@ -72,45 +78,37 @@ public class EmployerListingsEspressoTest {
     }
 
     /**
-     * Check if no jobs posted.
+     * Test Applications appear in the list when provided.
      */
-// test just for checking job list features
     @Test
-    public void checkIfNoJobsPosted() {
-        ArrayList<Job> jobs = new ArrayList<>();
+    public void testApplicationsAreVisibleInList() {
+        ArrayList<Application> apps = new ArrayList<>();
+
+        apps.add(new Application(
+                "applicant1",
+                "testJobID",
+                "Test cover letter",
+                "Pending",
+                "app123"
+        ));
+        apps.add(new Application(
+                "applicant2",
+                "testJobID",
+                "Another letter",
+                "Accepted",
+                "app456"
+        ));
+
         activityScenario.onActivity(activity -> {
-           activity.setDisplayedJobsForTest(jobs);
+            activity.setDisplayedAppsForTest(apps);
         });
 
         onView(isRoot()).perform(waitFor(1000));
-        onView(withId(R.id.dashboardTitle)).check(matches(withText("Your Posted Jobs")));
+        onView(withId(R.id.appsResultsView)).check(matches(isDisplayed()));
 
-        onData(is("No jobs posted yet.")).inAdapterView(withId(R.id.jobListView))
+        onData(anything()).inAdapterView(withId(R.id.appsResultsView)).atPosition(0)
                 .check(matches(isDisplayed()));
-    }
-
-    /**
-     * Test that once a job is clicked the employer can see all applications for it.
-     */
-    @Test
-    public void testClickJobOpensApplications() {
-        ArrayList<Job> jobs = new ArrayList<>();
-        jobs.add(new Job("Test Title",
-                "Test Category",
-                "2025-12-25",
-                "Test job description",
-                "testUserID",
-                "testJobID1"));
-        activityScenario.onActivity(activity -> {
-            activity.setDisplayedJobsForTest(jobs);
-        });
-
-        onView(isRoot()).perform(waitFor(1000));
-        onView(withId(R.id.jobListView)).check(matches(isDisplayed()));
-        onData(anything()).inAdapterView(withId(R.id.jobListView)).atPosition(0)
-                .check(matches(withText("Test Title")));
-        onData(anything()).inAdapterView(withId(R.id.jobListView)).atPosition(0).perform(click());
-        onView(isRoot()).perform(waitFor(1000));
-        onView(withId(R.id.viewAppsHeading)).check(matches(withText("Test Title Applications")));
+        onData(anything()).inAdapterView(withId(R.id.appsResultsView)).atPosition(1)
+                .check(matches(isDisplayed()));
     }
 }
