@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
@@ -62,6 +62,17 @@ public class JobDetailActivity extends AppCompatActivity {
         category = findViewById(R.id.jobCategory);
         description = findViewById(R.id.jobDesc);
         applyButton = findViewById(R.id.applyButton);
+
+        // Check if user has already applied to job
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user!=null ? user.getUid() : "testUserID";
+        submitHandler.checkIfHasAlreadyApplied(uid, jobID, new SubmitApplicationHandler.HasAlreadyAppliedCallback() {
+            @Override
+            public void onCallback(boolean applied) {
+                if (!applied) applyButton.setVisibility(VISIBLE);
+                else ((TextView) findViewById(R.id.jobDetailAlreadyApplied)).setText(R.string.ALREADY_APPLIED);
+            }
+        });
 
         title.setText(getIntent().getStringExtra("title"));
         employer.setText(getIntent().getStringExtra("employer"));

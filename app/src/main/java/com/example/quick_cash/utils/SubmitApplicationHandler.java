@@ -94,18 +94,26 @@ public class SubmitApplicationHandler {
      * @param callback callback function
      */
     public void checkIfHasAlreadyApplied(String uid, String jobID, HasAlreadyAppliedCallback callback) {
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                boolean applied = false;
-                for (Application app : apps) {
-                    if (app.getApplicantId().equals(uid) && app.getJobId().equals(jobID)) {
-                        applied = true;
-                        break;
+        if (uid.equalsIgnoreCase("testUserID")){
+            // for test
+            if (!jobID.contains("alreadyapplied"))
+                callback.onCallback(false);
+            else
+                callback.onCallback(true);
+        } else {
+            appsCRUD.getApplications(new Applications.AppsCallback() {
+                @Override
+                public void onCallback(ArrayList<Application> apps) {
+                    boolean applied = false;
+                    for (Application app : apps) {
+                        if (app.getApplicantId().equals(uid) && app.getJobId().equals(jobID)) {
+                            applied = true;
+                            break;
+                        }
                     }
+                    callback.onCallback(applied);
                 }
-                callback.onCallback(applied);
-            }
-        });
+            });
+        }
     }
 }

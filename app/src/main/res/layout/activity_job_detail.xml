@@ -49,11 +49,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="#0066FF"
+                android:visibility="gone"
                 android:text="Apply Now"
                 android:textColor="@color/white" />
         </LinearLayout>>
 
-        <TextView android:id="@+id/jobDetailStatus"
+        <TextView android:id="@+id/jobDetailAlreadyApplied"
             android:textColor="@color/white"
             android:layout_marginBottom="24dp"
             android:layout_width="wrap_content"
