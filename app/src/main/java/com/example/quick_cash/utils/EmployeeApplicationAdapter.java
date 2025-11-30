@@ -83,11 +83,14 @@ public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
 
         if (status.equals("accepted")) {
             holder.status.setTextColor(0xFF00FF00);
+            holder.markCompleted.setVisibility(VISIBLE);
         }
         else if (status.equals("declined")) {
+            holder.markCompleted.setVisibility(GONE);
             holder.status.setTextColor(0xFFFF4444);
         }
         else {
+            holder.markCompleted.setVisibility(GONE);
             holder.status.setTextColor(0xFFFFFFFF);
         }
 
