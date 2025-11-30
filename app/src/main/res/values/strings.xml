@@ -33,4 +33,5 @@
         <item>Declined</item>
         <item>Approved</item>
     </string-array>
+    <string name="MARKED_COMPLETED">Marked as completed</string>
 </resources>
