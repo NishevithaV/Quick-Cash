@@ -6,6 +6,7 @@ public class Job {
     private String deadline;
     private String desc;
     private String userID;
+    private String id;
 
     /**
      * Instantiates a new Job.
@@ -28,6 +29,26 @@ public class Job {
         this.deadline = deadline;
         this.desc = desc;
         this.userID = userID;
+        this.id = "";
+    }
+
+    /**
+     * Instantiates a new Job.
+     *
+     * @param title    the title
+     * @param category the category
+     * @param deadline the deadline
+     * @param desc     the desc
+     * @param userID   the user id
+     * @param id       the job id
+     */
+    public Job(String title, String category, String deadline, String desc, String userID, String id) {
+        this.title = title;
+        this.category = category;
+        this.deadline = deadline;
+        this.desc = desc;
+        this.userID = userID;
+        this.id = id;
     }
 
     /**
@@ -120,4 +141,11 @@ public class Job {
         this.userID = userID;
     }
 
+    /**
+     * Get Job Id
+     * @return the job id
+     */
+    public String getId() {
+        return id;
+    }
 }

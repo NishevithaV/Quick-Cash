@@ -42,7 +42,6 @@ public class Application {
         this.letter = letter;
         this.status = "pending";
         this.jobId = jobId;
-        this.id = "";
     }
 
     /**

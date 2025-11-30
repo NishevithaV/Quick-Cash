@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class SubmitApplicationActivity extends AppCompatActivity {
     Button submitBtn;
     EditText cvrLtrInput;
+    public String lastToastMessage;
     private String jobID;
     SubmitApplicationHandler submitHandler;
     @Override
@@ -40,6 +41,24 @@ public class SubmitApplicationActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user!=null ? user.getUid() : "testUserID";
+                // this is where the submit happens so before this we need to check that cvrLtrInput is not empty with an if else statement
+                // make a toast saying cover letter cant be empty or smth if it is empty
+                submitHandler.submitApp(uid, jobID, cvrLtrInput.getText().toString(), new SubmitApplicationHandler.SubmitCallback() {
+                    @Override
+                    public void onCallback(String msg) {
+                        if (msg.equals(SubmitApplicationHandler.APPLICATION_SUCCESS)) {
+                            submitBtn.setVisibility(GONE);
+                            lastToastMessage = getString(R.string.APPLICATION_SUCCESS);
+                            Toast.makeText(SubmitApplicationActivity.this, lastToastMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 }

@@ -51,16 +51,9 @@ public class SubmitApplicationHandler {
                 callback.onCallback(ALREADY_APPLIED);
         } else {
             // for real
-            appsCRUD.getApplications(new Applications.AppsCallback() {
+            checkIfHasAlreadyApplied(uid, jobID, new HasAlreadyAppliedCallback() {
                 @Override
-                public void onCallback(ArrayList<Application> apps) {
-                    boolean applied = false;
-                    for (Application app : apps) {
-                        if (app.getApplicantId().equals(uid) && app.getJobId().equals(jobID)) {
-                            applied = true;
-                            break;
-                        }
-                    }
+                public void onCallback(boolean applied) {
                     if (!applied) {
                         Application app = new Application(uid, letter, jobID);
                         appsCRUD.postApplication(app, new Applications.PostAppCallback() {
@@ -81,5 +74,38 @@ public class SubmitApplicationHandler {
             });
         }
 
+    }
+
+    /**
+     * Has already applied callback interface
+     */
+    public interface HasAlreadyAppliedCallback {
+        /**
+         * Callback function
+         * @param applied callback boolean
+         */
+        public void onCallback(boolean applied);
+    }
+
+    /**
+     * Checks if user has already applied to job
+     * @param uid user id
+     * @param jobID job id
+     * @param callback callback function
+     */
+    public void checkIfHasAlreadyApplied(String uid, String jobID, HasAlreadyAppliedCallback callback) {
+        appsCRUD.getApplications(new Applications.AppsCallback() {
+            @Override
+            public void onCallback(ArrayList<Application> apps) {
+                boolean applied = false;
+                for (Application app : apps) {
+                    if (app.getApplicantId().equals(uid) && app.getJobId().equals(jobID)) {
+                        applied = true;
+                        break;
+                    }
+                }
+                callback.onCallback(applied);
+            }
+        });
     }
 }

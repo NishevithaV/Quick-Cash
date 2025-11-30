@@ -86,7 +86,8 @@ public class Jobs {
                         String.valueOf(snapshot.child("category").getValue(String.class)),
                         String.valueOf(snapshot.child("deadline").getValue(String.class)),
                         String.valueOf(snapshot.child("desc").getValue(String.class)),
-                        String.valueOf(snapshot.child("userID").getValue(String.class))
+                        String.valueOf(snapshot.child("userID").getValue(String.class)),
+                        snapshot.getKey()
                 );
                 callback.onCallback(jobArr[0]);
             }
@@ -116,7 +117,8 @@ public class Jobs {
                             String.valueOf(jobSnap.child("category").getValue(String.class)),
                             String.valueOf(jobSnap.child("deadline").getValue(String.class)),
                             String.valueOf(jobSnap.child("desc").getValue(String.class)),
-                            String.valueOf(jobSnap.child("userID").getValue(String.class))
+                            String.valueOf(jobSnap.child("userID").getValue(String.class)),
+                            jobSnap.getKey()
                     );
                     jobs.add(job);
                 }
