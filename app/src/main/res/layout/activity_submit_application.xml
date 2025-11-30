@@ -36,7 +36,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/submitBtn"
+                android:id="@+id/submitLtrBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

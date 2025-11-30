@@ -1,12 +1,20 @@
 package com.example.quick_cash.views.employee;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.utils.SubmitApplicationHandler;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class JobDetailActivity extends AppCompatActivity {
 
@@ -15,6 +23,8 @@ public class JobDetailActivity extends AppCompatActivity {
     TextView category;
     TextView description;
     Button applyButton;
+    private SubmitApplicationHandler submitHandler;
+    private String jobID;
 
     /**
      * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
@@ -27,6 +37,8 @@ public class JobDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_detail);
+        submitHandler = new SubmitApplicationHandler();
+        jobID = getIntent().getStringExtra("jobID");
         initUI();
         initListeners();
     }
