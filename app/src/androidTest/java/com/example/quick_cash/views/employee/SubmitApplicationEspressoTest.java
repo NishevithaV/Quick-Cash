@@ -63,5 +63,15 @@ public class SubmitApplicationEspressoTest {
             assertEquals("Application Submitted", activity.lastToastMessage);
         });
     }
+
+    @Test
+    public void testEmptySubmissionToast() {
+        onView(withId(R.id.cvrLtrInput)).perform(clearText(), typeText(" "), closeSoftKeyboard());
+        onView(withId(R.id.submitLtrBtn)).perform(click());
+
+        scenario.onActivity(activity -> {
+            assertEquals("Cover letter empty", activity.lastToastMessage);
+        });
+    }
 }
 
