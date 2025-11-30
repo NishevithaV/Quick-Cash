@@ -20,14 +20,26 @@ public class SubmitApplicationJUnitTest {
     public void setUp() {
         uID = "testUserID";
         jobID = "testJobID";
-        jobID2 = "testJobIDAlreadyApplied";
+        jobID2 = "testJobIDalreadyapplied";
         Users mockUsers = Mockito.mock(Users.class);
         Applications mockApps = Mockito.mock(Applications.class);
         appHandler = new SubmitApplicationHandler(mockUsers, mockApps);
     }
 
     @Test
-    public void testSaveApplication() {
+    public void testSaveApplicationSuccess() {
+        final String[] result = new String[1];
+        appHandler.submitApp(uID, jobID, "My cover letter", new SubmitApplicationHandler.SubmitCallback() {
+            @Override
+            public void onCallback(String msg) {
+                result[0] = msg;
+            }
+        });
+        assertEquals(SubmitApplicationHandler.APPLICATION_SUCCESS, result[0]); // AT-5: should be marked as applied
+    }
+
+    @Test
+    public void testSaveApplicationAlreadyApplied() {
         final String[] result = new String[1];
         appHandler.submitApp(uID, jobID2, "My cover letter", new SubmitApplicationHandler.SubmitCallback() {
             @Override
@@ -35,6 +47,6 @@ public class SubmitApplicationJUnitTest {
                 result[0] = msg;
             }
         });
-        assertEquals(SubmitApplicationHandler.APPLICATION_SUCCESS, result[0]); // AT-5: should be marked as applied
+        assertEquals(SubmitApplicationHandler.ALREADY_APPLIED, result[0]); // AT-5: should be marked as applied
     }
 }
