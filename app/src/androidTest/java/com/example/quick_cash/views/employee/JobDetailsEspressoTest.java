@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -44,6 +47,12 @@ public class JobDetailsEspressoTest {
         onView(withId(R.id.jobCategory)).check(matches(isDisplayed()));
         onView(withId(R.id.jobDesc)).check(matches(isDisplayed()));
         onView(withId(R.id.applyButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void applyButtonClick_opensSubmitActivity() {
+        onView(withId(R.id.applyButton)).perform(click());
+        onView(withId(R.id.cvrLtrHead)).check(matches(isDisplayed()));
     }
 }
 

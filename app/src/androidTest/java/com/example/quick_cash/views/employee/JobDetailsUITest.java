@@ -1,5 +1,6 @@
 package com.example.quick_cash.views.employee;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
@@ -8,8 +9,11 @@ import android.content.Intent;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.UiSelector;
+import androidx.test.uiautomator.Until;
 
 import com.example.quick_cash.views.employee.JobDetailActivity;
 
@@ -45,4 +49,11 @@ public class JobDetailsUITest {
         assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobDesc")).exists());
     }
 
+    @Test
+    public void testApplyButtonOpensSubmission() {
+        UiObject2 applyButton = device.wait(Until.findObject(By.res("com.example.quick_cash", "applyButton")), 5000);
+        applyButton.click();
+        UiObject2 heading = device.wait(Until.findObject(By.res("com.example.quick_cash", "cvrLtrHead")), 5000);
+        assertNotNull(heading);
+    }
 }
