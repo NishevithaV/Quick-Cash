@@ -74,8 +74,11 @@ public class ApplicationReviewActivity extends AppCompatActivity {
             accepted = true;
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setText("Approve Payment");
-        } else if (status.equalsIgnoreCase("approved") || status.equalsIgnoreCase("declined")) {
+        } else if (status.equalsIgnoreCase("declined")) {
             statusAppRev.setTextColor(Color.RED);
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setVisibility(View.GONE);
+        } else if (!status.equalsIgnoreCase("pending")) {
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
         }
@@ -104,13 +107,14 @@ public class ApplicationReviewActivity extends AppCompatActivity {
             statusAppRev.setTextColor(Color.RED);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
-        } else {
+        } else if (status.equalsIgnoreCase("accepted")) {
             statusAppRev.setTextColor(Color.GREEN);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setText("Approve Payment");
+        } else if (!status.equalsIgnoreCase("pending")) {
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setVisibility(View.GONE);
         }
-
-
 
         appsCRUD.updateStatus(appId, status);
         toastMsg = "Application successfully "+status;

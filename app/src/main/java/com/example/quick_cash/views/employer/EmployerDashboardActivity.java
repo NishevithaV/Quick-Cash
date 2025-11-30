@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.views.settings.SettingsActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class EmployerDashboardActivity extends AppCompatActivity {
 
@@ -35,6 +36,10 @@ public class EmployerDashboardActivity extends AppCompatActivity {
     private void initListeners() {
         btnViewListings.setOnClickListener(v -> {
             Intent intent = new Intent(EmployerDashboardActivity.this, EmployerListingsActivity.class);
+            String uid = FirebaseAuth.getInstance().getCurrentUser() != null
+                    ? FirebaseAuth.getInstance().getCurrentUser().getUid()
+                    : "testUserID";
+            intent.putExtra("userID", uid);
             startActivity(intent);
         });
 

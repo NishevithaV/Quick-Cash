@@ -11,6 +11,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.models.Application;
+import com.example.quick_cash.models.Job;
+import com.example.quick_cash.utils.FirebaseCRUD.Jobs;
+import com.example.quick_cash.utils.UserIdMapper;
+import com.example.quick_cash.views.employee.JobDetailActivity;
+import com.example.quick_cash.views.employee.JobSearchActivity;
 import com.example.quick_cash.views.settings.SettingsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,8 +32,10 @@ public class EmployerListingsActivity extends AppCompatActivity {
     private Button settingsPageButton;
     private Button postJobButton;
     private ListView jobsListView;
+    private Jobs jobsCRUD;
     private ArrayAdapter<String> adapter;
     private List<String> jobTitles = new ArrayList<>();
+    private List<Job> displayedJobs = new ArrayList<>();
 
     /**
      * Overriden onCreate function to start activity, initialize UI, properties, and set listeners
@@ -41,14 +49,14 @@ public class EmployerListingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer_listings);
         String userID = getIntent().getStringExtra("userID");
-
+        jobsCRUD = new Jobs(FirebaseDatabase.getInstance());
         initUI();
         initListeners();
 
         adapter = new ArrayAdapter<>(this, R.layout.job_postings_item, jobTitles);
         jobsListView.setAdapter(adapter);
 
-        loadJobsForUser(userID);
+        if (!getIntent().getBooleanExtra("isTest", false)) loadJobsForUser(userID);
     }
 
     private void initListeners() {
@@ -58,6 +66,14 @@ public class EmployerListingsActivity extends AppCompatActivity {
         });
         settingsPageButton.setOnClickListener(v -> {
             Intent intent = new Intent(EmployerListingsActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+        jobsListView.setOnItemClickListener((parent, view, position, id) -> {
+            Job selectedJob = displayedJobs.get(position);
+
+            Intent intent = new Intent(EmployerListingsActivity.this, JobApplicationsActivity.class);
+            intent.putExtra("jobID", selectedJob.getId());
+            intent.putExtra("jobTitle", selectedJob.getTitle());
             startActivity(intent);
         });
     }
@@ -74,34 +90,47 @@ public class EmployerListingsActivity extends AppCompatActivity {
      * @param userID the user id
      */
     public void loadJobsForUser(String userID) {
-        DatabaseReference dbRef = FirebaseDatabase.getInstance()
-                .getReference("job_listings");
+        jobsCRUD.getJobsForUser(userID, new Jobs.JobsCallback() {
+            @Override
+            public void onCallback(ArrayList<Job> jobs) {
+                jobTitles.clear();
+                displayedJobs.clear();
 
-        dbRef.orderByChild("userID").equalTo(userID)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        jobTitles.clear();
-
-                        for (DataSnapshot jobSnap : snapshot.getChildren()) {
-                            String title = jobSnap.child("title").getValue(String.class);
-                            if (title != null && !title.isEmpty()) jobTitles.add(title);
-                        }
-
-                        if (jobTitles.isEmpty()) {
-                            jobTitles.add("No jobs posted yet.");
-                        }
-
-                        adapter.notifyDataSetChanged();
-
-
+                for (Job j : jobs) {
+                    String title = j.getTitle();
+                    if (title != null && !title.isEmpty()) {
+                        jobTitles.add(title);
+                        displayedJobs.add(j);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(EmployerListingsActivity.this,
-                                "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if (jobTitles.isEmpty()) {
+                    jobTitles.add("No jobs posted yet.");
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCallback(Job job) {
+                // Do nothing
+            }
+        });
+    }
+
+    public void setDisplayedJobsForTest(ArrayList<Job> jobs) {
+        displayedJobs.clear();
+        displayedJobs.addAll(jobs);
+        jobTitles.clear();
+        for (Job j : jobs) {
+            String title = j.getTitle();
+            if (title != null && !title.isEmpty()) {
+                jobTitles.add(title);
+            }
+        }
+        if (jobTitles.isEmpty()) {
+            jobTitles.add("No jobs posted yet.");
+        }
+        adapter.notifyDataSetChanged();
     }
 }
