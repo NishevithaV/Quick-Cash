@@ -1,12 +1,14 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
     namespace 'com.example.quick_cash'
     compileSdk 36
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "com.example.quick_cash"
@@ -28,9 +30,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
@@ -43,10 +42,9 @@ dependencies {
     implementation libs.uiautomator
     implementation libs.firebase.auth
     implementation libs.espresso.idling.resource
-    implementation libs.play.services.maps
     testImplementation libs.junit
     testImplementation libs.mockito.core
-
+    implementation(libs.maps)
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.espresso.intents
