@@ -84,6 +84,7 @@ public class Jobs {
                 jobArr[0] = new Job(
                         String.valueOf(snapshot.child("title").getValue(String.class)),
                         String.valueOf(snapshot.child("category").getValue(String.class)),
+                        String.valueOf(snapshot.child("location").getValue(String.class)),
                         String.valueOf(snapshot.child("deadline").getValue(String.class)),
                         String.valueOf(snapshot.child("desc").getValue(String.class)),
                         String.valueOf(snapshot.child("userID").getValue(String.class)),

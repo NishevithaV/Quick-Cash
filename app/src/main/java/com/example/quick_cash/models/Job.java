@@ -45,9 +45,10 @@ public class Job {
      * @param userID   the user id
      * @param id       the job id
      */
-    public Job(String title, String category, String deadline, String desc, String userID, String id) {
+    public Job(String title, String category, String location, String deadline, String desc, String userID, String id) {
         this.title = title;
         this.category = category;
+        this.location = location;
         this.deadline = deadline;
         this.desc = desc;
         this.userID = userID;
