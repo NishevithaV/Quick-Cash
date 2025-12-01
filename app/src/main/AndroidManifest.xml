@@ -23,7 +23,7 @@
             android:value="AIzaSyCQ4JImMbrCWQ755h2vhVOLBfKzL_mCfrY" />
 
         <activity
-            android:name=".views.registration.RegistrationActivity"
+            android:name=".views.employee.EmployeeApplicationTrackingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,8 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".views.registration.RegistrationActivity"/>
         <activity android:name=".views.settings.SettingsActivity" />
-        <activity android:name=".views.employee.EmployeeDashboardActivity" />
+
         <activity android:name=".views.reset_password.ResetPasswordActivity" />
         <activity android:name=".views.reset_password.ResetPasswordFormActivity" />
         <activity android:name=".views.login.LoginActivity" />
