@@ -27,4 +27,6 @@
     <string name="title_activity_current_location">CurrentLocation</string>
     <string name="ALREADY_APPLIED">Already Applied</string>
     <string name="APPLICATION_SUCCESS">Application Submitted</string>
+    <string name="APPLICATION_FAILURE">Cover letter empty</string>
+
 </resources>
