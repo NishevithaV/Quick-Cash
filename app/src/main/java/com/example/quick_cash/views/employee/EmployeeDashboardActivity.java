@@ -40,6 +40,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         }
     }
 
+
     private void initListeners() {
         // Navigate to Find Jobs screen
         btnFindJobs.setOnClickListener(v -> {
