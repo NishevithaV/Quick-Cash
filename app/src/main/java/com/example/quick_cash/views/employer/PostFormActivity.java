@@ -1,6 +1,8 @@
 package com.example.quick_cash.views.employer;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -22,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
     Jobs jobsCRUD;
     JobPostingValidator validator;
     EditText jobName;
+    EditText jobLocation;
 
     Spinner jobCategorySpinner;
     EditText applicationDeadline;
@@ -97,6 +101,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
      */
     protected void initUIElements() {
         jobName = findViewById(R.id.JobTitleField);
+        jobLocation = findViewById(R.id.JobLocationField);
         jobCategorySpinner = findViewById(R.id.JobCategorySpinner);
         applicationDeadline = findViewById(R.id.ApplicationDeadlineField);
         jobDescription = findViewById(R.id.JobDescriptionField);
@@ -116,6 +121,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         String userId = getCurrentUserID();
         String enteredJobTitle = jobName.getText().toString().trim();
         String enteredJobCategory = jobCategorySpinner.getSelectedItem().toString();
+        String enteredJobLocation = jobLocation.getText().toString().trim();
         String enteredJobDeadline = applicationDeadline.getText().toString().trim();
         String enteredJobDescription = jobDescription.getText().toString().trim();
 
@@ -129,6 +135,13 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
 
         if (!validator.checkValidJobCategory(enteredJobCategory)) {
             errorMessage = getResources().getString(R.string.INVALID_JOB_CATEGORY);
+            result.setText(errorMessage);
+            showToast(errorMessage);
+            return;
+        }
+
+        if (validator.checkEmptyJobLocation(enteredJobLocation)) {
+            errorMessage = getResources().getString(R.string.EMPTY_LOCATION);
             result.setText(errorMessage);
             showToast(errorMessage);
             return;
@@ -155,25 +168,49 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        Job job = new Job(
-                enteredJobTitle,
-                enteredJobCategory,
-                "test",
-                enteredJobDeadline,
-                enteredJobDescription,
-                userId);
+        // Geocode the location to get coordinates
+        Geocoder geocoder = new Geocoder(this);
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(enteredJobLocation, 1);
+            if (addresses == null || addresses.isEmpty()) {
+                errorMessage = getResources().getString(R.string.INVALID_LOCATION);
+                result.setText(errorMessage);
+                showToast(errorMessage);
+                return;
+            }
 
-        boolean postedSuccessfully = jobsCRUD.postJob(job);
+            Address address = addresses.get(0);
+            double latitude = address.getLatitude();
+            double longitude = address.getLongitude();
 
-        if (!postedSuccessfully) {
-            showToast("Job posting failed");
+            Job job = new Job(
+                    enteredJobTitle,
+                    enteredJobCategory,
+                    enteredJobLocation,
+                    enteredJobDeadline,
+                    enteredJobDescription,
+                    userId,
+                    latitude,
+                    longitude);
+
+            boolean postedSuccessfully = jobsCRUD.postJob(job);
+
+            if (!postedSuccessfully) {
+                showToast("Job posting failed");
+                result.setText(getResources().getString(R.string.EMPTY_STRING));
+                return;
+            }
+
+            showToast("Job posted successfully");
             result.setText(getResources().getString(R.string.EMPTY_STRING));
-            return;
-        };
+            move2EmployerDashboard(job);
 
-        showToast("Job posted successfully");
-        result.setText(getResources().getString(R.string.EMPTY_STRING));
-        move2EmployerDashboard(job);
+        } catch (IOException e) {
+            errorMessage = getResources().getString(R.string.INVALID_LOCATION);
+            result.setText(errorMessage);
+            showToast(errorMessage);
+            e.printStackTrace();
+        }
     }
 
     /**
