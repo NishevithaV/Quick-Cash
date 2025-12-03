@@ -187,4 +187,110 @@ public class UIAutomatorTest {
         // Wait for toast to appear (toast message should show)
         device.wait(Until.hasObject(By.text("Unable to find location. Please try a different address.")), 3000);
     }
+
+    /**
+     * AT-3: Test View on Map button is visible after location search.
+     */
+    @Test
+    public void testViewOnMapButtonVisibleAfterLocationSearch() throws UiObjectNotFoundException {
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        locationSearchField.setText("Halifax");
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        radiusSelect.click();
+        device.wait(Until.hasObject(By.text("10 km")), 2000);
+        UiObject2 radius = device.findObject(By.text("10 km"));
+        radius.click();
+        
+        UiObject2 searchBtn = device.findObject(By.res(launcherPackageName, "searchBtn"));
+        searchBtn.click();
+        
+        // Wait for results
+        device.wait(Until.hasObject(By.res(launcherPackageName, "viewOnMapBtn")), 5000);
+        UiObject2 viewOnMapBtn = device.findObject(By.res(launcherPackageName, "viewOnMapBtn"));
+        assertNotNull(viewOnMapBtn);
+        assertTrue(viewOnMapBtn.isEnabled());
+    }
+
+    /**
+     * AT-3: Test clicking View on Map button opens MapViewActivity.
+     */
+    @Test
+    public void testClickViewOnMapOpensMapActivity() throws UiObjectNotFoundException {
+        // Perform location search
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        locationSearchField.setText("Halifax");
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        radiusSelect.click();
+        device.wait(Until.hasObject(By.text("25 km")), 2000);
+        UiObject2 radius = device.findObject(By.text("25 km"));
+        radius.click();
+        
+        UiObject2 searchBtn = device.findObject(By.res(launcherPackageName, "searchBtn"));
+        searchBtn.click();
+        
+        // Wait for View on Map button
+        device.wait(Until.hasObject(By.res(launcherPackageName, "viewOnMapBtn")), 5000);
+        UiObject2 viewOnMapBtn = device.findObject(By.res(launcherPackageName, "viewOnMapBtn"));
+        viewOnMapBtn.click();
+        
+        // Wait for MapViewActivity to load
+        device.wait(Until.hasObject(By.res(launcherPackageName, "map")), 5000);
+        UiObject2 mapView = device.findObject(By.res(launcherPackageName, "map"));
+        assertNotNull(mapView);
+    }
+
+    /**
+     * AT-3: Test View on Map displays Google Maps.
+     */
+    @Test
+    public void testViewOnMapDisplaysGoogleMaps() {
+        // Perform location search with results
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        locationSearchField.setText("Halifax, NS");
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        radiusSelect.click();
+        device.wait(Until.hasObject(By.text("50 km")), 2000);
+        UiObject2 radius = device.findObject(By.text("50 km"));
+        radius.click();
+        
+        UiObject2 searchBtn = device.findObject(By.res(launcherPackageName, "searchBtn"));
+        searchBtn.click();
+        
+        // Wait and click View on Map
+        device.wait(Until.hasObject(By.res(launcherPackageName, "viewOnMapBtn")), 5000);
+        UiObject2 viewOnMapBtn = device.findObject(By.res(launcherPackageName, "viewOnMapBtn"));
+        viewOnMapBtn.click();
+        
+        // Wait for map to load
+        device.wait(Until.hasObject(By.res(launcherPackageName, "map")), 5000);
+        
+        // Verify map fragment exists
+        UiObject2 mapFragment = device.findObject(By.res(launcherPackageName, "map"));
+        assertNotNull(mapFragment);
+    }
+
+    /**
+     * AT-3: Test View on Map with no results shows message.
+     */
+    @Test
+    public void testViewOnMapWithNoResultsShowsMessage() {
+        // Search in a location with no jobs (middle of ocean)
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        locationSearchField.setText("Atlantic Ocean");
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        radiusSelect.click();
+        device.wait(Until.hasObject(By.text("5 km")), 2000);
+        UiObject2 radius = device.findObject(By.text("5 km"));
+        radius.click();
+        
+        UiObject2 searchBtn = device.findObject(By.res(launcherPackageName, "searchBtn"));
+        searchBtn.click();
+        
+        // Wait for results - should show no results
+        device.wait(Until.hasObject(By.text("No Results. Try a different search")), 5000);
+    }
 }

@@ -262,6 +262,100 @@ public class EspressoTest {
         onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * AT-3: Test View on Map button exists.
+     */
+    @Test
+    public void testViewOnMapButtonExists() {
+        onView(withId(R.id.viewOnMapBtn)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test View on Map button appears after location search.
+     */
+    @Test
+    public void testViewOnMapButtonAppearsAfterLocationSearch() {
+        // Perform location search
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax, NS"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("10 km"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // View on Map button should now be visible
+        onView(withId(R.id.viewOnMapBtn)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test clicking View on Map button with jobs.
+     */
+    @Test
+    public void testClickViewOnMapButtonWithJobs() {
+        // Perform location search to get jobs
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("50 km"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Click View on Map button
+        onView(withId(R.id.viewOnMapBtn)).perform(click());
+        
+        // Wait for MapView to load
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // MapView should be displayed (check for map container)
+        onView(withId(R.id.map)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test View on Map shows correct activity.
+     */
+    @Test
+    public void testViewOnMapOpensMapActivity() {
+        // Perform location search
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("25 km"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Click View on Map
+        onView(withId(R.id.viewOnMapBtn)).perform(click());
+        
+        // Wait for activity transition
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Should see the map fragment
+        onView(withId(R.id.map)).check(matches(isDisplayed()));
+    }
+
 
 
 
