@@ -1,6 +1,8 @@
 package com.example.quick_cash.models;
 
-public class Job {
+import java.io.Serializable;
+
+public class Job implements Serializable {
     private String title;
     private String category;
     private String location;

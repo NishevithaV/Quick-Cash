@@ -27,6 +27,7 @@ import com.example.quick_cash.utils.JobAdapter;
 import com.example.quick_cash.utils.JobSearchHandler;
 import com.example.quick_cash.utils.LocationHandler;
 import com.example.quick_cash.utils.UserIdMapper;
+import com.example.quick_cash.views.maps.MapViewActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +44,7 @@ public class JobSearchActivity extends AppCompatActivity {
     TextView currentLocationHeader;
     ListView resultsView;
     Button searchBtn;
+    Button viewOnMapBtn;
     Spinner categorySelector;
     Spinner locationSelector;
     Spinner radiusSelector;
@@ -91,6 +93,7 @@ public class JobSearchActivity extends AppCompatActivity {
         this.userSearch = findViewById(R.id.userSearch);
         this.locationSearchField = findViewById(R.id.locationSearchField);
         this.searchBtn = findViewById(R.id.searchBtn);
+        this.viewOnMapBtn = findViewById(R.id.viewOnMapBtn);
         this.resultsHeader = findViewById(R.id.textViewResHead);
         this.resultsView = findViewById(R.id.resultsView);
         this.currentLocationHeader = findViewById(R.id.currentLocationHeader);
@@ -150,6 +153,13 @@ public class JobSearchActivity extends AppCompatActivity {
                     loadJobs(searchText, category, locationFilter);
                 }
             }
+        });
+
+        viewOnMapBtn.setOnClickListener(v -> {
+            // Pass displayed jobs to MapViewActivity
+            Intent intent = new Intent(JobSearchActivity.this, MapViewActivity.class);
+            intent.putExtra("jobs", displayedJobs);
+            startActivity(intent);
         });
 
         resultsView.setOnItemClickListener((parent, view, position, id) -> {
@@ -240,10 +250,12 @@ public class JobSearchActivity extends AppCompatActivity {
 
         if (displayedJobs.isEmpty()) {
             resultsView.setVisibility(View.GONE);
+            viewOnMapBtn.setVisibility(View.GONE);
             resultsHeader.setText(R.string.NO_RESULT);
         } else {
             resultsHeader.setText(R.string.RESULT);
             resultsView.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
 
             JobAdapter adapter = new JobAdapter(this, R.layout.search_results_item, new ArrayList<>(jobs));
             resultsView.setAdapter(adapter);
