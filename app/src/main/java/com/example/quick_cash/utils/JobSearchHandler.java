@@ -1,5 +1,6 @@
 package com.example.quick_cash.utils;
 
+import android.location.Location;
 
 import com.example.quick_cash.models.Job;
 
@@ -154,6 +155,65 @@ public class JobSearchHandler {
             }
 
             results.add(job);
+        }
+
+        return results;
+    }
+
+    /**
+     * Calculate distance between two coordinates using Android Location API.
+     *
+     * @param lat1 the first latitude
+     * @param lng1 the first longitude
+     * @param lat2 the second latitude
+     * @param lng2 the second longitude
+     * @return distance in kilometers
+     */
+    private float calculateDistance(double lat1, double lng1, double lat2, double lng2) {
+        float[] results = new float[1];
+        Location.distanceBetween(lat1, lng1, lat2, lng2, results);
+        return results[0] / 1000; // Convert meters to kilometers
+    }
+
+    /**
+     * Gets jobs filtered by location radius.
+     *
+     * @param search      the search text
+     * @param category    the category
+     * @param searchLat   the search latitude
+     * @param searchLng   the search longitude
+     * @param radiusKm    the radius in kilometers
+     * @return the filtered jobs
+     */
+    public ArrayList<Job> getJobsByLocationRadius(String search, String category, 
+                                                   double searchLat, double searchLng, 
+                                                   int radiusKm) {
+        ArrayList<Job> results = new ArrayList<>();
+
+        for (Job job : allJobs) {
+            // Check search and category first
+            if (!matchSearch(job, search)) {
+                continue;
+            }
+            if (!matchCategory(job, category)) {
+                continue;
+            }
+
+            // Check if job has coordinates
+            if (job.getLatitude() == 0.0 && job.getLongitude() == 0.0) {
+                continue; // Skip jobs without coordinates
+            }
+
+            // Calculate distance
+            float distance = calculateDistance(
+                    searchLat, searchLng, 
+                    job.getLatitude(), job.getLongitude()
+            );
+
+            // Include if within radius
+            if (distance <= radiusKm) {
+                results.add(job);
+            }
         }
 
         return results;

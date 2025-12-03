@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,18 +30,22 @@ import com.example.quick_cash.utils.UserIdMapper;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JobSearchActivity extends AppCompatActivity {
 
     EditText userSearch;
+    EditText locationSearchField;
     TextView resultsHeader;
     TextView currentLocationHeader;
     ListView resultsView;
     Button searchBtn;
     Spinner categorySelector;
     Spinner locationSelector;
+    Spinner radiusSelector;
 
     Jobs jobsCRUD;
 
@@ -82,6 +89,7 @@ public class JobSearchActivity extends AppCompatActivity {
 
     private void initUI() {
         this.userSearch = findViewById(R.id.userSearch);
+        this.locationSearchField = findViewById(R.id.locationSearchField);
         this.searchBtn = findViewById(R.id.searchBtn);
         this.resultsHeader = findViewById(R.id.textViewResHead);
         this.resultsView = findViewById(R.id.resultsView);
@@ -110,15 +118,37 @@ public class JobSearchActivity extends AppCompatActivity {
         );
         locationAdapter.setDropDownViewResource(R.layout.category_item);
         locationSelector.setAdapter(locationAdapter);
+
+        this.radiusSelector = findViewById(R.id.radiusSelect);
+        ArrayList<String> radiusOptions = new ArrayList<String>(
+                Arrays.asList("Radius (km)", "5 km", "10 km", "25 km", "50 km", "100 km")
+        );
+        ArrayAdapter<String> radiusAdapter = new ArrayAdapter<>(
+                this,
+                R.layout.category_item,
+                radiusOptions
+        );
+        radiusAdapter.setDropDownViewResource(R.layout.category_item);
+        radiusSelector.setAdapter(radiusAdapter);
     }
 
     private void initListeners() {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadJobs(userSearch.getText().toString().trim(),
-                        categorySelector.getSelectedItem().toString(),
-                        locationSelector.getSelectedItem().toString());
+                String searchText = userSearch.getText().toString().trim();
+                String category = categorySelector.getSelectedItem().toString();
+                String locationFilter = locationSelector.getSelectedItem().toString();
+                String locationSearch = locationSearchField.getText().toString().trim();
+                String radiusStr = radiusSelector.getSelectedItem().toString();
+
+                // Handle location-based search with radius
+                if (!locationSearch.isEmpty() && !radiusStr.equals("Radius (km)")) {
+                    loadJobsByLocationRadius(searchText, category, locationSearch, radiusStr);
+                } else {
+                    // Default search behavior
+                    loadJobs(searchText, category, locationFilter);
+                }
             }
         });
 
@@ -163,6 +193,45 @@ public class JobSearchActivity extends AppCompatActivity {
                 = jobSearcher.getAllJobs(search, category, location, locationHandler.getDetectedLocation());
 
         displayJobs(jobsToLoad);
+    }
+
+    private void loadJobsByLocationRadius(String search, String category, String locationSearch, String radiusStr) {
+        // Parse radius
+        int radius;
+        try {
+            radius = Integer.parseInt(radiusStr.split(" ")[0]);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Please select a valid radius", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Geocode the search location
+        Geocoder geocoder = new Geocoder(this);
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(locationSearch, 1);
+            if (addresses == null || addresses.isEmpty()) {
+                Toast.makeText(this, "Unable to find location. Please try a different address.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Address address = addresses.get(0);
+            double searchLat = address.getLatitude();
+            double searchLng = address.getLongitude();
+
+            // Filter jobs by radius
+            ArrayList<Job> jobsToLoad = jobSearcher.getJobsByLocationRadius(
+                    search, category, searchLat, searchLng, radius
+            );
+
+            if (jobsToLoad.isEmpty()) {
+                resultsHeader.setText("No jobs found in this location");
+            }
+            displayJobs(jobsToLoad);
+
+        } catch (IOException e) {
+            Toast.makeText(this, "Unable to find location. Please try a different address.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void displayJobs(ArrayList<Job> jobs) {
