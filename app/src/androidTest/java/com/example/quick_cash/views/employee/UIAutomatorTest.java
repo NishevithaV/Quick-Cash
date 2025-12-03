@@ -130,4 +130,61 @@ public class UIAutomatorTest {
         UiObject applyButton = device.findObject(new UiSelector().text("Apply"));
         assertTrue(applyButton.exists());
     }
+
+    /**
+     * AT-2: Test location search field and radius selector are visible.
+     */
+    @Test
+    public void testLocationSearchFieldAndRadiusSelectorVisible() {
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        assertNotNull(locationSearchField);
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        assertNotNull(radiusSelect);
+    }
+
+    /**
+     * AT-2: Test searching by location with radius.
+     */
+    @Test
+    public void testSearchByLocationWithRadius() throws UiObjectNotFoundException {
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        locationSearchField.setText("Halifax, NS");
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        radiusSelect.click();
+        
+        device.wait(Until.hasObject(By.text("10 km")), 2000);
+        UiObject2 radius = device.findObject(By.text("10 km"));
+        radius.click();
+        
+        UiObject2 searchBtn = device.findObject(By.res(launcherPackageName, "searchBtn"));
+        searchBtn.click();
+        
+        // Wait for geocoding and results
+        device.wait(Until.hasObject(By.text("Results")), 5000);
+        UiObject resultsHeader = device.findObject(new UiSelector().text("Results"));
+        assertTrue(resultsHeader.exists());
+    }
+
+    /**
+     * AT-2: Test invalid location shows toast error.
+     */
+    @Test
+    public void testInvalidLocationShowsError() {
+        UiObject2 locationSearchField = device.findObject(By.res(launcherPackageName, "locationSearchField"));
+        locationSearchField.setText(gibberish);
+        
+        UiObject2 radiusSelect = device.findObject(By.res(launcherPackageName, "radiusSelect"));
+        radiusSelect.click();
+        device.wait(Until.hasObject(By.text("10 km")), 2000);
+        UiObject2 radius = device.findObject(By.text("10 km"));
+        radius.click();
+        
+        UiObject2 searchBtn = device.findObject(By.res(launcherPackageName, "searchBtn"));
+        searchBtn.click();
+        
+        // Wait for toast to appear (toast message should show)
+        device.wait(Until.hasObject(By.text("Unable to find location. Please try a different address.")), 3000);
+    }
 }
