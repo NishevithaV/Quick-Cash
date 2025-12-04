@@ -82,6 +82,21 @@ public class Jobs {
                             String.valueOf(jobSnap.child("desc").getValue(String.class)),
                             String.valueOf(jobSnap.child("userID").getValue(String.class))
                     );
+                    
+                    // Set coordinates if they exist
+                    if (jobSnap.child("latitude").exists()) {
+                        Double lat = jobSnap.child("latitude").getValue(Double.class);
+                        if (lat != null) {
+                            job.setLatitude(lat);
+                        }
+                    }
+                    if (jobSnap.child("longitude").exists()) {
+                        Double lng = jobSnap.child("longitude").getValue(Double.class);
+                        if (lng != null) {
+                            job.setLongitude(lng);
+                        }
+                    }
+                    
                     jobs.add(job);
                 }
                 callback.onCallback(jobs);

@@ -59,6 +59,8 @@ public class PostJobUIAutomatorTest {
         assertTrue(jobTitleField.exists());
         UiObject jobCategorySpinner = device.findObject(new UiSelector().textContains("Select job category"));
         jobCategorySpinner.exists();
+        UiObject locationField = device.findObject(new UiSelector().textContains("Job Location"));
+        assertTrue(locationField.exists());
         UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
         assertTrue(applicationDeadlineField.exists());
         UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
@@ -80,8 +82,10 @@ public class PostJobUIAutomatorTest {
         jobCategorySpinner.click();
         List<UiObject2> types = device.findObjects(By.res("android:id/text1"));
         types.get(4).click();
+        UiObject locationField = device.findObject(new UiSelector().textContains("Job Location"));
+        locationField.setText("Halifax, NS");
         UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
-        applicationDeadlineField.setText("2025-11-21");
+        applicationDeadlineField.setText("2025-12-21");
         UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         descriptionField.setText("Sample description");
         UiObject postJobButton = device.findObject(new UiSelector().text("Post Job"));
@@ -105,8 +109,10 @@ public class PostJobUIAutomatorTest {
         jobCategorySpinner.click();
         List<UiObject2> types = device.findObjects(By.res("android:id/text1"));
         types.get(4).click();
+        UiObject locationField = device.findObject(new UiSelector().textContains("Job Location"));
+        locationField.setText("Halifax, NS");
         UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
-        applicationDeadlineField.setText("2025-11-21");
+        applicationDeadlineField.setText("2025-12-21");
         UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
         descriptionField.setText("Sample description");
         UiObject postJobButton = device.findObject(new UiSelector().text("Post Job"));
