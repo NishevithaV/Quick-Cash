@@ -9,6 +9,7 @@ public class Job implements Serializable {
     private String deadline;
     private String desc;
     private String userID;
+    private String id;
     private double latitude;
     private double longitude;
 
@@ -35,6 +36,29 @@ public class Job implements Serializable {
         this.deadline = deadline;
         this.desc = desc;
         this.userID = userID;
+        this.id = "";
+        this.latitude = 0.0;
+        this.longitude = 0.0;
+    }
+
+    /**
+     * Instantiates a new Job.
+     *
+     * @param title    the title
+     * @param category the category
+     * @param deadline the deadline
+     * @param desc     the desc
+     * @param userID   the user id
+     * @param id       the job id
+     */
+    public Job(String title, String category, String location, String deadline, String desc, String userID, String id) {
+        this.title = title;
+        this.category = category;
+        this.location = location;
+        this.deadline = deadline;
+        this.desc = desc;
+        this.userID = userID;
+        this.id = id;
         this.latitude = 0.0;
         this.longitude = 0.0;
     }
@@ -169,6 +193,14 @@ public class Job implements Serializable {
      */
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    /**
+     * Get Job Id
+     * @return the job id
+     */
+    public String getId() {
+        return id;
     }
 
     /**

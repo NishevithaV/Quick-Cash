@@ -69,7 +69,6 @@ public class JobSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_job_list);
-
         initUI();
         displayedJobs = new ArrayList<>();
 
@@ -80,14 +79,21 @@ public class JobSearchActivity extends AppCompatActivity {
         requestLocationPermission();
 
         jobsCRUD = new Jobs(FirebaseDatabase.getInstance());
-        jobsCRUD.getJobs(callbackJobs -> {
-            jobSearcher = new JobSearchHandler(callbackJobs);
-            displayJobs(new ArrayList<>(callbackJobs));
-            initListeners();
+        jobsCRUD.getJobs(new Jobs.JobsCallback() {
+            @Override
+            public void onCallback(ArrayList<Job> callbackJobs) {
+                jobSearcher = new JobSearchHandler(callbackJobs);
+                displayJobs(new ArrayList<>(callbackJobs));
+                initListeners();
+            }
+
+            @Override
+            public void onCallback(Job job) {
+                // Do nothing
+            }
         });
 
     }
-
 
     private void initUI() {
         this.userSearch = findViewById(R.id.userSearch);
@@ -170,6 +176,7 @@ public class JobSearchActivity extends AppCompatActivity {
             intent.putExtra("category", selectedJob.getCategory());
             intent.putExtra("location", selectedJob.getLocation());
             intent.putExtra("description", selectedJob.getDesc());
+            intent.putExtra("jobID", selectedJob.getId());
             UserIdMapper.getName(selectedJob.getUserID(), name -> {
                 intent.putExtra("employer", name);
                 startActivity(intent);

@@ -126,9 +126,10 @@ public class UIAutomatorTest {
         UiObject2 firstItem = list.getChildren().get(0);
         firstItem.click();
 
-        device.wait(Until.findObject(By.textContains("Apply")), 3000);
-        UiObject applyButton = device.findObject(new UiSelector().text("Apply"));
-        assertTrue(applyButton.exists());
+        assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobTitle")).exists());
+        assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobEmployer")).exists());
+        assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobCategory")).exists());
+        assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobDesc")).exists());
     }
 
     /**

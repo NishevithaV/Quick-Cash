@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.quick_cash.models.Job;
+import com.example.quick_cash.models.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,6 +61,44 @@ public class Jobs {
          * @param jobs the jobs
          */
         void onCallback(ArrayList<Job> jobs);
+
+        /**
+         * On callback.
+         *
+         * @param job the job
+         */
+        void onCallback(Job job);
+    }
+
+    /**
+     * Gets job given job id.
+     *
+     * @param callback the callback
+     */
+    public void getJob(String jobId, JobsCallback callback) {
+        final Job[] jobArr = new Job[1];
+
+        jobListRef.child(jobId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                jobArr[0] = new Job(
+                        String.valueOf(snapshot.child("title").getValue(String.class)),
+                        String.valueOf(snapshot.child("category").getValue(String.class)),
+                        String.valueOf(snapshot.child("location").getValue(String.class)),
+                        String.valueOf(snapshot.child("deadline").getValue(String.class)),
+                        String.valueOf(snapshot.child("desc").getValue(String.class)),
+                        String.valueOf(snapshot.child("userID").getValue(String.class)),
+                        snapshot.getKey()
+                );
+                callback.onCallback(jobArr[0]);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Do nothing
+            }
+        });
+
     }
 
     /**
@@ -80,7 +119,8 @@ public class Jobs {
                             String.valueOf(jobSnap.child("location").getValue(String.class)),
                             String.valueOf(jobSnap.child("deadline").getValue(String.class)),
                             String.valueOf(jobSnap.child("desc").getValue(String.class)),
-                            String.valueOf(jobSnap.child("userID").getValue(String.class))
+                            String.valueOf(jobSnap.child("userID").getValue(String.class)),
+                            jobSnap.getKey()
                     );
                     
                     // Set coordinates if they exist
