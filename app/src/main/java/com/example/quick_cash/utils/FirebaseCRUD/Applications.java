@@ -95,13 +95,12 @@ public class Applications {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int totalApps = (int) snapshot.getChildrenCount();
-                Log.i("Total COUNT", String.valueOf(totalApps));
                 final int[] processedCount = {0};
                 for (DataSnapshot appSnap : snapshot.getChildren()) {
                     String jobId = String.valueOf(appSnap.child("jobId").getValue(String.class));
                     Application app = new Application(
                             String.valueOf(appSnap.child("applicantId").getValue(String.class)),
-                            String.valueOf(appSnap.child("coverLtr").getValue(String.class)),
+                            String.valueOf(appSnap.child("letter").getValue(String.class)),
                             String.valueOf(appSnap.child("status").getValue(String.class)),
                             jobId,
                             appSnap.getKey()
@@ -113,16 +112,21 @@ public class Applications {
                                     if (uid.equals(employerId)){
                                         apps.add(app);
                                     }
+                                    processedCount[0]++;
+
+                                    if (processedCount[0] == totalApps) {
+                                        callback.onCallback(apps);
+                                    }
                                 });
                             } else {
                                 if (app.getApplicantId().equals(uid)){
                                     apps.add(app);
                                 }
-                            }
-                            processedCount[0]++;
+                                processedCount[0]++;
 
-                            if (processedCount[0] == totalApps) {
-                                callback.onCallback(apps);
+                                if (processedCount[0] == totalApps) {
+                                    callback.onCallback(apps);
+                                }
                             }
                         });
 
@@ -141,6 +145,16 @@ public class Applications {
                 // Do nothing
             }
         });
+    }
+
+    /**
+     * Update application status.
+     *
+     * @param appId   the application id
+     * @param newStatus  the new status
+     */
+    public void updateStatus(String appId, String newStatus) {
+        appsRef.child(appId).child("status").setValue(newStatus);
     }
 
 }

@@ -38,6 +38,9 @@
         <activity android:name=".views.login.LoginActivity" />
         <activity android:name=".views.employer.PostFormActivity" />
         <activity android:name=".views.employer.EmployerDashboardActivity" />
+        <activity android:name=".views.employer.ApplicationReviewActivity" />
+        <activity android:name=".views.employer.ApplicationsActivity" />
+        <activity android:name=".views.employer.EmployerListingsActivity" />
         <activity android:name=".views.switch_role.ConfirmActivity" />
         <activity android:name=".views.employee.SubmitApplicationActivity" />
         <activity android:name=".views.employee.JobDetailActivity" />

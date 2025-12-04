@@ -233,7 +233,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
      */
     protected void move2EmployerDashboard(Job job) {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(this, EmployerDashboardActivity.class);
+            Intent intent = new Intent(this, EmployerListingsActivity.class);
             intent.putExtra("userID", job.getUserID());
             startActivity(intent);
             finish();

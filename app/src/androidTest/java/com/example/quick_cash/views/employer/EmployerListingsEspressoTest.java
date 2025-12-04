@@ -12,14 +12,13 @@ import static org.hamcrest.CoreMatchers.is;
 import androidx.test.core.app.ActivityScenario;
 
 import com.example.quick_cash.R;
-import com.example.quick_cash.views.employer.EmployerDashboardActivity;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class EmployerDashboardEspressoTest {
+public class EmployerListingsEspressoTest {
 
-    public ActivityScenario<EmployerDashboardActivity> activityScenario;
+    public ActivityScenario<EmployerListingsActivity> activityScenario;
 
     /**
      * Set up before running tests
@@ -27,7 +26,7 @@ public class EmployerDashboardEspressoTest {
     @Before
     public void setup() {
 
-        activityScenario = ActivityScenario.launch(EmployerDashboardActivity.class);
+        activityScenario = ActivityScenario.launch(EmployerListingsActivity.class);
         activityScenario.onActivity(activity -> {
             activity.loadJobsForUser("NO_JOB_UID");
         });

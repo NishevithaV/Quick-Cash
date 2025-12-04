@@ -77,7 +77,7 @@ public class JobSearchActivity extends AppCompatActivity {
                 currentLocationHeader.setText(location)
         );
         requestLocationPermission();
-
+        displayedJobs = new ArrayList<>();
         jobsCRUD = new Jobs(FirebaseDatabase.getInstance());
         jobsCRUD.getJobs(new Jobs.JobsCallback() {
             @Override
@@ -206,8 +206,12 @@ public class JobSearchActivity extends AppCompatActivity {
     }
 
     private void loadJobs(String search, String category, String location) {
-        ArrayList<Job> jobsToLoad
-                = jobSearcher.getAllJobs(search, category, location, locationHandler.getDetectedLocation());
+        ArrayList<Job> jobsToLoad = jobSearcher.getAllJobs(
+                search,
+                category,
+                location,
+                locationHandler.getDetectedLocation()
+        );
 
         displayJobs(jobsToLoad);
     }

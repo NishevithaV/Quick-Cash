@@ -30,5 +30,10 @@
     <string name="ALREADY_APPLIED">Already Applied</string>
     <string name="APPLICATION_SUCCESS">Application Submitted</string>
     <string name="APPLICATION_FAILURE">Cover letter empty</string>
-
+    <string-array name="statuses">
+        <item>Pending</item>
+        <item>Accepted</item>
+        <item>Declined</item>
+        <item>Approved</item>
+    </string-array>
 </resources>
