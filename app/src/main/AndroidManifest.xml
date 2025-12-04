@@ -43,6 +43,7 @@
         <activity android:name=".views.employee.JobDetailActivity" />
         <activity android:name=".views.employee.JobSearchActivity" />
         <activity android:name=".views.maps.CurrentLocationActivity" />
+        <activity android:name=".views.maps.MapViewActivity" />
     </application>
 
 </manifest>

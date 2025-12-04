@@ -1,6 +1,8 @@
 package com.example.quick_cash.models;
 
-public class Job {
+import java.io.Serializable;
+
+public class Job implements Serializable {
     private String title;
     private String category;
     private String location;
@@ -8,6 +10,8 @@ public class Job {
     private String desc;
     private String userID;
     private String id;
+    private double latitude;
+    private double longitude;
 
     /**
      * Instantiates a new Job.
@@ -33,6 +37,8 @@ public class Job {
         this.desc = desc;
         this.userID = userID;
         this.id = "";
+        this.latitude = 0.0;
+        this.longitude = 0.0;
     }
 
     /**
@@ -53,6 +59,31 @@ public class Job {
         this.desc = desc;
         this.userID = userID;
         this.id = id;
+        this.latitude = 0.0;
+        this.longitude = 0.0;
+    }
+
+    /**
+     * Instantiates a new Job with coordinates.
+     *
+     * @param title     the title
+     * @param category  the category
+     * @param location  the location
+     * @param deadline  the deadline
+     * @param desc      the desc
+     * @param userID    the user id
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     */
+    public Job(String title, String category, String location, String deadline, String desc, String userID, double latitude, double longitude) {
+        this.title = title;
+        this.category = category;
+        this.location = location;
+        this.deadline = deadline;
+        this.desc = desc;
+        this.userID = userID;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
@@ -171,4 +202,41 @@ public class Job {
     public String getId() {
         return id;
     }
+
+    /**
+     * Gets latitude.
+     *
+     * @return the latitude
+     */
+    public double getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * Sets latitude.
+     *
+     * @param latitude the latitude
+     */
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * Gets longitude.
+     *
+     * @return the longitude
+     */
+    public double getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * Sets longitude.
+     *
+     * @param longitude the longitude
+     */
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
 }

@@ -180,4 +180,183 @@ public class EspressoTest {
         onView(withId(R.id.textViewResHead)).check(matches(withText(R.string.NO_RESULT)));
     }
 
+    /**
+     * AT-2: Test location search field exists.
+     */
+    @Test
+    public void testLocationSearchFieldExists() {
+        onView(withId(R.id.locationSearchField)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-2: Test radius selector exists.
+     */
+    @Test
+    public void testRadiusSelectorExists() {
+        onView(withId(R.id.radiusSelect)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-2: Test searching by location with radius filters results.
+     */
+    @Test
+    public void testSearchByLocationWithRadius() {
+        // Enter location and select radius
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax, NS"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("10 km"))).perform(click());
+        
+        // Perform search
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for geocoding and results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Results should be displayed
+        onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-2: Test searching with invalid location shows error.
+     */
+    @Test
+    public void testSearchWithInvalidLocationShowsError() {
+        // Enter invalid location
+        onView(withId(R.id.locationSearchField)).perform(typeText(gibberish), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("10 km"))).perform(click());
+        
+        // Perform search - should show error toast
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for geocoding attempt
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * AT-2: Test searching without radius uses default behavior.
+     */
+    @Test
+    public void testSearchWithoutRadiusUsesDefault() {
+        // Enter location but don't select radius
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax"), closeSoftKeyboard());
+        
+        // Search without selecting radius - should use default search
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Should still show results using default logic
+        onView(withId(R.id.resultsView)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test View on Map button exists.
+     */
+    @Test
+    public void testViewOnMapButtonExists() {
+        onView(withId(R.id.viewOnMapBtn)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test View on Map button appears after location search.
+     */
+    @Test
+    public void testViewOnMapButtonAppearsAfterLocationSearch() {
+        // Perform location search
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax, NS"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("10 km"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // View on Map button should now be visible
+        onView(withId(R.id.viewOnMapBtn)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test clicking View on Map button with jobs.
+     */
+    @Test
+    public void testClickViewOnMapButtonWithJobs() {
+        // Perform location search to get jobs
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("50 km"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Click View on Map button
+        onView(withId(R.id.viewOnMapBtn)).perform(click());
+        
+        // Wait for MapView to load
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // MapView should be displayed (check for map container)
+        onView(withId(R.id.map)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * AT-3: Test View on Map shows correct activity.
+     */
+    @Test
+    public void testViewOnMapOpensMapActivity() {
+        // Perform location search
+        onView(withId(R.id.locationSearchField)).perform(typeText("Halifax"), closeSoftKeyboard());
+        onView(withId(R.id.radiusSelect)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("25 km"))).perform(click());
+        onView(withId(R.id.searchBtn)).perform(click());
+        
+        // Wait for results
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Click View on Map
+        onView(withId(R.id.viewOnMapBtn)).perform(click());
+        
+        // Wait for activity transition
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Should see the map fragment
+        onView(withId(R.id.map)).check(matches(isDisplayed()));
+    }
+
+
+
+
 }

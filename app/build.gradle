@@ -45,6 +45,7 @@ dependencies {
     implementation libs.espresso.idling.resource
     implementation libs.play.services.maps
     implementation libs.play.services.location
+    implementation libs.gms.play.services.maps
     testImplementation libs.junit
     testImplementation libs.mockito.core
 
