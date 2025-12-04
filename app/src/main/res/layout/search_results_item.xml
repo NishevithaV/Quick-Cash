@@ -48,4 +48,14 @@
         android:ellipsize="end"
         android:maxLines="1" />
 
+    <!-- Location -->
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#C1CBFF"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
 </LinearLayout>
