@@ -27,24 +27,35 @@
             android:textColor="#FFF"
             android:text="Find Jobs" />
 
+        <TextView
+            android:id="@+id/currentLocationHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Detecting Current Location..."
+            android:textSize="16sp"
+            android:textColor="#AAAAAA"
+            android:padding="6dp"
+            android:layout_marginBottom="12dp"/>
 
 
-            <EditText
-                android:id="@+id/userSearch"
-                android:layout_width="337dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/searchbar"
-                android:backgroundTint="#0066FF"
-                android:ems="10"
-                android:fontFamily="sans-serif-medium"
-                android:hint="Search for Jobs"
-                android:inputType="text"
-                android:radius="12dp"
-                android:textColor="#FFF"
-                android:textAlignment="center"
-                android:textColorHint="#A8B5FF"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
+        <EditText
+            android:id="@+id/userSearch"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchbar"
+            android:backgroundTint="#0066FF"
+            android:ems="10"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Search for Jobs"
+            android:inputType="text"
+            android:radius="12dp"
+            android:textColor="#FFF"
+            android:textAlignment="center"
+            android:textColorHint="#A8B5FF"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
 
         <FrameLayout
             android:layout_width="344dp"
@@ -80,6 +91,87 @@
                 android:src="@drawable/drop_arrow" />
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/locationSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="#00ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="2dp"
+                android:popupBackground="#802A3459"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="#A8B5FF" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="2dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/drop_arrow"
+                android:clickable="false"
+                android:focusable="false" />
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/locationSearchField"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchbar"
+            android:backgroundTint="#0066FF"
+            android:ems="10"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Search Location (e.g., Halifax, NS)"
+            android:inputType="textPostalAddress"
+            android:radius="12dp"
+            android:textColor="#FFF"
+            android:textAlignment="center"
+            android:textColorHint="#A8B5FF"
+            android:layout_marginBottom="12dp" />
+
+        <FrameLayout
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/radiusSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="#00ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="2dp"
+                android:popupBackground="#802A3459"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="#A8B5FF" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="2dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/drop_arrow"
+                android:clickable="false"
+                android:focusable="false" />
+        </FrameLayout>
+
         <Button
             android:id="@+id/searchBtn"
             android:layout_width="337dp"
@@ -106,6 +198,20 @@
             android:textColor="#FFF"
             app:layout_constraintBottom_toTopOf="@+id/resultsView"
             tools:layout_editor_absoluteX="15dp" />
+
+        <Button
+            android:id="@+id/viewOnMapBtn"
+            android:layout_width="337dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#0066FF"
+            android:fontFamily="sans-serif-medium"
+            android:padding="2dp"
+            android:text="View on Map"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <ListView
             android:id="@+id/resultsView"
