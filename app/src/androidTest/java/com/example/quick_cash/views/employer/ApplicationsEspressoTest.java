@@ -20,6 +20,7 @@ import androidx.test.espresso.matcher.RootMatchers;
 import com.example.quick_cash.R;
 import com.example.quick_cash.models.Application;
 import com.example.quick_cash.views.employer.ApplicationsActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -47,6 +48,7 @@ public class ApplicationsEspressoTest {
      */
     @Test
     public void testApplicationsLoad() {
+        FirebaseAuth.getInstance().signOut();
         onView(withId(R.id.appsResultsView)).check(matches(isDisplayed()));
     }
 

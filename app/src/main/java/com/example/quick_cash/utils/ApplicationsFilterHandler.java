@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationsFilterHandler {
-    private ArrayList<Application> allJobs;
+    private ArrayList<Application> allApps;
 
     /**
      * Instantiates a new Application search handler.
@@ -19,18 +19,34 @@ public class ApplicationsFilterHandler {
     }
 
     private void updateAllApps(List<Application> sampleApps) {
-        allJobs = new ArrayList<>(sampleApps);
+        allApps = new ArrayList<>(sampleApps);
     }
 
     private boolean matchStatus(Application a, String status) {
         return a.getStatus().equalsIgnoreCase(status);
     }
-    private ArrayList<Application> filterApps(String search) {
+
+    private boolean matchJob(Application a, String jobID) {
+        return a.getJobId().equals(jobID);
+    }
+    private ArrayList<Application> filterAppsByStatus(String search) {
         ArrayList<Application> results = new ArrayList<>();
 
-        for (Application j : allJobs) {
-            if (matchStatus(j, search)) {
-                results.add(j);
+        for (Application a : allApps) {
+            if (matchStatus(a, search)) {
+                results.add(a);
+            }
+        }
+
+        return results;
+    }
+
+    private ArrayList<Application> filterAppsByJob(String search) {
+        ArrayList<Application> results = new ArrayList<>();
+
+        for (Application a : allApps) {
+            if (matchJob(a, search)) {
+                results.add(a);
             }
         }
 
@@ -38,12 +54,22 @@ public class ApplicationsFilterHandler {
     }
 
     /**
-     * Gets all jobs.
+     * Gets all apps of specified status.
      *
      * @param status   the search
      * @return the matching apps
      */
-    public ArrayList<Application> getApps(String status) {
-        return filterApps(status);
+    public ArrayList<Application> getAppsByStatus(String status) {
+        return filterAppsByStatus(status);
+    }
+
+    /**
+     * Gets all apps for specified job.
+     *
+     * @param jobID   the search
+     * @return the matching apps
+     */
+    public ArrayList<Application> getAppsByJob(String jobID) {
+        return filterAppsByJob(jobID);
     }
 }

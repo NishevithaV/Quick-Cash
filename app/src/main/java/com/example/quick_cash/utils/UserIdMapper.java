@@ -24,6 +24,19 @@ public final class UserIdMapper {
     }
 
     /**
+     * Get user role given user id
+     *
+     * @param userId   id to get role for
+     * @param callback interface with method to handle user role
+     */
+    public static void getRole(String userId, UserNameCallback callback) {
+        usersCRUD.getUser(userId, user -> {
+            String role = user.getType();
+            callback.onNameLoaded(role != null && !role.equals("null") ? role : "Test User Role");
+        });
+    }
+
+    /**
      * Interface to be used as callback with getName()
      */
     public interface UserNameCallback {

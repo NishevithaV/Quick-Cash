@@ -33,25 +33,24 @@ public class Application {
     /**
      * Instantiates a new Job.
      *
-     * @param applicantId    the title
-     * @param letter the deadline
-     * @param jobId     the desc
+     * @param applicantId    the applicant id
+     * @param letter the letter
+     * @param jobId     the jobId
      */
     public Application(String applicantId, String letter, String jobId) {
         this.applicantId = applicantId;
         this.letter = letter;
         this.status = "pending";
         this.jobId = jobId;
-        this.id = "";
     }
 
     /**
-     * Instantiates a new Job.
+     * Instantiates a new Application.
      *
-     * @param applicantId    the title
-     * @param letter the deadline
+     * @param applicantId    the applicatant id
+     * @param letter the letter
      * @param status the status
-     * @param jobId     the desc
+     * @param jobId     the jobID
      * @param id the id
      */
     public Application(String applicantId, String letter, String status, String jobId, String id) {
@@ -105,5 +104,13 @@ public class Application {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Set status
+     * @param status the status
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

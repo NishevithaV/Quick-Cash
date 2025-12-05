@@ -18,6 +18,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
     Button btnSettings;
 
     Button btnNearbyJobs;
+    Button btnMyApps;
 
 
     /**
@@ -40,6 +41,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         }
     }
 
+
     private void initListeners() {
         // Navigate to Find Jobs screen
         btnFindJobs.setOnClickListener(v -> {
@@ -56,13 +58,18 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
             Intent intent = new Intent( EmployeeDashboardActivity.this, CurrentLocationActivity.class);
             startActivity(intent);
         });
+
+        btnMyApps.setOnClickListener(v -> {
+            Intent intent = new Intent( EmployeeDashboardActivity.this, EmployeeApplicationsActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void initUI() {
         btnFindJobs = findViewById(R.id.btnFindJobs);
         btnSettings = findViewById(R.id.btnSettings);
         btnNearbyJobs = findViewById(R.id.btnNearbyJobs);
-
+        btnMyApps = findViewById(R.id.btnMyApps);
     }
 
 }

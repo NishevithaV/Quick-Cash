@@ -14,17 +14,17 @@ public final class JobIdMapper {
     private JobIdMapper() {} // Prevent instantiation
 
     /**
-     * Get user name given user id
+     * Get Job Title given user id
      *
      * @param jobId   id to get name for
      * @param callback interface with method to handle user name
      */
-    public static void getTitle(String jobId, JobTitleCallback callback) {
+    public static void getTitle(String jobId, JobInfoCallback callback) {
         jobsCRUD.getJob(jobId, new Jobs.JobsCallback() {
             @Override
             public void onCallback(Job job){
                 String title = job.getTitle();
-                callback.onTitleLoaded(title != null && !title.equals("null") ? title : "Test Job Title");
+                callback.onInfoLoaded(title != null && !title.equals("null") ? title : "Test Job Title");
             }
 
             @Override
@@ -35,14 +35,35 @@ public final class JobIdMapper {
     }
 
     /**
-     * Interface to be used as callback with getName()
+     * Interface to be used as callback
      */
-    public interface JobTitleCallback {
+    public interface JobInfoCallback {
         /**
-         * Run On title loaded. To be implemented
+         * Run On info loaded. To be implemented
          *
-         * @param title the title
+         * @param info the info
          */
-        void onTitleLoaded(String title);
+        void onInfoLoaded(String info);
+    }
+
+    /**
+     * Get Job Title given user id
+     *
+     * @param jobId   id to get name for
+     * @param callback interface with method to handle user name
+     */
+    public static void getEmployer(String jobId, JobInfoCallback callback) {
+        jobsCRUD.getJob(jobId, new Jobs.JobsCallback() {
+            @Override
+            public void onCallback(Job job){
+                String userID = job.getUserID();
+                callback.onInfoLoaded(userID != null && !userID.equals("null") ? userID : "Test Employer ID");
+            }
+
+            @Override
+            public void onCallback(ArrayList<Job> job){
+                // Do nothing
+            }
+        });
     }
 }

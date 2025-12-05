@@ -40,12 +40,16 @@
         <activity android:name=".views.employee.EmployeeDashboardActivity" />
         <activity android:name=".views.employer.ApplicationReviewActivity" />
         <activity android:name=".views.employer.ApplicationsActivity" />
+        <activity android:name=".views.employer.JobApplicationsActivity" />
         <activity android:name=".views.employer.EmployerListingsActivity" />
         <activity android:name=".views.employer.EmployerPaymentActivity" />
         <activity android:name=".views.switch_role.ConfirmActivity" />
+        <activity android:name=".views.employee.EmployeeApplicationsActivity" />
+        <activity android:name=".views.employee.SubmitApplicationActivity" />
         <activity android:name=".views.employee.JobDetailActivity" />
         <activity android:name=".views.employee.JobSearchActivity" />
         <activity android:name=".views.maps.CurrentLocationActivity" />
+        <activity android:name=".views.maps.MapViewActivity" />
     </application>
 
 </manifest>

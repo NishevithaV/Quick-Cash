@@ -1,10 +1,13 @@
 package com.example.quick_cash.views.employer;
 
+import static android.view.View.GONE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,14 +26,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ApplicationsActivity extends AppCompatActivity {
+public class JobApplicationsActivity extends AppCompatActivity {
 
-    Spinner statusFilter;
+    FrameLayout statusFrame;
+    TextView heading;
     ListView appsResultsView;
     TextView appsResHead;
     Applications appsCRUD;
 
-    private String selectedStatus;
+    private String selectedJobId;
+    private String selectedJobTitle;
     public String toastMsg;
     private ArrayList<Application> displayedApps;
     private ApplicationsFilterHandler filterHandler;
@@ -40,14 +45,15 @@ public class ApplicationsActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_applications);
-        selectedStatus = "pending";
+        selectedJobId = getIntent().getStringExtra("jobID");
+        selectedJobTitle = getIntent().getStringExtra("jobTitle");
         initUI();
         appsCRUD = new Applications(FirebaseDatabase.getInstance());
         appsCRUD.getApplications(new Applications.AppsCallback() {
             @Override
             public void onCallback(ArrayList<Application> apps) {
                 filterHandler = new ApplicationsFilterHandler(apps);
-                loadApps(selectedStatus);
+                loadApps(selectedJobId);
                 initListeners();
             }
         });
@@ -61,41 +67,25 @@ public class ApplicationsActivity extends AppCompatActivity {
             @Override
             public void onCallback(ArrayList<Application> apps) {
                 filterHandler = new ApplicationsFilterHandler(apps);
-                loadApps(selectedStatus);
+                loadApps(selectedJobId);
             }
         });
     }
 
     private void initUI() {
-        this.statusFilter = findViewById(R.id.statusFilter);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.statuses,
-                R.layout.status_spinner_item
-        );
-        adapter.setDropDownViewResource(R.layout.status_spinner_item);
-        statusFilter.setAdapter(adapter);
+        this.statusFrame = findViewById(R.id.statusFilterFrame);
+        statusFrame.setVisibility(GONE);
         this.appsResultsView = findViewById(R.id.appsResultsView);
         this.appsResHead = findViewById(R.id.appsResHead);
+        this.heading = findViewById(R.id.viewAppsHeading);
+        String jobHeader = selectedJobTitle+" Applications";
+        heading.setText(jobHeader);
     }
 
     private void initListeners() {
-        statusFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedStatus = parent.getItemAtPosition(position).toString();
-                loadApps(selectedStatus);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
-            }
-        });
-
         appsResultsView.setOnItemClickListener((parent, view, position, id) -> {
             Application selectedApp = displayedApps.get(position);
-            Intent intent = new Intent(ApplicationsActivity.this, ApplicationReviewActivity.class);
+            Intent intent = new Intent(JobApplicationsActivity.this, ApplicationReviewActivity.class);
             UserIdMapper.getName(selectedApp.getApplicantId(), name -> {
                 intent.putExtra("applicantName", name);
             });
@@ -109,8 +99,8 @@ public class ApplicationsActivity extends AppCompatActivity {
         });
     }
 
-    private void loadApps(String status) {
-        ArrayList<Application> appsToLoad = filterHandler.getAppsByStatus(status);
+    private void loadApps(String search) {
+        ArrayList<Application> appsToLoad = filterHandler.getAppsByJob(search);
         displayApps(appsToLoad);
     }
 
@@ -119,7 +109,7 @@ public class ApplicationsActivity extends AppCompatActivity {
         displayedApps.addAll(apps);
 
         if (displayedApps.isEmpty()) {
-            appsResultsView.setVisibility(View.GONE);
+            appsResultsView.setVisibility(GONE);
             appsResHead.setText(R.string.NO_RESULT);
         } else {
             appsResultsView.setVisibility(View.VISIBLE);

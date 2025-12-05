@@ -2,6 +2,7 @@ package com.example.quick_cash.utils;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,15 @@ import java.util.List;
 
 public class ApplicationAdapter extends ArrayAdapter<Application> {
 
+    private static class ViewHolder {
+        TextView jobTitleText;
+        TextView statusText;
+        TextView applicantText;
+        String boundAppId;
+    }
+
     private final int resource;
 
-    /**
-     * Instantiates a new Job adapter.
-     *
-     * @param context  the context
-     * @param resource the resource
-     * @param apps     the jobs
-     */
     public ApplicationAdapter(Context context, int resource, List<Application> apps) {
         super(context, resource, apps);
         this.resource = resource;
@@ -35,31 +36,48 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        View view = convertView;
-
-        if (view == null) {
+        ViewHolder holder;
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            view = inflater.inflate(resource, parent, false);
+            convertView = inflater.inflate(resource, parent, false);
+            holder = new ViewHolder();
+            holder.jobTitleText = convertView.findViewById(R.id.jobTitleTextApps);
+            holder.statusText = convertView.findViewById(R.id.statusTextApps);
+            holder.applicantText = convertView.findViewById(R.id.applicantTextApps);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
         Application app = getItem(position);
-
-        TextView jobTitleText = view.findViewById(R.id.jobTitleTextApps);
-        TextView statusText = view.findViewById(R.id.statusTextApps);
-        TextView applicantText = view.findViewById(R.id.applicantTextApps);
-
         if (app != null) {
-            String status = app.getStatus();
-            statusText.setText(status);
-            if (status.equalsIgnoreCase("declined")) {
-                statusText.setTextColor(Color.RED);
-            } else if (status.equalsIgnoreCase("accepted")) {
-                statusText.setTextColor(Color.GREEN);
+            holder.boundAppId = app.getJobId() + "-" + app.getApplicantId();
+
+            holder.statusText.setText(app.getStatus());
+            if (app.getStatus().equalsIgnoreCase("declined")) {
+                holder.statusText.setTextColor(Color.RED);
+            } else if (app.getStatus().equalsIgnoreCase("accepted")) {
+                holder.statusText.setTextColor(Color.GREEN);
             }
-            UserIdMapper.getName(app.getApplicantId(), applicantText::setText);
-            JobIdMapper.getTitle(app.getJobId(), jobTitleText::setText);
+
+            holder.jobTitleText.setText("Loading...");
+            holder.applicantText.setText("Loading...");
+
+            final String currentBoundId = holder.boundAppId;
+
+            UserIdMapper.getName(app.getApplicantId(), name -> {
+                if (holder.boundAppId.equals(currentBoundId)) {
+                    holder.applicantText.setText(name != null ? name : "Unknown");
+                }
+            });
+
+            JobIdMapper.getTitle(app.getJobId(), title -> {
+                if (holder.boundAppId.equals(currentBoundId)) {
+                    holder.jobTitleText.setText(title != null ? title : "Unknown");
+                }
+            });
         }
 
-        return view;
+        return convertView;
     }
 }

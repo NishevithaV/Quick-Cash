@@ -21,6 +21,7 @@ public class JUnitTest {
     private List<Job> mathTeachArr;
     private List<Job> englishTeachArr;
     private List<Job> educationArr;
+    private List<Job> halifaxArr;
     private List<Job> emptyArr;
 
     /**
@@ -29,10 +30,10 @@ public class JUnitTest {
     @Before
     public void setup() {
         sampleJobs = new ArrayList<>();
-        sampleJobs.add(new Job("Android Developer", "Tech", "2025-12-31", "Develop Android apps", "user1"));
-        sampleJobs.add(new Job("Nurse", "Health", "2025-11-30", "Work in hospital", "user2"));
-        sampleJobs.add(new Job("Math Teacher", "Education", "2025-10-15", "Teach math", "user3"));
-        sampleJobs.add(new Job("English Teacher", "Education", "2025-10-15", "Teach English", "user4"));
+        sampleJobs.add(new Job("Android Developer", "Tech", "Halifax", "2025-12-31", "Develop Android apps", "user1"));
+        sampleJobs.add(new Job("Nurse", "Health", "Halifax", "2025-11-30", "Work in hospital", "user2"));
+        sampleJobs.add(new Job("Math Teacher", "Education", "Toronto", "2025-10-15", "Teach math", "user3"));
+        sampleJobs.add(new Job("English Teacher", "Education", "Calgary", "2025-10-15", "Teach English", "user4"));
         searcher = new JobSearchHandler(sampleJobs);
 
         androidArr = new ArrayList<Job>(Collections.singletonList(sampleJobs.get(0)));
@@ -42,6 +43,10 @@ public class JUnitTest {
         educationArr = new ArrayList<Job>();
         educationArr.addAll(mathTeachArr);
         educationArr.addAll(englishTeachArr);
+        halifaxArr = new ArrayList<Job>();
+        halifaxArr.addAll(androidArr);
+        halifaxArr.addAll(nurseArr);
+
         emptyArr = new ArrayList<Job>();
     }
 
@@ -50,7 +55,7 @@ public class JUnitTest {
      */
     @Test
     public void testAllJobsOnInit() {
-        assertEquals(searcher.getAllJobs("", ""), sampleJobs);
+        assertEquals(searcher.getAllJobs("", "", "All Jobs", "Halifax"), sampleJobs);
     }
 
     /**
@@ -58,9 +63,9 @@ public class JUnitTest {
      */
     @Test
     public void testFilterByKeywordAndCategory() {
-        assertEquals(searcher.getAllJobs("Android", "Tech"), androidArr);
-        assertEquals(searcher.getAllJobs("Hospital", "Health"), nurseArr);
-        assertEquals(searcher.getAllJobs("English", "Education"), englishTeachArr);
+        assertEquals(searcher.getAllJobs("Android", "Tech", "All Jobs", "Halifax"), androidArr);
+        assertEquals(searcher.getAllJobs("Hospital", "Health", "All Jobs", "Halifax"), nurseArr);
+        assertEquals(searcher.getAllJobs("English", "Education", "All Jobs", "Calgary"), englishTeachArr);
     }
 
     /**
@@ -68,9 +73,9 @@ public class JUnitTest {
      */
     @Test
     public void testFilterByKeyword() {
-        assertEquals(searcher.getAllJobs("Apps", ""), androidArr);
-        assertEquals(searcher.getAllJobs("Hospital", ""), nurseArr);
-        assertEquals(searcher.getAllJobs("teach", ""), educationArr);
+        assertEquals(searcher.getAllJobs("Apps", "", "All Jobs", "Halifax"), androidArr);
+        assertEquals(searcher.getAllJobs("Hospital", "", "All Jobs", "Halifax"), nurseArr);
+        assertEquals(searcher.getAllJobs("teach", "", "All Jobs", "Halifax"), educationArr);
     }
 
     /**
@@ -78,9 +83,17 @@ public class JUnitTest {
      */
     @Test
     public void testFilterByCategory() {
-        assertEquals(searcher.getAllJobs("", "Tech"), androidArr);
-        assertEquals(searcher.getAllJobs("", "Health"), nurseArr);
-        assertEquals(searcher.getAllJobs("", "Education"), educationArr);
+        assertEquals(searcher.getAllJobs("", "Tech", "All Jobs", "Halifax"), androidArr);
+        assertEquals(searcher.getAllJobs("", "Health", "All Jobs", "Halifax"), nurseArr);
+        assertEquals(searcher.getAllJobs("", "Education", "All Jobs", "Halifax"), educationArr);
+    }
+
+    /**
+     * Test filter by Location.
+     */
+    @Test
+    public void testFilterByLocation() {
+        assertEquals(searcher.getAllJobs("", "", "Nearby Jobs", "Halifax"), halifaxArr);
     }
 
     /**
@@ -89,7 +102,7 @@ public class JUnitTest {
     @Test
     public void testFilterNoResults() {
         String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
-        assertEquals(searcher.getAllJobs(gibberish, "Tech"), emptyArr);
-        assertEquals(searcher.getAllJobs("Dev", gibberish), emptyArr);
+        assertEquals(searcher.getAllJobs(gibberish, "Tech", "All Jobs", "Halifax"), emptyArr);
+        assertEquals(searcher.getAllJobs("Dev", gibberish, "All Jobs", "Halifax"), emptyArr);
     }
 }

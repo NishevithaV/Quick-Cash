@@ -75,5 +75,15 @@ public class JobPostingValidator {
     public boolean checkEmptyJobDescription(String description) {
         return description.isEmpty();
     }
+
+    /**
+     * Check empty job location boolean.
+     *
+     * @param location the location
+     * @return the boolean
+     */
+    public boolean checkEmptyJobLocation(String location) {
+        return location == null || location.trim().isEmpty();
+    }
 }
 

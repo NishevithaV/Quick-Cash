@@ -25,7 +25,7 @@
         android:id="@+id/tv_employee_dashboard_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Employee Dashboard"
+        android:text="My Applications"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -34,8 +34,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
+    <!-- ListView -->
+    <ListView
         android:id="@+id/recycler_applications"
         android:layout_width="0dp"
         android:layout_height="0dp"

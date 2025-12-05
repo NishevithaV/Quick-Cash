@@ -9,7 +9,8 @@
     app:cardUseCompatPadding="true"
     app:cardBackgroundColor="#323232">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp">
@@ -17,33 +18,30 @@
         <!-- Job Title -->
         <TextView
             android:id="@+id/tv_job_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Front-end Developer"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="17sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:textSize="17sp" />
 
         <!-- Company -->
         <TextView
             android:id="@+id/tv_company_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="ABC Company"
             android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_job_title"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textSize="14sp" />
 
         <!-- Status Badge -->
         <TextView
             android:id="@+id/tv_application_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center_horizontal"
             android:text="Accepted"
             android:textColor="@android:color/white"
             android:textStyle="bold"
@@ -51,17 +49,15 @@
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:paddingTop="6dp"
-            android:paddingBottom="6dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_company_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:paddingBottom="6dp" />
 
         <!-- Mark Completed button -->
         <Button
             android:id="@+id/btn_mark_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center_horizontal"
             android:text="MARK COMPLETED"
             android:textStyle="bold"
             android:backgroundTint="#3D5AFE"
@@ -69,11 +65,8 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_application_status"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:paddingBottom="8dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>

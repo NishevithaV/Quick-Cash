@@ -42,5 +42,14 @@
         android:layout_height="wrap_content"
         android:text="Nearby Jobs"
         android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#0066FF" />
+
+    <Button
+        android:id="@+id/btnMyApps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Applications"
+        android:textSize="18sp"
         android:backgroundTint="#0066FF" />
 </LinearLayout>

@@ -47,6 +47,7 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText(""));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
         onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
@@ -62,7 +63,8 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Software Engineer"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
-        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-12-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
@@ -76,7 +78,8 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
-        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-12-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
@@ -91,6 +94,7 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Select job category"))).perform(click());
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
         onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
@@ -105,6 +109,7 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
         onView(withId(R.id.ApplicationDeadlineField)).perform(typeText(""));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
@@ -119,7 +124,8 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
-        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-12-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
@@ -133,6 +139,7 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
         onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2024-11-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
@@ -147,7 +154,8 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
-        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-12-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText(""));
         onView(withId(R.id.PostJobButton)).perform(click());
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_DESCRIPTION)));
@@ -161,8 +169,39 @@ public class PostJobEspressoTest {
         onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
         onView(withId(R.id.JobCategorySpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
-        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-12-21"));
         onView(withId(R.id.JobDescriptionField)).perform(typeText("We need an AI backend engineer"));
+        onView(withId(R.id.PostJobButton)).perform(click());
+        onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
+    }
+
+    /**
+     * Check if location field is empty.
+     */
+    @Test
+    public void checkIfLocationIsEmpty() {
+        onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
+        onView(withId(R.id.JobCategorySpinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
+        onView(withId(R.id.JobLocationField)).perform(typeText(""));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-11-21"));
+        onView(withId(R.id.JobDescriptionField)).perform(typeText("Sample description"));
+        onView(withId(R.id.PostJobButton)).perform(click());
+        onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_LOCATION)));
+    }
+
+    /**
+     * Check if location field is not empty.
+     */
+    @Test
+    public void checkIfLocationIsNotEmpty() {
+        onView(withId(R.id.JobTitleField)).perform(typeText("Backend Dev"));
+        onView(withId(R.id.JobCategorySpinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("AI"))).perform(click());
+        onView(withId(R.id.JobLocationField)).perform(typeText("Halifax, NS"));
+        onView(withId(R.id.ApplicationDeadlineField)).perform(typeText("2025-12-21"));
+        onView(withId(R.id.JobDescriptionField)).perform(typeText("Sample description"));
         onView(withId(R.id.PostJobButton)).perform(click());
         onView(withId(R.id.Result)).check(matches(withText(R.string.EMPTY_STRING)));
     }
