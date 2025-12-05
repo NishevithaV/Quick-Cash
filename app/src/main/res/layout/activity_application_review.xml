@@ -21,22 +21,24 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView android:id="@+id/jobTitleAppRev"
-            android:textSize="20sp"
-            android:textStyle="bold"
+        <TextView
+            android:id="@+id/jobTitleAppRev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="test job"
             android:textColor="@color/white"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/statusAppRev"
             android:textSize="20sp"
-            android:textColor="#89BCFF"
-            android:text="test status"
-            android:layout_marginBottom="8dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/statusAppRev"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="test status"
+            android:textColor="#89BCFF"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/cvrLtrAppRev"
@@ -70,6 +72,9 @@
                 android:backgroundTint="#0066FF"
                 android:text="Accept"
                 android:textColor="@color/white" />
-        </LinearLayout>>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>
