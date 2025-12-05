@@ -30,5 +30,7 @@
         <item>Accepted</item>
         <item>Declined</item>
         <item>Approved</item>
+        <item>Completed</item>
+        <item>paid</item>
     </string-array>
 </resources>

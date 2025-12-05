@@ -45,6 +45,7 @@ dependencies {
     testImplementation libs.junit
     testImplementation libs.mockito.core
     implementation(libs.maps)
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.espresso.intents
