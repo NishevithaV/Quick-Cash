@@ -105,4 +105,12 @@ public class Application {
     public String getId() {
         return id;
     }
+
+    /**
+     * Set status
+     * @param status the status
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

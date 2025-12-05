@@ -30,20 +30,20 @@ public class AppReviewJUnitTest {
 
 
         ApplicationsFilterHandler filterHandler = new ApplicationsFilterHandler(apps);
-        List<Application> filtered = filterHandler.getApps("pending");
+        List<Application> filtered = filterHandler.getAppsByStatus("pending");
 
         for (Application a : filtered) {
             assertEquals("pending", a.getStatus()); // AT-4
         }
         filtered.clear();
 
-        filtered.addAll(filterHandler.getApps("accepted"));
+        filtered.addAll(filterHandler.getAppsByStatus("accepted"));
         for (Application a : filtered) {
             assertEquals("accepted", a.getStatus()); // AT-4
         }
         filtered.clear();
 
-        filtered.addAll(filterHandler.getApps("declined"));
+        filtered.addAll(filterHandler.getAppsByStatus("declined"));
         for (Application a : filtered) {
             assertEquals("declined", a.getStatus()); // AT-4
         }
