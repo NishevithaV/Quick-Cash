@@ -27,6 +27,15 @@ import java.util.List;
 
 public class PostFormActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //path
+    private static final String CREDENTIALS_FILE_PATH = "key.json";
+
+    //provided by google - for sending the notification
+
+    //new endpoint
+    private static final String PUSH_NOTIFICATION_ENDPOINT ="https://fcm.googleapis.com/v1/projects/quickcash-72ee9/messages:send";
+
+
     Jobs jobsCRUD;
     JobPostingValidator validator;
     EditText jobName;

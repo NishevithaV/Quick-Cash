@@ -1,7 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+    id 'com.google.firebase.crashlytics'
 }
+
+def credentialsPropertiesFile = rootProject.file("local.properties")
+def credentialsProperties = new Properties()
+credentialsProperties.load(new FileInputStream(credentialsPropertiesFile))
 
 android {
     namespace 'com.example.quick_cash'
@@ -46,4 +51,20 @@ dependencies {
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.espresso.intents
     androidTestImplementation libs.mockito.android
+
+    //3rd party library - for network request or api request to the firebase server
+    implementation libs.volley
+
+    // messaging libraries
+    implementation libs.firebase.messaging
+    implementation platform(libs.firebase.bom)
+
+    //for getting the error messages related to firebase
+    implementation libs.firebase.crashlytics
+    implementation libs.firebase.analytics
+    implementation libs.firebase.database
+
+    //auth library
+    implementation libs.google.auth.library.oauth2.http
+
 }
