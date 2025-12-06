@@ -69,19 +69,26 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         cvrLtrAppRev.setText(letter);
         declineBtn = findViewById(R.id.declineBtn);
         acceptBtn = findViewById(R.id.acceptBtn);
+        if(status.equalsIgnoreCase("completed")){
+            statusAppRev.setTextColor(Color.GREEN);
+            declineBtn.setVisibility(View.GONE);
+            acceptBtn.setText("Approve and Pay");
+            accepted = true;
+        }
         if (status.equalsIgnoreCase("accepted")) {
             statusAppRev.setTextColor(Color.GREEN);
-            accepted = true;
             declineBtn.setVisibility(View.GONE);
-            acceptBtn.setText("Approve Payment");
+            acceptBtn.setVisibility(View.GONE);
         } else if (status.equalsIgnoreCase("declined")) {
             statusAppRev.setTextColor(Color.RED);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
-        } else if (!status.equalsIgnoreCase("pending")) {
+        }else if(status.equalsIgnoreCase("paid")){
+            statusAppRev.setTextColor(Color.GREEN);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
         }
+
     }
 
     private void initListeners() {
@@ -93,8 +100,13 @@ public class ApplicationReviewActivity extends AppCompatActivity {
             if (!accepted) {
                 accepted = true;
                 update("accepted");
-            } else {
-                // this is where the intent to approve payment page goes for vaishnavi
+            }
+            else{
+                update("completed");
+                Intent intent = new Intent(ApplicationReviewActivity.this, EmployerPaymentActivity.class);
+                intent.putExtra("jobApplicationId", appId);
+                startActivityForResult(intent, 5000);
+
             }
         });
     }
@@ -110,15 +122,36 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         } else if (status.equalsIgnoreCase("accepted")) {
             statusAppRev.setTextColor(Color.GREEN);
             declineBtn.setVisibility(View.GONE);
-            acceptBtn.setText("Approve Payment");
-        } else if (!status.equalsIgnoreCase("pending")) {
-            declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
+        }else {
+            statusAppRev.setTextColor(Color.GREEN);
+            declineBtn.setVisibility(View.GONE);
         }
+
+
 
         appsCRUD.updateStatus(appId, status);
         toastMsg = "Application successfully "+status;
         Toast.makeText(ApplicationReviewActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 5000 && resultCode == RESULT_OK) {
+            if (data != null && data.getBooleanExtra("paymentApproved", false)) {
+
+                status = "approved";
+                statusAppRev.setText("approved");
+                statusAppRev.setTextColor(Color.GREEN);
+
+                acceptBtn.setVisibility(View.GONE);
+                declineBtn.setVisibility(View.GONE);
+
+                Toast.makeText(this, "Payment Completed. Application Approved!", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 }
