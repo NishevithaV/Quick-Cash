@@ -8,10 +8,11 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp">
 
-        <TextView android:id="@+id/jobTitle"
+        <TextView
+            android:id="@+id/jobTitle"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -19,19 +20,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView android:id="@+id/jobEmployer"
+        <TextView
+            android:id="@+id/jobEmployer"
             android:textColor="@color/white"
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView android:id="@+id/jobCategory"
-            android:layout_marginBottom="12dp"
+        <TextView
+            android:id="@+id/jobCategory"
             android:textColor="@color/white"
+            android:layout_marginBottom="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView android:id="@+id/jobDesc"
+        <TextView
+            android:id="@+id/jobDesc"
             android:textColor="@color/white"
             android:layout_marginBottom="24dp"
             android:layout_width="wrap_content"
@@ -52,12 +56,14 @@
                 android:visibility="gone"
                 android:text="Apply Now"
                 android:textColor="@color/white" />
-        </LinearLayout>>
+        </LinearLayout>
 
-        <TextView android:id="@+id/jobDetailAlreadyApplied"
+        <TextView
+            android:id="@+id/jobDetailAlreadyApplied"
             android:textColor="@color/white"
             android:layout_marginBottom="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 </ScrollView>
