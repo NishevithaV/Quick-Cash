@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,8 +17,13 @@
         android:theme="@style/Theme.Quick_Cash"
         tools:targetApi="31">
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCQ4JImMbrCWQ755h2vhVOLBfKzL_mCfrY" />
+
         <activity
-            android:name=".views.registration.RegistrationActivity"
+            android:name=".views.employer.EmployerDashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,16 +31,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.settings.SettingsActivity"/>
-        <activity android:name=".views.employee.EmployeeDashboardActivity"/>
-        <activity android:name=".views.reset_password.ResetPasswordActivity"/>
-        <activity android:name=".views.reset_password.ResetPasswordFormActivity"/>
+        <activity android:name=".views.settings.SettingsActivity" />
+        <activity android:name=".views.registration.RegistrationActivity" />
+        <activity android:name=".views.reset_password.ResetPasswordActivity" />
+        <activity android:name=".views.reset_password.ResetPasswordFormActivity" />
         <activity android:name=".views.login.LoginActivity" />
         <activity android:name=".views.employer.PostFormActivity" />
-        <activity android:name=".views.employer.EmployerDashboardActivity" />
+        <activity android:name=".views.employee.EmployeeDashboardActivity" />
+        <activity android:name=".views.employer.ApplicationReviewActivity" />
+        <activity android:name=".views.employer.ApplicationsActivity" />
+        <activity android:name=".views.employer.JobApplicationsActivity" />
+        <activity android:name=".views.employer.EmployerListingsActivity" />
+        <activity android:name=".views.employer.EmployerPaymentActivity" />
         <activity android:name=".views.switch_role.ConfirmActivity" />
+        <activity android:name=".views.employee.EmployeeApplicationsActivity" />
+        <activity android:name=".views.employee.SubmitApplicationActivity" />
         <activity android:name=".views.employee.JobDetailActivity" />
         <activity android:name=".views.employee.JobSearchActivity" />
+        <activity android:name=".views.maps.CurrentLocationActivity" />
+        <activity android:name=".views.maps.MapViewActivity" />
     </application>
 
 </manifest>

@@ -11,6 +11,9 @@ credentialsProperties.load(new FileInputStream(credentialsPropertiesFile))
 android {
     namespace 'com.example.quick_cash'
     compileSdk 36
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "com.example.quick_cash"
@@ -32,6 +35,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding true
+    }
+
 }
 
 dependencies {
@@ -46,7 +53,8 @@ dependencies {
     implementation libs.espresso.idling.resource
     testImplementation libs.junit
     testImplementation libs.mockito.core
-
+    implementation(libs.maps)
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.espresso.intents

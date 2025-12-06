@@ -65,7 +65,7 @@ public class JUnitTest {
      */
     @Test
     public void checkIfApplicationDeadlineIsValid() {
-        assertTrue(validator.checkValidApplicationDeadline("2025-11-21"));
+        assertTrue(validator.checkValidApplicationDeadline("2025-12-25"));
     }
 
     /**
@@ -91,4 +91,39 @@ public class JUnitTest {
     public void checkIfDescriptionIsNotEmpty() {
         assertFalse(validator.checkEmptyJobDescription("Sample description"));
     }
+
+
+
+    /**
+     * Check if job location is empty.
+     */
+    @Test
+    public void checkIfJobLocationIsEmpty() {
+        assertTrue(validator.checkEmptyJobLocation(""));
+    }
+
+    /**
+     * Check if job location is null.
+     */
+    @Test
+    public void checkIfJobLocationIsNull() {
+        assertTrue(validator.checkEmptyJobLocation(null));
+    }
+
+    /**
+     * Check if job location with only whitespace is empty.
+     */
+    @Test
+    public void checkIfJobLocationWithWhitespaceIsEmpty() {
+        assertTrue(validator.checkEmptyJobLocation("   "));
+    }
+
+    /**
+     * Check if job location is not empty.
+     */
+    @Test
+    public void checkIfJobLocationIsNotEmpty() {
+        assertFalse(validator.checkEmptyJobLocation("Halifax, NS"));
+    }
+
 }

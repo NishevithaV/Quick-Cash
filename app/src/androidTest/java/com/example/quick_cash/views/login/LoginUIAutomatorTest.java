@@ -78,7 +78,7 @@ public class LoginUIAutomatorTest {
 
         // Wait for dashboard to appear (mock dashboard text)
         boolean employerDashboardLoaded =
-                device.wait(Until.hasObject(By.textContains("Your Posted Jobs")), 5000);
+                device.wait(Until.hasObject(By.textContains("Employer DashBoard")), 5000);
         boolean employeeDashboardLoaded =
                 device.wait(Until.hasObject(By.textContains("Employee Dashboard")), 5000);
 

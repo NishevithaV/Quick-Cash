@@ -42,6 +42,7 @@ uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", versi
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroid" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
+maps = { group = "com.google.android.gms", name = "play-services-maps", version = "19.0.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
