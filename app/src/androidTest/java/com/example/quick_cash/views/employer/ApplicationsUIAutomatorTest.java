@@ -22,12 +22,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+/**
+ * The type Applications ui automator test.
+ */
 public class ApplicationsUIAutomatorTest {
     private UiDevice device;
+    /**
+     * The Launcher package name.
+     */
     final String launcherPackageName = "com.example.quick_cash";
     private static final int LAUNCH_TIMEOUT = 5000;
 
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         FirebaseAuth.getInstance().signOut();
@@ -44,6 +54,11 @@ public class ApplicationsUIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Test all ui elements visible.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testAllUiElementsVisible() throws Exception {
         UiObject header = device.findObject(new UiSelector().textContains("Applications"));
@@ -75,6 +90,11 @@ public class ApplicationsUIAutomatorTest {
         assertTrue(acceptBtn.exists());
     }
 
+    /**
+     * Test clicking non pending application no decline or accept ui automator.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testClickingNonPendingApplicationNoDeclineOrAccept_UiAutomator() throws Exception {
         UiObject statusFilter = device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/statusFilter"));
@@ -96,6 +116,11 @@ public class ApplicationsUIAutomatorTest {
         assertTrue(acceptBtn.exists());
     }
 
+    /**
+     * Test filter applications.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testFilterApplications() throws Exception {
         UiObject statusFilter = device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/statusFilter"));

@@ -11,6 +11,9 @@ import org.junit.Test;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The type App review j unit test.
+ */
 public class AppReviewJUnitTest {
     /**
      * Test filtering by status logic

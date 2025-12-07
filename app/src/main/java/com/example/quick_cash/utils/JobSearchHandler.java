@@ -8,6 +8,9 @@ import com.example.quick_cash.models.Job;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Job search handler.
+ */
 public class JobSearchHandler {
     private ArrayList<Job> allJobs;
 
@@ -135,8 +138,10 @@ public class JobSearchHandler {
     /**
      * Gets all jobs.
      *
-     * @param search   the search
-     * @param category the category
+     * @param search         the search
+     * @param category       the category
+     * @param locationOption the location option
+     * @param userLocation   the user location
      * @return the all jobs
      */
     public ArrayList<Job> getAllJobs(String search,
@@ -181,14 +186,14 @@ public class JobSearchHandler {
     /**
      * Gets jobs filtered by location radius.
      *
-     * @param search      the search text
-     * @param category    the category
-     * @param searchLat   the search latitude
-     * @param searchLng   the search longitude
-     * @param radiusKm    the radius in kilometers
+     * @param search    the search text
+     * @param category  the category
+     * @param searchLat the search latitude
+     * @param searchLng the search longitude
+     * @param radiusKm  the radius in kilometers
      * @return the filtered jobs
      */
-    public ArrayList<Job> getJobsByLocationRadius(String search, String category, 
+    public ArrayList<Job> getJobsByLocationRadius(String search, String category,
                                                    double searchLat, double searchLng, 
                                                    int radiusKm) {
         ArrayList<Job> results = new ArrayList<>();

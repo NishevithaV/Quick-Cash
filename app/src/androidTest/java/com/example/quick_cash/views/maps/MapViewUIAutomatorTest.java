@@ -24,12 +24,18 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+/**
+ * The type Map view ui automator test.
+ */
 public class MapViewUIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
     private static final String PACKAGE_NAME = "com.example.quick_cash";
     private UiDevice device;
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -51,6 +57,8 @@ public class MapViewUIAutomatorTest {
 
     /**
      * AT-4: Test clicking on marker shows info window with job title.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
      */
     @Test
     public void testClickMarkerShowsJobTitle() throws UiObjectNotFoundException {

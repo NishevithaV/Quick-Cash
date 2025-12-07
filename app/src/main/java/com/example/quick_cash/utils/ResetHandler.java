@@ -16,22 +16,43 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The type Reset handler.
+ */
 public class ResetHandler {
 
     private DatabaseReference usersRef;
     private FirebaseLoginHandler loginHandler;
     private ResetPasswordValidator psswdValidator;
     private FirebaseAuth auth;
+
+    /**
+     * Instantiates a new Reset handler.
+     */
     public ResetHandler() {
         usersRef = new Users(FirebaseDatabase.getInstance()).getUsersRef();
         auth = FirebaseAuth.getInstance();
         loginHandler = new FirebaseLoginHandler();
     }
 
+    /**
+     * The interface Email exist callback.
+     */
     public interface EmailExistCallback {
+        /**
+         * On result.
+         *
+         * @param exists the exists
+         */
         void onResult(boolean exists);
     }
 
+    /**
+     * Email exists.
+     *
+     * @param email    the email
+     * @param callback the callback
+     */
     public void emailExists(String email, EmailExistCallback callback) {
         Query query = usersRef.orderByChild("email").equalTo(email);
 
@@ -49,11 +70,31 @@ public class ResetHandler {
         });
     }
 
+    /**
+     * The interface Password change callback.
+     */
     public interface PasswordChangeCallback {
+        /**
+         * On success.
+         */
         void onSuccess();
+
+        /**
+         * On failure.
+         *
+         * @param errorMessage the error message
+         */
         void onFailure(String errorMessage);
     }
 
+    /**
+     * Reset.
+     *
+     * @param email        the email
+     * @param currPassword the curr password
+     * @param newPassword  the new password
+     * @param callback     the callback
+     */
     public void reset(String email, String currPassword, String newPassword, PasswordChangeCallback callback) {
         auth.signInWithEmailAndPassword(email, currPassword)
                 .addOnCompleteListener(task -> {

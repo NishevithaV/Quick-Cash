@@ -6,6 +6,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.gms.tasks.Task;
 
+/**
+ * The type Firebase login handler.
+ */
 public class FirebaseLoginHandler {
 
     private final FirebaseAuth auth = FirebaseAuth.getInstance();

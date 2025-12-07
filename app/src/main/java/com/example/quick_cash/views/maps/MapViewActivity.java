@@ -22,6 +22,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Map view activity.
+ */
 public class MapViewActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

@@ -11,6 +11,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Update app status j unit test.
+ */
 public class UpdateAppStatusJUnitTest {
     /**
      * Test filtering by status logic

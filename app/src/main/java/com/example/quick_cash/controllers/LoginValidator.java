@@ -2,6 +2,9 @@ package com.example.quick_cash.controllers;
 
 import java.util.regex.Pattern;
 
+/**
+ * The type Login validator.
+ */
 public class LoginValidator {
 
     private static final Pattern EMAIL_REGEX = Pattern.compile(

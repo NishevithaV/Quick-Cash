@@ -21,11 +21,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * The type Job details ui test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class JobDetailsUITest {
 
     private UiDevice device;
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -41,6 +47,11 @@ public class JobDetailsUITest {
         ctx.startActivity(intent);
     }
 
+    /**
+     * Test all views visible.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testAllViewsVisible() throws Exception {
         assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobTitle")).exists());
@@ -49,6 +60,9 @@ public class JobDetailsUITest {
         assertTrue(device.findObject(new UiSelector().resourceId("com.example.quick_cash:id/jobDesc")).exists());
     }
 
+    /**
+     * Test apply button opens submission.
+     */
     @Test
     public void testApplyButtonOpensSubmission() {
         UiObject2 applyButton = device.wait(Until.findObject(By.res("com.example.quick_cash", "applyButton")), 5000);

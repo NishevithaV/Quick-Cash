@@ -21,12 +21,27 @@ import com.example.quick_cash.views.maps.CurrentLocationActivity;
 import com.example.quick_cash.views.settings.SettingsActivity;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+/**
+ * The type Employee dashboard activity.
+ */
 public class EmployeeDashboardActivity extends AppCompatActivity {
 
+    /**
+     * The Btn find jobs.
+     */
     Button btnFindJobs;
+    /**
+     * The Btn settings.
+     */
     Button btnSettings;
 
+    /**
+     * The Btn nearby jobs.
+     */
     Button btnNearbyJobs;
+    /**
+     * The Btn my apps.
+     */
     Button btnMyApps;
 
 

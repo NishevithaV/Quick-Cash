@@ -20,12 +20,27 @@ import com.example.quick_cash.views.settings.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+/**
+ * The type Employer dashboard activity.
+ */
 public class EmployerDashboardActivity extends AppCompatActivity {
 
+    /**
+     * The Btn view listings.
+     */
     Button btnViewListings;
+    /**
+     * The Btn review apps.
+     */
     Button btnReviewApps;
+    /**
+     * The Btn settings.
+     */
     Button btnSettings;
 
+    /**
+     * The Btn post jobs.
+     */
     Button btnPostJobs;
 
     @Override

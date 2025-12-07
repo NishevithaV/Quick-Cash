@@ -15,6 +15,9 @@ import androidx.core.app.ActivityCompat;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Location handler.
+ */
 public class LocationHandler {
 
     private static LocationHandler instance;
@@ -31,7 +34,15 @@ public class LocationHandler {
     private LocationListener locationListener;
     private OnLocationUpdate currentLocationCallback;
 
+    /**
+     * The interface On location update.
+     */
     public interface OnLocationUpdate {
+        /**
+         * On update.
+         *
+         * @param readableLocation the readable location
+         */
         void onUpdate(String readableLocation);
     }
 

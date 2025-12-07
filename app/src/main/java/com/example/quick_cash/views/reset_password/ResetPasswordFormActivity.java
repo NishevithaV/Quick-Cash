@@ -15,6 +15,9 @@ import com.example.quick_cash.controllers.ResetPasswordValidator;
 import com.example.quick_cash.utils.ResetHandler;
 import com.example.quick_cash.views.login.LoginActivity;
 
+/**
+ * The type Reset password form activity.
+ */
 public class ResetPasswordFormActivity extends AppCompatActivity {
 
     // declaring the UI components

@@ -16,15 +16,39 @@ import com.example.quick_cash.R;
 import com.example.quick_cash.utils.FirebaseCRUD.Applications;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The type Application review activity.
+ */
 public class ApplicationReviewActivity extends AppCompatActivity {
 
+    /**
+     * The Decline btn.
+     */
     Button declineBtn;
+    /**
+     * The Accept btn.
+     */
     Button acceptBtn;
 
+    /**
+     * The Applicant name app rev.
+     */
     TextView applicantNameAppRev;
+    /**
+     * The Job title app rev.
+     */
     TextView jobTitleAppRev;
+    /**
+     * The Status app rev.
+     */
     TextView statusAppRev;
+    /**
+     * The Cvr ltr app rev.
+     */
     TextView cvrLtrAppRev;
+    /**
+     * The Toast msg.
+     */
     public String toastMsg;
 
     private boolean accepted;

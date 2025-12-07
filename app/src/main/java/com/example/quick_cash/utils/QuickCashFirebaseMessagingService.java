@@ -17,6 +17,10 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.example.quick_cash.R;
 
 import java.util.Map;
+
+/**
+ * The type Quick cash firebase messaging service.
+ */
 //class is for showing the notifications on the very top
 //firebase messaging service from the build.gradle file
 //runs in the background

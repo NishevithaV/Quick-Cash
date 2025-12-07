@@ -1,5 +1,8 @@
 package com.example.quick_cash.models;
 
+/**
+ * The type Application.
+ */
 public class Application {
 
     private String letter;
@@ -18,9 +21,9 @@ public class Application {
      * Instantiates a new Job.
      *
      * @param applicantId the applicantId
-     * @param letter the cover letter
-     * @param status the status
-     * @param jobId the jobId
+     * @param letter      the cover letter
+     * @param status      the status
+     * @param jobId       the jobId
      */
     public Application(String applicantId, String letter, String status, String jobId) {
         this.applicantId = applicantId;
@@ -33,9 +36,9 @@ public class Application {
     /**
      * Instantiates a new Job.
      *
-     * @param applicantId    the applicant id
-     * @param letter the letter
-     * @param jobId     the jobId
+     * @param applicantId the applicant id
+     * @param letter      the letter
+     * @param jobId       the jobId
      */
     public Application(String applicantId, String letter, String jobId) {
         this.applicantId = applicantId;
@@ -47,11 +50,11 @@ public class Application {
     /**
      * Instantiates a new Application.
      *
-     * @param applicantId    the applicatant id
-     * @param letter the letter
-     * @param status the status
-     * @param jobId     the jobID
-     * @param id the id
+     * @param applicantId the applicatant id
+     * @param letter      the letter
+     * @param status      the status
+     * @param jobId       the jobID
+     * @param id          the id
      */
     public Application(String applicantId, String letter, String status, String jobId, String id) {
         this.applicantId = applicantId;
@@ -108,6 +111,7 @@ public class Application {
 
     /**
      * Set status
+     *
      * @param status the status
      */
     public void setStatus(String status) {

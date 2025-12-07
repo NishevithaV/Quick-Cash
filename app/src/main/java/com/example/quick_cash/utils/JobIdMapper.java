@@ -7,6 +7,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * The type Job id mapper.
+ */
 public final class JobIdMapper {
 
     private static final Jobs jobsCRUD = new Jobs(FirebaseDatabase.getInstance());
@@ -16,7 +19,7 @@ public final class JobIdMapper {
     /**
      * Get Job Title given user id
      *
-     * @param jobId   id to get name for
+     * @param jobId    id to get name for
      * @param callback interface with method to handle user name
      */
     public static void getTitle(String jobId, JobInfoCallback callback) {
@@ -49,7 +52,7 @@ public final class JobIdMapper {
     /**
      * Get Job Title given user id
      *
-     * @param jobId   id to get name for
+     * @param jobId    id to get name for
      * @param callback interface with method to handle user name
      */
     public static void getEmployer(String jobId, JobInfoCallback callback) {

@@ -23,14 +23,32 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * The type Applications activity.
+ */
 public class ApplicationsActivity extends AppCompatActivity {
 
+    /**
+     * The Status filter.
+     */
     Spinner statusFilter;
+    /**
+     * The Apps results view.
+     */
     ListView appsResultsView;
+    /**
+     * The Apps res head.
+     */
     TextView appsResHead;
+    /**
+     * The Apps crud.
+     */
     Applications appsCRUD;
 
     private String selectedStatus;
+    /**
+     * The Toast msg.
+     */
     public String toastMsg;
     private ArrayList<Application> displayedApps;
     private ApplicationsFilterHandler filterHandler;
@@ -132,6 +150,11 @@ public class ApplicationsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets displayed apps for test.
+     *
+     * @param apps the apps
+     */
     public void setDisplayedAppsForTest(ArrayList<Application> apps) {
         displayedApps.clear();
         displayedApps.addAll(apps);

@@ -1,6 +1,9 @@
 package com.example.quick_cash.controllers;
 import com.example.quick_cash.controllers.RegistrationValidator;
 
+/**
+ * The type Reset password validator.
+ */
 public class ResetPasswordValidator {
 
     private RegistrationValidator psswdValidator;
@@ -27,6 +30,12 @@ public class ResetPasswordValidator {
         return validEmail;
     }
 
+    /**
+     * Is valid password boolean.
+     *
+     * @param psswd the psswd
+     * @return the boolean
+     */
     public boolean isValidPassword(String psswd) {
         return psswdValidator.validPassword(psswd);
     }

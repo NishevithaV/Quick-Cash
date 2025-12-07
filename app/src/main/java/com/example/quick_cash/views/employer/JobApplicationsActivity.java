@@ -26,16 +26,37 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * The type Job applications activity.
+ */
 public class JobApplicationsActivity extends AppCompatActivity {
 
+    /**
+     * The Status frame.
+     */
     FrameLayout statusFrame;
+    /**
+     * The Heading.
+     */
     TextView heading;
+    /**
+     * The Apps results view.
+     */
     ListView appsResultsView;
+    /**
+     * The Apps res head.
+     */
     TextView appsResHead;
+    /**
+     * The Apps crud.
+     */
     Applications appsCRUD;
 
     private String selectedJobId;
     private String selectedJobTitle;
+    /**
+     * The Toast msg.
+     */
     public String toastMsg;
     private ArrayList<Application> displayedApps;
     private ApplicationsFilterHandler filterHandler;
@@ -122,6 +143,11 @@ public class JobApplicationsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets displayed apps for test.
+     *
+     * @param apps the apps
+     */
     public void setDisplayedAppsForTest(ArrayList<Application> apps) {
         displayedApps.clear();
         displayedApps.addAll(apps);

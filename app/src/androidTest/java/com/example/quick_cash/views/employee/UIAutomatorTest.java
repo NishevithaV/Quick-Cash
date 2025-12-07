@@ -27,13 +27,22 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * The type Ui automator test.
+ */
 public class UIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
+    /**
+     * The Launcher package name.
+     */
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
     private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
+    /**
+     * The Permission rule.
+     */
     @Rule
     public GrantPermissionRule permissionRule =
             GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -146,6 +155,8 @@ public class UIAutomatorTest {
 
     /**
      * AT-2: Test searching by location with radius.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
      */
     @Test
     public void testSearchByLocationWithRadius() throws UiObjectNotFoundException {
@@ -191,6 +202,8 @@ public class UIAutomatorTest {
 
     /**
      * AT-3: Test View on Map button is visible after location search.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
      */
     @Test
     public void testViewOnMapButtonVisibleAfterLocationSearch() throws UiObjectNotFoundException {
@@ -215,6 +228,8 @@ public class UIAutomatorTest {
 
     /**
      * AT-3: Test clicking View on Map button opens MapViewActivity.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
      */
     @Test
     public void testClickViewOnMapOpensMapActivity() throws UiObjectNotFoundException {

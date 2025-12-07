@@ -9,16 +9,35 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * The type Submit application handler.
+ */
 public class SubmitApplicationHandler {
+    /**
+     * The constant ALREADY_APPLIED.
+     */
     public static final String ALREADY_APPLIED = "Failed: Already Applied";
+    /**
+     * The constant APPLICATION_SUCCESS.
+     */
     public static final String APPLICATION_SUCCESS = "Success: Application Submitted";
     private Applications appsCRUD;
     private Users usersCRUD;
+
+    /**
+     * Instantiates a new Submit application handler.
+     */
     public SubmitApplicationHandler(){
         appsCRUD = new Applications(FirebaseDatabase.getInstance());
         usersCRUD = new Users(FirebaseDatabase.getInstance());
     }
 
+    /**
+     * Instantiates a new Submit application handler.
+     *
+     * @param mockUsers the mock users
+     * @param mockApps  the mock apps
+     */
     public SubmitApplicationHandler(Users mockUsers, Applications mockApps) {
         this.appsCRUD = mockApps;
         this.usersCRUD = mockUsers;
@@ -30,6 +49,7 @@ public class SubmitApplicationHandler {
     public interface SubmitCallback {
         /**
          * Callback function
+         *
          * @param msg callback message
          */
         public void onCallback(String msg);
@@ -37,9 +57,10 @@ public class SubmitApplicationHandler {
 
     /**
      * Submits an application for an applicant
-     * @param uid applicant id
-     * @param jobID job id to apply to
-     * @param letter letter
+     *
+     * @param uid      applicant id
+     * @param jobID    job id to apply to
+     * @param letter   letter
      * @param callback callback
      */
     public void submitApp(String uid, String jobID, String letter, SubmitCallback callback) {
@@ -82,6 +103,7 @@ public class SubmitApplicationHandler {
     public interface HasAlreadyAppliedCallback {
         /**
          * Callback function
+         *
          * @param applied callback boolean
          */
         public void onCallback(boolean applied);
@@ -89,8 +111,9 @@ public class SubmitApplicationHandler {
 
     /**
      * Checks if user has already applied to job
-     * @param uid user id
-     * @param jobID job id
+     *
+     * @param uid      user id
+     * @param jobID    job id
      * @param callback callback function
      */
     public void checkIfHasAlreadyApplied(String uid, String jobID, HasAlreadyAppliedCallback callback) {

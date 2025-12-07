@@ -19,6 +19,9 @@ import com.example.quick_cash.views.login.LoginActivity;
 import com.example.quick_cash.controllers.RegistrationValidator;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The type Registration activity.
+ */
 public class RegistrationActivity extends AppCompatActivity {
 
     private EditText nameInput;

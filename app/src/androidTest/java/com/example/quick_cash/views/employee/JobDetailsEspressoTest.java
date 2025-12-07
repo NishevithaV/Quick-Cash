@@ -25,10 +25,17 @@ import com.example.quick_cash.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * The type Job details espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class JobDetailsEspressoTest {
 
     private ActivityScenario<JobDetailActivity> scenario;
+
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -48,6 +55,9 @@ public class JobDetailsEspressoTest {
         return i;
     }
 
+    /**
+     * Test all views visible.
+     */
     @Test
     public void testAllViewsVisible() {
         scenario = ActivityScenario.launch(createIntent("123"));
@@ -58,6 +68,9 @@ public class JobDetailsEspressoTest {
         onView(withId(R.id.applyButton)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Apply button click opens submit activity.
+     */
     @Test
     public void applyButtonClick_opensSubmitActivity() {
         scenario = ActivityScenario.launch(createIntent("123"));
@@ -65,6 +78,11 @@ public class JobDetailsEspressoTest {
         onView(withId(R.id.cvrLtrHead)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Test open already applied job.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void testOpenAlreadyAppliedJob() throws InterruptedException{
         scenario = ActivityScenario.launch(createIntent("testJobIDalreadyapplied"));

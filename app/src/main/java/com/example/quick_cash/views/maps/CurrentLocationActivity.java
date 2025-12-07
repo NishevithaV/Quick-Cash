@@ -26,11 +26,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Current location activity.
+ */
 public class CurrentLocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    /**
+     * The Location manager.
+     */
     LocationManager locationManager;
+    /**
+     * The Location listener.
+     */
     LocationListener locationListener;
+    /**
+     * The Marker.
+     */
     Marker marker;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;

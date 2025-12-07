@@ -10,6 +10,9 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.quick_cash.views.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * The type Logout handler.
+ */
 public class LogoutHandler {
     private final Context context;
     private final FirebaseAuth auth;

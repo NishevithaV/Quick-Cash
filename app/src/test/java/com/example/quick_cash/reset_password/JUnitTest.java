@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 import com.example.quick_cash.controllers.ResetPasswordValidator;
 
+/**
+ * The type J unit test.
+ */
 public class JUnitTest {
 
     private ResetPasswordValidator validator;
@@ -41,6 +44,9 @@ public class JUnitTest {
         assertTrue(validator.isValidEmail("al3098@somedomain.ca"));
     }
 
+    /**
+     * Is invalid password.
+     */
     @Test
     public void isInvalidPassword() {
         assertFalse(validator.isValidPassword("badpassword"));
@@ -48,6 +54,9 @@ public class JUnitTest {
         assertFalse(validator.isValidPassword(""));
     }
 
+    /**
+     * Is valid password.
+     */
     @Test
     public void isValidPassword() {
         assertTrue(validator.isValidPassword("12345678bB%"));

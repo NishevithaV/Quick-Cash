@@ -16,10 +16,16 @@ import com.example.quick_cash.R;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * The type View push notification activity espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class ViewPushNotificationActivityEspressoTest {
 
 
+    /**
+     * Check injected data displayed.
+     */
     @Test
     public void checkInjectedDataDisplayed() {
         Intent intent = new Intent();

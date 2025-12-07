@@ -23,6 +23,9 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import java.math.BigDecimal;
 
+/**
+ * The type Employer payment activity.
+ */
 public class EmployerPaymentActivity extends AppCompatActivity {
 
     private static final int PAYPAL_REQUEST_CODE = 999;

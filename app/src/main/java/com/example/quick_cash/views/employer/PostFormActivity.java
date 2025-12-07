@@ -54,6 +54,9 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * The type Post form activity.
+ */
 public class PostFormActivity extends AppCompatActivity implements View.OnClickListener {
 
     //path
@@ -69,14 +72,38 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
 
     private String jobId;
 
+    /**
+     * The Jobs crud.
+     */
     Jobs jobsCRUD;
+    /**
+     * The Validator.
+     */
     JobPostingValidator validator;
+    /**
+     * The Job name.
+     */
     EditText jobName;
+    /**
+     * The Job location.
+     */
     EditText jobLocation;
 
+    /**
+     * The Job category spinner.
+     */
     Spinner jobCategorySpinner;
+    /**
+     * The Application deadline.
+     */
     EditText applicationDeadline;
+    /**
+     * The Job description.
+     */
     EditText jobDescription;
+    /**
+     * The Result.
+     */
     TextView result;
 
     private FirebaseAuth auth;
@@ -393,7 +420,12 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    // Add a setter for testing
+    /**
+     * Sets jobs crud.
+     *
+     * @param jobsCRUD the jobs crud
+     */
+// Add a setter for testing
     public void setJobsCRUD(Jobs jobsCRUD) {
         this.jobsCRUD = jobsCRUD;
     }

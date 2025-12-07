@@ -36,25 +36,67 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Job search activity.
+ */
 public class JobSearchActivity extends AppCompatActivity {
 
+    /**
+     * The User search.
+     */
     EditText userSearch;
+    /**
+     * The Location search field.
+     */
     EditText locationSearchField;
+    /**
+     * The Results header.
+     */
     TextView resultsHeader;
+    /**
+     * The Current location header.
+     */
     TextView currentLocationHeader;
+    /**
+     * The Results view.
+     */
     ListView resultsView;
+    /**
+     * The Search btn.
+     */
     Button searchBtn;
+    /**
+     * The View on map btn.
+     */
     Button viewOnMapBtn;
+    /**
+     * The Category selector.
+     */
     Spinner categorySelector;
+    /**
+     * The Location selector.
+     */
     Spinner locationSelector;
+    /**
+     * The Radius selector.
+     */
     Spinner radiusSelector;
 
+    /**
+     * The Jobs crud.
+     */
     Jobs jobsCRUD;
 
+    /**
+     * The Job searcher.
+     */
     JobSearchHandler jobSearcher;
 
     private ArrayList<Job> displayedJobs;
 
+    /**
+     * The Location handler.
+     */
     LocationHandler locationHandler;
     private static final int REQUEST_LOCATION = 1;
 

@@ -16,6 +16,9 @@ import com.example.quick_cash.views.login.LoginActivity;
 import com.example.quick_cash.controllers.ResetPasswordValidator;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * The type Reset password activity.
+ */
 public class ResetPasswordActivity extends AppCompatActivity {
 
     // declaring the UI components

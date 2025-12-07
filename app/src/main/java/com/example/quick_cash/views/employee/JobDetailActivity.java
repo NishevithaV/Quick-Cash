@@ -16,12 +16,30 @@ import com.example.quick_cash.utils.SubmitApplicationHandler;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * The type Job detail activity.
+ */
 public class JobDetailActivity extends AppCompatActivity {
 
+    /**
+     * The Title.
+     */
     TextView title;
+    /**
+     * The Employer.
+     */
     TextView employer;
+    /**
+     * The Category.
+     */
     TextView category;
+    /**
+     * The Description.
+     */
     TextView description;
+    /**
+     * The Apply button.
+     */
     Button applyButton;
     private SubmitApplicationHandler submitHandler;
     private String jobID;

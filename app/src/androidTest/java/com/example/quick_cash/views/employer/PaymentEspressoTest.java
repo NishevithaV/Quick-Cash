@@ -19,9 +19,15 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
+/**
+ * The type Payment espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class PaymentEspressoTest {
 
+    /**
+     * Test ui elements exist.
+     */
     @Test
     public void testUIElementsExist() {
         Intent intent = new Intent(androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext(),
@@ -40,6 +46,10 @@ public class PaymentEspressoTest {
                     .check(matches(withText("Pay with PayPal")));
         }
     }
+
+    /**
+     * Test empty amount shows error toast.
+     */
     @Test
     public void testEmptyAmountShowsErrorToast() {
         Intent intent = new Intent(androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext(),
@@ -58,6 +68,9 @@ public class PaymentEspressoTest {
         }
     }
 
+    /**
+     * Test invalid amount shows error toast.
+     */
     @Test
     public void testInvalidAmountShowsErrorToast() {
         Intent intent = new Intent(androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext(),

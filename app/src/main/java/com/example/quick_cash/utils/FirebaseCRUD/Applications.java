@@ -18,6 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * The type Applications.
+ */
 public class Applications {
     private final DatabaseReference appsRef;
 
@@ -30,15 +33,27 @@ public class Applications {
         this.appsRef = database.getReference("job_applications");
     }
 
+    /**
+     * The interface Post app callback.
+     */
     public interface PostAppCallback {
+        /**
+         * On success.
+         */
         public void onSuccess();
+
+        /**
+         * On failure.
+         *
+         * @param reason the reason
+         */
         public void onFailure(String reason);
     }
 
     /**
      * Post Application boolean.
      *
-     * @param app the application
+     * @param app      the application
      * @param callback the callback
      */
     public void postApplication(Application app, PostAppCallback callback){
@@ -150,8 +165,8 @@ public class Applications {
     /**
      * Update application status.
      *
-     * @param appId   the application id
-     * @param newStatus  the new status
+     * @param appId     the application id
+     * @param newStatus the new status
      */
     public void updateStatus(String appId, String newStatus) {
         appsRef.child(appId).child("status").setValue(newStatus);

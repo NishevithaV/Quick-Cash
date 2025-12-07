@@ -19,17 +19,44 @@ import com.example.quick_cash.models.Application;
 
 import java.util.List;
 
+/**
+ * The type Employee application adapter.
+ */
 public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
 
     private final LayoutInflater inflater;
     private final int resource;
     private final OnItemActionListener listener;
 
+    /**
+     * The interface On item action listener.
+     */
     public interface OnItemActionListener {
+        /**
+         * On mark completed.
+         *
+         * @param app      the app
+         * @param position the position
+         */
         void onMarkCompleted(Application app, int position);
+
+        /**
+         * On card clicked.
+         *
+         * @param app      the app
+         * @param position the position
+         */
         void onCardClicked(Application app, int position); // optional
     }
 
+    /**
+     * Instantiates a new Employee application adapter.
+     *
+     * @param context  the context
+     * @param resource the resource
+     * @param apps     the apps
+     * @param listener the listener
+     */
     public EmployeeApplicationAdapter(Context context,
                                       int resource,
                                       List<Application> apps,
@@ -107,10 +134,30 @@ public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
         return convertView;
     }
 
+    /**
+     * The type View holder.
+     */
     static class ViewHolder {
-        TextView jobTitle, company, status;
+        /**
+         * The Job title.
+         */
+        TextView jobTitle, /**
+         * The Company.
+         */
+        company, /**
+         * The Status.
+         */
+        status;
+        /**
+         * The Mark completed.
+         */
         Button markCompleted;
 
+        /**
+         * Instantiates a new View holder.
+         *
+         * @param view the view
+         */
         ViewHolder(View view) {
             jobTitle = view.findViewById(R.id.tv_job_title);
             company = view.findViewById(R.id.tv_company_name);

@@ -36,6 +36,9 @@ public class EspressoTest {
      */
     public ActivityScenario<CurrentLocationActivity> activityScenario;
 
+    /**
+     * The Permission rule.
+     */
     @Rule
     public GrantPermissionRule permissionRule =
             GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);

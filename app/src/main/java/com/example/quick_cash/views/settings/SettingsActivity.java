@@ -11,6 +11,9 @@ import com.example.quick_cash.utils.LogoutHandler;
 import com.example.quick_cash.views.reset_password.ResetPasswordActivity;
 import com.example.quick_cash.utils.SwitchRoleHandler;
 
+/**
+ * The type Settings activity.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     private Button logoutButton;

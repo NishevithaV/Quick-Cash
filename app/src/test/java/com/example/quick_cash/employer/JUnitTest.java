@@ -8,7 +8,13 @@ import static org.junit.Assert.assertTrue;
 
 import com.example.quick_cash.controllers.JobPostingValidator;
 
+/**
+ * The type J unit test.
+ */
 public class JUnitTest {
+    /**
+     * The Validator.
+     */
     JobPostingValidator validator;
 
     /**
@@ -91,7 +97,6 @@ public class JUnitTest {
     public void checkIfDescriptionIsNotEmpty() {
         assertFalse(validator.checkEmptyJobDescription("Sample description"));
     }
-
 
 
     /**

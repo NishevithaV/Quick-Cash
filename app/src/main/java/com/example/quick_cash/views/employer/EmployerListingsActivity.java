@@ -27,6 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Employer listings activity.
+ */
 public class EmployerListingsActivity extends AppCompatActivity {
 
     private Button settingsPageButton;
@@ -118,6 +121,11 @@ public class EmployerListingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets displayed jobs for test.
+     *
+     * @param jobs the jobs
+     */
     public void setDisplayedJobsForTest(ArrayList<Job> jobs) {
         displayedJobs.clear();
         displayedJobs.addAll(jobs);

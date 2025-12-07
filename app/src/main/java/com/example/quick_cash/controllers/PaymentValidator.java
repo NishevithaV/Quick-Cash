@@ -1,6 +1,16 @@
 package com.example.quick_cash.controllers;
 import java.math.BigDecimal;
+
+/**
+ * The type Payment validator.
+ */
 public class PaymentValidator {
+    /**
+     * Is amount valid boolean.
+     *
+     * @param amountStr the amount str
+     * @return the boolean
+     */
     public static boolean isAmountValid(String amountStr) {
         if (amountStr == null || amountStr.trim().isEmpty()) return false;
         try {
@@ -13,6 +23,9 @@ public class PaymentValidator {
 
     /**
      * Converts a valid string to BigDecimal
+     *
+     * @param amountStr the amount str
+     * @return the big decimal
      */
     public static BigDecimal parseAmount(String amountStr) {
         return new BigDecimal(amountStr.trim());

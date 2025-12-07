@@ -16,6 +16,9 @@ import com.example.quick_cash.views.employee.EmployeeDashboardActivity;
 import com.example.quick_cash.views.employer.EmployerDashboardActivity;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The type Confirm activity.
+ */
 public class ConfirmActivity extends AppCompatActivity {
 
     private EditText emailInput;

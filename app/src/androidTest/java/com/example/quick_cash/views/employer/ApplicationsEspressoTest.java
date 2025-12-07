@@ -28,6 +28,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+/**
+ * The type Applications espresso test.
+ */
 public class ApplicationsEspressoTest {
 
     /**
@@ -52,6 +55,9 @@ public class ApplicationsEspressoTest {
         onView(withId(R.id.appsResultsView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Accept button shows toast.
+     */
     @Test
     public void acceptButtonShowsToast() {
         Intent intent = new Intent(
@@ -80,6 +86,9 @@ public class ApplicationsEspressoTest {
         });
     }
 
+    /**
+     * Decline button shows toast.
+     */
     @Test
     public void declineButtonShowsToast() {
         Intent intent = new Intent(
