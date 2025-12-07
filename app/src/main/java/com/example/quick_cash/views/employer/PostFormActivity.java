@@ -1,11 +1,16 @@
 package com.example.quick_cash.views.employer;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,19 +19,40 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.quick_cash.controllers.JobPostingValidator;
+import com.example.quick_cash.utils.AccessTokenListener;
 import com.example.quick_cash.utils.FirebaseCRUD.Jobs;
 import com.example.quick_cash.models.Job;
 import com.example.quick_cash.R;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PostFormActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +64,10 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
     //new endpoint
     private static final String PUSH_NOTIFICATION_ENDPOINT ="https://fcm.googleapis.com/v1/projects/quickcash-72ee9/messages:send";
 
+    //provided by volley library to make a network request
+    private RequestQueue requestQueue;
+
+    private String jobId;
 
     Jobs jobsCRUD;
     JobPostingValidator validator;
@@ -58,6 +88,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
      *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
      *
      */
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -65,8 +96,17 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
         this.setContentView(R.layout.activity_post_form);
         auth = FirebaseAuth.getInstance();
         this.validator = new JobPostingValidator();
-        this.jobsCRUD = new Jobs(getFirebaseDatabase());
+        if (jobsCRUD == null) {
+            this.jobsCRUD = new Jobs(getFirebaseDatabase());
+        }
         initUIElements();
+        //adding multiple network request to a queue, FIFO based, running it separate threads, cannot run network request on the main thread in android
+        //volley creates a separate thread for the network request
+        requestQueue = Volley.newRequestQueue(this);
+
+        //jobs is the topic name,subscribing to the jobs notification tray
+
+
         this.loadJobCategorySpinner();
         this.setupPostJobButton();
     }
@@ -202,9 +242,14 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
                     latitude,
                     longitude);
 
-            boolean postedSuccessfully = jobsCRUD.postJob(job);
 
-            if (!postedSuccessfully) {
+            Intent intent = getIntent();
+            boolean isTest = intent.getBooleanExtra("isTest", false);
+
+            if (!isTest) jobId = jobsCRUD.postJob(job);
+            else jobId = "TestJobId";
+
+            if (jobId == null) {
                 showToast("Job posting failed");
                 result.setText(getResources().getString(R.string.EMPTY_STRING));
                 return;
@@ -212,6 +257,26 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
 
             showToast("Job posted successfully");
             result.setText(getResources().getString(R.string.EMPTY_STRING));
+
+
+            // Check nearby
+            if (enteredJobLocation.contains("Halifax") && enteredJobLocation.contains("NS")) {
+                // Attempt to get the access token
+                getAccessToken(this, new AccessTokenListener() {
+                    @Override
+                    public void onAccessTokenReceived(String token) {
+                        // When the token is received, send the notification
+                        sendNotification(token);
+                    }
+
+                    @Override
+                    public void onAccessTokenError(Exception exception) {
+                        // Handle the error appropriately
+                        Log.e("ERROR", exception.toString());
+//                        Toast.makeText(PostFormActivity.this, "Error getting access token: " + exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
             move2EmployerDashboard(job);
 
         } catch (IOException e) {
@@ -247,5 +312,89 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
             finish();
         }, 1000);
+    }
+
+    private void getAccessToken(Context context, AccessTokenListener listener) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try {
+                InputStream serviceAccountStream = context.getAssets().open(CREDENTIALS_FILE_PATH);
+                GoogleCredentials googleCredentials = GoogleCredentials
+                        .fromStream(serviceAccountStream)
+                        .createScoped(Collections.singletonList("https://www.googleapis.com/auth/firebase.messaging"));
+
+                googleCredentials.refreshIfExpired(); // This will refresh the token if it's expired
+                String token = googleCredentials.getAccessToken().getTokenValue();
+                listener.onAccessTokenReceived(token);
+                Log.d("token","token"+token);
+            } catch (IOException e) {
+                listener.onAccessTokenError(e);
+            }
+        });
+        executorService.shutdown();
+    }
+
+    private void sendNotification(String authToken) {
+        try {
+            // Build the notification payload
+            JSONObject notificationJSONBody = new JSONObject();
+            notificationJSONBody.put("title", "New Job Created");
+            notificationJSONBody.put("body", "A new job is created in your city.");
+
+            JSONObject dataJSONBody = new JSONObject();
+            dataJSONBody.put("jobLocation", "Halifax, NS");
+            dataJSONBody.put("job_id", jobId);
+
+            JSONObject messageJSONBody = new JSONObject();
+            messageJSONBody.put("topic", "nearbyJobs");
+            messageJSONBody.put("notification", notificationJSONBody);
+            messageJSONBody.put("data", dataJSONBody);
+
+            JSONObject pushNotificationJSONBody = new JSONObject();
+            pushNotificationJSONBody.put("message", messageJSONBody);
+
+            // Log the complete JSON payload for debugging
+            Log.d("NotificationBody", "JSON Body: " + pushNotificationJSONBody.toString());
+
+            // Create the request
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    PUSH_NOTIFICATION_ENDPOINT,
+                    pushNotificationJSONBody,
+                    response -> {
+                        Log.d("NotificationResponse", "Response: " + response.toString());
+                        Toast.makeText(this, "Notification Sent Successfully", Toast.LENGTH_SHORT).show();
+                    },
+                    error -> {
+                        Log.e("NotificationError", "Error Response: " + error.toString());
+                        if (error.networkResponse != null) {
+                            Log.e("NotificationError", "Status Code: " + error.networkResponse.statusCode);
+                            Log.e("NotificationError", "Error Data: " + new String(error.networkResponse.data));
+                        }
+                        Toast.makeText(this, "Failed to Send Notification", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json; charset=UTF-8");
+                    headers.put("Authorization", "Bearer " + authToken);
+                    Log.d("NotificationHeaders", "Headers: " + headers.toString());
+                    return headers;
+                }
+            };
+
+            // Add the request to the queue
+            requestQueue.add(request);
+        } catch (JSONException e) {
+            Log.e("NotificationJSONException", "Error creating notification JSON: " + e.getMessage());
+            Toast.makeText(this, "Error creating notification payload", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    // Add a setter for testing
+    public void setJobsCRUD(Jobs jobsCRUD) {
+        this.jobsCRUD = jobsCRUD;
     }
 }
