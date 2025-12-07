@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quick_cash.controllers.PaymentValidator;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.utils.FirebaseCRUD.Applications;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -35,10 +36,14 @@ public class EmployerPaymentActivity extends AppCompatActivity {
 
     private String jobApplicationId;
 
+    private Applications appsCRUD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
+        appsCRUD = new Applications(FirebaseDatabase.getInstance());
 
 // Receive application ID
         jobApplicationId = getIntent().getStringExtra("jobApplicationId");
@@ -95,11 +100,9 @@ public class EmployerPaymentActivity extends AppCompatActivity {
                 PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirm != null) {
                     try {
+
                         // Update Firebase: status = approved
-                        FirebaseDatabase.getInstance().getReference("job_applications")
-                                .child(jobApplicationId)
-                                .child("status")
-                                .setValue("paid");
+                        appsCRUD.updateStatus(jobApplicationId, "paid");
 
                         // Send result back to ApplicationReviewActivity
                         Intent resultIntent = new Intent();
@@ -124,4 +127,4 @@ public class EmployerPaymentActivity extends AppCompatActivity {
         stopService(new Intent(this, PayPalService.class));
         super.onDestroy();
     }
-            }
+}
