@@ -1,6 +1,7 @@
 package com.example.quick_cash.utils;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.example.quick_cash.models.Job;
 
@@ -74,7 +75,7 @@ public class JobSearchHandler {
         }
 
         if (locationOption.equals("Nearby Jobs")) {
-            if (job.getLocation() == null)
+            if (job.getLocation() == null || job.getLocation().equals("null"))
                 return false;
 
             if (userLocation == null)
@@ -83,7 +84,9 @@ public class JobSearchHandler {
             String jobLoc = job.getLocation().toLowerCase().trim();
             String userLoc = userLocation.toLowerCase().trim();
 
-            return userLoc.contains(jobLoc) || jobLoc.contains(userLoc);
+            String[] parts = userLoc.split(", ");
+            String firstPart = parts.length > 0 ? parts[0] : userLoc;
+            return userLoc.contains(jobLoc) || jobLoc.contains(firstPart);
         }
 
         return true;
@@ -153,8 +156,8 @@ public class JobSearchHandler {
             if (!matchLocation(job, locationOption, userLocation)) {
                 continue;
             }
-
-            results.add(job);
+            if (job.getLocation() != null && !job.getLocation().equals("null"))
+                results.add(job);
         }
 
         return results;

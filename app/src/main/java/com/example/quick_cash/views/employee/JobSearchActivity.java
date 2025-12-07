@@ -106,7 +106,7 @@ public class JobSearchActivity extends AppCompatActivity {
 
         this.categorySelector = findViewById(R.id.catSelect);
         ArrayList<String> categories = new ArrayList<String>(
-                Arrays.asList("Category", "Finance", "Tech", "Education", "Health", "Construction", "AI")
+                Arrays.asList("Category", "Finance", "Tech", "Education", "Healthcare", "Construction", "AI")
         );
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
                 this,
@@ -257,7 +257,13 @@ public class JobSearchActivity extends AppCompatActivity {
 
     private void displayJobs(ArrayList<Job> jobs) {
         displayedJobs.clear();
-        displayedJobs.addAll(jobs);
+
+        for (Job job : jobs) {
+            String loc = job.getLocation();
+            if (loc != null && !loc.trim().isEmpty() && !loc.equals("null")) {
+                displayedJobs.add(job);
+            }
+        }
 
         if (displayedJobs.isEmpty()) {
             resultsView.setVisibility(View.GONE);
@@ -268,7 +274,7 @@ public class JobSearchActivity extends AppCompatActivity {
             resultsView.setVisibility(View.VISIBLE);
             viewOnMapBtn.setVisibility(View.VISIBLE);
 
-            JobAdapter adapter = new JobAdapter(this, R.layout.search_results_item, new ArrayList<>(jobs));
+            JobAdapter adapter = new JobAdapter(this, R.layout.search_results_item, displayedJobs);
             resultsView.setAdapter(adapter);
 
             adapter.notifyDataSetChanged();
@@ -290,8 +296,4 @@ public class JobSearchActivity extends AppCompatActivity {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
-    // todo: remove this later
-    private String getLocation() {return "test";}
-
 }
