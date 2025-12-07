@@ -46,7 +46,7 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         if (getIntent().getBooleanExtra("show_success_message", false)) {
             Toast.makeText(this, "Role switched successfully", Toast.LENGTH_SHORT).show();
         }
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("jobs");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("nearbyJobs");
         initListeners();
     }
 
