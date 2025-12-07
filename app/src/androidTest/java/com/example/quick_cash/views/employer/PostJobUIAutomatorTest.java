@@ -17,6 +17,8 @@ import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
 import androidx.test.uiautomator.Until;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,7 @@ import java.util.List;
 public class PostJobUIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
-    private static final int REDIRECT_TIMEOUT = 5000;
+    private static final int REDIRECT_TIMEOUT = 6000;
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
@@ -37,9 +39,11 @@ public class PostJobUIAutomatorTest {
      */
     @Before
     public void setup() {
+        FirebaseMessaging.getInstance().subscribeToTopic("jobs");
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         Context context = ApplicationProvider.getApplicationContext();
         Intent launcherIntent = new Intent();
+        launcherIntent.putExtra("isTest", true);
         launcherIntent.setClassName(
                 launcherPackageName,
                 launcherPackageName+".views.employer.PostFormActivity"
@@ -122,5 +126,27 @@ public class PostJobUIAutomatorTest {
         assertNotNull("Failed to redirect to Employer Dashboard!", dashboardTitle);
     }
 
+
+    @Test
+    public void testNotificationAppears() throws Exception {
+        UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));
+        jobTitleField.setText("Backend Developer");
+        UiObject jobCategorySpinner = device.findObject(new UiSelector().textContains("Select job category"));
+        jobCategorySpinner.click();
+        List<UiObject2> types = device.findObjects(By.res("android:id/text1"));
+        types.get(4).click();
+        UiObject locationField = device.findObject(new UiSelector().textContains("Job Location"));
+        locationField.setText("Halifax, NS");
+        UiObject applicationDeadlineField = device.findObject(new UiSelector().text("Application Deadline (YYYY-MM-DD)"));
+        applicationDeadlineField.setText("2025-12-21");
+        UiObject descriptionField = device.findObject(new UiSelector().text("Job Description"));
+        descriptionField.setText("Sample description");
+        UiObject postJobButton = device.findObject(new UiSelector().text("Post Job"));
+        postJobButton.click();
+
+        device.wait(Until.hasObject(By.text("Notification Sent Successfully")), REDIRECT_TIMEOUT);
+        UiObject result = device.findObject(new UiSelector().text("Notification Sent Successfully"));
+        assertNotNull("Failed to send notification!", result);
+    }
 }
 

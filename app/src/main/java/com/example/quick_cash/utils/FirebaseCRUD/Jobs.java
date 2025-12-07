@@ -32,14 +32,14 @@ public class Jobs {
      * Post job boolean.
      *
      * @param job the job
-     * @return the boolean
+     * @return the Job Id String
      */
-    public boolean postJob(Job job){
+    public String postJob(Job job){
 
         String jobId = jobListRef.push().getKey();
         if (jobId == null) {
             Log.e("Firebase", "Failed to generate jobId");
-            return false;
+            return null;
         }
 
         jobListRef.child(jobId).setValue(job)
@@ -50,7 +50,7 @@ public class Jobs {
                     Log.e("Firebase", "Failed to post job", e);
                 });
 
-        return true;
+        return jobId;
     }
 
     /**

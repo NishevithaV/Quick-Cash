@@ -1,6 +1,11 @@
 [versions]
 agp = "8.13.0"
+firebaseAnalytics = "23.0.0"
 firebaseAuth = "24.0.1"
+firebaseBom = "34.6.0"
+firebaseCrashlytics = "20.0.3"
+firebaseMessaging = "25.0.1"
+googleAuthLibraryOauth2Http = "1.41.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
@@ -14,10 +19,16 @@ uiautomator = "2.3.0"
 espressoIdlingResource = "3.7.0"
 mockito = "5.11.0"
 mockitoAndroid = "5.11.0"
+volley = "1.2.1"
 
 [libraries]
 espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoCore" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
+google-auth-library-oauth2-http = { module = "com.google.auth:google-auth-library-oauth2-http", version.ref = "googleAuthLibraryOauth2Http" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -30,6 +41,7 @@ espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-
 uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroid" }
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
 maps = { group = "com.google.android.gms", name = "play-services-maps", version = "19.0.0" }
 
 [plugins]

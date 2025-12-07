@@ -1,16 +1,23 @@
 package com.example.quick_cash.views.employee;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.quick_cash.R;
 import com.example.quick_cash.views.maps.CurrentLocationActivity;
 import com.example.quick_cash.views.settings.SettingsActivity;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class EmployeeDashboardActivity extends AppCompatActivity {
 
@@ -33,6 +40,15 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_employee_dashboard);
         initUI();
+        Intent intent = getIntent();
+        if (!intent.getBooleanExtra("isTest", false)) {
+            // Request notifications permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1001);
+            }
+        }
+        FirebaseMessaging.getInstance().subscribeToTopic("nearbyJobs");
         initListeners();
 
         // Check if we should show the success message
@@ -72,4 +88,16 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         btnMyApps = findViewById(R.id.btnMyApps);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 1001) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("Permissions", "Notifications permission granted");
+            } else {
+                Log.d("Permissions", "Notifications permission denied");
+            }
+        }
+    }
 }

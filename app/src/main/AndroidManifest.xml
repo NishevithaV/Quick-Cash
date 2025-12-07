@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -21,6 +22,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCQ4JImMbrCWQ755h2vhVOLBfKzL_mCfrY" />
+
+        <service
+            android:name=".utils.QuickCashFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
         <activity
             android:name=".views.registration.RegistrationActivity"
@@ -47,6 +56,7 @@
         <activity android:name=".views.employee.EmployeeApplicationsActivity" />
         <activity android:name=".views.employee.SubmitApplicationActivity" />
         <activity android:name=".views.employee.JobDetailActivity" />
+        <activity android:name=".views.employee.ViewPushNotificationActivity" />
         <activity android:name=".views.employee.JobSearchActivity" />
         <activity android:name=".views.maps.CurrentLocationActivity" />
         <activity android:name=".views.maps.MapViewActivity" />

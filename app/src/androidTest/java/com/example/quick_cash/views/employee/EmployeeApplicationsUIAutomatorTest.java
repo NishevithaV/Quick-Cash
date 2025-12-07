@@ -38,6 +38,7 @@ public class EmployeeApplicationsUIAutomatorTest {
                 launcherPackageName,
                 launcherPackageName+".views.employee.EmployeeDashboardActivity"
         );
+        launcherIntent.putExtra("isTest", true);
         launcherIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Assert.assertNotNull(launcherIntent);
         context.startActivity(launcherIntent);
