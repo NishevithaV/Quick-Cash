@@ -70,7 +70,6 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         declineBtn = findViewById(R.id.declineBtn);
         acceptBtn = findViewById(R.id.acceptBtn);
         if(status.equalsIgnoreCase("completed")){
-            statusAppRev.setTextColor(Color.GREEN);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setText("Approve and Pay");
             accepted = true;
@@ -84,7 +83,6 @@ public class ApplicationReviewActivity extends AppCompatActivity {
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
         }else if(status.equalsIgnoreCase("paid")){
-            statusAppRev.setTextColor(Color.GREEN);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
         }
@@ -100,9 +98,7 @@ public class ApplicationReviewActivity extends AppCompatActivity {
             if (!accepted) {
                 accepted = true;
                 update("accepted");
-            }
-            else{
-                update("completed");
+            } else {
                 Intent intent = new Intent(ApplicationReviewActivity.this, EmployerPaymentActivity.class);
                 intent.putExtra("jobApplicationId", appId);
                 startActivityForResult(intent, 5000);
@@ -123,9 +119,6 @@ public class ApplicationReviewActivity extends AppCompatActivity {
             statusAppRev.setTextColor(Color.GREEN);
             declineBtn.setVisibility(View.GONE);
             acceptBtn.setVisibility(View.GONE);
-        }else {
-            statusAppRev.setTextColor(Color.GREEN);
-            declineBtn.setVisibility(View.GONE);
         }
 
 
@@ -142,9 +135,8 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         if (requestCode == 5000 && resultCode == RESULT_OK) {
             if (data != null && data.getBooleanExtra("paymentApproved", false)) {
 
-                status = "approved";
-                statusAppRev.setText("approved");
-                statusAppRev.setTextColor(Color.GREEN);
+                status = "paid";
+                statusAppRev.setText("paid");
 
                 acceptBtn.setVisibility(View.GONE);
                 declineBtn.setVisibility(View.GONE);

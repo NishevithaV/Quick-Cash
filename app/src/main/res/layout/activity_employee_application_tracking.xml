@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- ListView -->
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/recycler_applications"
         android:layout_width="0dp"
         android:layout_height="0dp"
