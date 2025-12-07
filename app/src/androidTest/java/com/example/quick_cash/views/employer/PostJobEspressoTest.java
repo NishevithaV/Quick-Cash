@@ -10,30 +10,41 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.allOf;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.quick_cash.R;
+import com.example.quick_cash.utils.FirebaseCRUD.Jobs;
 import com.example.quick_cash.views.employer.PostFormActivity;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 @RunWith(AndroidJUnit4.class)
 public class PostJobEspressoTest {
 
     public ActivityScenario<PostFormActivity> activityScenario;
 
+    private Jobs mockJobs;
+
     /**
      * Set up before running tests
      */
     @Before
     public void setup() {
+        mockJobs = Mockito.mock(Jobs.class);
+
+        // Make postJob return a fake jobId (or true if it returns boolean)
+        when(mockJobs.postJob(any())).thenReturn("fakeJobId");
 
         activityScenario = ActivityScenario.launch(PostFormActivity.class);
         activityScenario.onActivity(activity -> {
+            activity.setJobsCRUD(mockJobs);
             activity.loadJobCategorySpinner();
             activity.setupPostJobButton();
         });
