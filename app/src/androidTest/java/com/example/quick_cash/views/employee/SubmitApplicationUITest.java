@@ -11,7 +11,6 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiSelector;
 
-import com.example.quick_cash.views.employee.SubmitApplicationActivity;
 
 import org.junit.Before;
 import org.junit.Test;

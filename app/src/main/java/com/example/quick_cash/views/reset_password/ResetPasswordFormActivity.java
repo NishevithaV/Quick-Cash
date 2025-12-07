@@ -69,21 +69,13 @@ public class ResetPasswordFormActivity extends AppCompatActivity {
      */
     protected void initListeners(){
 
-        resetButton.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                resetPassword();
-            }
-        });
+        resetButton.setOnClickListener(v -> resetPassword());
 
-        loginLink.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                Intent intent = new Intent(ResetPasswordFormActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
+        loginLink.setOnClickListener(v -> {
+            Intent intent = new Intent(ResetPasswordFormActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {

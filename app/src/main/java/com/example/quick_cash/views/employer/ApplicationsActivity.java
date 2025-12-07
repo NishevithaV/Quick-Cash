@@ -22,6 +22,7 @@ import com.example.quick_cash.utils.UserIdMapper;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Applications activity.
@@ -61,13 +62,10 @@ public class ApplicationsActivity extends AppCompatActivity {
         selectedStatus = "pending";
         initUI();
         appsCRUD = new Applications(FirebaseDatabase.getInstance());
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                filterHandler = new ApplicationsFilterHandler(apps);
-                loadApps(selectedStatus);
-                initListeners();
-            }
+        appsCRUD.getApplications(apps -> {
+            filterHandler = new ApplicationsFilterHandler(apps);
+            loadApps(selectedStatus);
+            initListeners();
         });
         displayedApps = new ArrayList<>();
     }
@@ -75,12 +73,9 @@ public class ApplicationsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                filterHandler = new ApplicationsFilterHandler(apps);
-                loadApps(selectedStatus);
-            }
+        appsCRUD.getApplications(apps -> {
+            filterHandler = new ApplicationsFilterHandler(apps);
+            loadApps(selectedStatus);
         });
     }
 
@@ -155,9 +150,9 @@ public class ApplicationsActivity extends AppCompatActivity {
      *
      * @param apps the apps
      */
-    public void setDisplayedAppsForTest(ArrayList<Application> apps) {
+    public void setDisplayedAppsForTest(List<Application> apps) {
         displayedApps.clear();
         displayedApps.addAll(apps);
-        displayApps(apps);
+        displayApps(new ArrayList<>(apps));
     }
 }

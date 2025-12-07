@@ -2,6 +2,7 @@ package com.example.quick_cash.views.maps;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -62,34 +63,31 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
 
         locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
+        locationListener = location -> {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
 
-                Geocoder geocoder = new Geocoder(getApplicationContext());
-                try {
-                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                    String address = addresses.get(0).getLocality()+":";
-                    address += addresses.get(0).getCountryName();
-                    LatLng userLocation = new LatLng(latitude, longitude);
-                    if (marker != null){
-                        marker.remove();
-                    }
+            Geocoder geocoder = new Geocoder(getApplicationContext());
+            try {
+                List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                String address = addresses.get(0).getLocality()+":";
+                address += addresses.get(0).getCountryName();
+                LatLng userLocation = new LatLng(latitude, longitude);
+                if (marker != null){
+                    marker.remove();
+                }
 
-                    marker = mMap.addMarker(new MarkerOptions().position(userLocation).title(address));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 20));
-                    mMap.setMaxZoomPreference(15);
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                marker = mMap.addMarker(new MarkerOptions().position(userLocation).title(address));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 20));
+                mMap.setMaxZoomPreference(15);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
             }
         };
 

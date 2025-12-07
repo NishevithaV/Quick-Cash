@@ -15,7 +15,6 @@ import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.UiSelector;
 import androidx.test.uiautomator.Until;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

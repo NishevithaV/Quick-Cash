@@ -1,11 +1,8 @@
 package com.example.quick_cash.utils;
 
-import android.text.style.TtsSpan;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.quick_cash.controllers.ResetPasswordValidator;
 import com.example.quick_cash.utils.FirebaseCRUD.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +20,6 @@ public class ResetHandler {
 
     private DatabaseReference usersRef;
     private FirebaseLoginHandler loginHandler;
-    private ResetPasswordValidator psswdValidator;
     private FirebaseAuth auth;
 
     /**

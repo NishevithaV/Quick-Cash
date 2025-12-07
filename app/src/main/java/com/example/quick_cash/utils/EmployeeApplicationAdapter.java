@@ -86,23 +86,8 @@ public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
         holder.jobTitle.setText("Loading...");
         holder.company.setText("Loading...");
         // Bind data
-        JobIdMapper.getTitle(app.getJobId(), new JobIdMapper.JobInfoCallback() {
-            @Override
-            public void onInfoLoaded(String info) {
-                holder.jobTitle.setText(info);
-            }
-        });
-        JobIdMapper.getEmployer(app.getJobId(), new JobIdMapper.JobInfoCallback() {
-            @Override
-            public void onInfoLoaded(String info) {
-                UserIdMapper.getName(info, new UserIdMapper.UserNameCallback() {
-                    @Override
-                    public void onNameLoaded(String name) {
-                        holder.company.setText(name);
-                    }
-                });
-            }
-        });
+        JobIdMapper.getTitle(app.getJobId(), info -> holder.jobTitle.setText(info));
+        JobIdMapper.getEmployer(app.getJobId(), info -> UserIdMapper.getName(info, name -> holder.company.setText(name)));
         holder.status.setText(app.getStatus());
 
                 // Style status badge
@@ -141,13 +126,9 @@ public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
         /**
          * The Job title.
          */
-        TextView jobTitle, /**
-         * The Company.
-         */
-        company, /**
-         * The Status.
-         */
-        status;
+        TextView jobTitle;
+        TextView company;
+        TextView status;
         /**
          * The Mark completed.
          */

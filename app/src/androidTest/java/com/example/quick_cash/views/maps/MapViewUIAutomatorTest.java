@@ -93,7 +93,7 @@ public class MapViewUIAutomatorTest {
 
         // Try to find the job title in the info window
         // Google Maps info windows show text but may not have resource IDs
-        UiObject titleText = device.findObject(new UiSelector().textContains("Software Developer"));
+        device.findObject(new UiSelector().textContains("Software Developer"));
         // If the text exists, the marker info window opened
         // Note: This might not always work due to Google Maps implementation
     }

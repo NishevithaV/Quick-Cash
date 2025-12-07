@@ -298,9 +298,7 @@ public class PostFormActivity extends AppCompatActivity implements View.OnClickL
 
                     @Override
                     public void onAccessTokenError(Exception exception) {
-                        // Handle the error appropriately
                         Log.e("ERROR", exception.toString());
-//                        Toast.makeText(PostFormActivity.this, "Error getting access token: " + exception.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }

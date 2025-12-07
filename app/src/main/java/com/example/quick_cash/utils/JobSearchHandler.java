@@ -1,7 +1,6 @@
 package com.example.quick_cash.utils;
 
 import android.location.Location;
-import android.util.Log;
 
 import com.example.quick_cash.models.Job;
 
@@ -105,34 +104,6 @@ public class JobSearchHandler {
      */
     private boolean matchCategoryAndSearch(Job job, String search, String category) {
         return matchSearch(job, search) && matchCategory(job, category);
-    }
-
-    // TODO: Bro why is this method here, are we even using it anywhere?
-    private ArrayList<Job> filterJobs(String search, String category) {
-        ArrayList<Job> results = new ArrayList<>();
-        boolean categoryIsEmpty = (category.isEmpty() || category.equals("Category"));
-
-        if (!search.isEmpty() && categoryIsEmpty) {
-            for (Job j : allJobs) {
-                if (matchSearch(j, search)) {
-                    results.add(j);
-                }
-            }
-        } else if (!categoryIsEmpty && search.isEmpty()) {
-            for (Job j : allJobs) {
-                if (matchCategory(j, category)) {
-                    results.add(j);
-                }
-            }
-        } else {
-            for (Job j : allJobs) {
-                if (matchCategoryAndSearch(j, search, category)) {
-                    results.add(j);
-                };
-            }
-        }
-
-        return results;
     }
 
     /**

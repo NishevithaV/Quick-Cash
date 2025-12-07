@@ -61,28 +61,20 @@ public class ResetPasswordActivity extends AppCompatActivity {
      */
     protected void initListeners(){
 
-        resetButton.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                goToResetForm();
-            }
-        });
+        resetButton.setOnClickListener(v -> goToResetForm());
     }
 
     private void goToResetForm(){
         String email = emailInput.getText().toString().trim();
         if (emailValidator.isValidEmail(email)) {
-            resetHandler.emailExists(email, new ResetHandler.EmailExistCallback() {
-                @Override
-                public void onResult(boolean exists){
-                    if (exists) {
-                        Intent intent = new Intent(ResetPasswordActivity.this, ResetPasswordFormActivity.class);
-                        intent.putExtra("email", email);
-                        startActivity(intent);
-                    } else {
-                        statusText.setText(R.string.EMAIL_NOT_EXIST);
-                        Toast.makeText(ResetPasswordActivity.this, R.string.EMAIL_NOT_EXIST, Toast.LENGTH_SHORT).show();
-                    }
+            resetHandler.emailExists(email, exists -> {
+                if (exists) {
+                    Intent intent = new Intent(ResetPasswordActivity.this, ResetPasswordFormActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                } else {
+                    statusText.setText(R.string.EMAIL_NOT_EXIST);
+                    Toast.makeText(ResetPasswordActivity.this, R.string.EMAIL_NOT_EXIST, Toast.LENGTH_SHORT).show();
                 }
             });
 

@@ -57,8 +57,8 @@ public class LogoutUIAutomatorTest {
      */
     @Test
     public void checkIfSettingsPageIsVisible() {
-        UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));
-        assertTrue(LogoutButton.exists());
+        UiObject logoutButton = device.findObject(new UiSelector().text("Logout"));
+        assertTrue(logoutButton.exists());
         UiObject textView = device.findObject(new UiSelector().textContains("Settings"));
         assertTrue(textView.exists());
     }
@@ -70,14 +70,14 @@ public class LogoutUIAutomatorTest {
      */
     @Test
     public void checkIfCancelWorks() throws UiObjectNotFoundException {
-        UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));
-        LogoutButton.click();
-        UiObject CancelButton = device.findObject(new UiSelector().text("Cancel"));
-        CancelButton.click();
+        UiObject logoutButton = device.findObject(new UiSelector().text("Logout"));
+        logoutButton.click();
+        UiObject cancelButton = device.findObject(new UiSelector().text("Cancel"));
+        cancelButton.click();
 
         UiObject textView = device.findObject(new UiSelector().textContains("Settings"));
         assertTrue(textView.exists());
-        assertTrue(LogoutButton.exists());
+        assertTrue(logoutButton.exists());
     }
 
     /**
@@ -87,12 +87,12 @@ public class LogoutUIAutomatorTest {
      */
     @Test
     public void checkIfMoved2LoginPage() throws UiObjectNotFoundException{
-        UiObject LogoutButton = device.findObject(new UiSelector().text("Logout"));
-        LogoutButton.click();
-        UiObject ConfirmButton = device.findObject(new UiSelector().text("Yes"));
-        ConfirmButton.click();
+        UiObject logoutButton = device.findObject(new UiSelector().text("Logout"));
+        logoutButton.click();
+        UiObject confirmButton = device.findObject(new UiSelector().text("Yes"));
+        confirmButton.click();
 
-        UiObject LoginLabel = device.findObject(new UiSelector().textContains("Login"));
-        assertTrue(LoginLabel.exists());
+        UiObject loginLabel = device.findObject(new UiSelector().textContains("Login"));
+        assertTrue(loginLabel.exists());
     }
 }

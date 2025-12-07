@@ -1,5 +1,4 @@
 package com.example.quick_cash.controllers;
-import com.example.quick_cash.controllers.RegistrationValidator;
 
 /**
  * The type Reset password validator.

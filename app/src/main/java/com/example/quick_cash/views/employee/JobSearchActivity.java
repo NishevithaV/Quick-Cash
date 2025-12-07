@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.quick_cash.utils.FirebaseCRUD.Jobs;
 import com.example.quick_cash.models.Job;
@@ -147,7 +148,7 @@ public class JobSearchActivity extends AppCompatActivity {
         this.currentLocationHeader = findViewById(R.id.currentLocationHeader);
 
         this.categorySelector = findViewById(R.id.catSelect);
-        ArrayList<String> categories = new ArrayList<String>(
+        ArrayList<String> categories = new ArrayList<>(
                 Arrays.asList("Category", "Finance", "Tech", "Education", "Healthcare", "Construction", "AI")
         );
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
@@ -159,7 +160,7 @@ public class JobSearchActivity extends AppCompatActivity {
         categorySelector.setAdapter(categoryAdapter);
 
         this.locationSelector = findViewById(R.id.locationSelect);
-        ArrayList<String> locations = new ArrayList<String>(
+        ArrayList<String> locations = new ArrayList<>(
                 Arrays.asList("All Jobs", "Nearby Jobs")
         );
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(
@@ -171,7 +172,7 @@ public class JobSearchActivity extends AppCompatActivity {
         locationSelector.setAdapter(locationAdapter);
 
         this.radiusSelector = findViewById(R.id.radiusSelect);
-        ArrayList<String> radiusOptions = new ArrayList<String>(
+        ArrayList<String> radiusOptions = new ArrayList<>(
                 Arrays.asList("Radius (km)", "5 km", "10 km", "25 km", "50 km", "100 km")
         );
         ArrayAdapter<String> radiusAdapter = new ArrayAdapter<>(
@@ -184,22 +185,19 @@ public class JobSearchActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String searchText = userSearch.getText().toString().trim();
-                String category = categorySelector.getSelectedItem().toString();
-                String locationFilter = locationSelector.getSelectedItem().toString();
-                String locationSearch = locationSearchField.getText().toString().trim();
-                String radiusStr = radiusSelector.getSelectedItem().toString();
+        searchBtn.setOnClickListener(v -> {
+            String searchText = userSearch.getText().toString().trim();
+            String category = categorySelector.getSelectedItem().toString();
+            String locationFilter = locationSelector.getSelectedItem().toString();
+            String locationSearch = locationSearchField.getText().toString().trim();
+            String radiusStr = radiusSelector.getSelectedItem().toString();
 
-                // Handle location-based search with radius
-                if (!locationSearch.isEmpty() && !radiusStr.equals("Radius (km)")) {
-                    loadJobsByLocationRadius(searchText, category, locationSearch, radiusStr);
-                } else {
-                    // Default search behavior
-                    loadJobs(searchText, category, locationFilter);
-                }
+            // Handle location-based search with radius
+            if (!locationSearch.isEmpty() && !radiusStr.equals("Radius (km)")) {
+                loadJobsByLocationRadius(searchText, category, locationSearch, radiusStr);
+            } else {
+                // Default search behavior
+                loadJobs(searchText, category, locationFilter);
             }
         });
 
@@ -227,7 +225,7 @@ public class JobSearchActivity extends AppCompatActivity {
     }
 
     private void requestLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 

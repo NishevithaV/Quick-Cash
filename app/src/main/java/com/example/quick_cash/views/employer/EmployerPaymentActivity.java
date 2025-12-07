@@ -18,7 +18,6 @@ import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 
 import java.math.BigDecimal;
@@ -64,7 +63,11 @@ public class EmployerPaymentActivity extends AppCompatActivity {
         amountEditText = findViewById(R.id.amountEditText);
         payButton = findViewById(R.id.payButton);
 
-// Inside payButton click listener
+        initListeners();
+    }
+
+    private void initListeners() {
+        // Inside payButton click listener
         payButton.setOnClickListener(v -> {
             String amountStr = amountEditText.getText().toString();
             if (!PaymentValidator.isAmountValid(amountStr)) {
@@ -75,8 +78,6 @@ public class EmployerPaymentActivity extends AppCompatActivity {
             BigDecimal amount = PaymentValidator.parseAmount(amountStr);
             startPayPalPayment(amount);
         });
-
-
     }
 
     private void startPayPalPayment(BigDecimal amount) {
@@ -94,6 +95,18 @@ public class EmployerPaymentActivity extends AppCompatActivity {
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
     }
 
+    /**
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     *
+     */
+    @Deprecated
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -70,13 +70,10 @@ public class JobApplicationsActivity extends AppCompatActivity {
         selectedJobTitle = getIntent().getStringExtra("jobTitle");
         initUI();
         appsCRUD = new Applications(FirebaseDatabase.getInstance());
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                filterHandler = new ApplicationsFilterHandler(apps);
-                loadApps(selectedJobId);
-                initListeners();
-            }
+        appsCRUD.getApplications(apps -> {
+            filterHandler = new ApplicationsFilterHandler(apps);
+            loadApps(selectedJobId);
+            initListeners();
         });
         displayedApps = new ArrayList<>();
     }
@@ -84,12 +81,9 @@ public class JobApplicationsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                filterHandler = new ApplicationsFilterHandler(apps);
-                loadApps(selectedJobId);
-            }
+        appsCRUD.getApplications(apps -> {
+            filterHandler = new ApplicationsFilterHandler(apps);
+            loadApps(selectedJobId);
         });
     }
 

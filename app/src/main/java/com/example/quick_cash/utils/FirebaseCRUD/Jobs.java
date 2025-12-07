@@ -1,13 +1,10 @@
 package com.example.quick_cash.utils.FirebaseCRUD;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.quick_cash.models.Job;
-import com.example.quick_cash.models.User;
-import com.example.quick_cash.views.employer.EmployerListingsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

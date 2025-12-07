@@ -47,12 +47,7 @@ public class EmployeeApplicationsActivity extends AppCompatActivity {
     }
 
     private void loadApps() {
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                displayApps(apps);
-            }
-        });
+        appsCRUD.getApplications(apps -> displayApps(apps));
     }
     private void displayApps(ArrayList<Application> apps) {
         EmployeeApplicationAdapter adapter = new EmployeeApplicationAdapter(

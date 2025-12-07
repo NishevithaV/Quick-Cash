@@ -62,16 +62,13 @@ public class JobDetailActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        applyButton.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   Intent intent = new Intent(JobDetailActivity.this, SubmitApplicationActivity.class);
-                   intent.putExtra("jobID", jobID);
-                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                   startActivity(intent);
-                   finish();
-               }
-           }
+        applyButton.setOnClickListener(v -> {
+            Intent intent = new Intent(JobDetailActivity.this, SubmitApplicationActivity.class);
+            intent.putExtra("jobID", jobID);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
         );
     }
 
@@ -85,12 +82,9 @@ public class JobDetailActivity extends AppCompatActivity {
         // Check if user has already applied to job
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user!=null ? user.getUid() : "testUserID";
-        submitHandler.checkIfHasAlreadyApplied(uid, jobID, new SubmitApplicationHandler.HasAlreadyAppliedCallback() {
-            @Override
-            public void onCallback(boolean applied) {
-                if (!applied) applyButton.setVisibility(VISIBLE);
-                else ((TextView) findViewById(R.id.jobDetailAlreadyApplied)).setText(R.string.ALREADY_APPLIED);
-            }
+        submitHandler.checkIfHasAlreadyApplied(uid, jobID, applied -> {
+            if (!applied) applyButton.setVisibility(VISIBLE);
+            else ((TextView) findViewById(R.id.jobDetailAlreadyApplied)).setText(R.string.ALREADY_APPLIED);
         });
 
         title.setText(getIntent().getStringExtra("title"));

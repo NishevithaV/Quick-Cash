@@ -3,11 +3,8 @@ package com.example.quick_cash.utils;
 import com.example.quick_cash.models.Application;
 import com.example.quick_cash.utils.FirebaseCRUD.Applications;
 import com.example.quick_cash.utils.FirebaseCRUD.Users;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 
 /**
  * The type Submit application handler.
@@ -72,25 +69,22 @@ public class SubmitApplicationHandler {
                 callback.onCallback(ALREADY_APPLIED);
         } else {
             // for real
-            checkIfHasAlreadyApplied(uid, jobID, new HasAlreadyAppliedCallback() {
-                @Override
-                public void onCallback(boolean applied) {
-                    if (!applied) {
-                        Application app = new Application(uid, letter, jobID);
-                        appsCRUD.postApplication(app, new Applications.PostAppCallback() {
-                            @Override
-                            public void onSuccess() {
-                                callback.onCallback(APPLICATION_SUCCESS);
-                            }
+            checkIfHasAlreadyApplied(uid, jobID, applied -> {
+                if (!applied) {
+                    Application app = new Application(uid, letter, jobID);
+                    appsCRUD.postApplication(app, new Applications.PostAppCallback() {
+                        @Override
+                        public void onSuccess() {
+                            callback.onCallback(APPLICATION_SUCCESS);
+                        }
 
-                            @Override
-                            public void onFailure(String reason) {
-                                callback.onCallback(reason);
-                            }
-                        });
-                    } else {
-                        callback.onCallback(ALREADY_APPLIED);
-                    }
+                        @Override
+                        public void onFailure(String reason) {
+                            callback.onCallback(reason);
+                        }
+                    });
+                } else {
+                    callback.onCallback(ALREADY_APPLIED);
                 }
             });
         }
@@ -124,18 +118,15 @@ public class SubmitApplicationHandler {
             else
                 callback.onCallback(true);
         } else {
-            appsCRUD.getApplications(new Applications.AppsCallback() {
-                @Override
-                public void onCallback(ArrayList<Application> apps) {
-                    boolean applied = false;
-                    for (Application app : apps) {
-                        if (app.getApplicantId().equals(uid) && app.getJobId().equals(jobID)) {
-                            applied = true;
-                            break;
-                        }
+            appsCRUD.getApplications(apps -> {
+                boolean applied = false;
+                for (Application app : apps) {
+                    if (app.getApplicantId().equals(uid) && app.getJobId().equals(jobID)) {
+                        applied = true;
+                        break;
                     }
-                    callback.onCallback(applied);
                 }
+                callback.onCallback(applied);
             });
         }
     }
