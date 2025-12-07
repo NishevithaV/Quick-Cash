@@ -25,6 +25,13 @@ public class AppReviewJUnitTest {
         Application app1 = new Application("user001","I am very interested in this position.", "pending", "job001", "app001");
         apps.add(app1);
 
+        Application app2 = new Application("user002","I am very interested in this position.", "accepted", "job002", "app002");
+        apps.add(app2);
+
+        Application app3 = new Application("user003","I am very interested in this position.", "declined", "job003", "app003");
+        apps.add(app3);
+
+
         ApplicationsFilterHandler filterHandler = new ApplicationsFilterHandler(apps);
         List<Application> filtered = filterHandler.getAppsByStatus("pending");
 
