@@ -18,11 +18,26 @@ import com.example.quick_cash.views.switch_role.ConfirmActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * The type Submit application activity.
+ */
 public class SubmitApplicationActivity extends AppCompatActivity {
+    /**
+     * The Submit btn.
+     */
     Button submitBtn;
+    /**
+     * The Cvr ltr input.
+     */
     EditText cvrLtrInput;
+    /**
+     * The Last toast message.
+     */
     public String lastToastMessage;
     private String jobID;
+    /**
+     * The Submit handler.
+     */
     SubmitApplicationHandler submitHandler;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

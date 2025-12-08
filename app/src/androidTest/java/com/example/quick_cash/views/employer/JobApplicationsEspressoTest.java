@@ -30,8 +30,14 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+/**
+ * The type Job applications espresso test.
+ */
 public class JobApplicationsEspressoTest {
 
+    /**
+     * The Activity scenario.
+     */
     public ActivityScenario<JobApplicationsActivity> activityScenario;
 
     /**

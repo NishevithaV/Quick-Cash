@@ -11,6 +11,9 @@ import org.junit.Test;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The type App review j unit test.
+ */
 public class AppReviewJUnitTest {
     /**
      * Test filtering by status logic
@@ -23,10 +26,10 @@ public class AppReviewJUnitTest {
         apps.add(app1);
 
         Application app2 = new Application("user002","I am very interested in this position.", "accepted", "job002", "app002");
-        apps.add(app1);
+        apps.add(app2);
 
         Application app3 = new Application("user003","I am very interested in this position.", "declined", "job003", "app003");
-        apps.add(app1);
+        apps.add(app3);
 
 
         ApplicationsFilterHandler filterHandler = new ApplicationsFilterHandler(apps);

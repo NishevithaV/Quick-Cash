@@ -6,6 +6,9 @@ import com.example.quick_cash.models.Application;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Applications filter handler.
+ */
 public class ApplicationsFilterHandler {
     private ArrayList<Application> allApps;
 
@@ -56,7 +59,7 @@ public class ApplicationsFilterHandler {
     /**
      * Gets all apps of specified status.
      *
-     * @param status   the search
+     * @param status the search
      * @return the matching apps
      */
     public ArrayList<Application> getAppsByStatus(String status) {
@@ -66,7 +69,7 @@ public class ApplicationsFilterHandler {
     /**
      * Gets all apps for specified job.
      *
-     * @param jobID   the search
+     * @param jobID the search
      * @return the matching apps
      */
     public ArrayList<Application> getAppsByJob(String jobID) {

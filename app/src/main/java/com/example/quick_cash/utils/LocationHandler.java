@@ -9,12 +9,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Location handler.
+ */
 public class LocationHandler {
 
     private static LocationHandler instance;
@@ -31,7 +33,15 @@ public class LocationHandler {
     private LocationListener locationListener;
     private OnLocationUpdate currentLocationCallback;
 
+    /**
+     * The interface On location update.
+     */
     public interface OnLocationUpdate {
+        /**
+         * On update.
+         *
+         * @param readableLocation the readable location
+         */
         void onUpdate(String readableLocation);
     }
 
@@ -45,12 +55,7 @@ public class LocationHandler {
         this.locationManager =
                 (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
 
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                updateLocation(location);
-            }
-        };
+        locationListener = location -> updateLocation(location);
     }
 
     /**
@@ -79,7 +84,7 @@ public class LocationHandler {
      * Start location updates
      */
     public void startUpdates() {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             return;
         }

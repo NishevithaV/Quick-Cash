@@ -15,12 +15,17 @@ import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.UiSelector;
 import androidx.test.uiautomator.Until;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Ui automator test.
+ */
 public class UIAutomatorTest {
     private static final int LAUNCH_TIMEOUT = 5000;
+    /**
+     * The Launcher package name.
+     */
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
@@ -33,6 +38,9 @@ public class UIAutomatorTest {
     private final String newPasswordID = "newPasswd";
     private final String formStatusTxtID = "formResetPsswdStatusTextID";
 
+    /**
+     * The Test email.
+     */
     String testEmail = "iamjohn@johnny.com";
 
     /**

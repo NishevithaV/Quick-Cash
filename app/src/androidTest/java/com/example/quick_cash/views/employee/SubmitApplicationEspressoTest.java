@@ -29,9 +29,16 @@ import static org.junit.Assert.assertEquals;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * The type Submit application espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class SubmitApplicationEspressoTest {
     private ActivityScenario<SubmitApplicationActivity> scenario;
+
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -48,12 +55,18 @@ public class SubmitApplicationEspressoTest {
         return i;
     }
 
+    /**
+     * Test all views visible.
+     */
     @Test
     public void testAllViewsVisible() {
         onView(withId(R.id.cvrLtrInput)).check(matches(isDisplayed()));
         onView(withId(R.id.submitLtrBtn)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Test successful submission toast.
+     */
     @Test
     public void testSuccessfulSubmissionToast() {
         onView(withId(R.id.cvrLtrInput)).perform(clearText(), typeText("Cover letter"), closeSoftKeyboard());
@@ -64,6 +77,9 @@ public class SubmitApplicationEspressoTest {
         });
     }
 
+    /**
+     * Test empty submission toast.
+     */
     @Test
     public void testEmptySubmissionToast() {
         onView(withId(R.id.cvrLtrInput)).perform(clearText(), typeText(" "), closeSoftKeyboard());

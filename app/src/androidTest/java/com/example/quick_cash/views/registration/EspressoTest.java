@@ -22,6 +22,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * The type Espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class EspressoTest {

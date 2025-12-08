@@ -15,10 +15,22 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * The type Employee applications activity.
+ */
 public class EmployeeApplicationsActivity extends AppCompatActivity {
 
+    /**
+     * The Apps list view.
+     */
     ListView appsListView;
+    /**
+     * The Apps crud.
+     */
     Applications appsCRUD;
+    /**
+     * The Toast msg.
+     */
     public String toastMsg;
 
     @Override
@@ -35,12 +47,7 @@ public class EmployeeApplicationsActivity extends AppCompatActivity {
     }
 
     private void loadApps() {
-        appsCRUD.getApplications(new Applications.AppsCallback() {
-            @Override
-            public void onCallback(ArrayList<Application> apps) {
-                displayApps(apps);
-            }
-        });
+        appsCRUD.getApplications(apps -> displayApps(apps));
     }
     private void displayApps(ArrayList<Application> apps) {
         EmployeeApplicationAdapter adapter = new EmployeeApplicationAdapter(
@@ -68,6 +75,11 @@ public class EmployeeApplicationsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Display apps for test.
+     *
+     * @param apps the apps
+     */
     public void displayAppsForTest(ArrayList<Application> apps) {
         EmployeeApplicationAdapter adapter = new EmployeeApplicationAdapter(
                 this,

@@ -21,11 +21,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * The type Espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class EspressoTest {
 
+    /**
+     * The Activity scenario.
+     */
     public ActivityScenario<ResetPasswordActivity> activityScenario;
+    /**
+     * The Test exist email.
+     */
     String testExistEmail = "iamjohn@johnny.com";
+    /**
+     * The Test valid email not exist.
+     */
     String testValidEmailNotExist = "thisemaildoesnotexitindb@validemail.com";
 
 
@@ -61,6 +73,8 @@ public class EspressoTest {
 
     /**
      * Test same password.
+     *
+     * @throws InterruptedException the interrupted exception
      */
     @Test
     public void testSamePassword() throws InterruptedException{
@@ -81,6 +95,8 @@ public class EspressoTest {
 
     /**
      * Test invalid password.
+     *
+     * @throws InterruptedException the interrupted exception
      */
     @Test
     public void testInvalidPassword() throws InterruptedException {
@@ -99,6 +115,9 @@ public class EspressoTest {
         onView(withId(R.id.resetTologinLinkID)).check(matches(not(isDisplayed())));
     }
 
+    /**
+     * Test email not exist.
+     */
     @Test
     public void testEmailNotExist() {
         onView(withId(R.id.resetEmailInputID)).perform(typeText(testValidEmailNotExist), closeSoftKeyboard());
@@ -106,6 +125,9 @@ public class EspressoTest {
         onView(withId(R.id.resetPsswdStatusTextID)).check(matches(withText(R.string.EMAIL_NOT_EXIST)));
     }
 
+    /**
+     * Test email exists.
+     */
     @Test
     public void testEmailExists() {
         onView(withId(R.id.resetEmailInputID)).perform(typeText(testExistEmail), closeSoftKeyboard());

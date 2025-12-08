@@ -9,12 +9,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 import java.util.function.Consumer;
 
+/**
+ * The type Users.
+ */
 public class Users {
     private final FirebaseAuth auth;
     private final FirebaseDatabase database;
@@ -133,6 +135,11 @@ public class Users {
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
 
+    /**
+     * Gets users ref.
+     *
+     * @return the users ref
+     */
     public DatabaseReference getUsersRef() {
         return usersRef;
     }

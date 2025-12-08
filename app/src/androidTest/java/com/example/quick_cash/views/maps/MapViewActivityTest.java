@@ -21,6 +21,9 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 
+/**
+ * The type Map view activity test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class MapViewActivityTest {
 

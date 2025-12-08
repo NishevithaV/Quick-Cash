@@ -1,5 +1,7 @@
 package com.example.quick_cash.views.employee;
 
+import static android.view.View.GONE;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,12 +21,27 @@ import com.example.quick_cash.views.maps.CurrentLocationActivity;
 import com.example.quick_cash.views.settings.SettingsActivity;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+/**
+ * The type Employee dashboard activity.
+ */
 public class EmployeeDashboardActivity extends AppCompatActivity {
 
+    /**
+     * The Btn find jobs.
+     */
     Button btnFindJobs;
+    /**
+     * The Btn settings.
+     */
     Button btnSettings;
 
+    /**
+     * The Btn nearby jobs.
+     */
     Button btnNearbyJobs;
+    /**
+     * The Btn my apps.
+     */
     Button btnMyApps;
 
 
@@ -74,7 +91,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
             Intent intent = new Intent( EmployeeDashboardActivity.this, CurrentLocationActivity.class);
             startActivity(intent);
         });
-
+        btnNearbyJobs.setVisibility(GONE);
         btnMyApps.setOnClickListener(v -> {
             Intent intent = new Intent( EmployeeDashboardActivity.this, EmployeeApplicationsActivity.class);
             startActivity(intent);

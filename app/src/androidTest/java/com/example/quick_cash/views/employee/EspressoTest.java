@@ -45,6 +45,9 @@ public class EspressoTest {
     public ActivityScenario<JobSearchActivity> activityScenario;
     private final String gibberish = "aspfiojhnapsfanhaivhiuhawejj;aijhnhuiawoiefh";
 
+    /**
+     * The Permission rule.
+     */
     @Rule
     public GrantPermissionRule permissionRule =
             GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);

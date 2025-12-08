@@ -7,6 +7,9 @@ import static org.junit.Assert.*;
 
 import com.example.quick_cash.controllers.RegistrationValidator;
 
+/**
+ * The type J unit test.
+ */
 public class JUnitTest {
 
     private RegistrationValidator registrationValidator;

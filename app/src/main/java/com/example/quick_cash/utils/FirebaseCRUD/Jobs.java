@@ -1,13 +1,10 @@
 package com.example.quick_cash.utils.FirebaseCRUD;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.quick_cash.models.Job;
-import com.example.quick_cash.models.User;
-import com.example.quick_cash.views.employer.EmployerListingsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,6 +13,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * The type Jobs.
+ */
 public class Jobs {
     private final DatabaseReference jobListRef;
 
@@ -75,6 +75,7 @@ public class Jobs {
     /**
      * Gets job given job id.
      *
+     * @param jobId    the job id
      * @param callback the callback
      */
     public void getJob(String jobId, JobsCallback callback) {
@@ -155,7 +156,7 @@ public class Jobs {
     /**
      * Gets jobs for specified user.
      *
-     * @param userID the user
+     * @param userID   the user
      * @param callback the callback
      */
     public void getJobsForUser(String userID, JobsCallback callback) {

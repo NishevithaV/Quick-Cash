@@ -31,8 +31,14 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+/**
+ * The type Employer listings espresso test.
+ */
 public class EmployerListingsEspressoTest {
 
+    /**
+     * The Activity scenario.
+     */
     public ActivityScenario<EmployerListingsActivity> activityScenario;
 
     /**
@@ -49,6 +55,7 @@ public class EmployerListingsEspressoTest {
 
     /**
      * Helper function to pause and wait for an amount of time
+     *
      * @param millis time to wait for
      * @return ViewAction
      */

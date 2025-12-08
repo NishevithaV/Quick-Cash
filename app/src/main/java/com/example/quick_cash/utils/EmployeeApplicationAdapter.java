@@ -19,17 +19,44 @@ import com.example.quick_cash.models.Application;
 
 import java.util.List;
 
+/**
+ * The type Employee application adapter.
+ */
 public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
 
     private final LayoutInflater inflater;
     private final int resource;
     private final OnItemActionListener listener;
 
+    /**
+     * The interface On item action listener.
+     */
     public interface OnItemActionListener {
+        /**
+         * On mark completed.
+         *
+         * @param app      the app
+         * @param position the position
+         */
         void onMarkCompleted(Application app, int position);
+
+        /**
+         * On card clicked.
+         *
+         * @param app      the app
+         * @param position the position
+         */
         void onCardClicked(Application app, int position); // optional
     }
 
+    /**
+     * Instantiates a new Employee application adapter.
+     *
+     * @param context  the context
+     * @param resource the resource
+     * @param apps     the apps
+     * @param listener the listener
+     */
     public EmployeeApplicationAdapter(Context context,
                                       int resource,
                                       List<Application> apps,
@@ -59,23 +86,8 @@ public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
         holder.jobTitle.setText("Loading...");
         holder.company.setText("Loading...");
         // Bind data
-        JobIdMapper.getTitle(app.getJobId(), new JobIdMapper.JobInfoCallback() {
-            @Override
-            public void onInfoLoaded(String info) {
-                holder.jobTitle.setText(info);
-            }
-        });
-        JobIdMapper.getEmployer(app.getJobId(), new JobIdMapper.JobInfoCallback() {
-            @Override
-            public void onInfoLoaded(String info) {
-                UserIdMapper.getName(info, new UserIdMapper.UserNameCallback() {
-                    @Override
-                    public void onNameLoaded(String name) {
-                        holder.company.setText(name);
-                    }
-                });
-            }
-        });
+        JobIdMapper.getTitle(app.getJobId(), info -> holder.jobTitle.setText(info));
+        JobIdMapper.getEmployer(app.getJobId(), info -> UserIdMapper.getName(info, name -> holder.company.setText(name)));
         holder.status.setText(app.getStatus());
 
                 // Style status badge
@@ -107,10 +119,26 @@ public class EmployeeApplicationAdapter extends ArrayAdapter<Application> {
         return convertView;
     }
 
+    /**
+     * The type View holder.
+     */
     static class ViewHolder {
-        TextView jobTitle, company, status;
+        /**
+         * The Job title.
+         */
+        TextView jobTitle;
+        TextView company;
+        TextView status;
+        /**
+         * The Mark completed.
+         */
         Button markCompleted;
 
+        /**
+         * Instantiates a new View holder.
+         *
+         * @param view the view
+         */
         ViewHolder(View view) {
             jobTitle = view.findViewById(R.id.tv_job_title);
             company = view.findViewById(R.id.tv_company_name);

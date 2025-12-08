@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The type J unit test.
+ */
 public class JUnitTest {
 
     private JobSearchHandler searcher;

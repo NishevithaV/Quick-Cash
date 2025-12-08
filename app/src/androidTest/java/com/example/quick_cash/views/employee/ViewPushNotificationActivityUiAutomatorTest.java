@@ -14,16 +14,27 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * The type View push notification activity ui automator test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class ViewPushNotificationActivityUiAutomatorTest {
 
     private UiDevice device;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
     }
 
+    /**
+     * Check injected data displayed.
+     *
+     * @throws UiObjectNotFoundException the ui object not found exception
+     */
     @Test
     public void checkInjectedDataDisplayed() throws UiObjectNotFoundException {
         Intent intent = new Intent();

@@ -3,6 +3,9 @@ package com.example.quick_cash.controllers;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The type Job posting validator.
+ */
 public class JobPostingValidator {
     /**
      * Instantiates a new Job posting validator.

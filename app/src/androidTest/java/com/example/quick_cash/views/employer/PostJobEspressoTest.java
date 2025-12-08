@@ -25,9 +25,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
+/**
+ * The type Post job espresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class PostJobEspressoTest {
 
+    /**
+     * The Activity scenario.
+     */
     public ActivityScenario<PostFormActivity> activityScenario;
 
     private Jobs mockJobs;

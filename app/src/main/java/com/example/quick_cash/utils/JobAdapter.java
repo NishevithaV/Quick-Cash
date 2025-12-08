@@ -14,6 +14,9 @@ import com.example.quick_cash.R;
 
 import java.util.List;
 
+/**
+ * The type Job adapter.
+ */
 public class JobAdapter extends ArrayAdapter<Job> {
 
     private final int resource;

@@ -69,6 +69,7 @@ public class EmployeeApplicationsEspressoTest {
 
     /**
      * Helper function to pause and wait for an amount of time
+     *
      * @param millis time to wait for
      * @return ViewAction
      */

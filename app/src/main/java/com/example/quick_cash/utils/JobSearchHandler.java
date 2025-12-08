@@ -7,6 +7,9 @@ import com.example.quick_cash.models.Job;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Job search handler.
+ */
 public class JobSearchHandler {
     private ArrayList<Job> allJobs;
 
@@ -74,7 +77,7 @@ public class JobSearchHandler {
         }
 
         if (locationOption.equals("Nearby Jobs")) {
-            if (job.getLocation() == null)
+            if (job.getLocation() == null || job.getLocation().equals("null"))
                 return false;
 
             if (userLocation == null)
@@ -83,7 +86,9 @@ public class JobSearchHandler {
             String jobLoc = job.getLocation().toLowerCase().trim();
             String userLoc = userLocation.toLowerCase().trim();
 
-            return userLoc.contains(jobLoc) || jobLoc.contains(userLoc);
+            String[] parts = userLoc.split(", ");
+            String firstPart = parts.length > 0 ? parts[0] : userLoc;
+            return userLoc.contains(jobLoc) || jobLoc.contains(firstPart);
         }
 
         return true;
@@ -101,39 +106,13 @@ public class JobSearchHandler {
         return matchSearch(job, search) && matchCategory(job, category);
     }
 
-    // TODO: Bro why is this method here, are we even using it anywhere?
-    private ArrayList<Job> filterJobs(String search, String category) {
-        ArrayList<Job> results = new ArrayList<>();
-        boolean categoryIsEmpty = (category.isEmpty() || category.equals("Category"));
-
-        if (!search.isEmpty() && categoryIsEmpty) {
-            for (Job j : allJobs) {
-                if (matchSearch(j, search)) {
-                    results.add(j);
-                }
-            }
-        } else if (!categoryIsEmpty && search.isEmpty()) {
-            for (Job j : allJobs) {
-                if (matchCategory(j, category)) {
-                    results.add(j);
-                }
-            }
-        } else {
-            for (Job j : allJobs) {
-                if (matchCategoryAndSearch(j, search, category)) {
-                    results.add(j);
-                };
-            }
-        }
-
-        return results;
-    }
-
     /**
      * Gets all jobs.
      *
-     * @param search   the search
-     * @param category the category
+     * @param search         the search
+     * @param category       the category
+     * @param locationOption the location option
+     * @param userLocation   the user location
      * @return the all jobs
      */
     public ArrayList<Job> getAllJobs(String search,
@@ -153,8 +132,8 @@ public class JobSearchHandler {
             if (!matchLocation(job, locationOption, userLocation)) {
                 continue;
             }
-
-            results.add(job);
+            if (job.getLocation() != null && !job.getLocation().equals("null"))
+                results.add(job);
         }
 
         return results;
@@ -178,14 +157,14 @@ public class JobSearchHandler {
     /**
      * Gets jobs filtered by location radius.
      *
-     * @param search      the search text
-     * @param category    the category
-     * @param searchLat   the search latitude
-     * @param searchLng   the search longitude
-     * @param radiusKm    the radius in kilometers
+     * @param search    the search text
+     * @param category  the category
+     * @param searchLat the search latitude
+     * @param searchLng the search longitude
+     * @param radiusKm  the radius in kilometers
      * @return the filtered jobs
      */
-    public ArrayList<Job> getJobsByLocationRadius(String search, String category, 
+    public ArrayList<Job> getJobsByLocationRadius(String search, String category,
                                                    double searchLat, double searchLng, 
                                                    int radiusKm) {
         ArrayList<Job> results = new ArrayList<>();

@@ -20,6 +20,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Users test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class UsersTest {
 

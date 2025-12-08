@@ -2,6 +2,9 @@ package com.example.quick_cash.models;
 
 import java.io.Serializable;
 
+/**
+ * The type Job.
+ */
 public class Job implements Serializable {
     private String title;
     private String category;
@@ -46,6 +49,7 @@ public class Job implements Serializable {
      *
      * @param title    the title
      * @param category the category
+     * @param location the location
      * @param deadline the deadline
      * @param desc     the desc
      * @param userID   the user id
@@ -197,6 +201,7 @@ public class Job implements Serializable {
 
     /**
      * Get Job Id
+     *
      * @return the job id
      */
     public String getId() {

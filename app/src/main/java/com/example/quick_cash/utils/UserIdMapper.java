@@ -4,6 +4,9 @@ package com.example.quick_cash.utils;
 import com.example.quick_cash.utils.FirebaseCRUD.Users;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The type User id mapper.
+ */
 public final class UserIdMapper {
 
     private static final Users usersCRUD = new Users(FirebaseDatabase.getInstance());

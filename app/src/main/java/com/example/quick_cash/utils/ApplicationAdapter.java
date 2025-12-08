@@ -17,17 +17,39 @@ import com.example.quick_cash.models.Job;
 
 import java.util.List;
 
+/**
+ * The type Application adapter.
+ */
 public class ApplicationAdapter extends ArrayAdapter<Application> {
 
     private static class ViewHolder {
+        /**
+         * The Job title text.
+         */
         TextView jobTitleText;
+        /**
+         * The Status text.
+         */
         TextView statusText;
+        /**
+         * The Applicant text.
+         */
         TextView applicantText;
+        /**
+         * The Bound app id.
+         */
         String boundAppId;
     }
 
     private final int resource;
 
+    /**
+     * Instantiates a new Application adapter.
+     *
+     * @param context  the context
+     * @param resource the resource
+     * @param apps     the apps
+     */
     public ApplicationAdapter(Context context, int resource, List<Application> apps) {
         super(context, resource, apps);
         this.resource = resource;

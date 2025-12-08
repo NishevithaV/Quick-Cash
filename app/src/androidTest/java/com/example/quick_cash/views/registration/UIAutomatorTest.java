@@ -17,6 +17,9 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * The type Ui automator test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class UIAutomatorTest {
 

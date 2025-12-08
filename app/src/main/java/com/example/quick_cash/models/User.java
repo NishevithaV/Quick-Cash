@@ -1,5 +1,8 @@
 package com.example.quick_cash.models;
 
+/**
+ * The type User.
+ */
 public class User {
     private String id;
     private String name;

@@ -9,13 +9,31 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 
+/**
+ * The type Submit application j unit test.
+ */
 public class SubmitApplicationJUnitTest {
 
+    /**
+     * The Job id.
+     */
     String jobID;
+    /**
+     * The Job id 2.
+     */
     String jobID2;
+    /**
+     * The U id.
+     */
     String uID;
+    /**
+     * The App handler.
+     */
     SubmitApplicationHandler appHandler;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp() {
         uID = "testUserID";
@@ -26,6 +44,9 @@ public class SubmitApplicationJUnitTest {
         appHandler = new SubmitApplicationHandler(mockUsers, mockApps);
     }
 
+    /**
+     * Test save application success.
+     */
     @Test
     public void testSaveApplicationSuccess() {
         final String[] result = new String[1];
@@ -38,6 +59,9 @@ public class SubmitApplicationJUnitTest {
         assertEquals(SubmitApplicationHandler.APPLICATION_SUCCESS, result[0]); // AT-5: should be marked as applied
     }
 
+    /**
+     * Test save application already applied.
+     */
     @Test
     public void testSaveApplicationAlreadyApplied() {
         final String[] result = new String[1];

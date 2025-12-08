@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quick_cash.R;
 import com.example.quick_cash.utils.JobIdMapper;
 
+/**
+ * The type View push notification activity.
+ */
 public class ViewPushNotificationActivity extends AppCompatActivity {
 
     private TextView titleTV;

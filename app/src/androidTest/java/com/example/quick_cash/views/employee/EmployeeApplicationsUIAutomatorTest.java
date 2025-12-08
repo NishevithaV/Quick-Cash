@@ -1,6 +1,5 @@
 package com.example.quick_cash.views.employee;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,12 +21,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Employee applications ui automator test.
+ */
 public class EmployeeApplicationsUIAutomatorTest {
     private UiDevice device;
+    /**
+     * The Launcher package name.
+     */
     final String launcherPackageName = "com.example.quick_cash";
     private static final int LAUNCH_TIMEOUT = 5000;
 
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         FirebaseAuth.getInstance().signOut();
@@ -45,6 +53,11 @@ public class EmployeeApplicationsUIAutomatorTest {
         device.wait(Until.hasObject(By.pkg(launcherPackageName).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Test navigation all ui elements visible.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testNavigation_AllUiElementsVisible() throws Exception {
         UiObject2 myAppsButton = device.wait(Until.findObject(By.res(launcherPackageName, "btnMyApps")), 2000);

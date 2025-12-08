@@ -26,11 +26,17 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+/**
+ * The type Post job ui automator test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class PostJobUIAutomatorTest {
 
     private static final int LAUNCH_TIMEOUT = 5000;
     private static final int REDIRECT_TIMEOUT = 6000;
+    /**
+     * The Launcher package name.
+     */
     final String launcherPackageName = "com.example.quick_cash";
     private UiDevice device;
 
@@ -127,6 +133,11 @@ public class PostJobUIAutomatorTest {
     }
 
 
+    /**
+     * Test notification appears.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testNotificationAppears() throws Exception {
         UiObject jobTitleField = device.findObject(new UiSelector().text("Job Title"));

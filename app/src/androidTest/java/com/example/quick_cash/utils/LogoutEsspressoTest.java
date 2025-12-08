@@ -17,6 +17,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * The type Logout esspresso test.
+ */
 @RunWith(AndroidJUnit4.class)
 public class LogoutEsspressoTest {
 

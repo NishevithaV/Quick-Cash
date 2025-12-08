@@ -16,15 +16,39 @@ import com.example.quick_cash.R;
 import com.example.quick_cash.utils.FirebaseCRUD.Applications;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The type Application review activity.
+ */
 public class ApplicationReviewActivity extends AppCompatActivity {
 
+    /**
+     * The Decline btn.
+     */
     Button declineBtn;
+    /**
+     * The Accept btn.
+     */
     Button acceptBtn;
 
+    /**
+     * The Applicant name app rev.
+     */
     TextView applicantNameAppRev;
+    /**
+     * The Job title app rev.
+     */
     TextView jobTitleAppRev;
+    /**
+     * The Status app rev.
+     */
     TextView statusAppRev;
+    /**
+     * The Cvr ltr app rev.
+     */
     TextView cvrLtrAppRev;
+    /**
+     * The Toast msg.
+     */
     public String toastMsg;
 
     private boolean accepted;
@@ -128,21 +152,32 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         Toast.makeText(ApplicationReviewActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
 
     }
+
+    /**
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     * @deprecated
+     */
+    @Deprecated
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 5000 && resultCode == RESULT_OK) {
-            if (data != null && data.getBooleanExtra("paymentApproved", false)) {
+        if ((requestCode == 5000 && resultCode == RESULT_OK) && (data != null && data.getBooleanExtra("paymentApproved", false))) {
 
-                status = "paid";
-                statusAppRev.setText("paid");
+            status = "paid";
+            statusAppRev.setText("paid");
 
-                acceptBtn.setVisibility(View.GONE);
-                declineBtn.setVisibility(View.GONE);
+            acceptBtn.setVisibility(View.GONE);
+            declineBtn.setVisibility(View.GONE);
 
-                Toast.makeText(this, "Payment Completed. Application Approved!", Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(this, "Payment Completed. Application Approved!", Toast.LENGTH_LONG).show();
         }
     }
 

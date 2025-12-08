@@ -1,5 +1,8 @@
 package com.example.quick_cash.controllers;
 
+/**
+ * The type Registration validator.
+ */
 public class RegistrationValidator {
 
     /**

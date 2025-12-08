@@ -4,13 +4,14 @@ package com.example.quick_cash.employer;
 import static org.junit.Assert.assertEquals;
 
 import com.example.quick_cash.models.Application;
-import com.example.quick_cash.utils.ApplicationsFilterHandler;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * The type Update app status j unit test.
+ */
 public class UpdateAppStatusJUnitTest {
     /**
      * Test filtering by status logic
