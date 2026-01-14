@@ -1,4 +1,4 @@
-# Quick Cash (Android App)
+## Quick Cash (Android App)
 
 Quick Cash is a location based mobile application that connects people who need small paid jobs completed with nearby users willing to do them. The app supports role based user interactions, job discovery, payments, notifications, and reputation tracking.
 
