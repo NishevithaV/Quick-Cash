@@ -18,7 +18,7 @@ The project was developed iteratively in a TDD environment, with features added 
 - Payment integration for job compensation  
 - Notifications for preferred job availability  
 - Employee recommendations for employers  
-- Ratings, reputation, job history, and income tracking  
+- Ratings, reputation, job history, and income tracking.
 
 ## Tech Stack
 - Android (Java)  
